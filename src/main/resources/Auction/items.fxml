@@ -18,7 +18,7 @@
          <children>
             <ImageView fx:id="Auctionimage" fitHeight="115.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../img/auction.png" />
+                  <Image url="@../img/auction.png" />
                </image>
             </ImageView>
             <HBox prefHeight="56.0" prefWidth="317.0">

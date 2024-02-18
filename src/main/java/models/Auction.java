@@ -2,24 +2,59 @@ package models;
 
 public class Auction {
     private int id,price;
-    private String Auctionname;
+    float bitcoin;
+
+    private String time,date,Auctionname;
+
+
+
+
+    public Auction(int id, int price, float bitcoin, String time, String date, String Auctionname) {
+        this.id = id;
+        this.bitcoin = bitcoin;
+        this.price = price;
+        this.time = time;
+        this.date = date;
+        this.Auctionname = Auctionname;
+
+    }
 
     public Auction() {
     }
 
-    public Auction(int id, int price, String Auctionname) {
-        this.id = id;
+    public Auction(int price, float bitcoin, String time, String date, String Auctionname) {
+        this.bitcoin = bitcoin;
         this.price = price;
+        this.time = time;
+        this.date = date;
         this.Auctionname = Auctionname;
     }
 
-
-    public Auction(int price, String Auctionname) {
-        this.price = price;
-        this.Auctionname = Auctionname;
+    public Auction(int id, int newPrice, String newName) {
     }
 
-    public Auction(int id, String newName, int newPrice) {
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public float getBitcoin() {
+        return bitcoin;
+    }
+
+    public void setBitcoin(float bitcoin) {
+        this.bitcoin = bitcoin;
     }
 
     public int getId() {
@@ -49,7 +84,10 @@ public class Auction {
     public String toString() {
         return "Auction{" +
                 "id=" + id +
+                ", time=" + time +
                 ", price=" + price +
+                ", bitcoin=" + bitcoin +
+                ", date=" + date +
                 ", Auctionname='" + Auctionname + '\'' +
                 '}';
     }

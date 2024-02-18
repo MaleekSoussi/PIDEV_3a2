@@ -2,17 +2,19 @@ package controllers.Auction;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import models.Auction;
 import services.AuctionService;
-import services.PersonService;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class AddAuctionController {
     private final AuctionService auctionService = new AuctionService();
+
     @FXML
     private TextField AuctionNametf;
 
@@ -20,27 +22,40 @@ public class AddAuctionController {
     private TextField price;
 
     @FXML
-    private Label errorLabel;
-
+    private TextField Bitcoin;
 
     @FXML
     private StackPane alertPopup;
 
+    @FXML
+    private Label errorLabel;
+
+    @FXML
+    private DatePicker dateAuction;
+
+    @FXML
+    private TextField Auctiontime;
 
     @FXML
     public void addAuction(ActionEvent event) {
         String auctionName = AuctionNametf.getText().trim();
         String priceStr = price.getText().trim();
+        String bitcoinStr = Bitcoin.getText().trim();
+        String auctionTime = Auctiontime.getText().trim();
+        LocalDate auctionDate = dateAuction.getValue();
 
         // Clear error label for fresh feedback
         errorLabel.setText("");
 
         // Validate input
         int priceInt;
+        float bitcoinFloat;
+
         try {
             priceInt = Integer.parseInt(priceStr);
+            bitcoinFloat = Float.parseFloat(bitcoinStr);
         } catch (NumberFormatException e) {
-            errorLabel.setText("Invalid price format. Please enter a number.");
+            errorLabel.setText("Invalid price or bitcoin format. Please enter numbers.");
             return;
         }
 
@@ -57,11 +72,10 @@ public class AddAuctionController {
 
         try {
             // Use the injected auctionService
-            auctionService.create(new Auction(priceInt, auctionName));
+            auctionService.create(new Auction(priceInt, bitcoinFloat, auctionTime, auctionDate.toString(), auctionName));
 
             // Handle successful addition (e.g., clear fields, navigate)
-            AuctionNametf.clear(); // Clear auction name field (optional)
-            price.clear(); // Clear price field (optional)
+            clearFields();
             showAlertPopup(); // Show success popup (avoid duplicate attempts)
         } catch (SQLException e) {
             errorLabel.setText("Error adding auction: " + e.getMessage());
@@ -78,11 +92,15 @@ public class AddAuctionController {
     @FXML
     public void dismissAlert() {
         alertPopup.setVisible(false); // Hide the popup
-        AuctionNametf.clear(); // Clear the auction name field (optional)
-        price.clear(); // Clear the price field (optional)
+        clearFields();
     }
 
+    // Add a method to clear all input fields
+    private void clearFields() {
+        AuctionNametf.clear(); // Clear auction name field
+        price.clear(); // Clear price field
+        Bitcoin.clear(); // Clear Bitcoin field
+        Auctiontime.clear(); // Clear Auction time field
+        dateAuction.getEditor().clear(); // Clear Date picker
     }
-
-
-
+}
