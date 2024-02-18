@@ -1,0 +1,4 @@
+Controllers\SignupController.class
+Controllers\MainWindowController.class
+Controllers\SettingsController.class
+Test\MainFX.class
