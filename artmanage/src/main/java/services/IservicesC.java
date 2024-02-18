@@ -1,0 +1,13 @@
+package services;
+import entities.category;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public interface IservicesC <C> {
+    public  void addC(C c ) throws SQLException;
+    public  void modifyC(C c ,int id_category ) throws SQLException;
+
+    public  void deleteC(int id_category )throws SQLException;
+    public List<C> displayC() throws SQLException;
+}
