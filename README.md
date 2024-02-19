@@ -7,3 +7,4 @@ UI (LOGIN Section)
 ---------------------------------------------
 UI (Account settings Section)
 ![image](https://github.com/MaleekSoussi/PIDEV_3a2/assets/100535374/f71040f2-533d-4bd4-bb01-c9a515129554)
+---------------------------------------------
