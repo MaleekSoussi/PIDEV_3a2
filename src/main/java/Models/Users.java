@@ -31,6 +31,26 @@ public class Users {
         this.lastLogin = lastLogin;
     }
 
+    public Users(int userID,String firstname, String lastname, String email, String role, String status, LocalDateTime dateCreated, LocalDateTime lastLogin) {
+        this.userID = userID;
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.emailAddress = email;
+        this.role = role;
+        this.accountStatus = status;
+        this.dateCreated = dateCreated;
+        this.lastLogin = lastLogin;
+    }
+
+    public Users(int userID,String firstname, String lastname, String email, String status) {
+        this.userID = userID;
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.emailAddress = email;
+        this.accountStatus = status;
+    }
+
+
     // Getters and setters for all attributes
 
     public int getUserID() {

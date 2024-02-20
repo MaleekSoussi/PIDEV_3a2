@@ -11,7 +11,7 @@ import java.util.List;
 public class UserService implements IService<Users> {
 
     private Connection connection;
-    private static Users currentlyLoggedInUser = null;
+    public static Users currentlyLoggedInUser = null;
 
     public UserService() {
         connection = MyDatabase.getInstance().getConnection();
@@ -56,27 +56,26 @@ public class UserService implements IService<Users> {
 
     @Override
     public List<Users> read() throws SQLException {
-        String sql = "select * from users";
+        String sql = "SELECT user_id, firstname, lastname, email_address, role, account_status, date_created, last_login FROM users";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
         List<Users> users = new ArrayList<>();
         while (rs.next()) {
             Users user = new Users(
-                    rs.getInt("user_id"),
+                    rs.getInt("user_id"), // Fetch and set the userID
                     rs.getString("firstname"),
                     rs.getString("lastname"),
-                    rs.getString("password"),
                     rs.getString("email_address"),
                     rs.getString("role"),
                     rs.getString("account_status"),
-                    (LocalDateTime) rs.getObject("date_created"),
-                    (LocalDateTime) rs.getObject("last_login")
+                    rs.getTimestamp("date_created") != null ? rs.getTimestamp("date_created").toLocalDateTime() : null,
+                    rs.getTimestamp("last_login") != null ? rs.getTimestamp("last_login").toLocalDateTime() : null
             );
             users.add(user);
-
         }
         return users;
     }
+
 
     @Override
     public Users authenticate(String emailAddress, String password) throws SQLException {
@@ -123,16 +122,6 @@ public class UserService implements IService<Users> {
         }
     }
 
-    public void logout() {
-        currentlyLoggedInUser = null;
-    }
-
-    public Users getCurrentUser() {
-        return currentlyLoggedInUser;
-    }
-
-
-
     public void updatesettings(Users user) throws SQLException {
         String sql = "UPDATE users SET firstname = ?, lastname = ?, email_address = ? WHERE user_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -143,6 +132,31 @@ public class UserService implements IService<Users> {
             ps.executeUpdate();
         }
     }
+
+    public Users readUser(int userId) throws SQLException {
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Users(
+                            rs.getInt("user_id"),
+                            rs.getString("firstname"),
+                            rs.getString("lastname"),
+                            rs.getString("password"),
+                            rs.getString("email_address"),
+                            rs.getString("role"),
+                            rs.getString("account_status"),
+                            rs.getTimestamp("date_created").toLocalDateTime(),
+                            rs.getTimestamp("last_login") != null ? rs.getTimestamp("last_login").toLocalDateTime() : null
+                    );
+                }
+            }
+        }
+        return null;
+    }
+
+
 
 }
 
