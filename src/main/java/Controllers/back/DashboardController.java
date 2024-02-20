@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DashboardController implements UserDetailUpdater {
+public class DashboardController implements UserInterface {
 
 
     @FXML
@@ -55,11 +55,11 @@ public class DashboardController implements UserDetailUpdater {
             }
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/back/item.fxml"));
-                Node userItemNode = loader.load();
+                Node userItemNode = loader.load(); // a node for each list
                 UserItemController itemController = loader.getController();
                 itemController.setUser(user);
-                itemController.setDetailUpdater(this); // Set the detail updater
-                // Set the deletion callback using a lambda expression
+                itemController.setUserinterface(this); // Set the user interface to this (reference to this instance of the dashboard controller)
+                //establishing comms with the other controller
 
                 vboxUserList.getChildren().add(userItemNode);
             } catch (IOException e) {
@@ -102,6 +102,7 @@ public class DashboardController implements UserDetailUpdater {
 
 //selected user is needed to know which is user id is getting updated
     private int selectedUserID;
+    @Override
     public void setSelectedUserID(int userID) {
         this.selectedUserID = userID;
     }
@@ -113,7 +114,6 @@ public class DashboardController implements UserDetailUpdater {
             userToUpdate.setFirstName(firstname.getText());
             userToUpdate.setLastName(lastname.getText());
             userToUpdate.setAccountStatus(status.getText());
-
             us.update(userToUpdate);
             refreshUserList();
         } catch (SQLException e) {
@@ -145,7 +145,6 @@ public class DashboardController implements UserDetailUpdater {
     void logout(ActionEvent event) {
         // Logout the current user
         UserService.currentlyLoggedInUser=null;
-
         try {
             // Load the main window view
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/MainWindow.fxml"));

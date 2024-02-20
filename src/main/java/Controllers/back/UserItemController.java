@@ -45,13 +45,14 @@ public class UserItemController {
     private Users user; // The User object for this item
     private UserService us =new UserService();
 
-    private UserDetailUpdater detailUpdater;
-
-    public void setDetailUpdater(UserDetailUpdater updater) {
-        this.detailUpdater = updater;
+    private UserInterface userinterface;
+    public void setUserinterface(UserInterface instance) {
+        this.userinterface = instance; // recuperation of the dashboard instance from the   itemController.setUserinterface(this); line
+        //also this way we can notify the dashboardcontroller with user details to updated and also which selected user
     }
 
 
+//each user is represented by this useritem controller
     // Method to set the User data for this item
     public void setUser(Users user) {
         this.user = user;
@@ -70,20 +71,11 @@ public class UserItemController {
         // Add an action listener to the delete button
         deletebutton.setOnAction(event -> deleteUser());
         updatebutton.setOnAction(event -> {
-            if(detailUpdater != null) {
-                // Pass the user to be modified to DashboardController
-                detailUpdater.updateDetails(user);
-                // Set the selectedUserID in DashboardController
-                ((DashboardController) detailUpdater).setSelectedUserID(user.getUserID());
+            if(userinterface != null) {
+                userinterface.updateDetails(user); // Pass the user to be modified to DashboardController
+                userinterface.setSelectedUserID(user.getUserID()); // sending the selected user to dashboard
             }
         });
-    }
-
-
-    private void updateDetails() {
-        if(detailUpdater != null) {
-            detailUpdater.updateDetails(user);
-        }
     }
 
     private void deleteUser() {
@@ -98,13 +90,12 @@ public class UserItemController {
             System.out.println("User with ID " + user.getUserID() + " deleted successfully.");
 
             // If a callback exists, run it to refresh the user list
-            if (detailUpdater != null) {
-                detailUpdater.refreshUserList();
-                detailUpdater.clearForm();
+            if (userinterface != null) {
+                userinterface.refreshUserList();
+                userinterface.clearForm();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle exception
         }
     }
 
