@@ -15,6 +15,7 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>Test.MainFX</mainClass>
+                    <executable>C:\Users\PRO-ART\.jdks\jbrsdk-17.0.9\bin\java.exe</executable>
                 </configuration>
             </plugin>
         </plugins>
