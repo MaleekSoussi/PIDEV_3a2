@@ -1,26 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="form_container" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddartController">
+<AnchorPane prefHeight="617.0" prefWidth="1234.0" styleClass="form_container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddartController">
    <children>
-      <TextField fx:id="titlef" layoutX="216.0" layoutY="75.0" promptText="Title" />
-      <Button layoutX="488.0" layoutY="357.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="50.0" text="Add" />
-      <TextField fx:id="materialsf" layoutX="216.0" layoutY="120.0" promptText="materials" />
-      <TextField fx:id="heightf" layoutX="216.0" layoutY="165.0" promptText="Height" />
-      <TextField fx:id="widthf" layoutX="216.0" layoutY="211.0" promptText="width" />
-      <TextField fx:id="cityf" layoutX="216.0" layoutY="301.0" promptText="city" />
-      <TextField fx:id="descriptionf" layoutX="216.0" layoutY="346.0" promptText="description" />
-      <TextField fx:id="typef" layoutX="216.0" layoutY="256.0" promptText="type" />
-      <Text fill="#828bd7" layoutX="239.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD YOUR ARTWORK" wrappingWidth="194.64373779296875">
+      <TextField fx:id="titlef" layoutX="235.0" layoutY="226.0" prefHeight="49.0" prefWidth="278.0" promptText="Type to add the Title" styleClass="search-button" stylesheets="@css/styles.css" />
+      <Button layoutX="1012.0" layoutY="556.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="260.0" styleClass="add-btn" stylesheets="@css/styles.css" text="Add" />
+      <TextField fx:id="materialsf" layoutX="713.0" layoutY="226.0" prefWidth="278.0" promptText="Type to add the Materials" styleClass="search-button" stylesheets="@css/styles.css" />
+      <TextField fx:id="heightf" layoutX="235.0" layoutY="287.0" prefWidth="278.0" promptText="Type to add the Height" styleClass="search-button" stylesheets="@css/styles.css" />
+      <TextField fx:id="widthf" layoutX="713.0" layoutY="287.0" prefWidth="278.0" promptText="Type to add the width" styleClass="search-button" stylesheets="@css/styles.css" />
+      <TextField fx:id="cityf" layoutX="713.0" layoutY="366.0" prefWidth="278.0" promptText="Type to add the city" styleClass="search-button" stylesheets="@css/styles.css" />
+      <TextField fx:id="descriptionf" layoutX="235.0" layoutY="436.0" prefWidth="278.0" promptText="Type to add description" styleClass="search-button" stylesheets="@css/styles.css" />
+      <TextField fx:id="typef" layoutX="237.0" layoutY="366.0" prefWidth="278.0" promptText="Type to add the type" styleClass="search-button" stylesheets="@css/styles.css" />
+      <Text fill="#828bd7" layoutX="470.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD YOUR ARTWORK" wrappingWidth="369.04376220703125">
          <font>
-            <Font size="19.0" />
+            <Font name="Cambria" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="showf" layoutX="486.0" layoutY="15.0" mnemonicParsing="false" onAction="#display" prefHeight="26.0" prefWidth="50.0" text="show" />
+      <Button fx:id="showf" layoutX="14.0" layoutY="106.0" mnemonicParsing="false" onAction="#display" prefHeight="26.0" prefWidth="164.0" styleClass="add-btn" stylesheets="@css/styles.css" text="show" />
+      <TextField fx:id="price" layoutX="713.0" layoutY="436.0" prefWidth="278.0" promptText="type to add the price" styleClass="search-button" stylesheets="@css/styles.css" />
+      <HBox layoutX="-23.0" layoutY="-13.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="1302.0" spacing="10.0" styleClass="table-view">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Home">
+               <HBox.margin>
+                  <Insets left="175.0" top="45.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Art Works">
+               <HBox.margin>
+                  <Insets left="40.0" top="45.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Cambria" size="13.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Auction">
+               <HBox.margin>
+                  <Insets left="50.0" top="45.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Cambria" size="13.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Courses">
+               <HBox.margin>
+                  <Insets left="50.0" top="45.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Cambria" size="13.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Event">
+               <HBox.margin>
+                  <Insets left="50.0" top="45.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Cambria" size="13.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="About Us">
+               <HBox.margin>
+                  <Insets left="50.0" top="45.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Cambria" size="13.0" />
+               </font>
+            </Button>
+            <Label prefHeight="40.0" prefWidth="35.0">
+               <HBox.margin>
+                  <Insets left="120.0" top="35.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cart.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </HBox>
+      <ImageView fitHeight="111.0" fitWidth="157.0" layoutX="-2.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

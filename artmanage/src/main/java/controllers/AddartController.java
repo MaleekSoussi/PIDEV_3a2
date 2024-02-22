@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import services.ArtServices;
 
@@ -31,12 +32,17 @@ public class AddartController {
     private TextField cityf;
     @FXML
     private TextField descriptionf;
+    @FXML
+    private TextField price;
+    @FXML
+    private Button back;
+
 
 
     @FXML
     void add(ActionEvent event) {
         try {
-            artps.add(new art(titlef.getText(), materialsf.getText(), Double.parseDouble(widthf.getText()), Double.parseDouble(heightf.getText()), typef.getText(), cityf.getText(), descriptionf.getText()));
+            artps.add(new art(titlef.getText(), materialsf.getText(), Double.parseDouble(widthf.getText()), Double.parseDouble(heightf.getText()), typef.getText(), cityf.getText(), descriptionf.getText() , Float.parseFloat(price.getText())));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
@@ -49,12 +55,14 @@ public class AddartController {
             typef.setText("");
             cityf.setText("");
             descriptionf.setText("");
+            price.setText("");
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+
 
     }
 
@@ -68,4 +76,12 @@ public class AddartController {
         System.out.println("error"+e.getMessage());
     }
 
-    }}
+    }
+
+
+    @FXML
+    void backToFront(ActionEvent event) {
+
+    }
+
+}

@@ -1,6 +1,5 @@
 package controllers;
 
-import entities.art;
 import entities.category;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +23,8 @@ public class ManageCategController {
     private ObservableList<category> ol;
     int idC = 0 ;
 
-
+    @FXML
+    private Button clear;
 
     @FXML
     private Button addt;
@@ -42,6 +42,10 @@ public class ManageCategController {
     private Button modifys;
 
     @FXML
+    private ComboBox<String> typeCat;
+
+
+    @FXML
     private TableView<category> showCategory;
 
     @FXML
@@ -50,6 +54,12 @@ public class ManageCategController {
     @FXML
     private TextField names;
 
+    public void initialize() {
+        // Initialize the ObservableList and get the items list from the ComboBox
+        ObservableList<String> typeCategory = FXCollections.observableArrayList("Sculpture", "Paintings", "Photography", "Drawing");
+        typeCat.setItems(typeCategory);
+
+    }
     @FXML
     void displayC(ActionEvent event) {
         try {
@@ -73,7 +83,7 @@ public class ManageCategController {
     @FXML
     void addC(ActionEvent event) {
         try {
-            categoryServices.addC(new category(names.getText(),datet.getText()));
+            categoryServices.addC(new category(typeCat.getValue(),datet.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success !");
             alert.setContentText("added!!");
@@ -126,7 +136,7 @@ public class ManageCategController {
 
     // Méthode pour réinitialiser les champs de texte
     private void resetFields() {
-        names.clear();
+        typeCat.getItems().clear();
         datet.clear();
 
     }
@@ -145,47 +155,53 @@ public class ManageCategController {
             if (category != null) {
                 // Récupérer les données du Panier et les afficher dans les champs de texte appropriés
                 idC = category.getId_category();
-                names.setText(category.getName());
+                typeCat.setValue(category.getName());
                 datet.setText(category.getDate());
 
             }
         }
     }
 
-
     @FXML
-    void modifyC(ActionEvent event)
-    {
+    void modifyC(ActionEvent event) {
+        // Get the selected category from the TableView
         category category = showCategory.getSelectionModel().getSelectedItem();
 
-        // Vérifier si un élément a été effectivement sélectionné
+        // Check if a category has been selected
         if (category != null) {
-            // Mettre à jour les propriétés du Conseil avec les valeurs des champs de texte
-            category.setName(names.getText());
+            initialize();
+            // Update the name of the category with the value selected in the ComboBox
+            category.setName(typeCat.getValue());
+
+            // Update the date of the category with the value entered in the TextField
             category.setDate(datet.getText());
 
-
-            // Appeler la méthode de mise à jour dans votre service ou gestionnaire de données
+            // Call the method to update the category in the database
             try {
-                categoryServices.modifyC(category,idC); // Assuming you have an update method in your service
-                // Rafraîchir la TableView après la modification
+                categoryServices.modifyC(category, idC); // Assuming you have an update method in your service
+                // Refresh the TableView after modification
+                initialize();
                 refreshTableView();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
-                // Gérer l'erreur selon vos besoins
+                // Handle the error as needed
             }
 
-            // Réinitialiser les champs de texte et activer le bouton d'ajout
+            // Reset the fields and disable the add button
             resetFields();
             addt.setDisable(true);
+
         }
+        initialize();
     }
+
+
 
     @FXML
     void goArt(ActionEvent event) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/addart.fxml"));
-            names.getScene().setRoot(root);
+            Parent root = FXMLLoader.load(getClass().getResource("/displayArt.fxml"));
+            datet.getScene().setRoot(root);
 
         } catch (IOException e) {
             System.out.println("error"+e.getMessage());

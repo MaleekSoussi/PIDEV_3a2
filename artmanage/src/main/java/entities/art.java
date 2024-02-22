@@ -10,9 +10,11 @@ public class art {
     public String city;
     public String description;
 
+    public float price;
+
     public art(){}
 
-    public art(String title, String materials,double height, double width, String type, String city, String description) {
+    public art(String title, String materials,double height, double width, String type, String city, String description,float price) {
         this.title = title;
         this.materials = materials;
         this.height = height;
@@ -20,8 +22,9 @@ public class art {
         this.type = type;
         this.city = city;
         this.description = description;
+        this.price=price;
     }
-    public art(int id_art, String title, String materials,double height, double width, String type, String city, String description) {
+    public art(int id_art, String title, String materials,double height, double width, String type, String city, String description,float price) {
         this.id_art = id_art;
         this.title = title;
         this.materials = materials;
@@ -30,6 +33,7 @@ public class art {
         this.type = type;
         this.city = city;
         this.description = description;
+        this.price=price;
     }
 
 
@@ -98,6 +102,14 @@ public class art {
         this.description = description;
     }
 
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "art{" +
@@ -109,6 +121,8 @@ public class art {
                 ", type='" + type + '\'' +
                 ", city='" + city + '\'' +
                 ", description='" + description + '\'' +
+                ", price='" + price + '\'' +
+
                 '}' +"\n";
     }
 

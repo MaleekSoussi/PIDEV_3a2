@@ -97,7 +97,9 @@ public class Main {
         String city = scanner.next();
         System.out.print("Enter art description: ");
         String description = scanner.next();
-        return new art( title, materials, height, width, type,city,description);
+        System.out.print("Enter art price: ");
+        float price = scanner.nextFloat();
+        return new art( title, materials, height, width, type,city,description,price);
     }
 
 }

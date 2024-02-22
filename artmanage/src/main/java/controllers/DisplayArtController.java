@@ -53,6 +53,9 @@ public class DisplayArtController {
 
     @FXML
     private TableColumn<art, String> descriptionc;
+
+    @FXML
+    private TableColumn<art, Float> priceT;
     @FXML
     private TextField titleu;
     @FXML
@@ -71,6 +74,8 @@ public class DisplayArtController {
 
     @FXML
     private TextField descriptionu;
+    @FXML
+    private TextField prices;
 
 
     @FXML
@@ -93,6 +98,8 @@ public class DisplayArtController {
             typec.setCellValueFactory(new PropertyValueFactory<>("type"));
             cityc.setCellValueFactory(new PropertyValueFactory<>("city"));
             descriptionc.setCellValueFactory(new PropertyValueFactory<>("description"));
+            priceT.setCellValueFactory(new PropertyValueFactory<>("price"));
+
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -156,6 +163,7 @@ public class DisplayArtController {
             art.setType(typeu.getText());
             art.setCity(cityu.getText());
             art.setDescription(descriptionu.getText());
+            art.setWidth(Float.parseFloat(prices.getText()));
 
             // Appeler la méthode de mise à jour dans votre service ou gestionnaire de données
             try {
@@ -191,6 +199,7 @@ public class DisplayArtController {
             typeu.clear();
             cityu.clear();
             descriptionu.clear();
+            prices.clear();
         }
 
     @FXML
@@ -209,6 +218,7 @@ public class DisplayArtController {
                 typeu.setText(art.getType());
                 cityu.setText(art.getCity());
                 descriptionu.setText(art.getDescription());
+                prices.setText(String.valueOf(art.getPrice()));
 
             }
         }
