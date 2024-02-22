@@ -2,6 +2,7 @@ package Controllers.front;
 
 import Models.Users;
 import Services.UserService;
+import Test.MainFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,11 +19,7 @@ import java.util.Optional;
 public class SettingsController{
 
 
-    @FXML
-    private Button cancelbutton;
 
-    @FXML
-    private Button deletebutton;
 
     @FXML
     private TextField emailfield;
@@ -33,16 +30,11 @@ public class SettingsController{
     @FXML
     private TextField lastnamefield;
 
-    @FXML
-    private Button savebutton;
 
-
-    private Users originalUserData;
     private UserService us = new UserService();
 
     public void initialize() {
         if (UserService.currentlyLoggedInUser != null) {
-            originalUserData = UserService.currentlyLoggedInUser; // Store the original user data
             firstnamefield.setText( UserService.currentlyLoggedInUser.getFirstName());
             lastnamefield.setText(  UserService.currentlyLoggedInUser.getLastName());
             emailfield.setText( UserService.currentlyLoggedInUser.getEmailAddress());
@@ -52,20 +44,9 @@ public class SettingsController{
 
 
     public void Cancel(ActionEvent actionEvent) {
-        if (originalUserData != null) {
-            firstnamefield.setText(originalUserData.getFirstName());
-            lastnamefield.setText(originalUserData.getLastName());
-            emailfield.setText(originalUserData.getEmailAddress());
-        }
+        initialize();
     }
-
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null); // Optional: to remove the header text
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+    
     @FXML
    public void Save(ActionEvent event) {
         try {
@@ -76,22 +57,30 @@ public class SettingsController{
                 String lastName = lastnamefield.getText();
                 String email = emailfield.getText();
 
+
                 // Update the currentUser object
                 UserService.currentlyLoggedInUser.setFirstName(firstName);
                 UserService.currentlyLoggedInUser.setLastName(lastName);
-                UserService.currentlyLoggedInUser.setEmailAddress(email);
+                if (us.isEmailUnique(email) || !email.matches("^[\\w.-]+@esprit\\.tn$")) {
+                    UserService.currentlyLoggedInUser.setEmailAddress(email);
+                    us.update(UserService.currentlyLoggedInUser);
+                     us.showAlert(Alert.AlertType.INFORMATION, "Update Successful", "Your information has been updated.");
+                }
+                else
+                {
+                     us.showAlert(Alert.AlertType.INFORMATION, "email not unique or doesnt have @esprit.tn", "re enter email");
+                    emailfield.setText( UserService.currentlyLoggedInUser.getEmailAddress());
+                }
 
                 // Update the user in the database
-                us.update(UserService.currentlyLoggedInUser);
 
-                // Optionally, display a success message
-                showAlert(Alert.AlertType.INFORMATION, "Update Successful", "Your information has been updated.");
             }
         } catch (SQLException e) {
             // Handle potential SQLException
-           showAlert(Alert.AlertType.ERROR, "Database Error", "Error");
+            us.showAlert(Alert.AlertType.ERROR, "Database Error", "Error");
             System.out.println(e.getMessage());
         }
+
     }
 
 
@@ -109,59 +98,29 @@ public class SettingsController{
                 if (UserService.currentlyLoggedInUser != null) {
                     // Delete the user from the database
                     us.delete(UserService.currentlyLoggedInUser.getUserID());
-
                     // Log out the user
                     UserService.currentlyLoggedInUser=null;
 
                     // Load and display the main window
-                    Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                    Parent root = FXMLLoader.load(getClass().getResource("/front/MainWindow.fxml"));
-                    stage.setScene(new Scene(root));
-                    stage.show();
+                    us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
                 }
-            } catch (SQLException | IOException e) {
-                showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while deleting the account: " + e.getMessage());
+            } catch (SQLException e) {
+                 us.showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while deleting the account: " + e.getMessage());
             }
         }
     }
 
     @FXML
     void goback(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/MainWindow.fxml")); // Ensure the path is correct
-            Parent root = loader.load();
-
-            // Get the current stage using the event source
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-            // Set the new scene to the stage with the loaded root
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
-        }
+        us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
     }
 
     @FXML
     void logout(ActionEvent event) {
         // Logout the current user
-        UserService.currentlyLoggedInUser=null;
-
-        try {
-            // Load the main window view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/MainWindow.fxml"));
-            Parent root = loader.load();
-
-            // Get the current stage using the event source
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-            // Set the new scene to the stage with the loaded root
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            System.out.println("error:" + e.getMessage());
-        }
+        UserService.currentlyLoggedInUser = null;
+        // Use switchView to change the scene
+        us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
     }
 
 

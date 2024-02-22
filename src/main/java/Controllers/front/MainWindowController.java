@@ -1,6 +1,7 @@
 package Controllers.front;
 
 import Services.UserService;
+import Test.MainFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,40 +25,12 @@ public class MainWindowController {
 
     @FXML
     void login(ActionEvent event) {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/Login.fxml"));
-            Parent root = loader.load();
-
-            // Get the current stage using the event source
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-            // Set the new scene to the stage with the loaded root
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            System.out.println("error:" + e.getMessage());
-        }
+        us.switchView(MainFX.primaryStage, "/front/Login.fxml");
     }
 
     @FXML
     void signup(ActionEvent event) {
-        try {
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/Signup.fxml"));
-                Parent root = loader.load();
-
-                // Get the current stage using the event source
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-                // Set the new scene to the stage with the loaded root
-                stage.setScene(new Scene(root));
-                stage.show();
-
-        } catch (IOException e) {
-            System.out.println("error:" + e.getMessage());
-        }
+        us.switchView(MainFX.primaryStage, "/front/Signup.fxml");
     }
 
     @FXML
@@ -66,34 +39,14 @@ public class MainWindowController {
 
     @FXML
     void settings(ActionEvent event) {
-        try {
             // Replace this with your actual method to check if a user is logged in
             if (UserService.currentlyLoggedInUser==null) {
                 // User is not logged in, load the Login view
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/Login.fxml"));
-                Parent root = loader.load();
-
-                // Get the current stage using the event source
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-                // Set the new scene to the stage with the loaded root
-                stage.setScene(new Scene(root));
-                stage.show();
+                us.switchView(MainFX.primaryStage, "/front/Login.fxml");
             } else {
                 // User is logged in, load the Settings view
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/Settings.fxml"));
-                Parent root = loader.load();
-
-                // Get the current stage using the event source
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-                // Set the new scene to the stage with the loaded root
-                stage.setScene(new Scene(root));
-                stage.show();
+                us.switchView(MainFX.primaryStage, "/front/Settings.fxml");
             }
-        } catch (IOException e) {
-            System.out.println("error:"+e.getMessage());
-        }
     }
 
 

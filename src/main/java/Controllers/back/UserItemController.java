@@ -28,9 +28,6 @@ public class UserItemController {
     private Label firstname;
 
     @FXML
-    private HBox itemC;
-
-    @FXML
     private Label lastlogin;
 
     @FXML

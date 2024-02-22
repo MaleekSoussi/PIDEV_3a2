@@ -7,8 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainFX extends Application {
+
+    public static Stage primaryStage;
+
+
     @Override
     public void start(Stage stage) throws Exception {
+        primaryStage = stage;
         // load the fxml file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/MainWindow.fxml"));
         Parent root= loader.load();
@@ -23,3 +28,5 @@ public class MainFX extends Application {
         launch(args);
     }
 }
+
+

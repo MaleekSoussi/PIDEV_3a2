@@ -1,6 +1,7 @@
 package Controllers.front;
 
 import Services.UserService;
+import Test.MainFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -21,46 +22,14 @@ public class LoginController{
     private final UserService us = new UserService();
     @FXML
     private TextField emailField;
-
-    @FXML
-    private Button facebookButton;
-
-    @FXML
-    private Button gmailButton;
-
-    @FXML
-    private Button loginButton;
-
     @FXML
     private PasswordField passwordField;
 
-    @FXML
-    private Button signinbutton;
-
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null); // Optional: to remove the header text
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+    
 
     @FXML
     void gottosignup(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/Signup.fxml"));
-            Parent root = loader.load();
-
-            // Get the current stage using the event source
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-            // Set the new scene to the stage with the loaded root
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
-        }
+        us.switchView(MainFX.primaryStage, "/front/Signup.fxml");
     }
 
     @FXML
@@ -71,7 +40,7 @@ public class LoginController{
         if (us.login(email, password)) { // Use UserService's login method for authentication
             // Check if the user's account is disabled
             if ("Disabled".equals(UserService.currentlyLoggedInUser.getAccountStatus())) {
-                showAlert(Alert.AlertType.ERROR, "Login Failed", "Your account is disabled.");
+                 us.showAlert(Alert.AlertType.ERROR, "Login Failed", "Your account is disabled.");
                 return; // Stop the login process
             }
 
@@ -80,16 +49,10 @@ public class LoginController{
                     // Update the last_login field in the database
                     us.updateLastLoginTimestamp(email);
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/back/Dashboard.fxml"));
-                    Parent root = loader.load();
+                    us.switchView(MainFX.primaryStage, "/back/Dashboard.fxml");
 
-                    Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-                    stage.setScene(new Scene(root));
-                    stage.show();
-
-                } catch (IOException | SQLException e) {
-                    showAlert(Alert.AlertType.ERROR, "Loading Error", "Error while loading: " + e.getMessage());
+                } catch (SQLException e) {
+                     us.showAlert(Alert.AlertType.ERROR, "Loading Error", "Error while loading: " + e.getMessage());
                 }
             }
             else {
@@ -99,21 +62,15 @@ public class LoginController{
                 // Update the last_login field in the database
                 us.updateLastLoginTimestamp(email);
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/MainWindow.fxml"));
-                Parent root = loader.load();
+                us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
 
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-                stage.setScene(new Scene(root));
-                stage.show();
-
-            } catch (IOException | SQLException e) {
-                showAlert(Alert.AlertType.ERROR, "Loading Error", "Error while loading the main window: " + e.getMessage());
+            } catch (SQLException e) {
+                 us.showAlert(Alert.AlertType.ERROR, "Loading Error", "Error while loading the main window: " + e.getMessage());
             }
             }
         } else {
 
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect email or password.");
+             us.showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect email or password.");
         }
 
     }

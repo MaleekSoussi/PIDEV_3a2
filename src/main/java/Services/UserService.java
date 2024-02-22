@@ -2,7 +2,14 @@ package Services;
 
 import Models.Users;
 import Utils.MyDatabase;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -157,6 +164,43 @@ public class UserService implements IService<Users> {
     }
 
 
+    public boolean isEmailUnique(String email) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM users WHERE email_address = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // If count is 0, email is unique
+                    return rs.getInt(1) == 0;
+                }
+                return false;
+            }
+        }
+    }
+
+
+
+    public void switchView(Stage stage, String fxmlPath) {
+        try {
+            // Load the view from the given FXML path
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            // Set the new scene to the stage with the loaded root
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Error loading view: " + e.getMessage());
+        }
+    }
+
+
+    public void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null); // Optional: to remove the header text
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }
 

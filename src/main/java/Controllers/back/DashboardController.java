@@ -1,6 +1,7 @@
 package Controllers.back;
 
 import Services.UserService;
+import Test.MainFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -124,20 +125,7 @@ public class DashboardController implements UserInterface {
 
     @FXML
     void addclicked(MouseEvent event) {
-        try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/back/Add.fxml"));
-        Parent root = loader.load();
-
-        // Get the current stage using the event source
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        // Set the new scene to the stage with the loaded root
-        stage.setScene(new Scene(root));
-        stage.show();
-
-    } catch (IOException e) {
-        throw new RuntimeException(e);
-    }
+            us.switchView(MainFX.primaryStage, "/back/Add.fxml");
 
     }
 
@@ -145,20 +133,7 @@ public class DashboardController implements UserInterface {
     void logout(ActionEvent event) {
         // Logout the current user
         UserService.currentlyLoggedInUser=null;
-        try {
-            // Load the main window view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/MainWindow.fxml"));
-            Parent root = loader.load();
-
-            // Get the current stage using the event source
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-            // Set the new scene to the stage with the loaded root
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            System.out.println("error:" + e.getMessage());
-        }
+        us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
     }
 
 
