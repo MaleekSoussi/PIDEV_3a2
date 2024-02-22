@@ -1,9 +1,0 @@
-Controllers\back\UserItemController.class
-Controllers\back\AddController.class
-Controllers\back\DashboardController.class
-Controllers\front\SettingsController.class
-Controllers\front\MainWindowController.class
-Controllers\front\SignupController.class
-Controllers\back\UserDetailUpdater.class
-Controllers\front\LoginController.class
-Test\MainFX.class
