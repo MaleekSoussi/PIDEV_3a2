@@ -68,7 +68,7 @@ public class SettingsController{
                 }
                 else
                 {
-                     us.showAlert(Alert.AlertType.INFORMATION, "email not unique or doesnt have @esprit.tn", "re enter email");
+                     us.showAlert(Alert.AlertType.INFORMATION,"Error"  ,"email not unique or doesnt have @esprit.tn");
                     emailfield.setText( UserService.currentlyLoggedInUser.getEmailAddress());
                 }
 
@@ -123,6 +123,11 @@ public class SettingsController{
         us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
     }
 
+
+    @FXML
+    void Feedback(ActionEvent event) {
+        us.switchView(MainFX.primaryStage, "/front/Feedback.fxml");
+    }
 
 
 

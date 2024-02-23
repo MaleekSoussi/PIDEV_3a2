@@ -48,7 +48,6 @@ public class LoginController{
                 try {
                     // Update the last_login field in the database
                     us.updateLastLoginTimestamp(email);
-
                     us.switchView(MainFX.primaryStage, "/back/Dashboard.fxml");
 
                 } catch (SQLException e) {

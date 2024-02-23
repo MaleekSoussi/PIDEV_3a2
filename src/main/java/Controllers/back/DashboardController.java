@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -18,8 +19,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
-public class DashboardController implements UserInterface {
+public class DashboardController {
 
 
     @FXML
@@ -39,29 +41,29 @@ public class DashboardController implements UserInterface {
 
     private UserService us = new UserService();
 
-    // Initialize method that sets up the VBox inside the ScrollPane
     public void initialize() {
         vboxUserList = new VBox(5); // Spacing of 5 between items
         vboxUserList.setFillWidth(true); // This will make the VBox fit to the width of ScrollPane
         itemlist.setContent(vboxUserList);
         itemlist.setFitToWidth(true); // This will make the content fit the width of ScrollPane
-        refreshUserList(); // call to refresh function
-    }
+        try {
+            List<Users> users = us.read();
+            loadUserItems(users);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }    }
 
     public void loadUserItems(List<Users> users) {
-        vboxUserList.getChildren().clear(); // Clear the list before loading new items
+        vboxUserList.getChildren().clear();
         for (Users user : users) {
             if (user.getRole().contains("Admin")) {
-                continue; // Skip this iteration, don't add the user to the list
+                continue;
             }
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/back/item.fxml"));
-                Node userItemNode = loader.load(); // a node for each list
+                Node userItemNode = loader.load();
                 UserItemController itemController = loader.getController();
-                itemController.setUser(user);
-                itemController.setUserinterface(this); // Set the user interface to this (reference to this instance of the dashboard controller)
-                //establishing comms with the other controller
-
+                itemController.setUser(user, this); // Pass 'this' to the item controller ( passing a dash controller to each node)
                 vboxUserList.getChildren().add(userItemNode);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -70,53 +72,40 @@ public class DashboardController implements UserInterface {
     }
 
 
-    @Override
-    public void refreshUserList() {
-        // Implementation for refreshing the user list
-        try {
-            List<Users> users = us.read(); // Use UserService to read users
-            loadUserItems(users);
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle SQL Exception
-        }
-    }
 
-
-    @Override
     public void clearForm() {
-        // Clear each text field
         firstname.clear();
         lastname.clear();
         status.clear();
     }
 
-
-// to show user details in the fields
-    @Override
-    public void updateDetails(Users user) {
+    public void updateDetails(Users user) { // will show the selected item to display
+        selectedUserID = user.getUserID();// getting the specific user saved while also getting info to show in the fields
         firstname.setText(user.getFirstName());
         lastname.setText(user.getLastName());
         status.setText(user.getAccountStatus());
     }
 
 
-
 //selected user is needed to know which is user id is getting updated
     private int selectedUserID;
-    @Override
-    public void setSelectedUserID(int userID) {
-        this.selectedUserID = userID;
-    }
 
     @FXML
-    void updateclicked(ActionEvent event) {
+    void updateclicked() {
         try {
             Users userToUpdate = us.readUser(selectedUserID);
             userToUpdate.setFirstName(firstname.getText());
             userToUpdate.setLastName(lastname.getText());
+            String accountStatus = status.getText();
+            if (!"Active".equals(accountStatus) && !"Disabled".equals(accountStatus)) {
+                us.showAlert(Alert.AlertType.INFORMATION, "Update Error", "Account status must be 'Active' or 'Disabled'.");
+                return;
+            }
             userToUpdate.setAccountStatus(status.getText());
             us.update(userToUpdate);
-            refreshUserList();
+            us.showAlert(Alert.AlertType.INFORMATION, "User updated", "The  user has been updated successfully.");
+            clearForm();
+            initialize();
         } catch (SQLException e) {
             e.printStackTrace();
         }

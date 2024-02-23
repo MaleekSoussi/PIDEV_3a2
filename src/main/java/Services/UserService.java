@@ -20,6 +20,7 @@ public class UserService implements IService<Users> {
     private Connection connection;
     public static Users currentlyLoggedInUser = null;
 
+
     public UserService() {
         connection = MyDatabase.getInstance().getConnection();
     }
@@ -83,8 +84,6 @@ public class UserService implements IService<Users> {
         return users;
     }
 
-
-    @Override
     public Users authenticate(String emailAddress, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE email_address = ? AND password = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -128,18 +127,7 @@ public class UserService implements IService<Users> {
             return false;
         }
     }
-
-    public void updatesettings(Users user) throws SQLException {
-        String sql = "UPDATE users SET firstname = ?, lastname = ?, email_address = ? WHERE user_id = ?";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, user.getFirstName());
-            ps.setString(2, user.getLastName());
-            ps.setString(3, user.getEmailAddress());
-            ps.setInt(4, user.getUserID());
-            ps.executeUpdate();
-        }
-    }
-
+    
     public Users readUser(int userId) throws SQLException {
         String sql = "SELECT * FROM users WHERE user_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {

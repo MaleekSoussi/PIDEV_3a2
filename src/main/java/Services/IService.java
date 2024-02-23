@@ -13,7 +13,6 @@ public interface IService<T> {
 
     List<T> read() throws SQLException;
 
-    public Users authenticate(String email, String password) throws SQLException;
-    public void updateLastLoginTimestamp(String email) throws SQLException;
+
 
 }
