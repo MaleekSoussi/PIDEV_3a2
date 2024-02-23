@@ -1,4 +1,4 @@
-package controllers.Auction;
+package controllers.testing;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

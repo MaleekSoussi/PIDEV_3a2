@@ -91,4 +91,26 @@ public class AuctionService implements IService<Auction> {
         statement.close();
         return auctions;
     }
-}
+
+    @Override
+    public List<Auction> read1() throws SQLException {
+        String sql = "SELECT price,bitcoin,Auctionname FROM auction";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        List<Auction> auctions = new ArrayList<>();
+
+        while (rs.next()) {
+            Auction auction = new Auction();
+            auction.setPrice(rs.getInt("price"));
+            auction.setBitcoin(rs.getFloat("bitcoin"));
+            auction.setAuctionname(rs.getString("Auctionname"));
+            auctions.add(auction);
+        }
+
+        rs.close();
+        statement.close();
+        return auctions;
+    }
+
+    }
+

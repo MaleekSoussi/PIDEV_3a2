@@ -11,12 +11,12 @@
 }
 
 .search-button{
-    -fx-background-color: #000000;
+    -fx-background-color: #526ed0;
     -fx-background-radius: 30;
 }
 
 .right-bar{
-    -fx-background-color: #1d2a62;
+    -fx-background-color: #33425b;
 }
 
 .shadow{
@@ -24,7 +24,7 @@
 }
 
 .chosen-fruit-card{
-    -fx-background-color: #3f4980;
+    -fx-background-color: #484cb0;
     -fx-background-radius: 30;
 }
 
@@ -51,4 +51,36 @@
 .fruit-item{
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 30;
+}
+/* Styles for TableView */
+.table-view .row-cell {
+    -fx-background-color: #2773d3;
+    -fx-text-fill: #c9a43d;
+    -fx-padding: 5 10;
+}
+/* Alternate Row Color */
+.table-view .row-cell:odd {
+    -fx-background-color: #ffd721;
+}
+
+/* Selected Row */
+.table-view .row-cell:selected {
+    -fx-background-color: #c9a43d;
+    -fx-text-fill: #ffd721;
+}
+
+/* Hover Effect */
+.table-view .row-cell:hover {
+    -fx-background-color: #774141;
+}
+
+/* Scroll Bar */
+.table-view .scroll-bar {
+    -fx-background-color: #774141;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+/* Scroll Bar Thumb */
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #a97777;
 }

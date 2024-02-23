@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class AddAuctionController {
+
+    private ViewAuctionController viewAuctionController;
+
     private final AuctionService auctionService = new AuctionService();
 
     @FXML
@@ -35,6 +38,11 @@ public class AddAuctionController {
 
     @FXML
     private TextField Auctiontime;
+
+    // Setter method to inject ViewAuctionController
+    public void setViewAuctionController(ViewAuctionController viewAuctionController) {
+        this.viewAuctionController = viewAuctionController;
+    }
 
     @FXML
     public void addAuction(ActionEvent event) {
@@ -77,30 +85,33 @@ public class AddAuctionController {
             // Handle successful addition (e.g., clear fields, navigate)
             clearFields();
             showAlertPopup(); // Show success popup (avoid duplicate attempts)
+
+            // Refresh the table view after adding an auction
+            viewAuctionController.refreshTableView();
         } catch (SQLException e) {
             errorLabel.setText("Error adding auction: " + e.getMessage());
         }
     }
 
-    // Add a new method to show the alert popup
+    // Method to show the alert popup
     private void showAlertPopup() {
         alertPopup.setVisible(true); // Make the popup visible
         alertPopup.requestFocus(); // Focus on the popup to capture user input
     }
 
-    // Add a method to dismiss the alert popup
-    @FXML
-    public void dismissAlert() {
-        alertPopup.setVisible(false); // Hide the popup
-        clearFields();
-    }
-
-    // Add a method to clear all input fields
+    // Method to clear all input fields
     private void clearFields() {
         AuctionNametf.clear(); // Clear auction name field
         price.clear(); // Clear price field
         Bitcoin.clear(); // Clear Bitcoin field
         Auctiontime.clear(); // Clear Auction time field
         dateAuction.getEditor().clear(); // Clear Date picker
+    }
+
+    // Method to dismiss the alert popup
+    @FXML
+    public void dismissAlert() {
+        alertPopup.setVisible(false); // Hide the popup
+        clearFields();
     }
 }
