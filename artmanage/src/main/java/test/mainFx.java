@@ -11,7 +11,7 @@ public class mainFx extends Application
     public void start(Stage stage) throws Exception
     {
         //load the fxml file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/manageCateg.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GoBackFront.fxml"));
         //load fxml code in a scene
         Parent root= loader.load();
         //put the fxml file in scene

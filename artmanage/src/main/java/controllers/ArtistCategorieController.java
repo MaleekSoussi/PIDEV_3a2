@@ -30,7 +30,8 @@ public class ArtistCategorieController {
     private TableColumn<?, ?> namee;
     @FXML
     private TableColumn<?, ?> dateT;
-
+    @FXML
+    private ComboBox<String> categoryyList;
 
     @FXML
     private ImageView add;
@@ -61,11 +62,17 @@ public class ArtistCategorieController {
 
     @FXML
     private Button update;
+    public void initialize() {
+        // Initialize the ObservableList and get the items list from the ComboBox
+        ObservableList<String> typeCategory = FXCollections.observableArrayList("Sculpture", "Paintings", "Photography", "Drawing");
+        categoryyList.setItems(typeCategory);
+
+    }
 
     @FXML
     void adding(ActionEvent event) {
         try {
-            categoryServices.addC(new category(nom.getText(),datee.getText()));
+            categoryServices.addC(new category(categoryyList.getValue(),datee.getText()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success !");
             alert.setContentText("added!!");
@@ -107,7 +114,7 @@ public class ArtistCategorieController {
         // Vérifier si un élément a été effectivement sélectionné
         if (category != null) {
             // Mettre à jour les propriétés d'art avec les valeurs des champs de texte
-            category.setName(nom.getText());
+            category.setName(categoryyList.getValue());
             category.setDate(datee.getText());
 
 
@@ -125,6 +132,8 @@ public class ArtistCategorieController {
             resetFields();
             //addC().setDisable(true);
         }
+        initialize();
+
     }
     @FXML
     void deleteC(ActionEvent event) {
@@ -161,7 +170,7 @@ public class ArtistCategorieController {
 
     // Méthode pour réinitialiser les champs de texte
     private void resetFields() {
-        nom.clear();
+        categoryyList.getItems().clear();
         datee.clear();
 
     }
@@ -174,7 +183,7 @@ public class ArtistCategorieController {
             if (category != null) {
                 // Récupérer les données du Panier et les afficher dans les champs de texte appropriés
                 idC = category.getId_category();
-                nom.setText(category.getName());
+                categoryyList.setValue(category.getName());
                 datee.setText(category.getDate());
 
             }

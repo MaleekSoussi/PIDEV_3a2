@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -21,7 +22,7 @@
       <TextField fx:id="widthf" layoutX="713.0" layoutY="287.0" prefWidth="278.0" promptText="Type to add the width" styleClass="search-button" stylesheets="@css/styles.css" />
       <TextField fx:id="cityf" layoutX="713.0" layoutY="366.0" prefWidth="278.0" promptText="Type to add the city" styleClass="search-button" stylesheets="@css/styles.css" />
       <TextField fx:id="descriptionf" layoutX="235.0" layoutY="436.0" prefWidth="278.0" promptText="Type to add description" styleClass="search-button" stylesheets="@css/styles.css" />
-      <TextField fx:id="typef" layoutX="237.0" layoutY="366.0" prefWidth="278.0" promptText="Type to add the type" styleClass="search-button" stylesheets="@css/styles.css" />
+      <TextField fx:id="typef" layoutX="235.0" layoutY="366.0" prefWidth="278.0" promptText="Type to add the Rarity" styleClass="search-button" stylesheets="@css/styles.css" />
       <Text fill="#828bd7" layoutX="470.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD YOUR ARTWORK" wrappingWidth="369.04376220703125">
          <font>
             <Font name="Cambria" size="30.0" />
@@ -31,7 +32,7 @@
       <TextField fx:id="price" layoutX="713.0" layoutY="436.0" prefWidth="278.0" promptText="type to add the price" styleClass="search-button" stylesheets="@css/styles.css" />
       <HBox layoutX="-23.0" layoutY="-13.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="1302.0" spacing="10.0" styleClass="table-view">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Home">
+            <Button fx:id="home" mnemonicParsing="false" onAction="#gotoHome" prefHeight="26.0" prefWidth="86.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Home">
                <HBox.margin>
                   <Insets left="175.0" top="45.0" />
                </HBox.margin>
@@ -101,5 +102,6 @@
             <Image url="@images/logo.png" />
          </image>
       </ImageView>
+      <ComboBox fx:id="typeCategry" layoutX="489.0" layoutY="520.0" prefHeight="35.0" prefWidth="278.0" promptText="Type Category" styleClass="search-button" stylesheets="@css/styles.css" />
    </children>
 </AnchorPane>

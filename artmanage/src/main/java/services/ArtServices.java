@@ -1,5 +1,6 @@
 package services;
 import entities.art;
+import entities.category;
 import utils.MyDB;
 
 import java.sql.*;
@@ -13,7 +14,7 @@ public class ArtServices implements IServices <art> {
     @Override
     public void add(art a) throws SQLException {
         // SQL query to insert art data into the database
-        String req = "INSERT INTO art ( title, materials, height, width, type, city, description,price) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
+        String req = "INSERT INTO art ( title, materials, height, width, type, city, description,price,id_category) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?)";
 
         // Using try-with-resources to ensure proper resource management
         try (PreparedStatement pstmt = con.prepareStatement(req)) {
@@ -26,6 +27,7 @@ public class ArtServices implements IServices <art> {
             pstmt.setString(6, a.getCity());
             pstmt.setString(7, a.getDescription());
             pstmt.setFloat(8, a.getPrice());
+            pstmt.setInt(9, a.getId_category());
 
             // Executing the update operation
             pstmt.executeUpdate();
@@ -34,7 +36,7 @@ public class ArtServices implements IServices <art> {
 
     @Override
     public void modify(art newart, int id_art) throws SQLException {
-        String req = "UPDATE art SET title=?, materials=?, height=?, width=?, type=?, city=?, description=? ,price=? WHERE id_art=?";
+        String req = "UPDATE art SET title=?, materials=?, height=?, width=?, type=?, city=?, description=? ,price=? ,id_category=? WHERE id_art=?";
         PreparedStatement pre = con.prepareStatement(req);
         pre.setString(1, newart.getTitle());
         pre.setString(2, newart.getMaterials());
@@ -44,7 +46,8 @@ public class ArtServices implements IServices <art> {
         pre.setString(6, newart.getCity());
         pre.setString(7, newart.getDescription());
         pre.setFloat(8, newart.getPrice());
-        pre.setInt(9, id_art);
+        pre.setInt(9, newart.getId_category());
+        pre.setInt(10, id_art);
 
         pre.executeUpdate();
     }
@@ -84,15 +87,34 @@ public class ArtServices implements IServices <art> {
             a.setCity(res.getString(7));
             a.setDescription(res.getString(8));
             a.setPrice(res.getFloat(9));
+            a.setId_category(res.getInt(10));
             arts.add(a);
         }
 
         return arts;
     }
 
-
-
-
-}
-
+    @Override
+    public List<art> getOneArt() throws SQLException {
+        List<art> getOneArt = new ArrayList<>() ;
+        String req = "SELECT A.*, C.name AS name FROM art A INNER JOIN category C ON A.id_category = C.id_category";
+        Statement stmt = con.createStatement();
+        ResultSet res = stmt.executeQuery(req);
+        while (res.next()){
+            art a = new art();
+            a.setId_art(res.getInt(1));
+            a.setTitle(res.getString(2));
+            a.setMaterials(res.getString(3));
+            a.setHeight(res.getDouble(4));
+            a.setWidth(res.getDouble(5));
+            a.setType(res.getString(6));
+            a.setCity(res.getString(7));
+            a.setDescription(res.getString(8));
+            a.setPrice(res.getFloat(9));
+            a.setId_category(res.getInt(10));
+            getOneArt.add(a);
+        }
+        return getOneArt;
+    }
+    }
 

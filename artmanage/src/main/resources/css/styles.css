@@ -163,4 +163,15 @@
     -fx-background-color: #778da9;
 }
 
+.comboBox
+{
+    .form_container TextField {
+        -fx-pref-height: 250;
+        -fx-pref-height: 35;
+        -fx-background-color: #ffffff;
+        -fx-font-size: 1.3em;
+        -fx-effect: dropshadow(three-pass-box, #aaaaaa, 3, 0, 0, 3);
+    }
+}
+
 

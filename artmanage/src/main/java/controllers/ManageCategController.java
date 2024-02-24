@@ -1,5 +1,5 @@
 package controllers;
-
+import entities.art;
 import entities.category;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -116,7 +116,7 @@ public class ManageCategController {
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setContentText(e.getMessage());
+                alert.setContentText("Cannot delete a Category !");
                 alert.showAndWait();
             }
             refreshTableView();
@@ -183,7 +183,7 @@ public class ManageCategController {
                 initialize();
                 refreshTableView();
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Cannot update a Category !");
                 // Handle the error as needed
             }
 
@@ -194,6 +194,8 @@ public class ManageCategController {
         }
         initialize();
     }
+
+
 
 
 

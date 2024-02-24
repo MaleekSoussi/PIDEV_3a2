@@ -1,8 +1,10 @@
 package services;
 
 import entities.art;
+import entities.category;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 public interface IServices <T>{
@@ -11,5 +13,8 @@ public interface IServices <T>{
 
     public  void delete(int id_art )throws SQLException;
     public List<T> display() throws SQLException;
+
+    public List<art> getOneArt() throws SQLException;
+
 
 }

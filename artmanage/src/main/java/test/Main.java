@@ -1,6 +1,7 @@
 package test;
 
 import entities.art;
+import entities.category;
 import services.ArtServices;
 import utils.MyDB;
 
@@ -10,6 +11,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+/*
         MyDB conn1 = MyDB.getInstance();
         ArtServices s = new ArtServices();
 
@@ -99,7 +101,11 @@ public class Main {
         String description = scanner.next();
         System.out.print("Enter art price: ");
         float price = scanner.nextFloat();
-        return new art( title, materials, height, width, type,city,description,price);
+        System.out.print("Enter art price: ");
+        int id_category = scanner.nextInt();
+        return new art( title, materials, height, width, type,city,description,price,id_category);
+
+ */
     }
 
 }

@@ -4,7 +4,9 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -18,11 +20,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="modechanger" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" styleClass="bg" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageArtistController">
+<AnchorPane fx:id="modechanger" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1354.0" styleClass="bg" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageArtistController">
     <children>
         <AnchorPane layoutX="2.0" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0">
             <children>
-                <BorderPane fx:id="sheet" layoutX="6.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <BorderPane fx:id="sheet" layoutX="6.0" prefHeight="200.0" prefWidth="1445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <left>
                         <VBox prefHeight="200.0" prefWidth="435.0" styleClass="shadow" stylesheets="@css/styles.css" BorderPane.alignment="CENTER">
                             <children>
@@ -75,7 +77,7 @@
                                     </styleClass>
                                 </HBox>
                                 <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="69.0" prefWidth="435.0" VBox.vgrow="ALWAYS" />
-                                <VBox fx:id="chosenFruitCard" alignment="CENTER" prefHeight="665.0" prefWidth="354.0" styleClass="free-delivery-card" stylesheets="@css/styles.css">
+                                <VBox fx:id="chosenFruitCard" alignment="CENTER" prefHeight="629.0" prefWidth="354.0" spacing="10.0" styleClass="free-delivery-card" stylesheets="@css/styles.css">
                                     <VBox.margin>
                                         <Insets left="50.0" right="50.0" />
                                     </VBox.margin>
@@ -87,17 +89,14 @@
                                  <children>
                                               <HBox alignment="CENTER" prefHeight="46.0" prefWidth="334.0">
                                        <children>
-                                                      <TextField fx:id="idT" alignment="CENTER" prefHeight="42.0" prefWidth="278.0" promptText="Type here the Title" styleClass="search-box">
+                                                      <TextField fx:id="idT" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Title" styleClass="search-box">
                                                           <font>
                                                               <Font name="Cambria" size="18.0" />
                                                           </font>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
                                              <stylesheets>
                                                 <URL value="@css/styles.css" />
             
-                                             </stylesheets>
+                                                         </stylesheets>
                                                       </TextField>
                                        </children>
                                               </HBox>
@@ -108,7 +107,7 @@
                                                 <Insets top="10.0" />
                                             </VBox.margin>
                                             <children>
-                                                <TextField fx:id="materialsA" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="Type here the Materials" styleClass="search-box">
+                                                <TextField fx:id="materialsA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText=" Materials" styleClass="search-box">
                                                     <font>
                                                         <Font name="Cambria" size="18.0" />
                                                     </font>
@@ -124,7 +123,7 @@
                                         </HBox>
                                         <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                                             <children>
-                                                <TextField fx:id="heightA" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="Type here the Height" styleClass="search-box">
+                                                <TextField fx:id="heightA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Height" styleClass="search-box">
                                                     <font>
                                                         <Font name="Cambria" size="18.0" />
                                                     </font>
@@ -141,9 +140,9 @@
                                                 <Insets top="10.0" />
                                             </VBox.margin>
                                         </HBox>
-                                        <HBox alignment="CENTER" prefHeight="39.0" prefWidth="354.0">
+                                        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="354.0">
                                             <children>
-                                                <TextField fx:id="widthA" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="Type here the Width" styleClass="search-box">
+                                                <TextField fx:id="widthA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Width" styleClass="search-box">
                                                     <font>
                                                         <Font name="Cambria" size="18.0" />
                                                     </font>
@@ -159,10 +158,13 @@
                                             <VBox.margin>
                                                 <Insets top="10.0" />
                                             </VBox.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
                                         </HBox>
                                         <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0" stylesheets="@css/styles.css">
                                             <children>
-                                                <TextField fx:id="TypeA" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="type here the type" styleClass="search-box">
+                                                <TextField fx:id="TypeA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Type" styleClass="search-box">
                                                     <font>
                                                         <Font name="Cambria" size="18.0" />
                                                     </font>
@@ -181,7 +183,7 @@
                                         </HBox>
                               <HBox alignment="CENTER" prefHeight="65.0" prefWidth="354.0" stylesheets="@css/styles.css">
                                  <children>
-                                    <TextField fx:id="cityA" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="type here the city" styleClass="search-box">
+                                    <TextField fx:id="cityA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="City" styleClass="search-box">
                                        <font>
                                           <Font name="Cambria" size="18.0" />
                                        </font>
@@ -199,7 +201,7 @@
                                  <children>
                                     <HBox prefHeight="37.0" prefWidth="286.0">
                                        <children>
-                                          <TextField fx:id="descA" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="type here the Description" styleClass="search-box" stylesheets="@css/styles.css">
+                                          <TextField fx:id="descA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Description" styleClass="search-box" stylesheets="@css/styles.css">
                                              <font>
                                                 <Font name="Cambria" size="18.0" />
                                              </font>
@@ -215,16 +217,38 @@
                                     </HBox>
                                  </children>
                               </HBox>
-                              <TextField fx:id="priceV" alignment="CENTER" prefHeight="35.0" prefWidth="294.0" promptText="type here the Price" styleClass="search-box" stylesheets="@css/styles.css">
-                                 <font>
-                                    <Font name="Cambria" size="18.0" />
-                                 </font>
-                              </TextField>
+                              <HBox prefHeight="37.0" prefWidth="354.0">
+                                 <children>
+                                    <TextField fx:id="priceV" alignment="CENTER" prefHeight="35.0" prefWidth="281.0" promptText="Price" styleClass="search-box" stylesheets="@css/styles.css">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="15.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="53.0" prefWidth="354.0">
+                                 <children>
+                                    <ComboBox fx:id="combo_category" prefWidth="277.0" promptText="Category" styleClass="comboBox" stylesheets="@css/styles.css">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </ComboBox>
+                                 </children>
+                              </HBox>
                                     </children>
                                 </VBox>
                         <HBox prefHeight="35.0" prefWidth="331.0" />
                                 <Pane prefHeight="57.0" prefWidth="435.0" VBox.vgrow="ALWAYS" />
                             </children>
+                     <BorderPane.margin>
+                        <Insets top="-10.0" />
+                     </BorderPane.margin>
                         </VBox>
                     </left>
                     <center>
@@ -288,21 +312,23 @@
                                         </Label>
                                     </children>
                                 </HBox>
-                                <HBox fx:id="update" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="778.0" stylesheets="@css/styles.css" VBox.vgrow="ALWAYS">
+                                <HBox fx:id="update" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="809.0" stylesheets="@css/styles.css" VBox.vgrow="ALWAYS">
                                     <children>
-                                        <TableView fx:id="showTbleArtis" onMouseClicked="#clicked">
+                                        <TableView fx:id="showTbleArtis" maxWidth="1.7976931348623157E308" onMouseClicked="#clicked" prefHeight="486.0" prefWidth="840.0">
                                             <columns>
-                                                <TableColumn fx:id="titleV" prefWidth="93.0" text="Title" />
-                                                <TableColumn fx:id="materialsv" prefWidth="93.0" text="Materials" />
-                                                <TableColumn fx:id="heightv" prefWidth="93.0" text="Height" />
-                                                <TableColumn fx:id="widtht" minWidth="0.0" prefWidth="93.0" text="width" />
-                                                <TableColumn fx:id="typet" minWidth="5.0" prefWidth="93.0" text="type" />
-                                    <TableColumn fx:id="cityt" minWidth="5.0" prefWidth="93.0" text="city" />
-                                    <TableColumn fx:id="descriptiont" minWidth="5.0" prefWidth="93.0" text="description" />
-                                    <TableColumn fx:id="priceT" minWidth="5.0" prefWidth="93.0" text="price" />
+                                                <TableColumn fx:id="titleV" prefWidth="72.00006294250488" text="Title" />
+                                                <TableColumn fx:id="materialsv" prefWidth="83.20000457763672" text="Materials" />
+                                                <TableColumn fx:id="heightv" prefWidth="83.20001220703125" text="Height" />
+                                                <TableColumn fx:id="widtht" minWidth="0.0" prefWidth="85.5999755859375" text="width" />
+                                                <TableColumn fx:id="typet" minWidth="5.0" prefWidth="85.5999755859375" text="type" />
+                                    <TableColumn fx:id="cityt" minWidth="5.0" prefWidth="80.80010986328125" text="city" />
+                                    <TableColumn fx:id="descriptiont" minWidth="5.0" prefWidth="99.20004272460938" text="description" />
+                                    <TableColumn fx:id="priceT" minWidth="5.0" prefWidth="89.60009765625" text="price" />
+                                    <TableColumn fx:id="col_category" minWidth="30.0" prefWidth="123.199951171875" resizable="false" text="category" />
+                                                
                                             </columns>
                                             <HBox.margin>
-                                                <Insets top="100.0" />
+                                                <Insets top="50.0" />
                                             </HBox.margin>
                                  <stylesheets>
                                     <URL value="@css/styles.css" />
@@ -311,22 +337,39 @@
                                         </TableView>
                                     </children>
                                 </HBox>
-                                <HBox layoutX="30.0" layoutY="86.0" prefHeight="100.0" prefWidth="200.0" styleClass="shadow">
+                                <HBox alignment="CENTER" layoutX="30.0" layoutY="86.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0" styleClass="shadow">
                            <children>
-                              <Button fx:id="clear" mnemonicParsing="false" onAction="#clear" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="clear">
+                              <Button fx:id="clear" mnemonicParsing="false" onAction="#clear" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="Clear">
                                  <font>
                                     <Font name="Cambria" size="22.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
-                              <Button fx:id="show" mnemonicParsing="false" onAction="#show" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="show">
+                              <Button fx:id="show" mnemonicParsing="false" onAction="#show" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="Show">
                                  <font>
                                     <Font name="Cambria" size="22.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
-                              <Button fx:id="updateA" mnemonicParsing="false" onAction="#update" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="UPDATE">
+                              <Button fx:id="updateA" mnemonicParsing="false" onAction="#update" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="Update">
                                  <font>
                                     <Font name="Cambria" size="22.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#go_cat" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="Categories">
+                                 <font>
+                                    <Font name="Cambria" size="22.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                            </children></HBox>
                             </children>
@@ -349,6 +392,9 @@
                                             </viewport>
                                         </ImageView>
                                     </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                                 </Button>
                                 <Button fx:id="deleteart" layoutX="6.0" layoutY="90.0" mnemonicParsing="false" onAction="#deleteArt" prefHeight="36.0" prefWidth="36.0" styleClass="transparent">
                                     <graphic>
@@ -361,6 +407,9 @@
                                             </viewport>
                                         </ImageView>
                                     </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                                 </Button>
                             </children>
                             <styleClass>

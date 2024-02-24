@@ -10,4 +10,9 @@ public interface IservicesC <C> {
 
     public  void deleteC(int id_category )throws SQLException;
     public List<C> displayC() throws SQLException;
+
+    public String getCategoryName(int idCategory) throws SQLException;
+
+
+
 }

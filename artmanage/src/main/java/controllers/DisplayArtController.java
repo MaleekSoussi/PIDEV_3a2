@@ -1,32 +1,36 @@
 package controllers;
 
 import entities.art;
+import entities.category;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import services.ArtServices;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.input.MouseEvent;
+import services.CategoryServices;
+
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class DisplayArtController {
+public class DisplayArtController  {
     private final ArtServices ps = new ArtServices();
     private ObservableList<art> ol;
+    private final CategoryServices categoryServices = new CategoryServices();
+
 
     int id = 0;
 
@@ -53,6 +57,8 @@ public class DisplayArtController {
 
     @FXML
     private TableColumn<art, String> descriptionc;
+    @FXML
+    private ComboBox<category> categoriChoix;
 
     @FXML
     private TableColumn<art, Float> priceT;
@@ -76,6 +82,9 @@ public class DisplayArtController {
     private TextField descriptionu;
     @FXML
     private TextField prices;
+    @FXML
+    private TableColumn<art, String> categoryT;
+
 
 
     @FXML
@@ -99,7 +108,20 @@ public class DisplayArtController {
             cityc.setCellValueFactory(new PropertyValueFactory<>("city"));
             descriptionc.setCellValueFactory(new PropertyValueFactory<>("description"));
             priceT.setCellValueFactory(new PropertyValueFactory<>("price"));
-
+            categoryT.setCellValueFactory(cellData -> {
+                int categoryId = cellData.getValue().getId_category();
+                String categoryName = ""; // Default value
+                try {
+                    categoryName = categoryServices.getCategoryName(categoryId);
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("Error fetching category name: " + e.getMessage());
+                    alert.showAndWait();
+                }
+                // Convert the string category name to ObservableValue<Integer>
+                return new SimpleStringProperty(categoryName);
+            });
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -107,6 +129,14 @@ public class DisplayArtController {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+        List<category> allCategories = null ;
+        try {
+            allCategories = categoryServices.displayC();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        categoriChoix.setItems(FXCollections.observableList(allCategories));
 
     }
 
@@ -164,11 +194,17 @@ public class DisplayArtController {
             art.setCity(cityu.getText());
             art.setDescription(descriptionu.getText());
             art.setWidth(Float.parseFloat(prices.getText()));
+            art.setId_category((categoriChoix.getValue()).getId_category());
+
 
             // Appeler la méthode de mise à jour dans votre service ou gestionnaire de données
             try {
                 ps.modify(art,id); // Assuming you have an update method in your service
                 // Rafraîchir la TableView après la modification
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setContentText("Art Updated successfully ");
+                alert.showAndWait();
                 refreshTableView();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -200,6 +236,8 @@ public class DisplayArtController {
             cityu.clear();
             descriptionu.clear();
             prices.clear();
+            categoriChoix.getItems().clear();
+
         }
 
     @FXML
@@ -219,9 +257,29 @@ public class DisplayArtController {
                 cityu.setText(art.getCity());
                 descriptionu.setText(art.getDescription());
                 prices.setText(String.valueOf(art.getPrice()));
+                int categoryId = art.getId_category();
 
+                // Find the category object that corresponds to the categoryId
+                category selectedCategory = null; // Initialize to null
+                for (category cat : categoriChoix.getItems()) {
+                    if (cat.getId_category() == categoryId) {
+                        selectedCategory = cat;
+                        break;
+                    }
+                }
+                // Set the selected category in the combo box
+                categoriChoix.setValue(selectedCategory);
             }
         }
     }
+    @FXML
+    void go_cat(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/categorieM.fxml"));
+            cityu.getScene().setRoot(root);
 
+        } catch (IOException e) {
+            System.out.println("error"+e.getMessage());
+        }
+    }
 }

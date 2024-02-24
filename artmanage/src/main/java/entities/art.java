@@ -11,10 +11,11 @@ public class art {
     public String description;
 
     public float price;
+    public int id_category;
 
     public art(){}
 
-    public art(String title, String materials,double height, double width, String type, String city, String description,float price) {
+    public art(String title, String materials,double height, double width, String type, String city, String description,float price,int id_category) {
         this.title = title;
         this.materials = materials;
         this.height = height;
@@ -23,8 +24,9 @@ public class art {
         this.city = city;
         this.description = description;
         this.price=price;
+        this.id_category= id_category;
     }
-    public art(int id_art, String title, String materials,double height, double width, String type, String city, String description,float price) {
+    public art(int id_art, String title, String materials,double height, double width, String type, String city, String description,float price,int id_category) {
         this.id_art = id_art;
         this.title = title;
         this.materials = materials;
@@ -34,6 +36,8 @@ public class art {
         this.city = city;
         this.description = description;
         this.price=price;
+        this.id_category= id_category;
+
     }
 
 
@@ -61,6 +65,7 @@ public class art {
     public void setWidth(double width) {
         this.width = width;
     }
+
 
     public  String getTitle() {
         return title;
@@ -110,6 +115,14 @@ public class art {
         this.price = price;
     }
 
+    public int getId_category() {
+        return id_category;
+    }
+
+    public void setId_category(int id_category) {
+        this.id_category = id_category;
+    }
+
     @Override
     public String toString() {
         return "art{" +
@@ -122,6 +135,7 @@ public class art {
                 ", city='" + city + '\'' +
                 ", description='" + description + '\'' +
                 ", price='" + price + '\'' +
+                ", id_category='" + id_category + '\'' +
 
                 '}' +"\n";
     }
