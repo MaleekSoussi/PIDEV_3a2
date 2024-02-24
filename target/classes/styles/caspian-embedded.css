@@ -4305,10 +4305,17 @@ Add support for NO_HEADER tweak in tables .table-view.no-header > .column-header
   -fx-padding: 2px;
   -fx-cursor: default;
 }
+
 .text-area .content {
   -fx-cursor: text;
   -fx-padding: 8px 12px 8px 12px;
+  -fx-text-fill: black; /* Set text color to black */
 }
+
+.text-area .content .text {
+  -fx-background-color: #e0e0e0; /* Set background color to gray */
+}
+
 
 .password-field {
   -fx-text-fill: -color-fg-muted;

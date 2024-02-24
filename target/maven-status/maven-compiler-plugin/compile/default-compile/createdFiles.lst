@@ -1,9 +1,15 @@
 Controllers\back\UserItemController.class
+Controllers\back\DashboardFeedbackController.class
 Controllers\back\AddController.class
-Controllers\back\UserInterface.class
+Controllers\front\FeedbackController.class
 Controllers\back\DashboardController.class
 Controllers\front\SettingsController.class
+Models\Feedback.class
+Controllers\front\FeedbackItemController.class
+Controllers\back\FeedbackItemController.class
 Controllers\front\MainWindowController.class
 Controllers\front\SignupController.class
+Services\FeedbackService.class
+Controllers\front\NewFeedbackController.class
 Controllers\front\LoginController.class
 Test\MainFX.class
