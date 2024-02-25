@@ -1,6 +1,7 @@
 package services;
 
 import models.Auction;
+import models.Users;
 import utils.MyDatabase;
 
 import java.sql.Connection;
@@ -11,16 +12,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuctionService implements IService<Auction> {
+public class ArtistService implements IService<Auction> {
     private Connection connection;
 
-    public AuctionService() {
+    public ArtistService() {
         connection = MyDatabase.getInstance().getConnection();
     }
 
     @Override
     public void create(Auction auction) throws SQLException {
-        String sql = "INSERT INTO auction (Auctionname, price, bitcoin, time, date) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO auction (Auctionname, price, bitcoin, time, date) VALUES (?, ?, ?, ?, ?) " ;
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, auction.getAuctionname());
         statement.setInt(2, auction.getPrice());
@@ -71,7 +72,7 @@ public class AuctionService implements IService<Auction> {
 
     @Override
     public List<Auction> read() throws SQLException {
-        String sql = "SELECT * FROM auction";
+        String sql = "SELECT * FROM auction WHERE Userid=2";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
         List<Auction> auctions = new ArrayList<>();
@@ -94,5 +95,5 @@ public class AuctionService implements IService<Auction> {
 
 
 
-    }
+}
 

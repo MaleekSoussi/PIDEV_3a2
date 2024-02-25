@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.Test">
    <children>
-      <TableView layoutX="118.0" layoutY="79.0" prefHeight="270.0" prefWidth="375.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Form ID" />
-          <TableColumn prefWidth="75.0" text="Questions" />
-        </columns>
-      </TableView>
+      <VBox fx:id="QANDA" layoutX="129.0" layoutY="34.0" prefHeight="200.0" prefWidth="280.0" />
    </children>
 </AnchorPane>

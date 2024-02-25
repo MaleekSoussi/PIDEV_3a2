@@ -18,9 +18,31 @@ public class BidService implements IService<Bid> {
         this.auctionId = auctionId;
     }
 
+    public int getHighestBidForAuction(int auctionId) throws SQLException {
+        String sql = "SELECT MAX(bidamount) FROM bid WHERE idAuction = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, auctionId);
+        ResultSet resultSet = statement.executeQuery();
 
+        int highestBid = 0; // Default value if no bids exist yet
+
+        if (resultSet.next()) {
+            highestBid = resultSet.getInt(1);
+        }
+
+        resultSet.close();
+        statement.close();
+
+        return highestBid;
+    }
     @Override
     public void create(Bid bid) throws SQLException {
+        int highestBid = getHighestBidForAuction(auctionId);
+        System.out.println("Highest Bid: " + highestBid);
+        if (bid.getBidAmount() <= highestBid ) { // Increase minimum increment by 1 if needed
+            throw new IllegalArgumentException("Bid amount must be at least 1 unit higher than the current highest bid.");
+        }
+
         String sql = "INSERT INTO bid (bidamount, idAuction, userid) VALUES (?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, bid.getBidAmount());
@@ -90,8 +112,5 @@ public class BidService implements IService<Bid> {
         return bids;
     }
 
-    @Override
-    public List<Bid> read1() throws SQLException {
-        return null;
-    }
+
 }

@@ -35,7 +35,7 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false"  prefHeight="42.0" prefWidth="259.0" stylesheets="@../Auction/Stylesheet.css" text="Biders">
+                  <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@../Auction/Stylesheet.css" text="Biders">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -47,7 +47,7 @@
                         <Insets left="50.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false"  prefHeight="42.0" prefWidth="259.0" stylesheets="@../Auction/Stylesheet.css" text="CHAT" textFill="#c62929">
+                  <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@../Auction/Stylesheet.css" text="CHAT" textFill="#c62929">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -73,7 +73,7 @@
                   </Button>
                   <VBox alignment="CENTER" prefHeight="92.0" prefWidth="184.0">
                      <children>
-                        <Label text="1500" textFill="#26bfbc">
+                        <Label fx:id="highestbid" textFill="#26bfbc">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
@@ -87,7 +87,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="780" textFill="#de0000">
+                        <Label text="1" textFill="#de0000">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>

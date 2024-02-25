@@ -9,5 +9,5 @@ public interface IService<T> {
     void update(T t) throws SQLException;
     void delete(int id) throws SQLException;
     List<T> read() throws SQLException;
-    List<T> read1() throws SQLException;
+
 }

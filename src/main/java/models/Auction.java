@@ -1,16 +1,16 @@
 package models;
 
 public class Auction {
-    private int id,price;
+    private int id,price,Userid;
     float bitcoin;
 
     private String time,date,Auctionname;
 
+    
 
-
-
-    public Auction(int id, int price, float bitcoin, String time, String date, String Auctionname) {
+    public Auction(int id, int price, int userid, float bitcoin, String time, String date, String Auctionname) {
         this.id = id;
+        Userid = userid;
         this.bitcoin = bitcoin;
         this.price = price;
         this.time = time;
@@ -22,7 +22,8 @@ public class Auction {
     public Auction() {
     }
 
-    public Auction(int price, float bitcoin, String time, String date, String Auctionname) {
+    public Auction(int price, int userid, float bitcoin, String time, String date, String Auctionname) {
+        Userid = userid;
         this.bitcoin = bitcoin;
         this.price = price;
         this.time = time;
@@ -30,7 +31,11 @@ public class Auction {
         this.Auctionname = Auctionname;
     }
 
-    public Auction(int id, int newPrice, String newName) {
+    public Auction(int id, int newPrice, String newName, int userid) {
+        Userid = userid;
+    }
+
+    public Auction(int priceInt, float bitcoinFloat, String auctionTime, String string, String auctionName) {
     }
 
     public String getTime() {
@@ -79,11 +84,19 @@ public class Auction {
 
     public void setAuctionname(String Auctionname) {this.Auctionname=Auctionname;
     }
+    public int getUserid() {
+        return Userid;
+    }
+
+    public void setUserid(int userid) {
+        Userid = userid;
+    }
 
     @Override
     public String toString() {
         return "Auction{" +
                 "id=" + id +
+                ",Userid"+Userid+
                 ", time=" + time +
                 ", price=" + price +
                 ", bitcoin=" + bitcoin +

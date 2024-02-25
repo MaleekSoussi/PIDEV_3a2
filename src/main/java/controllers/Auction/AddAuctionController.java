@@ -1,5 +1,6 @@
 package controllers.Auction;
 
+import controllers.Artist.ViewAuctionArtist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -38,6 +39,7 @@ public class AddAuctionController {
 
     @FXML
     private TextField Auctiontime;
+    private ViewAuctionArtist ViewAuctionArtist;
 
     // Setter method to inject ViewAuctionController
     public void setViewAuctionController(ViewAuctionController viewAuctionController) {
@@ -113,5 +115,9 @@ public class AddAuctionController {
     public void dismissAlert() {
         alertPopup.setVisible(false); // Hide the popup
         clearFields();
+    }
+
+    public void setViewAuctionArtis(ViewAuctionArtist viewAuctionArtist) {
+        this.ViewAuctionArtist=ViewAuctionArtist;
     }
 }

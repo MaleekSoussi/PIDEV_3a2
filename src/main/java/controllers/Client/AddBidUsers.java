@@ -1,4 +1,4 @@
-package controllers.Bid;
+package controllers.Client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,14 +10,16 @@ import services.BidService;
 
 import java.sql.SQLException;
 
-public class AddBidController {
+public class AddBidUsers {
 
-    private ViewBidsController viewBidsController;
+    private ViewBidUsers ViewBidUsers;
     private BidService bidService;
-    public AddBidController() {
+
+    public AddBidUsers() {
         // You can initialize default values or perform other setup here if needed
     }
-    public AddBidController(BidService bidService) {
+
+    public AddBidUsers(BidService bidService) {
         this.bidService = bidService;
     }
 
@@ -30,9 +32,9 @@ public class AddBidController {
     @FXML
     private TextField amountField;
 
-    // Setter method to inject ViewBidsController
-    public void setViewBidsController(ViewBidsController viewBidsController) {
-        this.viewBidsController = viewBidsController;
+    // Setter method to inject ViewBidUsers
+    public void setViewBidUsers(ViewBidUsers ViewBidUsers) {
+        this.ViewBidUsers = ViewBidUsers;
     }
 
     // Setter method to inject BidService
@@ -65,7 +67,7 @@ public class AddBidController {
             showAlertPopup(); // Show success popup (avoid duplicate attempts)
 
             // Refresh the table view after adding a bid
-            viewBidsController.populateTableView();
+            ViewBidUsers.populateTableView();
         } catch (SQLException e) {
             errorLabel.setText("Error adding bid: " + e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -92,5 +94,4 @@ public class AddBidController {
     }
 
 
-    }
-
+}

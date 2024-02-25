@@ -61,8 +61,4 @@ public class PersonService implements IService<Person>{
         return people;
     }
 
-    @Override
-    public List<Person> read1() throws SQLException {
-        return null;
-    }
 }
