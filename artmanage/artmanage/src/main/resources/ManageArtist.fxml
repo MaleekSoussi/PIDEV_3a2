@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="modechanger" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1354.0" styleClass="bg" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManageArtistController">
+    <children>
+        <AnchorPane layoutX="2.0" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0">
+            <children>
+                <BorderPane fx:id="sheet" layoutX="6.0" prefHeight="200.0" prefWidth="1445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <left>
+                        <VBox prefHeight="200.0" prefWidth="435.0" styleClass="shadow" stylesheets="@css/styles.css" BorderPane.alignment="CENTER">
+                            <children>
+                                <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="453.0" styleClass="transparent" stylesheets="@css/styles.css">
+                                    <children>
+                                        <ImageView fx:id="fruitImg" fitHeight="98.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../../../Downloads/428992429_7315964061853058_2637355056516733891_n.jpg" />
+                                            </image>
+                                        </ImageView>
+                                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="234.0" text="ARTWorks" textFill="#878787">
+                                            <font>
+                                                <Font name="Cambria Bold" size="40.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="338.0" stylesheets="@css/styles.css" VBox.vgrow="NEVER">
+                                    <VBox.margin>
+                                        <Insets left="30.0" right="30.0" />
+                                    </VBox.margin>
+                                    <children>
+                                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="235.0" promptText="Type here to search" styleClass="search-box">
+                                            <HBox.margin>
+                                                <Insets left="20.0" />
+                                            </HBox.margin>
+                                            <font>
+                                                <Font name="Cambria" size="18.0" />
+                                            </font>
+                                 <stylesheets>
+                                    <URL value="@css/styles.css" />
+
+                                 </stylesheets>
+                                        </TextField>
+                                        <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="48.0" styleClass="search-button" stylesheets="@css/styles.css" textFill="WHITE">
+                                            <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@images/icons8-chercher-128.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic></Button>
+                                    </children>
+                                    <styleClass>
+                                        <String fx:value="search-box" />
+                                        <String fx:value="shadow" />
+                                    </styleClass>
+                                </HBox>
+                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="69.0" prefWidth="435.0" VBox.vgrow="ALWAYS" />
+                                <VBox fx:id="chosenFruitCard" alignment="CENTER" prefHeight="629.0" prefWidth="354.0" spacing="10.0" styleClass="free-delivery-card" stylesheets="@css/styles.css">
+                                    <VBox.margin>
+                                        <Insets left="50.0" right="50.0" />
+                                    </VBox.margin>
+                                    <children>
+                                        <HBox prefHeight="60.0" prefWidth="285.0">
+                                            <VBox.margin>
+                                                <Insets left="20.0" top="10.0" />
+                                            </VBox.margin>
+                                 <children>
+                                              <HBox alignment="CENTER" prefHeight="46.0" prefWidth="334.0">
+                                       <children>
+                                                      <TextField fx:id="idT" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Title" styleClass="search-box">
+                                                          <font>
+                                                              <Font name="Cambria" size="18.0" />
+                                                          </font>
+                                             <stylesheets>
+                                                <URL value="@css/styles.css" />
+            
+                                                         </stylesheets>
+                                                      </TextField>
+                                       </children>
+                                              </HBox>
+                                 </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefHeight="42.0" prefWidth="354.0">
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                            <children>
+                                                <TextField fx:id="materialsA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText=" Materials" styleClass="search-box">
+                                                    <font>
+                                                        <Font name="Cambria" size="18.0" />
+                                                    </font>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                       <stylesheets>
+                                          <URL value="@css/styles.css" />
+
+                                       </stylesheets>
+                                                </TextField>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
+                                            <children>
+                                                <TextField fx:id="heightA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Height" styleClass="search-box">
+                                                    <font>
+                                                        <Font name="Cambria" size="18.0" />
+                                                    </font>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                       <stylesheets>
+                                          <URL value="@css/styles.css" />
+
+                                       </stylesheets>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="354.0">
+                                            <children>
+                                                <TextField fx:id="widthA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Width" styleClass="search-box">
+                                                    <font>
+                                                        <Font name="Cambria" size="18.0" />
+                                                    </font>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                       <stylesheets>
+                                          <URL value="@css/styles.css" />
+
+                                       </stylesheets>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0" stylesheets="@css/styles.css">
+                                            <children>
+                                                <TextField fx:id="TypeA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Type" styleClass="search-box">
+                                                    <font>
+                                                        <Font name="Cambria" size="18.0" />
+                                                    </font>
+                                                    <HBox.margin>
+                                                        <Insets left="10.0" />
+                                                    </HBox.margin>
+                                       <stylesheets>
+                                          <URL value="@css/styles.css" />
+
+                                       </stylesheets>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                              <HBox alignment="CENTER" prefHeight="65.0" prefWidth="354.0" stylesheets="@css/styles.css">
+                                 <children>
+                                    <TextField fx:id="cityA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="City" styleClass="search-box">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                       <stylesheets>
+                                          <URL value="@css/styles.css" />
+
+                                       </stylesheets>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="58.0" prefWidth="354.0" stylesheets="@css/styles.css">
+                                 <children>
+                                    <HBox prefHeight="37.0" prefWidth="286.0">
+                                       <children>
+                                          <TextField fx:id="descA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Description" styleClass="search-box" stylesheets="@css/styles.css">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <stylesheets>
+
+                                          <URL value="@css/styles.css" />
+                                       </stylesheets>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="37.0" prefWidth="354.0">
+                                 <children>
+                                    <TextField fx:id="priceV" alignment="CENTER" prefHeight="35.0" prefWidth="281.0" promptText="Price" styleClass="search-box" stylesheets="@css/styles.css">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="15.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="53.0" prefWidth="354.0">
+                                 <children>
+                                    <ComboBox fx:id="combo_category" prefWidth="277.0" promptText="Category" styleClass="comboBox" stylesheets="@css/styles.css">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </ComboBox>
+                                 </children>
+                              </HBox>
+                                    </children>
+                                </VBox>
+                        <HBox prefHeight="35.0" prefWidth="331.0" />
+                                <Pane prefHeight="57.0" prefWidth="435.0" VBox.vgrow="ALWAYS" />
+                            </children>
+                     <BorderPane.margin>
+                        <Insets top="-10.0" />
+                     </BorderPane.margin>
+                        </VBox>
+                    </left>
+                    <center>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="66.0" prefWidth="807.0">
+                                    <VBox.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </VBox.margin>
+                                    <children>
+                                        <Label prefHeight="29.0" prefWidth="88.0" text="language" textFill="#878787">
+                                            <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <Label prefHeight="29.0" prefWidth="77.0" text="English" textFill="#878787" underline="true">
+                                            <font>
+                                                <Font name="Cambria" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="393.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="changeD" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: none;" styleClass="search-button" stylesheets="@css/styles.css" />
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="23.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/night-mode.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="65.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/brightness.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Button fx:id="changeD1" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: none;" styleClass="search-button">
+                                       <stylesheets>
+
+                                          <URL value="@css/styles.css" />
+                                       </stylesheets></Button>
+                                 </children></Pane>
+                                        <Label prefHeight="62.0" prefWidth="100.0" text="My Account" textFill="#878787">
+                                            <font>
+                                                <Font name="Cambria" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/icons8-plus-64.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="251.0" styleClass="shadow">
+                                    <VBox.margin>
+                                        <Insets left="20.0" right="20.0" top="10.0" />
+                                    </VBox.margin>
+                                    <children>
+                                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="102.0" prefWidth="317.0" text="Art Works List" textFill="#878787">
+                                            <font>
+                                                <Font name="Cambria Bold" size="40.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <HBox fx:id="update" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="809.0" stylesheets="@css/styles.css" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <TableView fx:id="showTbleArtis" maxWidth="1.7976931348623157E308" onMouseClicked="#clicked" prefHeight="486.0" prefWidth="840.0">
+                                            <columns>
+                                                <TableColumn fx:id="titleV" prefWidth="72.00006294250488" text="Title" />
+                                                <TableColumn fx:id="materialsv" prefWidth="83.20000457763672" text="Materials" />
+                                                <TableColumn fx:id="heightv" prefWidth="83.20001220703125" text="Height" />
+                                                <TableColumn fx:id="widtht" minWidth="0.0" prefWidth="85.5999755859375" text="width" />
+                                                <TableColumn fx:id="typet" minWidth="5.0" prefWidth="85.5999755859375" text="type" />
+                                    <TableColumn fx:id="cityt" minWidth="5.0" prefWidth="80.80010986328125" text="city" />
+                                    <TableColumn fx:id="descriptiont" minWidth="5.0" prefWidth="99.20004272460938" text="description" />
+                                    <TableColumn fx:id="priceT" minWidth="5.0" prefWidth="89.60009765625" text="price" />
+                                    <TableColumn fx:id="col_category" minWidth="30.0" prefWidth="123.199951171875" resizable="false" text="category" />
+                                                
+                                            </columns>
+                                            <HBox.margin>
+                                                <Insets top="50.0" />
+                                            </HBox.margin>
+                                 <stylesheets>
+                                    <URL value="@css/styles.css" />
+
+                                 </stylesheets>
+                                        </TableView>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" layoutX="30.0" layoutY="86.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0" styleClass="shadow">
+                           <children>
+                              <Button fx:id="clear" mnemonicParsing="false" onAction="#clear" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="Clear">
+                                 <font>
+                                    <Font name="Cambria" size="22.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="show" mnemonicParsing="false" onAction="#show" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="Show">
+                                 <font>
+                                    <Font name="Cambria" size="22.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="updateA" mnemonicParsing="false" onAction="#update" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="Update">
+                                 <font>
+                                    <Font name="Cambria" size="22.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#go_cat" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="Categories">
+                                 <font>
+                                    <Font name="Cambria" size="22.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children></HBox>
+                            </children>
+                        </VBox>
+                    </center>
+                    <right>
+                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="57.0" style="-fx-background-color: 00000019;" stylesheets="@css/styles.css" BorderPane.alignment="CENTER">
+                            <children>
+                                <Button fx:id="addart" layoutX="33.0" layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addArt" prefHeight="25.0" prefWidth="27.0" styleClass="transparent">
+                                    <padding>
+                                        <Insets right="30.0" />
+                                    </padding>
+                                    <graphic>
+                                        <ImageView fitHeight="38.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                                            <image>
+                                                <Image url="@images/icons8-plus-64.png" />
+                                            </image>
+                                            <viewport>
+                                                <Rectangle2D />
+                                            </viewport>
+                                        </ImageView>
+                                    </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                                </Button>
+                                <Button fx:id="deleteart" layoutX="6.0" layoutY="90.0" mnemonicParsing="false" onAction="#deleteArt" prefHeight="36.0" prefWidth="36.0" styleClass="transparent">
+                                    <graphic>
+                                        <ImageView fitHeight="37.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" y="1.0">
+                                            <image>
+                                                <Image url="@images/icons8-supprimer-48.png" />
+                                            </image>
+                                            <viewport>
+                                                <Rectangle2D minY="3.0" />
+                                            </viewport>
+                                        </ImageView>
+                                    </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                                </Button>
+                            </children>
+                            <styleClass>
+                                <String fx:value="shadow" />
+                                <String fx:value="add-btn" />
+                            </styleClass>
+                            <BorderPane.margin>
+                                <Insets right="10.0" />
+                            </BorderPane.margin>
+                        </Pane>
+                    </right>
+               <stylesheets>
+
+               </stylesheets>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
