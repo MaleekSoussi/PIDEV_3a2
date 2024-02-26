@@ -3,13 +3,16 @@ Controllers\back\DashboardFeedbackController.class
 Controllers\back\AddController.class
 Controllers\front\FeedbackController.class
 Controllers\back\DashboardController.class
+Services\PasswordHasher.class
 Controllers\front\SettingsController.class
 Models\Feedback.class
+Controllers\front\ResetPasswordController.class
 Controllers\front\FeedbackItemController.class
 Controllers\back\FeedbackItemController.class
 Controllers\front\MainWindowController.class
 Controllers\front\SignupController.class
 Services\FeedbackService.class
 Controllers\front\NewFeedbackController.class
+Controllers\front\TransitionController.class
 Controllers\front\LoginController.class
 Test\MainFX.class

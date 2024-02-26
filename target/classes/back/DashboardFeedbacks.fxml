@@ -43,18 +43,32 @@
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="453.0">
                            <children>
-                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#back" prefHeight="50.0" prefWidth="141.0" styleClass="custom-button" stylesheets="@../styles/stylesdash.css" text="Back">
+                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#back" prefHeight="50.0" prefWidth="63.0" styleClass="custom-button" stylesheets="@../styles/stylesdash.css">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets right="20.0" />
                                  </HBox.margin>
+                                 <graphic>
+                                    <ImageView fitHeight="38.0" fitWidth="39.0">
+                                       <image>
+                                          <Image url="@../styles/icons8_Home_32px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </Button>
-                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="141.0" styleClass="custom-button" stylesheets="@../styles/stylesdash.css" text="Logout">
+                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="0.0" styleClass="custom-button" stylesheets="@../styles/stylesdash.css">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
+                                 <graphic>
+                                    <ImageView fitHeight="38.0" fitWidth="33.0">
+                                       <image>
+                                          <Image url="@../styles/icons8-logout-66.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </Button>
                            </children>
                         </HBox>
