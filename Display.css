@@ -1,0 +1,55 @@
+/* styles.css */
+
+/* Root element */
+.root {
+    -fx-background-color: #041E32; /* Dark blue */
+}
+
+/* Text */
+.text {
+    -fx-fill: #FFFFFF; /* White */
+    -fx-font-family: Arial; /* Change font family */
+}
+
+/* Table View */
+.table-view {
+    -fx-background-color: #778DA9; /* Light blue */
+}
+
+/* Table Row */
+.table-row-cell {
+    -fx-background-color: #415A77; /* Dark gray-blue */
+}
+
+/* Table Column */
+.table-column {
+    -fx-text-fill: #FFFFFF; /* White */
+}
+
+/* Text Field */
+.text-field {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-text-fill: #041E32; /* Dark blue */
+    -fx-font-family: Arial; /* Change font family */
+    -fx-border-color: #C9A43D; /* Gold border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-background-radius: 5px; /* Round corners */
+}
+
+/* Date Picker */
+.date-picker {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-text-fill: #041E32; /* Dark blue */
+    -fx-font-family: Arial; /* Change font family */
+    -fx-border-color: #C9A43D; /* Gold border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-background-radius: 5px; /* Round corners */
+}
+
+/* Button */
+.button {
+    -fx-background-color: #C9A43D; /* Gold */
+    -fx-text-fill: #041E32; /* Dark blue */
+    -fx-font-family: Arial; /* Change font family */
+    -fx-background-radius: 5px; /* Round corners */
+}

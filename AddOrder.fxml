@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddOrderController">
+   <children>
+      <Button layoutX="253.0" layoutY="312.0" mnemonicParsing="false" onAction="#addButton" text="Add your order" />
+      <Text layoutX="175.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+      <Text layoutX="157.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price" />
+      <Text layoutX="173.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
+      <TextField fx:id="totalPA" layoutX="221.0" layoutY="180.0" prefHeight="56.0" prefWidth="150.0" />
+      <TextField fx:id="dateCA" layoutX="221.0" layoutY="254.0" prefHeight="26.0" prefWidth="150.0" />
+      <Button layoutX="394.0" layoutY="312.0" mnemonicParsing="false" onAction="#displayButton" text="Show your orders" />
+      <TextField fx:id="idBa" layoutX="221.0" layoutY="129.0" />
+   </children>
+</AnchorPane>

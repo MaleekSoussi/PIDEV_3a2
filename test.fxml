@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="bg1" stylesheets="@css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GoBackFrontController">
+    <children>
+        <Button fx:id="Back" layoutX="175.0" layoutY="167.0" mnemonicParsing="false" onAction="#goToBack" prefHeight="26.0" prefWidth="274.0" stylesheets="@css/styles.css" text="Back">
+            <styleClass>
+                <String fx:value="add-btn" />
+                <String fx:value="search-box" />
+            </styleClass></Button>
+        <Button fx:id="Front" layoutX="176.0" layoutY="249.0" mnemonicParsing="false" onAction="#GoToFront" prefHeight="26.0" prefWidth="274.0" stylesheets="@css/styles.css" text="Front">
+            <styleClass>
+                <String fx:value="add-btn" />
+                <String fx:value="search-box" />
+            </styleClass></Button>
+        <Text layoutX="255.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="shadow" text="GO TO " wrappingWidth="175.1875">
+            <font>
+                <Font name="Cambria" size="34.0" />
+            </font>
+        </Text>
+    </children>
+</AnchorPane>
