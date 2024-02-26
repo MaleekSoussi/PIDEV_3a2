@@ -41,7 +41,6 @@ public class SignupController{
 
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
-        String name = emailField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
         String role = (String) roleComboBox.getValue();
@@ -77,17 +76,17 @@ public class SignupController{
         }
 
         try {
-            Users newUser = new Users(); // Assuming Users is your model class
+            Users newUser = new Users();
             newUser.setFirstName(firstNameField.getText());
             newUser.setLastName(lastNameField.getText());
             newUser.setPassword(passwordField.getText());
             newUser.setEmailAddress(emailField.getText());
             newUser.setRole((String) roleComboBox.getValue());
-            newUser.setAccountStatus("Active"); // Assuming you have a default status
-            newUser.setDateCreated(LocalDateTime.now()); // Assuming dateCreated is set at time of creation
-            // lastLogin might be null until the user actually logs in
+            newUser.setAccountStatus("Active");
+            newUser.setDateCreated(LocalDateTime.now());
 
-            us.create(newUser); // Assuming create method handles the insertion into the database
+
+            us.create(newUser);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Success");
@@ -112,11 +111,6 @@ public class SignupController{
         emailField.clear();
         passwordField.clear();
         roleComboBox.getSelectionModel().clearSelection();
-    }
-
-    @FXML
-    public void gotologin(ActionEvent event) {
-            us.switchView(MainFX.primaryStage, "/front/Login.fxml");
     }
 
 }

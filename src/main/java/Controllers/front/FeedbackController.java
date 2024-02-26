@@ -22,24 +22,21 @@ public class FeedbackController{
 
     private UserService us = new UserService();
     private FeedbackService fs = new FeedbackService();
-    @FXML
-    private Button goback;
 
     @FXML
     private ScrollPane itemlist;
 
-    @FXML
-    private Button logout;
+
 
     @FXML
     private VBox vboxFeedbackList;
 
 
     public void initialize() {
-        vboxFeedbackList = new VBox(5); // Spacing of 5 between items
-        vboxFeedbackList.setFillWidth(true); // This will make the VBox fit to the width of ScrollPane
+        vboxFeedbackList = new VBox(5);
+        vboxFeedbackList.setFillWidth(true);
         itemlist.setContent(vboxFeedbackList);
-        itemlist.setFitToWidth(true); // This will make the content fit the width of ScrollPane
+        itemlist.setFitToWidth(true);
         try {
             List<Feedback> feedbacks = fs.getFeedbacksByUserId(UserService.currentlyLoggedInUser.getUserID());
             loadFeedbackItems(feedbacks);
@@ -79,11 +76,16 @@ public class FeedbackController{
 
     @FXML
     void logout(ActionEvent event) {
-        // Logout the current user
+        us.clearRememberedUser();
         UserService.currentlyLoggedInUser = null;
-        // Use switchView to change the scene
         us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
     }
+
+    @FXML
+    void Reset(ActionEvent event) {
+        us.switchView(MainFX.primaryStage, "/front/ResetPassword.fxml");
+    }
+
 
     @FXML
     void newfeedback(ActionEvent event){us.switchView(MainFX.primaryStage, "/front/NewFeedback.fxml");}

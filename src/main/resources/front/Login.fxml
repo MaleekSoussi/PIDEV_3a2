@@ -1,53 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.front.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.front.LoginController">
    <children>
-      <VBox alignment="CENTER" layoutX="417.0" layoutY="8.0" prefHeight="401.0" prefWidth="346.0" spacing="10.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="417.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="8.0">
+      <VBox alignment="CENTER" layoutX="25.0" layoutY="3.0" prefHeight="394.0" prefWidth="743.0" spacing="10.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="3.0">
          <children>
-            <Label alignment="CENTER" prefHeight="34.0" prefWidth="213.0" style="-fx-font-family: 'Arial'; -fx-font-size: 16;" text="Welcome" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="50.0" prefWidth="351.0" style="-fx-font-family: 'Arial'; -fx-font-size: 40;" text="Welcome">
                <font>
-                  <Font size="38.0" />
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="27.0" prefWidth="149.0" text="Access your account">
+               <font>
+                  <Font size="15.0" />
                </font></Label>
-            <Label prefHeight="23.0" prefWidth="130.0" text="Access your account" />
-            <TextField fx:id="emailField" prefWidth="351.0" promptText="Email" />
-            <PasswordField fx:id="passwordField" promptText="Password" />
-            <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" onAction="#login" text="Login" />
-            <Label text="Forgot your password?" />
-            <HBox alignment="CENTER" spacing="5.0">
-               <children>
-                  <Button fx:id="facebookButton" style="-fx-background-color: #3b5998; -fx-text-fill: white;" text="Continue with Facebook" />
-                  <Button fx:id="gmailButton" alignment="CENTER" style="-fx-background-color: #db4437; -fx-text-fill: white;" text="Continue with Gmail" />
-               </children>
-            </HBox>
+            <TextField fx:id="emailField" prefHeight="38.0" prefWidth="292.0" promptText="Email" />
+            <PasswordField fx:id="passwordField" prefHeight="39.0" prefWidth="292.0" promptText="Password" />
+            <Button fx:id="loginButton" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#login" prefHeight="35.0" prefWidth="292.0" text="Login" />
+            <CheckBox fx:id="rememberMeCheckbox" mnemonicParsing="false" text="Remember Me" />
+            <Label text="Forgot your password?">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin></Label>
+            <Button fx:id="gmailButton" alignment="CENTER" prefHeight="28.0" prefWidth="160.0" style="-fx-background-color: #db4437; -fx-text-fill: white;" text="Continue with Gmail">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin></Button>
          </children>
       </VBox>
-      <VBox alignment="CENTER" layoutX="-2.0" layoutY="54.0" prefHeight="297.0" prefWidth="377.0">
-         <children>
-            <ImageView fitHeight="223.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../styles/thumbnail_2 copy.png" />
-               </image>
-            </ImageView>
-         </children>
-      </VBox>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="412.0" layoutX="375.0" layoutY="-5.0" opacity="0.26" stroke="BLACK" strokeType="INSIDE" width="11.0" />
-      <Button fx:id="signinbutton" alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="357.0" maxWidth="1.7976931348623157E308" onAction="#gottosignup" prefHeight="36.0" prefWidth="292.0" text="Don't Have An account ? Sign up!" textAlignment="CENTER" />
    </children>
-   <stylesheets>
-      <URL value="@../styles/caspian-embedded.css" />
-      <URL value="@../styles/caspian-embedded-highContrast.css" />
-   </stylesheets>
 </AnchorPane>

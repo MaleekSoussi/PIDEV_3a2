@@ -44,14 +44,28 @@ public class FeedbackItemController {
         this.feedback = feedback;
         this.dashboardFeedbackController = dashboardFeedbackController;
 
-        // Populate the labels with data from the feedback
-        Answer.setText(feedback.getAnswer());
+        // Set the question and type labels
         Question.setText(feedback.getQuestion());
         Type.setText(feedback.getType());
         status.setText(feedback.getStatus());
 
+        if (feedback.getAnswer() != null && !feedback.getAnswer().isEmpty()) {
+
+            Answer.setText(feedback.getAnswer());
+            updatebutton.setVisible(false);
+        } else {
+
+            Answer.setText("No answer yet.");
+            updatebutton.setVisible(true);
+        }
+
+        // Set the action for the delete button
         deletebutton.setOnAction(event -> handleDeleteFeedback());
-        updatebutton.setOnAction(event -> dashboardFeedbackController.updateclicked(feedback));
+
+        // Set the action for the update button if it's visible
+        if (updatebutton.isVisible()) {
+            updatebutton.setOnAction(event -> dashboardFeedbackController.updateclicked(feedback));
+        }
     }
 
     public void handleDeleteFeedback() {

@@ -65,7 +65,7 @@ public class DashboardFeedbackController {
 
     @FXML
     void logout(ActionEvent event) {
-        // Logout the current user
+        us.clearRememberedUser();
         UserService.currentlyLoggedInUser=null;
         us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
     }
@@ -75,6 +75,7 @@ public class DashboardFeedbackController {
         String newAnswer = adminanswer.getText();
         if(newAnswer.isEmpty()) {
             us.showAlert(Alert.AlertType.INFORMATION, "Update Error", "answer field empty'.");
+            return;
         }
         try {
             if(feedback != null) {

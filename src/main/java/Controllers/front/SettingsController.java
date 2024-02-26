@@ -72,11 +72,8 @@ public class SettingsController{
                     emailfield.setText( UserService.currentlyLoggedInUser.getEmailAddress());
                 }
 
-                // Update the user in the database
-
             }
         } catch (SQLException e) {
-            // Handle potential SQLException
             us.showAlert(Alert.AlertType.ERROR, "Database Error", "Error");
             System.out.println(e.getMessage());
         }
@@ -96,12 +93,8 @@ public class SettingsController{
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 if (UserService.currentlyLoggedInUser != null) {
-                    // Delete the user from the database
                     us.delete(UserService.currentlyLoggedInUser.getUserID());
-                    // Log out the user
                     UserService.currentlyLoggedInUser=null;
-
-                    // Load and display the main window
                     us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
                 }
             } catch (SQLException e) {
@@ -117,9 +110,8 @@ public class SettingsController{
 
     @FXML
     void logout(ActionEvent event) {
-        // Logout the current user
         UserService.currentlyLoggedInUser = null;
-        // Use switchView to change the scene
+        us.clearRememberedUser();
         us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
     }
 
@@ -129,7 +121,9 @@ public class SettingsController{
         us.switchView(MainFX.primaryStage, "/front/Feedback.fxml");
     }
 
-
-
+    @FXML
+    void Reset(ActionEvent event) {
+        us.switchView(MainFX.primaryStage, "/front/ResetPassword.fxml");
+    }
 }
 

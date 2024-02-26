@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
@@ -25,56 +22,43 @@ public class LoginController{
     @FXML
     private PasswordField passwordField;
 
-    
-
     @FXML
-    void gottosignup(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/front/Signup.fxml");
-    }
+    private CheckBox rememberMeCheckbox;
 
     @FXML
     public void login(ActionEvent event) {
-        String email = emailField.getText(); // get the email from the email field
-        String password = passwordField.getText(); // get the password from the password field
+        String email = emailField.getText();
+        String password = passwordField.getText();
 
-        if (us.login(email, password)) { // Use UserService's login method for authentication
-            // Check if the user's account is disabled
+        if (us.login(email, password)) {
+
+            if (rememberMeCheckbox.isSelected()) {
+                us.rememberUser(email, password);
+            } else {
+                us.clearRememberedUser();
+            }
+
             if ("Disabled".equals(UserService.currentlyLoggedInUser.getAccountStatus())) {
-                 us.showAlert(Alert.AlertType.ERROR, "Login Failed", "Your account is disabled.");
-                return; // Stop the login process
+                us.showAlert(Alert.AlertType.ERROR, "Login Failed", "Your account is disabled.");
+                return;
             }
-
-            if ("UserAdmin".equals(UserService.currentlyLoggedInUser.getRole())) {
-                try {
-                    // Update the last_login field in the database
-                    us.updateLastLoginTimestamp(email);
-                    us.switchView(MainFX.primaryStage, "/back/Dashboard.fxml");
-
-                } catch (SQLException e) {
-                     us.showAlert(Alert.AlertType.ERROR, "Loading Error", "Error while loading: " + e.getMessage());
-                }
-            }
-            else {
-
 
             try {
-                // Update the last_login field in the database
                 us.updateLastLoginTimestamp(email);
-
-                us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
+                String redirectPath = "UserAdmin".equals(UserService.currentlyLoggedInUser.getRole()) ? "/back/Dashboard.fxml" : "/front/MainWindow.fxml";
+                us.switchView(MainFX.primaryStage, redirectPath);
 
             } catch (SQLException e) {
-                 us.showAlert(Alert.AlertType.ERROR, "Loading Error", "Error while loading the main window: " + e.getMessage());
-            }
+                us.showAlert(Alert.AlertType.ERROR, "Loading Error", "Error while loading: " + e.getMessage());
             }
         } else {
-
-             us.showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect email or password.");
+            us.showAlert(Alert.AlertType.ERROR, "Login Failed", "Incorrect email or password.");
         }
-
     }
 
 
-
-
 }
+
+
+
+

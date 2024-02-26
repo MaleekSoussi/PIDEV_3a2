@@ -1,9 +1,10 @@
 package Services;
+import java.util.prefs.Preferences;
+
 
 import Models.Users;
 import Utils.MyDatabase;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -17,10 +18,41 @@ import java.util.List;
 
 public class UserService implements IService<Users> {
 
-    private Connection connection;
+    private Connection connection = MyDatabase.getInstance().getConnection();
     public static Users currentlyLoggedInUser = null;
+    private Preferences prefs = Preferences.userNodeForPackage(UserService.class);
 
+    public void rememberUser(String email, String password) {
+        prefs.put("email", email);
+        prefs.put("password", password);
+    }
 
+    public void clearRememberedUser() {
+        prefs.remove("email");
+        prefs.remove("password");
+    }
+
+    public String autoLogin() {
+        String email = prefs.get("email", null);
+        String password = prefs.get("password", null); // Assuming you store a hashed token instead of a plain password.
+
+        if (email != null && password != null) {
+            try {
+                Users user = readUserByEmail(email);
+                // Here checkPassword should compare the hashed token with the hashed password stored in the database.
+                if (user != null && PasswordHasher.checkPassword(password, user.getPassword())) {
+                    currentlyLoggedInUser = user;
+                    return user.getRole();
+                }
+            } catch (SQLException e) {
+                showAlert(Alert.AlertType.ERROR, "Login Error", "An error occurred while trying to auto-login: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+//singleton
     public UserService() {
         connection = MyDatabase.getInstance().getConnection();
     }
@@ -32,6 +64,7 @@ public class UserService implements IService<Users> {
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, user.getFirstName());
         ps.setString(2, user.getLastName());
+        user.setPassword(PasswordHasher.hashPassword(user.getPassword()));
         ps.setString(3, user.getPassword());
         ps.setString(4, user.getEmailAddress());
         ps.setString(5, user.getRole());
@@ -49,7 +82,7 @@ public class UserService implements IService<Users> {
         ps.setString(4, user.getEmailAddress());
         ps.setString(5, user.getRole());
         ps.setString(6, user.getAccountStatus());
-        ps.setObject(7, user.getLastLogin()); // Using setObject for LocalDateTime
+        ps.setObject(7, user.getLastLogin());
         ps.setInt(8, user.getUserID());
         ps.executeUpdate();
     }
@@ -70,7 +103,7 @@ public class UserService implements IService<Users> {
         List<Users> users = new ArrayList<>();
         while (rs.next()) {
             Users user = new Users(
-                    rs.getInt("user_id"), // Fetch and set the userID
+                    rs.getInt("user_id"),
                     rs.getString("firstname"),
                     rs.getString("lastname"),
                     rs.getString("email_address"),
@@ -84,18 +117,17 @@ public class UserService implements IService<Users> {
         return users;
     }
 
-    public Users authenticate(String emailAddress, String password) throws SQLException {
-        String sql = "SELECT * FROM users WHERE email_address = ? AND password = ?";
+    public Users authenticate(String emailAddress) throws SQLException {
+        String sql = "SELECT * FROM users WHERE email_address = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, emailAddress);
-            statement.setString(2, password);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return new Users(
                             resultSet.getInt("user_id"),
                             resultSet.getString("firstname"),
                             resultSet.getString("lastname"),
-                            resultSet.getString("password"),
+                            resultSet.getString("password"), // This should be the hashed password
                             resultSet.getString("email_address"),
                             resultSet.getString("role"),
                             resultSet.getString("account_status"),
@@ -120,12 +152,15 @@ public class UserService implements IService<Users> {
 
     public boolean login(String email, String password) {
         try {
-            currentlyLoggedInUser = authenticate(email, password);
-            return currentlyLoggedInUser != null;
+            Users user = authenticate(email);
+            if (user != null && PasswordHasher.checkPassword(password, user.getPassword())) {
+                currentlyLoggedInUser = user;
+                return true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
     
     public Users readUser(int userId) throws SQLException {
@@ -167,17 +202,13 @@ public class UserService implements IService<Users> {
     }
 
 
-
     public void switchView(Stage stage, String fxmlPath) {
         try {
-            // Load the view from the given FXML path
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
-            // Set the new scene to the stage with the loaded root
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            System.out.println("Error loading view: " + e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "View Error", "Cannot load view: " + e.getMessage());
         }
     }
 
@@ -185,10 +216,46 @@ public class UserService implements IService<Users> {
     public void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
-        alert.setHeaderText(null); // Optional: to remove the header text
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public void updatePassword(String newPassword) throws SQLException {
+        String hashedPassword = PasswordHasher.hashPassword(newPassword);
+    String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        ps.setString(1, hashedPassword);
+        ps.setInt(2, currentlyLoggedInUser.getUserID());
+        ps.executeUpdate();
+    }}
+
+    public Users readUserByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM users WHERE email_address = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Users(
+                            rs.getInt("user_id"),
+                            rs.getString("firstname"),
+                            rs.getString("lastname"),
+                            rs.getString("password"),
+                            rs.getString("email_address"),
+                            rs.getString("role"),
+                            rs.getString("account_status"),
+                            rs.getTimestamp("date_created") != null ? rs.getTimestamp("date_created").toLocalDateTime() : null,
+                            rs.getTimestamp("last_login") != null ? rs.getTimestamp("last_login").toLocalDateTime() : null
+                    );
+                }
+            }
+        }
+        return null;
+    }
+
+
+
+
 
 }
 

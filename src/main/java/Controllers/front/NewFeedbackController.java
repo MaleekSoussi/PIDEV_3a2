@@ -25,7 +25,6 @@ public class NewFeedbackController {
 
     @FXML
     public void initialize() {
-        // Initialize the feedbackType ComboBox with options
         feedbackType.getItems().addAll("Bug Report", "Feature Request", "General Feedback");
         feedbackType.getSelectionModel().selectFirst();
     }

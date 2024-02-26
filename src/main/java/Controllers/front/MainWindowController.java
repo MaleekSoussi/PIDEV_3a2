@@ -25,7 +25,7 @@ public class MainWindowController {
 
     @FXML
     void login(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/front/Login.fxml");
+        us.switchView(MainFX.primaryStage, "/front/Transition.fxml");
     }
 
     @FXML
@@ -39,12 +39,10 @@ public class MainWindowController {
 
     @FXML
     void settings(ActionEvent event) {
-            // Replace this with your actual method to check if a user is logged in
+
             if (UserService.currentlyLoggedInUser==null) {
-                // User is not logged in, load the Login view
-                us.switchView(MainFX.primaryStage, "/front/Login.fxml");
+                us.switchView(MainFX.primaryStage, "/front/Transition.fxml");
             } else {
-                // User is logged in, load the Settings view
                 us.switchView(MainFX.primaryStage, "/front/Settings.fxml");
             }
     }
@@ -52,14 +50,9 @@ public class MainWindowController {
 
 
     public void initialize() {
-        // Check if a user is logged in
         if (UserService.currentlyLoggedInUser != null) {
-            // User is logged in
             loginButton.setVisible(false);
             Signupbutton.setVisible(false);
-
-            loginButton.setManaged(false);
-            Signupbutton.setManaged(false);
         }
     }
 

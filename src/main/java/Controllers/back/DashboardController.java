@@ -2,6 +2,9 @@ package Controllers.back;
 
 import Services.UserService;
 import Test.MainFX;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +42,13 @@ public class DashboardController {
     @FXML
     private VBox vboxUserList; // The VBox that will contain your user items
 
+
+    @FXML
+    private TextField searchField;
     private UserService us = new UserService();
+
+    private ObservableList<Users> masterList = FXCollections.observableArrayList(); // Master list of all users
+    private FilteredList<Users> filteredList; // Filtered list for displaying
 
     public void initialize() {
         vboxUserList = new VBox(5); // Spacing of 5 between items
@@ -48,12 +57,48 @@ public class DashboardController {
         itemlist.setFitToWidth(true); // This will make the content fit the width of ScrollPane
         try {
             List<Users> users = us.read();
-            loadUserItems(users);
+            masterList = FXCollections.observableArrayList(users); // Convert to ObservableList
+            filteredList = new FilteredList<>(masterList, p -> true); // Wrap with FilteredList
+            loadUserItems(filteredList); // Now pass the FilteredList
         } catch (SQLException e) {
             e.printStackTrace();
-        }    }
+        }
+        try {
+            masterList.setAll(us.read());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-    public void loadUserItems(List<Users> users) {
+        filteredList = new FilteredList<>(masterList, p -> true);
+
+        loadUserItems(filteredList);
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(user -> {
+
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (user.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (user.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                } else if (user.getEmailAddress().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches email.
+                } else if (user.getAccountStatus().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches account status
+                } else if (user.getRole().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches role
+                }
+                return false;
+            });
+            loadUserItems(filteredList); // Reload the user items with the filtered list
+        });
+
+    }
+
+    public void loadUserItems(FilteredList<Users> users) {
         vboxUserList.getChildren().clear();
         for (Users user : users) {
             if (user.getRole().contains("Admin")) {
@@ -120,7 +165,7 @@ public class DashboardController {
 
     @FXML
     void logout(ActionEvent event) {
-        // Logout the current user
+        us.clearRememberedUser();
         UserService.currentlyLoggedInUser=null;
         us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
     }

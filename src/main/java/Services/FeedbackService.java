@@ -54,26 +54,8 @@ public class FeedbackService implements IService<Feedback> {
 
     @Override
     public List<Feedback> read() throws SQLException {
-        String sql = "SELECT * FROM feedback";
-        List<Feedback> feedbackList = new ArrayList<>();
-        try (Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery(sql)) {
-            while (rs.next()) {
-                Feedback feedback = new Feedback(
-                        rs.getInt("feedback_id"),
-                        rs.getString("status"),
-                        rs.getString("type"),
-                        rs.getString("question"),
-                        rs.getString("answer"),
-                        rs.getString("user_satisfaction"),
-                        rs.getInt("id_U")
-                );
-                feedbackList.add(feedback);
-            }
-        }
-        return feedbackList;
+        return null;
     }
-
 
     public Feedback getFeedbackByUserId(int userId) throws SQLException {
         String sql = "SELECT * FROM feedback WHERE id_U = ?";

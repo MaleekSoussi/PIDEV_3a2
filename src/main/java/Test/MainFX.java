@@ -1,5 +1,6 @@
 package Test;
 
+import Services.UserService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,20 +9,32 @@ import javafx.stage.Stage;
 
 public class MainFX extends Application {
 
+
+    private UserService us = new UserService();
     public static Stage primaryStage;
 
 
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-        // load the fxml file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/MainWindow.fxml"));
-        Parent root= loader.load();
-        Scene scene = new Scene(root);
-        // set a scene in stage
-        stage.setScene(scene);
-        stage.setTitle("VinciApp");
-        stage.show();
+        String role = us.autoLogin(); // us is an instance of UserService
+
+        if (role != null) {
+            String fxmlFile;
+            if ("UserAdmin".equals(role)) {
+                fxmlFile = "/back/Dashboard.fxml";
+            } else {
+                fxmlFile = "/front/MainWindow.fxml";
+            }
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            primaryStage.setScene(new Scene(root));
+        } else {
+            // Show login or transition view
+            Parent root = FXMLLoader.load(getClass().getResource("/front/Transition.fxml"));
+            primaryStage.setScene(new Scene(root));
+        }
+        primaryStage.setTitle("VinciApp");
+        primaryStage.show();
     }
 
     public static void main(String[] args) {

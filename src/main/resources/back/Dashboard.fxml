@@ -43,10 +43,17 @@
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="453.0">
                            <children>
-                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="141.0" styleClass="custom-button" stylesheets="@../styles/stylesdash.css" text="Logout">
+                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="48.0" prefWidth="58.0" styleClass="custom-button" stylesheets="@../styles/stylesdash.css">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
+                                 <graphic>
+                                    <ImageView fitHeight="38.0" fitWidth="39.0">
+                                       <image>
+                                          <Image url="@../styles/icons8-logout-66.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </Button>
                            </children>
                         </HBox>
@@ -54,7 +61,7 @@
                            <children>
                               <HBox alignment="CENTER" layoutX="40.0" layoutY="39.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="368.0">
                                  <children>
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="235.0" promptText="Type here to search" styleClass="transparent">
+                                    <TextField fx:id="searchField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="235.0" promptText="Type here to search" styleClass="transparent">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>
