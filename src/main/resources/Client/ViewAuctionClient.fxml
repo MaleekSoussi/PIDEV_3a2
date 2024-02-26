@@ -11,11 +11,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -79,23 +77,15 @@
                                                 <Font name="Cambria" size="36.0" />
                                             </font>
                                         </Label>
-                                        <ImageView fx:id="Auctionoftheday" fitHeight="170.0" fitWidth="285.0" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fx:id="Auctionoftheday" fitHeight="277.0" fitWidth="273.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../img/auction.png" />
+                                                <Image url="@../img/9189.jpg" />
                                             </image>
                                             <VBox.margin>
                                                 <Insets top="20.0" />
                                             </VBox.margin>
                                         </ImageView>
                                         <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
-                                            <children>
-                                                <Label prefHeight="53.0" prefWidth="167.0" text="Price " textFill="WHITE">
-                                                    <font>
-                                                        <Font name="Cambria" size="24.0" />
-                                                    </font>
-                                                </Label>
-                                                <TextField promptText="Starting price" />
-                                            </children>
                                             <VBox.margin>
                                                 <Insets top="20.0" />
                                             </VBox.margin>
@@ -106,22 +96,17 @@
                                             </VBox.margin>
                                             <children>
                                                 <Separator prefHeight="0.0" prefWidth="118.0" />
-                                                <Label alignment="CENTER" prefHeight="45.0" prefWidth="64.0" text="or" textFill="WHITE">
-                                                    <font>
-                                                        <Font name="Cambria" size="24.0" />
-                                                    </font>
-                                                </Label>
                                                 <Separator prefHeight="0.0" prefWidth="118.0" />
                                             </children>
                                         </HBox>
                                         <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                                             <children>
-                                                <Label prefHeight="53.0" prefWidth="167.0" text="Bitcoin" textFill="WHITE">
+                                                <Label prefHeight="30.0" prefWidth="196.0" text="Donation Amount" textFill="WHITE">
                                                     <font>
                                                         <Font name="Cambria" size="24.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField promptText="starting price" />
+                                                <TextField fx:id="dono" prefHeight="25.0" prefWidth="122.0" promptText="Donations" />
                                             </children>
                                         </HBox>
                                         <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="270.0" styleClass="add-btn" stylesheets="@Stylesheet.css" text="BID NOW !" textFill="#0d0d0d">
@@ -180,7 +165,7 @@
                                     <children>
                                         <ScrollPane fitToHeight="true" fitToWidth="true">
                                             <content>
-                                                <GridPane fx:id="itemsContainer" alignment="TOP_CENTER" prefHeight="633.0" prefWidth="1034.0" >
+                                                <GridPane fx:id="itemsContainer" alignment="TOP_CENTER" prefHeight="633.0" prefWidth="1034.0">
                                                 </GridPane>
                                             </content>
                                         </ScrollPane>

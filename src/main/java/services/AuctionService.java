@@ -17,7 +17,30 @@ public class AuctionService implements IService<Auction> {
     public AuctionService() {
         connection = MyDatabase.getInstance().getConnection();
     }
+    public Auction getAuctionById(int auctionId) throws SQLException {
+        Auction auction = null;
+        String sql = "SELECT * FROM auction WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, auctionId);
+        ResultSet resultSet = statement.executeQuery();
 
+        if (resultSet.next()) {
+            auction = new Auction(
+                    resultSet.getInt("id"),
+                    resultSet.getInt("price"),
+                    resultSet.getInt("userid"),
+                    resultSet.getFloat("bitcoin"),
+                    resultSet.getString("time"),
+                    resultSet.getString("date"),
+                    resultSet.getString("Auctionname")
+            );
+        }
+
+        resultSet.close();
+        statement.close();
+
+        return auction;
+    }
     @Override
     public void create(Auction auction) throws SQLException {
         String sql = "INSERT INTO auction (Auctionname, price, bitcoin, time, date) VALUES (?, ?, ?, ?, ?)";
