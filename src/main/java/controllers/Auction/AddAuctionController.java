@@ -69,20 +69,14 @@ public class AddAuctionController {
             return;
         }
 
-        if (auctionName.isEmpty()) {
-            errorLabel.setText("Auction name cannot be empty.");
-            return;
-        }
-
-        // Check if auctionService is initialized
-        if (auctionService == null) {
-            errorLabel.setText("Auction service not available. Please inject or initialize it.");
+        if (auctionName.isEmpty() || auctionTime.isEmpty() || auctionDate == null) {
+            errorLabel.setText("Please fill in all fields.");
             return;
         }
 
         try {
             // Use the injected auctionService
-            auctionService.create(new Auction(priceInt, bitcoinFloat, auctionTime, auctionDate.toString(), auctionName));
+            auctionService.create(new Auction(priceInt, 1, bitcoinFloat, auctionTime, auctionDate.toString(), auctionName));
 
             // Handle successful addition (e.g., clear fields, navigate)
             clearFields();
@@ -94,6 +88,7 @@ public class AddAuctionController {
             errorLabel.setText("Error adding auction: " + e.getMessage());
         }
     }
+
 
     // Method to show the alert popup
     private void showAlertPopup() {

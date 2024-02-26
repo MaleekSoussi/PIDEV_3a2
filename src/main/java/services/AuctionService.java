@@ -43,18 +43,30 @@ public class AuctionService implements IService<Auction> {
     }
     @Override
     public void create(Auction auction) throws SQLException {
-        String sql = "INSERT INTO auction (Auctionname, price, bitcoin, time, date) VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "INSERT INTO auction (Auctionname, price, bitcoin, time, date, Userid) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, auction.getAuctionname());
         statement.setInt(2, auction.getPrice());
         statement.setFloat(3, auction.getBitcoin());
         statement.setString(4, auction.getTime());
         statement.setString(5, auction.getDate());
+        statement.setInt(6, 1); // Assuming Userid is always 1
 
-        statement.executeUpdate();
+        int rowsAffected = statement.executeUpdate();
+        if (rowsAffected == 0) {
+            throw new SQLException("Creating auction failed, no rows affected.");
+        }
+
+        try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                auction.setId(generatedKeys.getInt(1));
+            } else {
+                throw new SQLException("Creating auction failed, no ID obtained.");
+            }
+        }
+
         statement.close();
     }
-
     @Override
     public void update(Auction auction) throws SQLException {
         String sql = "UPDATE auction SET Auctionname = ?, price = ?, bitcoin = ?, time = ?, date = ? WHERE id = ?";

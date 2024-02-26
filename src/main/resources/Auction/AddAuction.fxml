@@ -14,7 +14,7 @@
         <TextField fx:id="AuctionNametf" layoutX="242.0" layoutY="111.0" prefHeight="25.0" prefWidth="304.0" promptText="Auction name" />
         <Label layoutX="192.0" layoutY="176.0" text="Price :" />
         <TextField fx:id="price" layoutX="242.0" layoutY="172.0" prefHeight="25.0" prefWidth="304.0" promptText="Price" />
-        <Label fx:id="errorLabel" layoutX="242.0" layoutY="400.0" prefHeight="20.0" prefWidth="304.0" textFill="blue" />
+        <Label fx:id="errorLabel" layoutX="195.0" layoutY="382.0" prefHeight="95.0" prefWidth="405.0" textFill="blue" />
       <TextField fx:id="Bitcoin" layoutX="242.0" layoutY="229.0" prefHeight="25.0" prefWidth="304.0" promptText="bitcoin" />
       <Label layoutX="150.0" layoutY="233.0" text="Price in bitcoin :" />
       <DatePicker fx:id="dateAuction" layoutX="242.0" layoutY="286.0" />
@@ -22,9 +22,9 @@
       <TextField fx:id="Auctiontime" layoutX="242.0" layoutY="345.0" prefHeight="25.0" prefWidth="295.0" promptText="Pick a time in HH:MM" />
       <Label layoutX="153.0" layoutY="349.0" prefHeight="17.0" prefWidth="80.0" text="Auction time" />
 
-                          <StackPane fx:id="alertPopup" layoutX="256.0" layoutY="385.0" prefHeight="50.0" prefWidth="200.0" visible="False">
+                          <StackPane fx:id="alertPopup" layoutX="256.0" layoutY="385.0" prefHeight="50.0" prefWidth="351.0" visible="False">
          <children>
-                <Label text="Auction added successfully!" textFill="green" />
+                <Label prefHeight="48.0" prefWidth="354.0" text="Auction added successfully!" textFill="green" />
          </children>
         </StackPane>
 

@@ -58,6 +58,13 @@ public class ViewBidUsers implements Initializable {
 
     public void populateTableView() {
         try {
+            // Fetch the highest bid for the auction
+            int highestBid = bidService.getHighestBidForAuction(auctionId);
+
+            // Set the highest bid to the label
+            highestbid.setText("Highest Bid: $" + highestBid);
+
+            // Populate the TableView with bid data
             ObservableList<Bid> bidData = FXCollections.observableArrayList(bidService.read());
             bidTableView.setItems(bidData);
         } catch (SQLException e) {

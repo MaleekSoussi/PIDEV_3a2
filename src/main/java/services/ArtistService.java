@@ -21,13 +21,14 @@ public class ArtistService implements IService<Auction> {
 
     @Override
     public void create(Auction auction) throws SQLException {
-        String sql = "INSERT INTO auction (Auctionname, price, bitcoin, time, date) VALUES (?, ?, ?, ?, ?) " ;
+        String sql = "INSERT INTO auction (Auctionname, price, bitcoin, time, date,Userid) VALUES (?, ?, ?, ?, ?,?) " ;
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, auction.getAuctionname());
         statement.setInt(2, auction.getPrice());
         statement.setFloat(3, auction.getBitcoin());
         statement.setString(4, auction.getTime());
         statement.setString(5, auction.getDate());
+        statement.setString(1, String.valueOf(1));
 
         statement.executeUpdate();
         statement.close();

@@ -11,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.Auction;
@@ -96,12 +93,24 @@ public class ViewAuctionArtist implements Initializable {
             {
                 deleteButton.setOnAction(event -> {
                     Auction auction = getTableView().getItems().get(getIndex());
-                    try {
-                        ArtistService.delete(auction.getId());
-                        auctionTableView.getItems().remove(auction);
-                    } catch (SQLException e) {
-                        // Handle the exception appropriately, e.g., show an error message
-                    }
+                    // Create a confirmation dialog
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation Dialog");
+                    alert.setHeaderText("Delete Auction");
+                    alert.setContentText("Are you sure you want to delete this auction?");
+
+                    // Show the confirmation dialog
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            try {
+                                ArtistService.delete(auction.getId());
+                                auctionTableView.getItems().remove(auction);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                                // Handle the exception appropriately, e.g., show an error message
+                            }
+                        }
+                    });
                 });
             }
 
