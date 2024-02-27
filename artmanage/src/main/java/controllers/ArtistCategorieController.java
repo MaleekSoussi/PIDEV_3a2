@@ -89,8 +89,8 @@ public class ArtistCategorieController {
     void displayc(ActionEvent event) {
         try {
             List<category> categoryList = categoryServices.displayC();
-            ol = FXCollections.observableList(categoryList);
-            showtablec.setItems(ol);
+            ol = FXCollections.observableList(categoryList);//// Creating an observable list from the categoryList
+            showtablec.setItems(ol);// Setting the observable list to the TableView showtablec
             namee.setCellValueFactory(new PropertyValueFactory<>("name"));
             dateT.setCellValueFactory(new PropertyValueFactory<>("date"));
 

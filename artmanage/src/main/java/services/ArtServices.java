@@ -14,8 +14,8 @@ public class ArtServices implements IServices <art> {
     @Override
     public void add(art a) throws SQLException {
         // SQL query to insert art data into the database
-        String req = "INSERT INTO art ( title, materials, height, width, type, city, description,price,id_category) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?)";
-
+        String req = "INSERT INTO art ( title, materials, height, width, type, city, description,price,id_category,path_image) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? , ?, ?)";
+        //analyse->comuling-->optimizing-->executing
         // Using try-with-resources to ensure proper resource management
         try (PreparedStatement pstmt = con.prepareStatement(req)) {
             // Setting the parameters for the prepared statement
@@ -28,6 +28,7 @@ public class ArtServices implements IServices <art> {
             pstmt.setString(7, a.getDescription());
             pstmt.setFloat(8, a.getPrice());
             pstmt.setInt(9, a.getId_category());
+            pstmt.setString(10, a.getPath_image());
 
             // Executing the update operation
             pstmt.executeUpdate();
@@ -36,7 +37,7 @@ public class ArtServices implements IServices <art> {
 
     @Override
     public void modify(art newart, int id_art) throws SQLException {
-        String req = "UPDATE art SET title=?, materials=?, height=?, width=?, type=?, city=?, description=? ,price=? ,id_category=? WHERE id_art=?";
+        String req = "UPDATE art SET title=?, materials=?, height=?, width=?, type=?, city=?, description=? ,price=? ,id_category=?,path_image=? WHERE id_art=?";
         PreparedStatement pre = con.prepareStatement(req);
         pre.setString(1, newart.getTitle());
         pre.setString(2, newart.getMaterials());
@@ -47,7 +48,8 @@ public class ArtServices implements IServices <art> {
         pre.setString(7, newart.getDescription());
         pre.setFloat(8, newart.getPrice());
         pre.setInt(9, newart.getId_category());
-        pre.setInt(10, id_art);
+        pre.setString(10, newart.getPath_image());
+        pre.setInt(11, id_art);
 
         pre.executeUpdate();
     }
@@ -88,6 +90,7 @@ public class ArtServices implements IServices <art> {
             a.setDescription(res.getString(8));
             a.setPrice(res.getFloat(9));
             a.setId_category(res.getInt(10));
+            a.setPath_image(res.getString(11));
             arts.add(a);
         }
 
@@ -112,9 +115,43 @@ public class ArtServices implements IServices <art> {
             a.setDescription(res.getString(8));
             a.setPrice(res.getFloat(9));
             a.setId_category(res.getInt(10));
+            a.setPath_image(res.getString(11));
+
             getOneArt.add(a);
         }
         return getOneArt;
     }
+    public List<art> searchArt(String search) {
+        List<art> artList = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM art WHERE title LIKE ? ";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, "%" + search + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Parcours du résultat de la requête
+            while (resultSet.next()) {
+                art art = new art();
+                art.setId_art(resultSet.getInt(1));
+                art.setTitle(resultSet.getString(2));
+                art.setMaterials(resultSet.getString(3));
+                art.setHeight(resultSet.getDouble(4));
+                art.setWidth(resultSet.getDouble(5));
+                art.setType(resultSet.getString(6));
+                art.setCity(resultSet.getString(7));
+                art.setDescription(resultSet.getString(8));
+                art.setPrice(resultSet.getFloat(9));
+                art.setId_category(resultSet.getInt(10));
+                art.setPath_image(resultSet.getString(11));
+                artList.add(art);
+            }
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return artList;
+    }
+
     }
 

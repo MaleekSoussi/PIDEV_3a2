@@ -80,6 +80,7 @@ public class CategoryServices implements IservicesC <category> {
         String categoryName = null;
         String req = "SELECT name FROM category WHERE id_category = ?";
         PreparedStatement preparedStatement = con.prepareStatement(req);
+        //Sets the value of the first parameter in the SQL query to the idCategory parameter.
         preparedStatement.setInt(1, idCategory);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {

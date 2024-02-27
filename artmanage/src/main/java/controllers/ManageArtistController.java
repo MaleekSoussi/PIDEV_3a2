@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -43,7 +44,6 @@ public class ManageArtistController implements Initializable {
     private TextField idT;
 
 
-
     @FXML
     private ComboBox<category> combo_category;
 
@@ -53,6 +53,9 @@ public class ManageArtistController implements Initializable {
     private TextField heightA;
     @FXML
     private TextField widthA;
+
+    @FXML
+    private TextField search_bar;
 
     @FXML
     private TextField TypeA;
@@ -119,7 +122,17 @@ public class ManageArtistController implements Initializable {
     void addArt(ActionEvent event) {
         try {
             category SelectedCategory = combo_category.getValue();
-            artps.add(new art(idT.getText(), materialsA.getText(), Double.parseDouble(heightA.getText()), Double.parseDouble(widthA.getText()), TypeA.getText(), cityA.getText(), descA.getText(),Float.parseFloat(priceV.getText()),SelectedCategory.getId_category()));
+            if (idT.getText().isEmpty() || materialsA.getText().isEmpty() || heightA.getText().isEmpty() || widthA.getText().isEmpty() ||
+                    TypeA.getText().isEmpty() || cityA.getText().isEmpty() || descA.getText().isEmpty() || priceV.getText().isEmpty() ||
+                    SelectedCategory == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Please fill in all fields");
+                alert.showAndWait();
+                return;}
+            artps.add(new art(idT.getText(), materialsA.getText(), Double.parseDouble(heightA.getText()), Double.parseDouble(widthA.getText()), TypeA.getText(), cityA.getText(), descA.getText(),Float.parseFloat(priceV.getText()),SelectedCategory.getId_category(),cityA.getText()));
+
+            //show(event);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Art added successfully");
@@ -130,8 +143,8 @@ public class ManageArtistController implements Initializable {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
-        refreshTableView();
 
+        resetFields();
     }
 
 
@@ -222,6 +235,8 @@ public class ManageArtistController implements Initializable {
         cityA.clear();
         descA.clear();
         priceV.clear();
+        //combo_category.getItems().clear();
+
     }
 
     @FXML
@@ -307,6 +322,7 @@ public class ManageArtistController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         List<category> allCategories = null ;
         try {
             allCategories = categoryServices.displayC();
@@ -327,5 +343,20 @@ public class ManageArtistController implements Initializable {
             System.out.println("error"+e.getMessage());
         }
     }
+
+    @FXML
+    void searchArt(KeyEvent event) {
+        String searchQuery = search_bar.getText(); // Replace searchTextField with the actual name of your TextField
+
+        // Call the searchProducts method in your ConseilService
+        List<art> matchingConseils = artps.searchArt(searchQuery);
+
+        // Update the UI with the matching Conseils
+        oll.clear(); // Clear the current data
+        oll.addAll(matchingConseils); // Add the matching Conseils to the observable list
+        showTbleArtis.setItems(oll); // Set the items in the TableView
+    }
+
+
 }
 

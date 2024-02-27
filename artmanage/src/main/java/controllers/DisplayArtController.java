@@ -12,7 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import services.ArtServices;
 
 import javafx.scene.layout.AnchorPane;
@@ -20,8 +26,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.input.MouseEvent;
 import services.CategoryServices;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,10 +41,15 @@ public class DisplayArtController  {
     private final CategoryServices categoryServices = new CategoryServices();
 
 
-    int id = 0;
 
+
+    int id = 0;
+    @FXML
+    private TextField searchforTitle;
     @FXML
     private TableView<art> ArtTableView;
+    @FXML
+    private TextField pathart;
 
     @FXML
     private TableColumn<art, String> titlec;
@@ -59,6 +73,10 @@ public class DisplayArtController  {
     private TableColumn<art, String> descriptionc;
     @FXML
     private ComboBox<category> categoriChoix;
+    @FXML
+    private TableColumn<art, String> path;
+    @FXML
+    private TextField paths;
 
     @FXML
     private TableColumn<art, Float> priceT;
@@ -84,6 +102,16 @@ public class DisplayArtController  {
     private TextField prices;
     @FXML
     private TableColumn<art, String> categoryT;
+    @FXML
+    private Button addIMAGES;
+
+    @FXML
+    private ImageView addImages;
+
+    @FXML
+    private Pane backImages;
+    @FXML
+    private ImageView imageARTS;
 
 
 
@@ -119,9 +147,10 @@ public class DisplayArtController  {
                     alert.setContentText("Error fetching category name: " + e.getMessage());
                     alert.showAndWait();
                 }
-                // Convert the string category name to ObservableValue<Integer>
+                   // Set the selected category in the combo box
                 return new SimpleStringProperty(categoryName);
             });
+            path.setCellValueFactory(new PropertyValueFactory<>("path_image"));
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -182,7 +211,6 @@ public class DisplayArtController  {
     void update(ActionEvent event) {
         // Récupérer l'objet Conseil sélectionné dans le TableView
         art art = ArtTableView.getSelectionModel().getSelectedItem();
-
         // Vérifier si un élément a été effectivement sélectionné
         if (art != null) {
             // Mettre à jour les propriétés du Conseil avec les valeurs des champs de texte
@@ -195,8 +223,10 @@ public class DisplayArtController  {
             art.setDescription(descriptionu.getText());
             art.setWidth(Float.parseFloat(prices.getText()));
             art.setId_category((categoriChoix.getValue()).getId_category());
+            String newImagePath = paths.getText();
+            art.setPath_image(newImagePath);
 
-
+            //System.out.println("New Image Path: " + newImagePath);
             // Appeler la méthode de mise à jour dans votre service ou gestionnaire de données
             try {
                 ps.modify(art,id); // Assuming you have an update method in your service
@@ -238,6 +268,11 @@ public class DisplayArtController  {
             descriptionu.clear();
             prices.clear();
             categoriChoix.getItems().clear();
+            paths.clear();
+            imageARTS.setImage(null);
+
+
+
 
         }
 
@@ -259,7 +294,6 @@ public class DisplayArtController  {
                 descriptionu.setText(art.getDescription());
                 prices.setText(String.valueOf(art.getPrice()));
                 int categoryId = art.getId_category();
-
                 // Find the category object that corresponds to the categoryId
                 category selectedCategory = null; // Initialize to null
                 for (category cat : categoriChoix.getItems()) {
@@ -270,6 +304,17 @@ public class DisplayArtController  {
                 }
                 // Set the selected category in the combo box
                 categoriChoix.setValue(selectedCategory);
+                paths.setText(art.getPath_image());
+
+                paths.setText(art.getPath_image());
+
+// Load the image from the specified path
+                String imagePath = art.getPath_image();
+                File imageFile = new File(imagePath);
+                Image image = new Image(imageFile.toURI().toString());
+
+// Set the image to the ImageView
+                imageARTS.setImage(image);
             }
         }
     }
@@ -283,4 +328,46 @@ public class DisplayArtController  {
             System.out.println("error"+e.getMessage());
         }
     }
+
+
+    @FXML
+    void searchForArt(KeyEvent event) {
+        String searchQuery = searchforTitle.getText(); // Replace searchTextField with the actual name of your TextField
+
+        // Call the searchProducts method in your ConseilService
+        List<art> matchingConseils = ps.searchArt(searchQuery);
+
+        // Update the UI with the matching Conseils
+        ol.clear(); // Clear the current data
+        ol.addAll(matchingConseils); // Add the matching Conseils to the observable list
+        ArtTableView.setItems(ol); // Set the items in the TableView
+    }
+
+
+    @FXML
+    void UpdateImages(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")); // Add more supported image formats if needed
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        if (selectedFile != null) {
+            paths.setText(selectedFile.getPath());
+            String destinationFolder = "C:\\xamppp\\htdocs\\ImageArt"; // Change the destination folder path
+            File destinationFile = new File(destinationFolder, selectedFile.getName());
+            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            // Load the selected image
+
+            Image image = new Image(destinationFile.toURI().toString());
+            // Set the image to the ImageView
+            imageARTS.setImage(image);
+        } else {
+            // Handle the case where no file was selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("No image file selected");
+            alert.showAndWait();
+        }
+    }
+
+
 }

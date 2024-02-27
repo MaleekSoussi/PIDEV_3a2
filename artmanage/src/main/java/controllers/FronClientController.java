@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -94,13 +95,13 @@ public class FronClientController {
 
         try {
             List<art> artList = cs.display();
-            courseListF(artList);
+            artListF(artList);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private void courseListF(List<art> artList)
+    private void artListF(List<art> artList)
     {
         artGrid.getChildren().clear();
         int columnCount = 0;
@@ -137,7 +138,13 @@ public class FronClientController {
             artGrid.getScene().setRoot(root);
 
         } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
+            e.printStackTrace();
         }
     }
+
+    @FXML
+    void searchArt(KeyEvent event) {
+
+    }
+
     }

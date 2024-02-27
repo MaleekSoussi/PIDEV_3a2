@@ -12,10 +12,11 @@ public class art {
 
     public float price;
     public int id_category;
+    public String path_image;
 
     public art(){}
 
-    public art(String title, String materials,double height, double width, String type, String city, String description,float price,int id_category) {
+    public art(String title, String materials,double height, double width, String type, String city, String description,float price,int id_category,String path_image) {
         this.title = title;
         this.materials = materials;
         this.height = height;
@@ -25,8 +26,9 @@ public class art {
         this.description = description;
         this.price=price;
         this.id_category= id_category;
+        this.path_image= path_image;
     }
-    public art(int id_art, String title, String materials,double height, double width, String type, String city, String description,float price,int id_category) {
+    public art(int id_art, String title, String materials,double height, double width, String type, String city, String description,float price,int id_category,String path_image) {
         this.id_art = id_art;
         this.title = title;
         this.materials = materials;
@@ -37,7 +39,7 @@ public class art {
         this.description = description;
         this.price=price;
         this.id_category= id_category;
-
+        this.path_image= path_image;
     }
 
 
@@ -123,6 +125,14 @@ public class art {
         this.id_category = id_category;
     }
 
+    public String getPath_image() {
+        return path_image;
+    }
+
+    public void setPath_image(String path_image) {
+        this.path_image = path_image;
+    }
+
     @Override
     public String toString() {
         return "art{" +
@@ -136,7 +146,7 @@ public class art {
                 ", description='" + description + '\'' +
                 ", price='" + price + '\'' +
                 ", id_category='" + id_category + '\'' +
-
+                ", path_image='" + path_image + '\'' +
                 '}' +"\n";
     }
 

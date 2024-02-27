@@ -11,15 +11,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import services.ArtServices;
 import services.CategoryServices;
 
+import javax.print.attribute.standard.Media;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -28,6 +34,22 @@ public class AddartController implements Initializable {
     private final ArtServices artps = new ArtServices();
     private final CategoryServices categoryServices = new CategoryServices();
 
+    @FXML
+    private Button addIMAGES;
+    @FXML
+    private Label ImageEmty;
+
+
+    @FXML
+    private ImageView imageART;
+
+    @FXML
+    private ImageView addImage;
+    @FXML
+    private TextField pathArt;
+
+    @FXML
+    private Pane backImage;
     @FXML
     private Button home;
     @FXML
@@ -46,29 +68,120 @@ public class AddartController implements Initializable {
     @FXML
     private TextField descriptionf;
     @FXML
-    private TextField price;
+    private TextField pricef;
     @FXML
     private Button back;
 
     @FXML
     private ComboBox<category> typeCategry;
+    @FXML
+    private Label categoryempty;
+
+    @FXML
+    private Label cityempty;
+
+    @FXML
+    private Label heightempty;
+    @FXML
+    private Label materialsempty;
+    @FXML
+    private Label priceempty;
+    @FXML
+    private Label descriptionempty;
+    @FXML
+    private Label rarityempty;
+    @FXML
+    private Label titleempty;
+    @FXML
+    private Label typeempty;
+    @FXML
+    private Label widthempty;
+
+    private boolean isValid = true;
 
     @FXML
     void add(ActionEvent event) {
-
         try {
-            category SelectedCategory = typeCategry.getValue();
-            artps.add(new art(titlef.getText(), materialsf.getText(), Double.parseDouble(widthf.getText()), Double.parseDouble(heightf.getText()), typef.getText(), cityf.getText(), descriptionf.getText() , Float.parseFloat(price.getText()), SelectedCategory.getId_category()));
+            setVisibility();
+           //Items retrieving text input from a text field
+            String title = titlef.getText().trim();
+            String material = materialsf.getText().trim();
+            double height = heightf.getText().isEmpty() ? 0.0d : Double.parseDouble(heightf.getText().trim()) ;
+            double width =  widthf.getText().isEmpty() ?  0.0d: Double.parseDouble(widthf.getText().trim()) ;
+            String type = typef.getText().trim();
+            String city = cityf.getText().trim();
+            String description = descriptionf.getText().trim();
+            float price = pricef.getText().isEmpty() ? 0.0f : Float.parseFloat(pricef.getText().trim()) ;
+            category SelectedCategory = typeCategry.getValue();    // getting all combo category values
+            String path_art = pathArt.getText().trim();
+            // Validate fields
+            if (title.isEmpty()) {
+                titleempty.setVisible(true);
+                isValid = false;
+            }
+            if (material.isEmpty()) {
+                materialsempty.setVisible(true);
+                isValid = false;
+            }
+            if (height == 0.0d) {
+                heightempty.setVisible(true);
+                isValid = false;
+            }
+            if (width == 0.0d) {
+                widthempty.setVisible(true);
+                isValid = false;
+            }
+            if (type.isEmpty()) {
+                rarityempty.setVisible(true);
+                isValid = false;
+
+            }
+
+            if (city.isEmpty()) {
+                cityempty.setVisible(true);
+                isValid = false;
+
+            }
+            if (description.isEmpty()) {
+                descriptionempty.setVisible(true);
+                isValid = false;
+
+            }
+            if (price == 0.0f) {
+                priceempty.setVisible(true);
+                isValid = false;
+
+            }
+            if (SelectedCategory == null) {
+                categoryempty.setVisible(true);
+                isValid = false;
+            }
+            if (path_art.isEmpty()) {
+                ImageEmty.setVisible(true);
+                isValid = false;
+            }
+            if(!isValid)
+                return;
+
+            // Add art if all validations pass
+            artps.add(new art(
+                    title,
+                    material,
+                    height,
+                    width,
+                    type,
+                    city,
+                    description, price,
+                    SelectedCategory.getId_category(),
+                    path_art ));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Art added successfully");
             alert.showAndWait();
+
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            showError("Error adding art: " + e.getMessage());
         }
 
 
@@ -89,6 +202,7 @@ public class AddartController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setVisibility();
         List<category> allCategories = null;
         try {
             allCategories = categoryServices.displayC();
@@ -97,6 +211,23 @@ public class AddartController implements Initializable {
         }
         // Set categories as items in the ComboBox
         typeCategry.setItems(FXCollections.observableList(allCategories));
+
+    }
+
+    public void setVisibility()
+    {
+        titleempty.setVisible(false);
+        materialsempty.setVisible(false);
+        heightempty.setVisible(false);
+        widthempty.setVisible(false);
+        rarityempty.setVisible(false);
+        cityempty.setVisible(false);
+        descriptionempty.setVisible(false);
+        priceempty.setVisible(false);
+        categoryempty.setVisible(false);
+        ImageEmty.setVisible(false);
+        pathArt.setVisible(false);
+
     }
 
 
@@ -111,4 +242,37 @@ public class AddartController implements Initializable {
             System.out.println("error"+e.getMessage());
         }
     }
-}
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
+    void AddImage(ActionEvent event) throws  IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")); // Add more supported image formats if needed
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        if (selectedFile != null) {
+            pathArt.setText(selectedFile.getPath());
+            String destinationFolder = "C:\\xamppp\\htdocs\\ImageArt"; // Change the destination folder path
+            File destinationFile = new File(destinationFolder, selectedFile.getName());
+            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            // Load the selected image
+
+            Image image = new Image(destinationFile.toURI().toString());
+            // Set the image to the ImageView
+            imageART.setImage(image);
+        } else {
+            // Handle the case where no file was selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("No image file selected");
+            alert.showAndWait();
+        }
+    }
+    }
+
+

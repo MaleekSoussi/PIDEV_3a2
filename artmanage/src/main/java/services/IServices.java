@@ -16,5 +16,7 @@ public interface IServices <T>{
 
     public List<art> getOneArt() throws SQLException;
 
+    public List<art> searchArt(String search);
+
 
 }
