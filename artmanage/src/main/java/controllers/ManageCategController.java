@@ -23,6 +23,7 @@ public class ManageCategController {
     private ObservableList<category> ol;
     int idC = 0 ;
 
+
     @FXML
     private Button clear;
 

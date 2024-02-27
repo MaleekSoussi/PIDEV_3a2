@@ -1,11 +1,12 @@
 package services;
 import entities.art;
-import entities.category;
 import utils.MyDB;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ArtServices implements IServices <art> {
     private Connection con;
@@ -152,6 +153,107 @@ public class ArtServices implements IServices <art> {
         }
         return artList;
     }
+    public art getArtById(int id) throws SQLException {
+        art art = null;
+        String query = "SELECT * FROM art WHERE id_art = ?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            // If a record is found, create an art object and populate its fields
+            if (resultSet.next()) {
+                art = new art();
+                art.setId_art(resultSet.getInt(1));
+                art.setTitle(resultSet.getString(2));
+                art.setMaterials(resultSet.getString(3));
+                art.setHeight(resultSet.getDouble(4));
+                art.setWidth(resultSet.getDouble(5));
+                art.setType(resultSet.getString(6));
+                art.setCity(resultSet.getString(7));
+                art.setDescription(resultSet.getString(8));
+                art.setPrice(resultSet.getFloat(9));
+                art.setId_category(resultSet.getInt(10));
+                art.setPath_image(resultSet.getString(11));
+            }
+        }
+        return art;
+    }
+    public List<art> getAllArt() {
+        List<art> artList = new ArrayList<>();
+        String query = "SELECT * FROM artworks"; // Adjust query based on your database schema
+
+        try (
+             PreparedStatement statement = con.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                // Create art objects from the result set and add them to the list
+                art art = new art();
+                art.setId_art(resultSet.getInt("id"));
+                art.setTitle(resultSet.getString("title"));
+                // Set other attributes accordingly
+
+                artList.add(art);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle or log the exception as necessary
+        }
+
+        return artList;
+    }
+    @Override
+    public int ConseilNumbers() throws SQLException {
+        int count = 0;
+        String req = "SELECT COUNT(*) AS total_arts FROM art";
+
+        try (Statement stmt = con.createStatement()) {
+            ResultSet resultSet = stmt.executeQuery(req);
+
+            if (resultSet.next()) {
+                count = resultSet.getInt("total_arts");
+            }
+        }
+        return count;
+    }
+@Override
+    public art getLastAddedArt() throws SQLException {
+        art art = new art();
+        String req = "SELECT * FROM art ORDER BY dateCreation DESC LIMIT 1";
+
+        try (Statement stmt = con.createStatement(); ResultSet res = stmt.executeQuery(req)) {
+            while (res.next()) {
+                art.setDateCreation(res.getTimestamp("dateCreation"));
+            }
+        }
+
+        return art;
+    }
+    @Override
+    public String getCategoryNames(int idCategory) throws SQLException {
+        String categoryName = null;
+        String req = "SELECT name FROM category WHERE id_category = ?";
+        PreparedStatement preparedStatement = con.prepareStatement(req);
+        //Sets the value of the first parameter in the SQL query to the idCategory parameter.
+        preparedStatement.setInt(1, idCategory);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            categoryName = resultSet.getString("name");
+        }
+        return categoryName;
+    }
+
+    public Map<Integer, Long> getArtCountByCategory() throws SQLException {
+        Map<Integer, Long> ArtCounts = new HashMap<>();
+        String req = "SELECT id_category, COUNT(id_art) as art_count FROM art GROUP BY id_category";
+
+        try (Statement stmt = con.createStatement(); ResultSet res = stmt.executeQuery(req)) {
+            while (res.next()) {
+                int idCategorie = res.getInt("id_category");
+                long ArtCount = res.getLong("art_count");
+                ArtCounts.put(idCategorie, ArtCount);
+            }
+        }
+
+        return ArtCounts;
+    }
     }
 

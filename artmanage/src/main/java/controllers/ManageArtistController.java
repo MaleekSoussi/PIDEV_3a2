@@ -17,17 +17,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import services.ArtServices;
 import services.CategoryServices;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -42,8 +45,22 @@ public class ManageArtistController implements Initializable {
 
     @FXML
     private TextField idT;
+    @FXML
+    private TextField TypeA;
+
+    @FXML
+    private Button addIMAGES;
+
+    @FXML
+    private ImageView addImage;
 
 
+    @FXML
+    private Pane backImage;
+
+
+    @FXML
+    private ImageView imageART;
     @FXML
     private ComboBox<category> combo_category;
 
@@ -57,8 +74,6 @@ public class ManageArtistController implements Initializable {
     @FXML
     private TextField search_bar;
 
-    @FXML
-    private TextField TypeA;
     @FXML
     private TextField cityA;
     @FXML
@@ -117,6 +132,12 @@ public class ManageArtistController implements Initializable {
     @FXML
     private AnchorPane modechanger;
 
+    @FXML
+    private TableColumn<art, String > path;
+
+    @FXML
+    private TextField pathI;
+
 
     @FXML
     void addArt(ActionEvent event) {
@@ -130,7 +151,7 @@ public class ManageArtistController implements Initializable {
                 alert.setContentText("Please fill in all fields");
                 alert.showAndWait();
                 return;}
-            artps.add(new art(idT.getText(), materialsA.getText(), Double.parseDouble(heightA.getText()), Double.parseDouble(widthA.getText()), TypeA.getText(), cityA.getText(), descA.getText(),Float.parseFloat(priceV.getText()),SelectedCategory.getId_category(),cityA.getText()));
+            artps.add(new art(idT.getText(), materialsA.getText(), Double.parseDouble(heightA.getText()), Double.parseDouble(widthA.getText()), TypeA.getText(), cityA.getText(), descA.getText(),Float.parseFloat(priceV.getText()),SelectedCategory.getId_category(),pathI.getText()));
 
             //show(event);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -176,6 +197,7 @@ public class ManageArtistController implements Initializable {
                 // Convert the string category name to ObservableValue<Integer>
                 return new SimpleStringProperty(categoryName);
             });
+            path.setCellValueFactory(new PropertyValueFactory<>("path_image"));
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -235,8 +257,9 @@ public class ManageArtistController implements Initializable {
         cityA.clear();
         descA.clear();
         priceV.clear();
-        //combo_category.getItems().clear();
-
+       // combo_category.getItems().clear();
+        pathI.clear();
+        imageART.setImage(null);
     }
 
     @FXML
@@ -267,6 +290,9 @@ public class ManageArtistController implements Initializable {
             art.setDescription(descA.getText());
             art.setPrice(Float.parseFloat(priceV.getText()));
             art.setId_category((combo_category.getValue()).getId_category());
+            String newImagePath = pathI.getText();
+            art.setPath_image(newImagePath);
+
 
             // Appeler la méthode de mise à jour dans votre service ou gestionnaire de données
             try {
@@ -316,9 +342,19 @@ public class ManageArtistController implements Initializable {
 
                 // Set the selected category in the combo box
                 combo_category.setValue(selectedCategory);
+                pathI.setText(art.getPath_image());
+
+// Load the image from the specified path
+                String imagePath = art.getPath_image();
+                File imageFile = new File(imagePath);
+                Image image = new Image(imageFile.toURI().toString());
+
+// Set the image to the ImageView
+                imageART.setImage(image);
+            }
             }
         }
-    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -357,6 +393,57 @@ public class ManageArtistController implements Initializable {
         showTbleArtis.setItems(oll); // Set the items in the TableView
     }
 
+    @FXML
+    void AddImage(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")); // Add more supported image formats if needed
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
 
+        if (selectedFile != null) {
+            pathI.setText(selectedFile.getPath());
+            String destinationFolder = "C:\\xamppp\\htdocs\\ImageArt"; // Change the destination folder path
+            File destinationFile = new File(destinationFolder, selectedFile.getName());
+            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            // Load the selected image
+
+            Image image = new Image(destinationFile.toURI().toString());
+            // Set the image to the ImageView
+            imageART.setImage(image);
+        } else {
+            // Handle the case where no file was selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("No image file selected");
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    void go_statistique(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Statistique.fxml"));
+            materialsA.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            System.out.println("error"+e.getMessage());
+        }
+    }
+
+
+    @FXML
+    void go_Sort(ActionEvent event) {
+        // Retrieve the items from the TableView
+        ObservableList<art> items = showTbleArtis.getItems();
+
+        // Sort the items by title using Comparator
+        items.sort(Comparator.comparing(art::getPrice));
+
+        // Update the TableView with the sorted items
+        showTbleArtis.setItems(items);
+    }
 }
+
+
+
+
+
 

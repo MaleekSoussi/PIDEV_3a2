@@ -183,5 +183,10 @@
          </children>
       </Pane>
       <TextField fx:id="paths" layoutX="11.0" layoutY="538.0" prefWidth="235.0" promptText="Path" styleClass="search-button" stylesheets="@css/styles.css" />
+      <Button fx:id="Sort" layoutX="683.0" layoutY="97.0" mnemonicParsing="false" onAction="#Sort" styleClass="add-btn" stylesheets="@css/styles.css" text="Sort">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

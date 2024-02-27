@@ -31,9 +31,9 @@
       </Text>
       <Button fx:id="showf" layoutX="86.0" layoutY="110.0" mnemonicParsing="false" onAction="#display" prefHeight="26.0" prefWidth="164.0" styleClass="add-btn" stylesheets="@css/styles.css" text="show" />
       <TextField fx:id="pricef" layoutX="550.0" layoutY="436.0" prefWidth="278.0" promptText="type to add the price" styleClass="search-button" stylesheets="@css/styles.css" />
-      <HBox layoutX="-23.0" layoutY="-13.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="1302.0" spacing="10.0" styleClass="table-view">
+      <HBox layoutX="-23.0" layoutY="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="1302.0" spacing="10.0" styleClass="table-view">
          <children>
-            <Button fx:id="home" mnemonicParsing="false" onAction="#gotoHome" prefHeight="26.0" prefWidth="86.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Home">
+            <Button fx:id="home" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#gotoHome" prefHeight="26.0" prefWidth="86.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Home">
                <HBox.margin>
                   <Insets left="175.0" top="45.0" />
                </HBox.margin>
@@ -41,7 +41,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Art Works">
+            <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="80.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Art Works">
                <HBox.margin>
                   <Insets left="40.0" top="45.0" />
                </HBox.margin>
@@ -49,7 +49,7 @@
                   <Font name="Cambria" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Auction">
+            <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Auction">
                <HBox.margin>
                   <Insets left="50.0" top="45.0" />
                </HBox.margin>
@@ -57,7 +57,7 @@
                   <Font name="Cambria" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Courses">
+            <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Courses">
                <HBox.margin>
                   <Insets left="50.0" top="45.0" />
                </HBox.margin>
@@ -65,7 +65,7 @@
                   <Font name="Cambria" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Event">
+            <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="Event">
                <HBox.margin>
                   <Insets left="50.0" top="45.0" />
                </HBox.margin>
@@ -73,7 +73,7 @@
                   <Font name="Cambria" size="13.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="About Us">
+            <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="About Us">
                <HBox.margin>
                   <Insets left="50.0" top="45.0" />
                </HBox.margin>
@@ -129,5 +129,10 @@
       </Pane>
       <TextField fx:id="pathArt" layoutX="920.0" layoutY="482.0" prefWidth="238.0" styleClass="search-button" stylesheets="@css/styles.css" />
       <Label fx:id="ImageEmty" layoutX="959.0" layoutY="153.0" prefHeight="18.0" prefWidth="150.0" text="Image should not empty" textFill="RED" />
+      <Button fx:id="Stat" alignment="TOP_CENTER" layoutX="11.0" layoutY="566.0" mnemonicParsing="false" onAction="#seeStat" prefHeight="33.0" prefWidth="134.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="statistical">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

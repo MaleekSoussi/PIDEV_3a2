@@ -32,6 +32,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -104,6 +105,9 @@ public class DisplayArtController  {
     private TableColumn<art, String> categoryT;
     @FXML
     private Button addIMAGES;
+
+    @FXML
+    private Button Sort;
 
     @FXML
     private ImageView addImages;
@@ -306,7 +310,7 @@ public class DisplayArtController  {
                 categoriChoix.setValue(selectedCategory);
                 paths.setText(art.getPath_image());
 
-                paths.setText(art.getPath_image());
+
 
 // Load the image from the specified path
                 String imagePath = art.getPath_image();
@@ -367,6 +371,17 @@ public class DisplayArtController  {
             alert.setContentText("No image file selected");
             alert.showAndWait();
         }
+    }
+    @FXML
+    void Sort(ActionEvent event) {
+        // Retrieve the items from the TableView
+        ObservableList<art> items = ArtTableView.getItems();
+
+        // Sort the items by title using Comparator
+        items.sort(Comparator.comparing(art::getPrice));
+
+        // Update the TableView with the sorted items
+        ArtTableView.setItems(items);
     }
 
 

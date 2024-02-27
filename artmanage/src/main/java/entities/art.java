@@ -1,5 +1,7 @@
 package entities;
 
+import java.sql.Timestamp;
+
 public class art {
     public int id_art;
     public double height;
@@ -13,6 +15,8 @@ public class art {
     public float price;
     public int id_category;
     public String path_image;
+
+    private Timestamp dateCreation ;
 
     public art(){}
 
@@ -68,6 +72,13 @@ public class art {
         this.width = width;
     }
 
+    public Timestamp getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Timestamp dateCreation) {
+        this.dateCreation = dateCreation;
+    }
 
     public  String getTitle() {
         return title;

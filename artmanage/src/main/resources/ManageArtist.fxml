@@ -199,7 +199,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="58.0" prefWidth="354.0" stylesheets="@css/styles.css">
                                  <children>
-                                    <HBox prefHeight="37.0" prefWidth="286.0">
+                                    <HBox prefHeight="38.0" prefWidth="286.0">
                                        <children>
                                           <TextField fx:id="descA" alignment="CENTER" prefHeight="20.0" prefWidth="278.0" promptText="Description" styleClass="search-box" stylesheets="@css/styles.css">
                                              <font>
@@ -219,7 +219,7 @@
                               </HBox>
                               <HBox prefHeight="37.0" prefWidth="354.0">
                                  <children>
-                                    <TextField fx:id="priceV" alignment="CENTER" prefHeight="35.0" prefWidth="281.0" promptText="Price" styleClass="search-box" stylesheets="@css/styles.css">
+                                    <TextField fx:id="priceV" alignment="CENTER" prefHeight="46.0" prefWidth="282.0" promptText="Price" styleClass="search-box" stylesheets="@css/styles.css">
                                        <font>
                                           <Font name="Cambria" size="18.0" />
                                        </font>
@@ -239,6 +239,21 @@
                                           <Insets left="40.0" />
                                        </HBox.margin>
                                     </ComboBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="37.0" prefWidth="354.0">
+                                 <children>
+                                    <TextField fx:id="pathI" alignment="CENTER" prefHeight="53.0" prefWidth="282.0" promptText="Path" styleClass="search-box" stylesheets="@css/styles.css">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="15.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </TextField>
                                  </children>
                               </HBox>
                                     </children>
@@ -372,19 +387,35 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
+                              <Button fx:id="stati" mnemonicParsing="false" onAction="#go_statistique" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="statistical">
+                                 <font>
+                                    <Font name="Cambria" size="22.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="sorts" mnemonicParsing="false" onAction="#go_Sort" styleClass="shopping-online-card" stylesheets="@css/styles.css" text="Sort">
+                                 <font>
+                                    <Font name="Cambria" size="22.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                            </children></HBox>
                         <Pane fx:id="backImage" maxWidth="250.0" prefHeight="242.0" prefWidth="213.0" styleClass="pane" stylesheets="@css/styles.css">
                            <children>
-                              <Button fx:id="addIMAGES" layoutX="103.0" layoutY="11.0" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#AddImage" prefHeight="27.0" prefWidth="45.0" styleClass="transparent">
+                              <Button fx:id="addIMAGES" layoutX="96.0" layoutY="-5.0" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#AddImage" prefHeight="27.0" prefWidth="45.0" styleClass="transparent">
                                  <graphic>
-                                    <ImageView fx:id="addImage" fitHeight="57.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="art" fitHeight="29.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@images/icons8-plus-64.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <ImageView fx:id="imageART" fitHeight="171.0" fitWidth="214.0" layoutX="24.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageART" fitHeight="171.0" fitWidth="214.0" layoutX="18.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                            <opaqueInsets>
                               <Insets />

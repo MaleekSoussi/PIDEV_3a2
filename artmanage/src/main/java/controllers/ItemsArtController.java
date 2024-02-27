@@ -2,6 +2,10 @@ package controllers;
 
 import entities.art;
 import entities.category;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import services.CategoryServices;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -11,55 +15,50 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Alert.AlertType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class ItemsArtController {
-    public static int idA;
+    private List<art> favoriteList = new ArrayList<>();
+
     private FronClientController fronClientController;
+    private static int idA;
+
+    private art art;
 
 
     @FXML
     private Label CITY;
 
-
+    @FXML
+    private ImageView image;
     @FXML
     private Label CATEGORY;
 
-    @FXML
-    private Label DESCRIPTION;
 
     @FXML
-    private Label HEIGHT;
-
-    @FXML
-    private Label MATERIALS;
-
+    private Button showmore;
     @FXML
     private Label PRICE;
 
     @FXML
     private Label TITLE;
 
-    @FXML
-    private Label TYPE;
+    private ShowMoreController showMoreController;
 
-    @FXML
-    private Label WIDTH;
-
-    public void setData(art art)
-    {
+    public void setData(art art) {
+        this.art = art;
         CategoryServices categoryServices = new CategoryServices();
-
         TITLE.setText(art.getTitle());
-        MATERIALS.setText(art.getMaterials());
-        HEIGHT.setText(String.valueOf(art.getHeight()));
-        WIDTH.setText(String.valueOf(art.getHeight()));
-        TYPE.setText(art.getType());
-        CITY.setText(art.getCity());
-        DESCRIPTION.setText(art.getDescription());
         PRICE.setText(String.valueOf(art.getPrice()));
         int categoryId = art.getId_category();
         String categoryName = ""; // Default value
@@ -71,28 +70,67 @@ public class ItemsArtController {
             alert.setContentText("Error fetching category name: " + e.getMessage());
             alert.showAndWait();
         }
-        // Set the category name in the label
         CATEGORY.setText(categoryName);
 
-    }
+        // Display the image if the path is not null
+        if (art.getPath_image() != null) {
+            Image images = new Image("file:" + art.getPath_image());
+            image.setImage(images);
+        }
 
-    @FXML
-    private Button showmore;
+
+    }
 
     @FXML
     void showmore(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/ShowMore.fxml"));
-            CATEGORY.getScene().setRoot(root);
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowMore.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller
+            ShowMoreController showMoreController = loader.getController();
+
+            // Pass the art data to the controller
+            showMoreController.setDataa(art);
+
+            // Set the scene
+            CATEGORY.getScene().setRoot(root);
         } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
+            System.out.println("error" + e.getMessage());
         }
     }
 
-    public void get_idA(art art)
-    {
-        idA=art.getId_art();
+
+    public static int getIdA(art art) {
+        return art.getId_art();
     }
 
-}
+
+
+    @FXML
+    void favoriteadd(ActionEvent event) {
+            if (art != null) {
+                // Add the art object to the favorite list
+                favoriteList.add(art);
+
+                // Show a notification that the product has been added to favorites
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Product added to favorites!");
+                alert.showAndWait();
+            } else {
+                // Handle case when no art object is selected
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No art object selected to add to favorites!");
+                alert.showAndWait();
+            }
+        }
+
+    }
+
+
+
+

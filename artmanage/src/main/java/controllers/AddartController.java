@@ -38,7 +38,8 @@ public class AddartController implements Initializable {
     private Button addIMAGES;
     @FXML
     private Label ImageEmty;
-
+    @FXML
+    private Button Stat;
 
     @FXML
     private ImageView imageART;
@@ -103,15 +104,15 @@ public class AddartController implements Initializable {
     void add(ActionEvent event) {
         try {
             setVisibility();
-           //Items retrieving text input from a text field
+            //Items retrieving text input from a text field
             String title = titlef.getText().trim();
             String material = materialsf.getText().trim();
-            double height = heightf.getText().isEmpty() ? 0.0d : Double.parseDouble(heightf.getText().trim()) ;
-            double width =  widthf.getText().isEmpty() ?  0.0d: Double.parseDouble(widthf.getText().trim()) ;
+            double height = heightf.getText().isEmpty() ? 0.0d : Double.parseDouble(heightf.getText().trim());
+            double width = widthf.getText().isEmpty() ? 0.0d : Double.parseDouble(widthf.getText().trim());
             String type = typef.getText().trim();
             String city = cityf.getText().trim();
             String description = descriptionf.getText().trim();
-            float price = pricef.getText().isEmpty() ? 0.0f : Float.parseFloat(pricef.getText().trim()) ;
+            float price = pricef.getText().isEmpty() ? 0.0f : Float.parseFloat(pricef.getText().trim());
             category SelectedCategory = typeCategry.getValue();    // getting all combo category values
             String path_art = pathArt.getText().trim();
             // Validate fields
@@ -160,7 +161,7 @@ public class AddartController implements Initializable {
                 ImageEmty.setVisible(true);
                 isValid = false;
             }
-            if(!isValid)
+            if (!isValid)
                 return;
 
             // Add art if all validations pass
@@ -173,7 +174,7 @@ public class AddartController implements Initializable {
                     city,
                     description, price,
                     SelectedCategory.getId_category(),
-                    path_art ));
+                    path_art));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
@@ -190,12 +191,12 @@ public class AddartController implements Initializable {
     @FXML
     void display(ActionEvent event) throws IOException {
         try {
-        Parent root = FXMLLoader.load(getClass().getResource("/displayArt.fxml"));
-        titlef.getScene().setRoot(root);
+            Parent root = FXMLLoader.load(getClass().getResource("/displayArt.fxml"));
+            titlef.getScene().setRoot(root);
 
-    } catch (IOException e) {
-        System.out.println("error"+e.getMessage());
-    }
+        } catch (IOException e) {
+            System.out.println("error" + e.getMessage());
+        }
 
     }
 
@@ -214,8 +215,7 @@ public class AddartController implements Initializable {
 
     }
 
-    public void setVisibility()
-    {
+    public void setVisibility() {
         titleempty.setVisible(false);
         materialsempty.setVisible(false);
         heightempty.setVisible(false);
@@ -231,7 +231,6 @@ public class AddartController implements Initializable {
     }
 
 
-
     @FXML
     void gotoHome(ActionEvent event) {
         try {
@@ -239,9 +238,10 @@ public class AddartController implements Initializable {
             materialsf.getScene().setRoot(root);
 
         } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
+            System.out.println("error" + e.getMessage());
         }
     }
+
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -250,7 +250,7 @@ public class AddartController implements Initializable {
     }
 
     @FXML
-    void AddImage(ActionEvent event) throws  IOException {
+    void AddImage(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")); // Add more supported image formats if needed
         File selectedFile = fileChooser.showOpenDialog(new Stage());
@@ -273,6 +273,17 @@ public class AddartController implements Initializable {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    void seeStat(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Statistique.fxml"));
+            typef.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            System.out.println("error"+e.getMessage());
+        }
     }
 
 
+}
