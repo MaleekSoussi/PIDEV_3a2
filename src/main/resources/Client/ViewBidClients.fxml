@@ -66,21 +66,22 @@
                                 <Insets left="50.0" />
                             </padding>
                         </Button>
-                        <VBox alignment="CENTER" prefHeight="92.0" prefWidth="184.0">
+                  <VBox prefHeight="110.0" prefWidth="253.0" />
+                        <VBox alignment="CENTER" prefHeight="123.0" prefWidth="253.0">
                             <children>
-                                <Label fx:id="highestbid" textFill="#26bfbc">
+                                <Label fx:id="highestbid" prefHeight="103.0" prefWidth="253.0" textFill="#26bfbc">
                                     <font>
                                         <Font name="System Bold" size="26.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" prefHeight="41.0" prefWidth="152.0" text="Current highest BID" textFill="WHITE">
+                                <Label alignment="CENTER" prefHeight="58.0" prefWidth="253.0" text="Current highest BID" textFill="WHITE">
                                     <font>
-                                        <Font size="15.0" />
+                                        <Font size="16.0" />
                                     </font>
                                 </Label>
                             </children>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox alignment="CENTER" prefHeight="170.0" prefWidth="253.0">
                             <children>
                                 <Label text="1" textFill="#de0000">
                                     <font>

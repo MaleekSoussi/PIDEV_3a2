@@ -20,11 +20,11 @@
 }
 
 .shadow{
-    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+    -fx-effect: dropShadow(three-pass-box, rgba(122, 27, 27, 0.1), 10.0 , 0.0 , 0.0 ,10.0);
 }
 
 .chosen-fruit-card{
-    -fx-background-color: #484cb0;
+    -fx-background-color: #9192c2;
     -fx-background-radius: 30;
 }
 

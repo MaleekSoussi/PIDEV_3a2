@@ -14,6 +14,10 @@
     -fx-background-color: #526ed0;
     -fx-background-radius: 30;
 }
+.AuctionValues-button{
+    -fx-background-color: #8c9be1;
+    -fx-background-radius: 30;
+}
 
 .right-bar{
     -fx-background-color: #33425b;

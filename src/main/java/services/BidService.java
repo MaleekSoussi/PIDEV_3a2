@@ -30,7 +30,6 @@ public class BidService implements IService<Bid> {
                     resultSet.getInt("id"),
                     resultSet.getInt("price"),
                     resultSet.getInt("userid"), // Assuming there's a userid column in the auction table
-                    resultSet.getFloat("bitcoin"),
                     resultSet.getString("time"),
                     resultSet.getString("date"),
                     resultSet.getString("Auctionname")

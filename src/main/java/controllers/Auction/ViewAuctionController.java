@@ -18,21 +18,20 @@ import services.AuctionService;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ViewAuctionController implements Initializable {
 
     @FXML
     private TableView<Auction> auctionTableView;
-
+    @FXML
+    private TextField donations;
     @FXML
     private TableColumn<Auction, String> nameColumn;
 
     @FXML
     private TableColumn<Auction, Integer> priceColumn;
-
-    @FXML
-    private TableColumn<Auction, Float> bitcoinColumn;
 
     @FXML
     private TableColumn<Auction, String> timeColumn;
@@ -60,7 +59,6 @@ public class ViewAuctionController implements Initializable {
     private void setupTableView() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("auctionname"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        bitcoinColumn.setCellValueFactory(new PropertyValueFactory<>("bitcoin"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
@@ -149,9 +147,19 @@ public class ViewAuctionController implements Initializable {
         try {
             ObservableList<Auction> auctionData = FXCollections.observableArrayList(auctionService.read());
             auctionTableView.setItems(auctionData);
+            calculateAndDisplayTotalDonations();
         } catch (SQLException e) {
             e.printStackTrace(); // Handle or log the exception appropriately
         }
+    }
+
+    private void calculateAndDisplayTotalDonations() throws SQLException {
+        List<Integer> lastBidPrices = auctionService.getLastBidPrices();
+        double totalDonations = 0;
+        for (Integer bidPrice : lastBidPrices) {
+            totalDonations += bidPrice * 0.05; // 5% of each last bid price
+        }
+        donations.setText(String.format("%.2f", totalDonations));
     }
 
     @FXML

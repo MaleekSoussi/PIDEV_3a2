@@ -34,9 +34,6 @@ public class ViewAuctionArtist implements Initializable {
     private TableColumn<Auction, Integer> priceColumn;
 
     @FXML
-    private TableColumn<Auction, Float> bitcoinColumn;
-
-    @FXML
     private TableColumn<Auction, String> timeColumn;
 
     @FXML
@@ -62,7 +59,6 @@ public class ViewAuctionArtist implements Initializable {
     private void setupTableView() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("auctionname"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        bitcoinColumn.setCellValueFactory(new PropertyValueFactory<>("bitcoin"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 

@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -106,18 +105,17 @@
                <children>
                   <Pane fx:id="pnlOverview" prefHeight="459.0" prefWidth="575.0" style="-fx-background-color: #165a72;">
                      <children>
-                        <TextField layoutX="590.0" layoutY="33.0" prefHeight="28.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #e9f5f9; -fx-border-color: #9925be;" />
                         <Label layoutX="57.0" layoutY="25.0" text="Bids" textFill="#e7e5e5">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <HBox fx:id="Bidhere" alignment="CENTER_LEFT" layoutX="31.0" layoutY="72.0" prefHeight="92.0" prefWidth="675.0" spacing="50.0" styleClass="free-delivery-card" stylesheets="@Stylesheet.css">
+                        <HBox fx:id="Bidhere" alignment="CENTER_LEFT" layoutX="132.0" layoutY="60.0" prefHeight="104.0" prefWidth="574.0" spacing="50.0" styleClass="free-delivery-card" stylesheets="@Stylesheet.css">
                            <children>
                            <VBox alignment="CENTER" prefHeight="92.0" prefWidth="78.0" />
                               <VBox prefHeight="92.0" prefWidth="170.0">
                                  <children>
-                                 <Label alignment="CENTER" prefHeight="116.0" prefWidth="245.0" text="BID NOW!!" textFill="WHITE">
+                                 <Label alignment="CENTER" prefHeight="104.0" prefWidth="128.0" text="BID NOW!!" textFill="WHITE">
                                     <font>
                                        <Font name="Cambria Bold Italic" size="24.0" />
                                     </font>
@@ -136,11 +134,6 @@
                            </ImageView>
                         </children>
                         </HBox>
-                        <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="750.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/browser.png" />
-                           </image>
-                        </ImageView>
                      </children>
                   </Pane>
                </children>

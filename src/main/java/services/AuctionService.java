@@ -15,7 +15,20 @@ public class AuctionService implements IService<Auction> {
     private Connection connection;
 
     public AuctionService() {
-        connection = MyDatabase.getInstance().getConnection();
+        connection = MyDatabase.getInstance().getConnection();}
+    public List<Integer> getLastBidPrices() throws SQLException {
+        String sql = "SELECT idAuction, MAX(bidamount) as last_bid_price FROM bid GROUP BY idAuction";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        List<Integer> lastBidPrices = new ArrayList<>();
+
+        while (rs.next()) {
+            lastBidPrices.add(rs.getInt("last_bid_price"));
+        }
+
+        rs.close();
+        statement.close();
+        return lastBidPrices;
     }
     public Auction getAuctionById(int auctionId) throws SQLException {
         Auction auction = null;
@@ -29,10 +42,11 @@ public class AuctionService implements IService<Auction> {
                     resultSet.getInt("id"),
                     resultSet.getInt("price"),
                     resultSet.getInt("userid"),
-                    resultSet.getFloat("bitcoin"),
                     resultSet.getString("time"),
                     resultSet.getString("date"),
-                    resultSet.getString("Auctionname")
+                    resultSet.getString("Auctionname"),
+                    resultSet.getString("imgpath"),
+                    resultSet.getString("description")
             );
         }
 
@@ -43,14 +57,16 @@ public class AuctionService implements IService<Auction> {
     }
     @Override
     public void create(Auction auction) throws SQLException {
-        String sql = "INSERT INTO auction (Auctionname, price, bitcoin, time, date, Userid) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO auction (Auctionname, price, time, date, Userid, imgpath, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
         statement.setString(1, auction.getAuctionname());
         statement.setInt(2, auction.getPrice());
-        statement.setFloat(3, auction.getBitcoin());
-        statement.setString(4, auction.getTime());
-        statement.setString(5, auction.getDate());
-        statement.setInt(6, 1); // Assuming Userid is always 1
+        statement.setString(3, auction.getTime());
+        statement.setString(4, auction.getDate());
+        statement.setInt(5, 1); // Assuming Userid is always 1
+        statement.setString(6, auction.getImgpath());
+        statement.setString(7, auction.getDescription());
 
         int rowsAffected = statement.executeUpdate();
         if (rowsAffected == 0) {
@@ -69,14 +85,13 @@ public class AuctionService implements IService<Auction> {
     }
     @Override
     public void update(Auction auction) throws SQLException {
-        String sql = "UPDATE auction SET Auctionname = ?, price = ?, bitcoin = ?, time = ?, date = ? WHERE id = ?";
+        String sql = "UPDATE auction SET Auctionname = ?, price = ?, time = ?, date = ? WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, auction.getAuctionname());
         statement.setInt(2, auction.getPrice());
-        statement.setFloat(3, auction.getBitcoin());
-        statement.setString(4, auction.getTime());
-        statement.setString(5, auction.getDate());
-        statement.setInt(6, auction.getId());
+        statement.setString(3, auction.getTime());
+        statement.setString(4, auction.getDate());
+        statement.setInt(5, auction.getId());
 
         int rowsAffected = statement.executeUpdate();
         statement.close();
@@ -115,12 +130,14 @@ public class AuctionService implements IService<Auction> {
             Auction auction = new Auction();
             auction.setId(rs.getInt("id"));
             auction.setPrice(rs.getInt("price"));
-            auction.setBitcoin(rs.getFloat("bitcoin"));
             auction.setTime(rs.getString("time"));
             auction.setDate(rs.getString("date"));
             auction.setAuctionname(rs.getString("Auctionname"));
+            auction.setImgpath(rs.getString("imgpath"));
+            auction.setDescription(rs.getString("description"));
             auctions.add(auction);
         }
+
 
         rs.close();
         statement.close();

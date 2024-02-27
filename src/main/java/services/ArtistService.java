@@ -21,14 +21,13 @@ public class ArtistService implements IService<Auction> {
 
     @Override
     public void create(Auction auction) throws SQLException {
-        String sql = "INSERT INTO auction (Auctionname, price, bitcoin, time, date,Userid) VALUES (?, ?, ?, ?, ?,?) " ;
+        String sql = "INSERT INTO auction (Auctionname, price, time, date,Userid) VALUES (?, ?, ?, ?, ?) " ;
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, auction.getAuctionname());
         statement.setInt(2, auction.getPrice());
-        statement.setFloat(3, auction.getBitcoin());
-        statement.setString(4, auction.getTime());
-        statement.setString(5, auction.getDate());
-        statement.setString(1, String.valueOf(1));
+        statement.setString(3, auction.getTime());
+        statement.setString(4, auction.getDate());
+        statement.setString(5, String.valueOf(1));
 
         statement.executeUpdate();
         statement.close();
@@ -36,14 +35,13 @@ public class ArtistService implements IService<Auction> {
 
     @Override
     public void update(Auction auction) throws SQLException {
-        String sql = "UPDATE auction SET Auctionname = ?, price = ?, bitcoin = ?, time = ?, date = ? WHERE id = ?";
+        String sql = "UPDATE auction SET Auctionname = ?, price = ?, time = ?, date = ? WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, auction.getAuctionname());
         statement.setInt(2, auction.getPrice());
-        statement.setFloat(3, auction.getBitcoin());
-        statement.setString(4, auction.getTime());
-        statement.setString(5, auction.getDate());
-        statement.setInt(6, auction.getId());
+        statement.setString(3, auction.getTime());
+        statement.setString(4, auction.getDate());
+        statement.setInt(5, auction.getId());
 
         int rowsAffected = statement.executeUpdate();
         statement.close();
@@ -82,12 +80,14 @@ public class ArtistService implements IService<Auction> {
             Auction auction = new Auction();
             auction.setId(rs.getInt("id"));
             auction.setPrice(rs.getInt("price"));
-            auction.setBitcoin(rs.getFloat("bitcoin"));
             auction.setTime(rs.getString("time"));
             auction.setDate(rs.getString("date"));
             auction.setAuctionname(rs.getString("Auctionname"));
+            auction.setImgpath(rs.getString("imgpath"));
+            auction.setDescription(rs.getString("description"));
             auctions.add(auction);
         }
+
 
         rs.close();
         statement.close();

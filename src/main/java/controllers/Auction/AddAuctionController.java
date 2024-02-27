@@ -3,13 +3,16 @@ package controllers.Auction;
 import controllers.Artist.ViewAuctionArtist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import models.Auction;
 import services.AuctionService;
 
+import javax.swing.*;
+import java.io.File;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -18,22 +21,25 @@ public class AddAuctionController {
     private ViewAuctionController viewAuctionController;
 
     private final AuctionService auctionService = new AuctionService();
-
+    private Image uploadedImage;
     @FXML
     private TextField AuctionNametf;
-
+    @FXML
+    ImageView imageView;
     @FXML
     private TextField price;
-
     @FXML
-    private TextField Bitcoin;
-
+    private Button Uploadimg;
     @FXML
     private StackPane alertPopup;
 
     @FXML
     private Label errorLabel;
+    @FXML
+    private String imgPath;
 
+    @FXML
+    private TextField description;
     @FXML
     private DatePicker dateAuction;
 
@@ -45,38 +51,58 @@ public class AddAuctionController {
     public void setViewAuctionController(ViewAuctionController viewAuctionController) {
         this.viewAuctionController = viewAuctionController;
     }
+    public void initialize() {
+        // Set up event handler for the Uploadimg
+        Uploadimg.setOnAction(event -> handleUploadimg());
+    }
 
+    private void handleUploadimg() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("C:\\xampp\\htdocs\\image"));
+
+        fileChooser.setTitle("Choose Image File");
+        // Set extension filters, if you want to restrict to certain file types
+
+
+        File selectedFile = fileChooser.showOpenDialog(Uploadimg.getScene().getWindow());
+        if (selectedFile != null) {
+            // Set the image path for later use
+            imgPath = selectedFile.toURI().toString();
+
+            // Create a new Image and set it to the ImageView
+            uploadedImage = new Image(imgPath);
+            imageView.setImage(uploadedImage);
+        }
+    }
     @FXML
     public void addAuction(ActionEvent event) {
         String auctionName = AuctionNametf.getText().trim();
         String priceStr = price.getText().trim();
-        String bitcoinStr = Bitcoin.getText().trim();
         String auctionTime = Auctiontime.getText().trim();
         LocalDate auctionDate = dateAuction.getValue();
+        String imgPathStr = imgPath.trim();
+        String descriptionStr = description.getText().trim();
 
         // Clear error label for fresh feedback
         errorLabel.setText("");
 
         // Validate input
         int priceInt;
-        float bitcoinFloat;
 
         try {
             priceInt = Integer.parseInt(priceStr);
-            bitcoinFloat = Float.parseFloat(bitcoinStr);
         } catch (NumberFormatException e) {
-            errorLabel.setText("Invalid price or bitcoin format. Please enter numbers.");
+            errorLabel.setText("Invalid price  Please enter numbers.");
             return;
         }
 
-        if (auctionName.isEmpty() || auctionTime.isEmpty() || auctionDate == null) {
+        if (auctionName.isEmpty() || auctionTime.isEmpty() || auctionDate == null
+                || imgPathStr.isEmpty() || descriptionStr.isEmpty()) {
             errorLabel.setText("Please fill in all fields.");
             return;
         }
-
         try {
-            // Use the injected auctionService
-            auctionService.create(new Auction(priceInt, 1, bitcoinFloat, auctionTime, auctionDate.toString(), auctionName));
+            auctionService.create(new Auction(priceInt, 1, auctionTime, auctionDate.toString(), auctionName, imgPathStr, descriptionStr));
 
             // Handle successful addition (e.g., clear fields, navigate)
             clearFields();
@@ -100,9 +126,9 @@ public class AddAuctionController {
     private void clearFields() {
         AuctionNametf.clear(); // Clear auction name field
         price.clear(); // Clear price field
-        Bitcoin.clear(); // Clear Bitcoin field
         Auctiontime.clear(); // Clear Auction time field
         dateAuction.getEditor().clear(); // Clear Date picker
+        description.clear(); // Clear description field
     }
 
     // Method to dismiss the alert popup
@@ -115,4 +141,5 @@ public class AddAuctionController {
     public void setViewAuctionArtis(ViewAuctionArtist viewAuctionArtist) {
         this.ViewAuctionArtist=ViewAuctionArtist;
     }
+
 }

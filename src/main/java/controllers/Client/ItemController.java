@@ -6,10 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import models.Auction;
 import javafx.event.ActionEvent;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import java.io.IOException;
 
 public class ItemController {
@@ -17,7 +20,8 @@ public class ItemController {
     private TextField auctionname;
     @FXML
     private TextField amountField;
-
+    @FXML
+    private ImageView imageView;
     private Auction auction;
 
     public void setAuctionData(Auction auction) {
@@ -29,6 +33,12 @@ public class ItemController {
         if (auction != null) {
             auctionname.setText(auction.getAuctionname());
             amountField.setText(String.valueOf(auction.getPrice()));
+            // Load and display the image
+            if (auction.getImgpath() != null && !auction.getImgpath().isEmpty()) {
+                String imagePath = auction.getImgpath(); // Adjust path as necessary
+                Image image = new Image(imagePath);
+                imageView.setImage(image);
+            }
         }
     }
 

@@ -1,13 +1,15 @@
 package controllers.Client;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.fxml.FXML;
+import javafx.scene.control.TextField; // Import TextField
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import models.Auction;
 import services.AuctionService;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,7 +20,8 @@ public class ViewAuctionClient implements Initializable {
 
     @FXML
     private GridPane itemsContainer;
-
+    @FXML
+    private TextField donations;
     private AuctionService auctionService;
 
     @Override
@@ -31,41 +34,45 @@ public class ViewAuctionClient implements Initializable {
         List<Auction> auctions = null;
         try {
             auctions = auctionService.read();
-        } catch (SQLException e) {
+            // Generate items based on the fetched data
+            generateItems(auctions);
+
+            // Calculate and display total donations
+            calculateAndDisplayTotalDonations();
+        } catch (SQLException | IOException e) {
             e.printStackTrace(); // Handle database exception appropriately
         }
+    }
 
-        // Generate items based on the fetched data
+    private void generateItems(List<Auction> auctions) throws IOException {
         if (auctions != null) {
             int columnIndex = 0;
             int rowIndex = 0;
             for (Auction auction : auctions) {
-                try {
-                    // Load the item FXML
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/Items.fxml"));
-                    VBox item = loader.load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/Items.fxml"));
+                VBox item = loader.load();
+                GridPane.setColumnIndex(item, columnIndex);
+                GridPane.setRowIndex(item, rowIndex);
+                itemsContainer.getChildren().add(item);
 
-                    // Set the column index
-                    GridPane.setColumnIndex(item, columnIndex);
-                    GridPane.setRowIndex(item, rowIndex);
-
-                    // Add the item to the GridPane
-                    itemsContainer.getChildren().add(item);
-
-                    // Update column and row indices
-                    columnIndex++;
-                    if (columnIndex  == 2) {
-                        columnIndex = 0;
-                        rowIndex++;
-                    }
-
-                    // Retrieve the controller and set auction data
-                    ItemController itemController = loader.getController();
-                    itemController.setAuctionData(auction);
-                } catch (IOException e) {
-                    e.printStackTrace(); // Handle the exception appropriately
+                columnIndex++;
+                if (columnIndex == 2) {
+                    columnIndex = 0;
+                    rowIndex++;
                 }
+
+                ItemController itemController = loader.getController();
+                itemController.setAuctionData(auction);
             }
         }
+    }
+
+    private void calculateAndDisplayTotalDonations() throws SQLException {
+        List<Integer> lastBidPrices = auctionService.getLastBidPrices();
+        double totalDonations = 0;
+        for (Integer bidPrice : lastBidPrices) {
+            totalDonations += bidPrice * 0.05; // 5% of each last bid price
+        }
+        donations.setText(String.format("%.2f", totalDonations));
     }
 }

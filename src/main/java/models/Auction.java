@@ -2,16 +2,35 @@ package models;
 
 public class Auction {
     private int id,price,Userid;
-    float bitcoin;
 
-    private String time,date,Auctionname;
 
-    
+    private String time,date,Auctionname,imgpath,description;
 
-    public Auction(int id, int price, int userid, float bitcoin, String time, String date, String Auctionname) {
+    public Auction(int price, int userid, String time, String date, String auctionname, String imgpath, String description) {
+        this.price = price;
+        Userid = userid;
+        this.time = time;
+        this.date = date;
+        Auctionname = auctionname;
+        this.imgpath = imgpath;
+        this.description = description;
+    }
+
+    public Auction(int id, int price, int userid, String time, String date, String auctionname, String imgpath, String description) {
+        this.id = id;
+        this.price = price;
+        Userid = userid;
+        this.time = time;
+        this.date = date;
+        Auctionname = auctionname;
+        this.imgpath = imgpath;
+        this.description = description;
+    }
+
+
+    public Auction(int id, int price, int userid, String time, String date, String Auctionname) {
         this.id = id;
         Userid = userid;
-        this.bitcoin = bitcoin;
         this.price = price;
         this.time = time;
         this.date = date;
@@ -22,9 +41,9 @@ public class Auction {
     public Auction() {
     }
 
-    public Auction(int price, int userid, float bitcoin, String time, String date, String Auctionname) {
+    public Auction(int price, int userid, String time, String date, String Auctionname) {
         Userid = userid;
-        this.bitcoin = bitcoin;
+
         this.price = price;
         this.time = time;
         this.date = date;
@@ -54,13 +73,6 @@ public class Auction {
         this.date = date;
     }
 
-    public float getBitcoin() {
-        return bitcoin;
-    }
-
-    public void setBitcoin(float bitcoin) {
-        this.bitcoin = bitcoin;
-    }
 
     public int getId() {
         return id;
@@ -91,15 +103,31 @@ public class Auction {
     public void setUserid(int userid) {
         Userid = userid;
     }
+    public String getImgpath() {
+        return imgpath;
+    }
+
+    public void setImgpath(String imgpath) {
+        this.imgpath = imgpath;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Override
     public String toString() {
         return "Auction{" +
                 "id=" + id +
+                "imgpath="+imgpath+
+                "description="+description+
                 ",Userid"+Userid+
                 ", time=" + time +
                 ", price=" + price +
-                ", bitcoin=" + bitcoin +
                 ", date=" + date +
                 ", Auctionname='" + Auctionname + '\'' +
                 '}';
