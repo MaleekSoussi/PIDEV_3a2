@@ -43,7 +43,11 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/Java-WebSocket-1.5.3.jar</systemPath>
         </dependency>
-
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+        </dependency>
 
     </dependencies>
 

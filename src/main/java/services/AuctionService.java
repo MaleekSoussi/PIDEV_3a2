@@ -85,13 +85,15 @@ public class AuctionService implements IService<Auction> {
     }
     @Override
     public void update(Auction auction) throws SQLException {
-        String sql = "UPDATE auction SET Auctionname = ?, price = ?, time = ?, date = ? WHERE id = ?";
+        String sql = "UPDATE auction SET Auctionname = ?, price = ?, time = ?, date = ?, imgpath = ?, description = ? WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, auction.getAuctionname());
         statement.setInt(2, auction.getPrice());
         statement.setString(3, auction.getTime());
         statement.setString(4, auction.getDate());
-        statement.setInt(5, auction.getId());
+        statement.setString(5, auction.getImgpath());
+        statement.setString(6, auction.getDescription());
+        statement.setInt(7, auction.getId());
 
         int rowsAffected = statement.executeUpdate();
         statement.close();
@@ -102,6 +104,7 @@ public class AuctionService implements IService<Auction> {
             System.err.println("Auction update failed");
         }
     }
+
 
     @Override
     public void delete(int id) throws SQLException {

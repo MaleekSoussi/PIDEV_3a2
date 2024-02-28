@@ -1,32 +1,39 @@
 package controllers.Client;
 
-import controllers.Client.AddBidUsers;
+import controllers.ChatClient.ChatClientController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import models.Bid;
+import models.Auction;
+import services.AuctionService;
 import services.BidService;
-
+import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ViewBidUsers implements Initializable {
-
+    @FXML
+    private ImageView ImageView;
+    @FXML
+    private TextArea auctiondescription;
     @FXML
     private Label highestbid;
-
+    @FXML
+    private Button chatbutton;
+    @FXML
+    private Button usersbutton;
     @FXML
     private TableView<Bid> bidTableView;
 
@@ -105,5 +112,42 @@ public class ViewBidUsers implements Initializable {
         // Initialize BidService here after auctionId is set
         bidService = new BidService(auctionId);
         populateTableView();
+
+        try {
+            AuctionService auctionService = new AuctionService();
+            Auction auction = auctionService.getAuctionById(auctionId);
+            if (auction != null) {
+                String imagePath = auction.getImgpath();
+                Image image = new Image(imagePath);
+                ImageView.setImage(image);
+
+                // Set the auction description
+                auctiondescription.setText(auction.getDescription());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exception
+        }
     }
+
+
+    @FXML
+    public void Userschat(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/Userschat.fxml"));
+            Parent chatWindow = loader.load();
+
+            ChatClientController chatController = loader.getController();
+            chatController.setAuctionId(this.auctionId); // Pass the auctionId to the chat controller
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(chatWindow));
+            stage.setTitle("Auction Chat: " + this.auctionId);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle exception
+        }
+    }
+
 }

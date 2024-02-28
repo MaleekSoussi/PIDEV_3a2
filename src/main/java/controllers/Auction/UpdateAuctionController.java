@@ -1,27 +1,34 @@
 package controllers.Auction;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Auction;
 import services.AuctionService;
 
+import java.io.File;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class UpdateAuctionController {
 
     private final AuctionService auctionService = new AuctionService();
 
-    @FXML
-    private TextField idTf;
 
-    @FXML
-    private TextField AuctionNameTf;
+    @FXML private TextField AuctionNametf;
+    @FXML private TextField priceTf;
+    @FXML private DatePicker dateAuction;
+    @FXML private TextField Auctiontime;
+    @FXML private TextField description;
+    @FXML private ImageView imageView;
+    @FXML private Button Uploadimg;
+    private String imgPath; // To store the path of the uploaded image
 
-    @FXML
-    private TextField priceTf;
+    private Auction auctionToUpdate;
 
     private OnAuctionUpdatedListener onAuctionUpdatedListener; // For update notification
 
@@ -29,29 +36,39 @@ public class UpdateAuctionController {
         this.onAuctionUpdatedListener = listener;
     }
 
-    private Auction auctionToUpdate;
-
     public void setAuction(Auction auction) {
         this.auctionToUpdate = auction;
         if (auction != null) {
-            idTf.setText(String.valueOf(auction.getId()));
-            AuctionNameTf.setText(auction.getAuctionname());
+            AuctionNametf.setText(auction.getAuctionname());
             priceTf.setText(String.valueOf(auction.getPrice()));
-            // Populate other fields as needed
+            dateAuction.setValue(LocalDate.parse(auction.getDate()));
+            Auctiontime.setText(auction.getTime());
+            description.setText(auction.getDescription());
+            imgPath = auction.getImgpath(); // Set the image path
+            if (imgPath != null && !imgPath.isEmpty()) {
+                Image image = new Image(imgPath);
+                imageView.setImage(image);
+            }
         }
     }
 
     @FXML
     void updateAuction(ActionEvent event) {
         try {
-            int id = Integer.parseInt(idTf.getText());
-            String newName = AuctionNameTf.getText();
+            String newName = AuctionNametf.getText();
             int newPrice = Integer.parseInt(priceTf.getText());
+            String newTime = Auctiontime.getText();
+            String newDescription = description.getText();
+            LocalDate newDate = dateAuction.getValue();
 
-            auctionToUpdate.setId(id); // Update auction details
             auctionToUpdate.setAuctionname(newName);
             auctionToUpdate.setPrice(newPrice);
-            // Update other fields as needed
+            auctionToUpdate.setTime(newTime);
+            auctionToUpdate.setDate(newDate.toString());
+            auctionToUpdate.setDescription(newDescription);
+            if (imgPath != null && !imgPath.isEmpty()) {
+                auctionToUpdate.setImgpath(imgPath);
+            }
 
             auctionService.update(auctionToUpdate);
 
@@ -69,7 +86,16 @@ public class UpdateAuctionController {
             handleError(e);
         }
     }
-
+    @FXML
+    void handleUploadimg(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        // Configure the file chooser, for example, set the title, initial directory, and filters
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            imgPath = selectedFile.toURI().toString();
+            imageView.setImage(new Image(imgPath));
+        }
+    }
     @FXML
     void handleClose(ActionEvent event) {
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
