@@ -1,13 +1,6 @@
 package controllers;
 
 import entities.art;
-import entities.category;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import services.CategoryServices;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,17 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import services.CategoryServices;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class ItemsArtController {
     private List<art> favoriteList = new ArrayList<>();
@@ -34,6 +23,7 @@ public class ItemsArtController {
     private static int idA;
 
     private art art;
+
 
 
     @FXML
@@ -107,7 +97,6 @@ public class ItemsArtController {
     }
 
 
-
     @FXML
     void favoriteadd(ActionEvent event) {
             if (art != null) {
@@ -115,19 +104,21 @@ public class ItemsArtController {
                 favoriteList.add(art);
 
                 // Show a notification that the product has been added to favorites
-                Alert alert = new Alert(AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Product added to favorites!");
                 alert.showAndWait();
             } else {
                 // Handle case when no art object is selected
-                Alert alert = new Alert(AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setContentText("No art object selected to add to favorites!");
                 alert.showAndWait();
             }
         }
+
+
 
     }
 

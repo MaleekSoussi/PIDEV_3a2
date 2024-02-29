@@ -16,11 +16,13 @@ public class art {
     public int id_category;
     public String path_image;
 
+    public String video ;
+
     private Timestamp dateCreation ;
 
     public art(){}
 
-    public art(String title, String materials,double height, double width, String type, String city, String description,float price,int id_category,String path_image) {
+    public art(String title, String materials,double height, double width, String type, String city, String description,float price,int id_category,String path_image,String video) {
         this.title = title;
         this.materials = materials;
         this.height = height;
@@ -31,8 +33,9 @@ public class art {
         this.price=price;
         this.id_category= id_category;
         this.path_image= path_image;
+        this.video= video;
     }
-    public art(int id_art, String title, String materials,double height, double width, String type, String city, String description,float price,int id_category,String path_image) {
+    public art(int id_art, String title, String materials,double height, double width, String type, String city, String description,float price,int id_category,String path_image, String video) {
         this.id_art = id_art;
         this.title = title;
         this.materials = materials;
@@ -44,10 +47,8 @@ public class art {
         this.price=price;
         this.id_category= id_category;
         this.path_image= path_image;
+        this.video = video;
     }
-
-
-
     public  int getId_art() {
         return id_art;
     }
@@ -70,6 +71,13 @@ public class art {
 
     public void setWidth(double width) {
         this.width = width;
+    }
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
     }
 
     public Timestamp getDateCreation() {

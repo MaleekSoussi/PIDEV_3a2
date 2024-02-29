@@ -29,5 +29,8 @@ public interface IServices <T>{
     public String getCategoryNames(int idCategory) throws SQLException;
 
     public Map<Integer, Long> getArtCountByCategory() throws SQLException ;
+    public art getOneart (int idart) throws SQLException ;
+    public List<art> getAllArts() throws SQLException;
+
 
     }

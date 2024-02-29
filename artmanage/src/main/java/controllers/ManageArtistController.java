@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -23,7 +24,6 @@ import javafx.stage.Stage;
 import services.ArtServices;
 import services.CategoryServices;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +33,8 @@ import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+
+
 
 public class ManageArtistController implements Initializable {
     private final ArtServices artps = new ArtServices();
@@ -53,6 +55,15 @@ public class ManageArtistController implements Initializable {
 
     @FXML
     private ImageView addImage;
+
+
+    @FXML
+    private TextField path_video;
+
+    public TextField getPath_video()
+    {
+        return path_video;
+    }
 
 
     @FXML
@@ -84,6 +95,10 @@ public class ManageArtistController implements Initializable {
     private TableColumn<art, String> titleV;
     @FXML
     private TableColumn<art, String> materialsv;
+
+    @FXML
+    private TableColumn<art, String> col_video;
+
     @FXML
     private TableColumn<art, Double> heightv;
 
@@ -144,14 +159,14 @@ public class ManageArtistController implements Initializable {
         try {
             category SelectedCategory = combo_category.getValue();
             if (idT.getText().isEmpty() || materialsA.getText().isEmpty() || heightA.getText().isEmpty() || widthA.getText().isEmpty() ||
-                    TypeA.getText().isEmpty() || cityA.getText().isEmpty() || descA.getText().isEmpty() || priceV.getText().isEmpty() ||
+                    TypeA.getText().isEmpty() || cityA.getText().isEmpty() || descA.getText().isEmpty() || priceV.getText().isEmpty() || priceV.getText().isEmpty() || path_video.getText().isEmpty() ||
                     SelectedCategory == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setContentText("Please fill in all fields");
                 alert.showAndWait();
                 return;}
-            artps.add(new art(idT.getText(), materialsA.getText(), Double.parseDouble(heightA.getText()), Double.parseDouble(widthA.getText()), TypeA.getText(), cityA.getText(), descA.getText(),Float.parseFloat(priceV.getText()),SelectedCategory.getId_category(),pathI.getText()));
+            artps.add(new art(idT.getText(), materialsA.getText(), Double.parseDouble(heightA.getText()), Double.parseDouble(widthA.getText()), TypeA.getText(), cityA.getText(), descA.getText(),Float.parseFloat(priceV.getText()),SelectedCategory.getId_category(),pathI.getText(),path_video.getText()));
 
             //show(event);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -164,7 +179,6 @@ public class ManageArtistController implements Initializable {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
-
         resetFields();
     }
 
@@ -198,6 +212,7 @@ public class ManageArtistController implements Initializable {
                 return new SimpleStringProperty(categoryName);
             });
             path.setCellValueFactory(new PropertyValueFactory<>("path_image"));
+            col_video.setCellValueFactory(new PropertyValueFactory<>("video"));
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -259,6 +274,7 @@ public class ManageArtistController implements Initializable {
         priceV.clear();
        // combo_category.getItems().clear();
         pathI.clear();
+        path_video.clear();
         imageART.setImage(null);
     }
 
@@ -292,6 +308,7 @@ public class ManageArtistController implements Initializable {
             art.setId_category((combo_category.getValue()).getId_category());
             String newImagePath = pathI.getText();
             art.setPath_image(newImagePath);
+            art.setVideo(path_video.getText());
 
 
             // Appeler la méthode de mise à jour dans votre service ou gestionnaire de données
@@ -329,6 +346,7 @@ public class ManageArtistController implements Initializable {
                 cityA.setText(art.getCity());
                 descA.setText(art.getDescription());
                 priceV.setText(String.valueOf(art.getPrice()));
+                path_video.setText(art.getVideo());
                 int categoryId = art.getId_category();
 
                 // Find the category object that corresponds to the categoryId
@@ -401,7 +419,7 @@ public class ManageArtistController implements Initializable {
 
         if (selectedFile != null) {
             pathI.setText(selectedFile.getPath());
-            String destinationFolder = "C:\\xamppp\\htdocs\\ImageArt"; // Change the destination folder path
+            String destinationFolder = "C:\\xampp\\htdocs\\ImageArt"; // Change the destination folder path
             File destinationFile = new File(destinationFolder, selectedFile.getName());
             Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             // Load the selected image
@@ -440,6 +458,49 @@ public class ManageArtistController implements Initializable {
         // Update the TableView with the sorted items
         showTbleArtis.setItems(items);
     }
+
+    @FXML
+    void play_video(ActionEvent event) {
+        {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/uploadVideo.fxml"));
+                Parent playVideoRoot = fxmlLoader.load();
+
+                UploadVideoController video = fxmlLoader.getController();
+                video.setManageArtistController(this);
+                video.Lire_video(event);
+
+                Stage playVideoStage = new Stage();
+                playVideoStage.setScene(new Scene(playVideoRoot));
+                playVideoStage.setTitle("Video");
+                playVideoStage.show();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+
+            }
+        }
+    }
+    @FXML
+    void uploadVideo(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.avi", "*.mkv")); // Corrected extensions
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        if (selectedFile != null) {
+            path_video.setText(selectedFile.getPath());
+            String destinationFolder = "C:\\xampp\\htdocs\\ImageArt"; // Set the correct path
+            File destinationFile = new File(destinationFolder, selectedFile.getName());
+            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } else {
+            // Handle the case where no file was selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("No video file selected");
+            alert.showAndWait();
+        }
+    }
+
 }
 
 

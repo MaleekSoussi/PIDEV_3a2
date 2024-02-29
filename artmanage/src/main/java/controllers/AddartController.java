@@ -1,11 +1,12 @@
 package controllers;
 
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import entities.art;
 import entities.category;
-
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,6 @@ import javafx.stage.Stage;
 import services.ArtServices;
 import services.CategoryServices;
 
-import javax.print.attribute.standard.Media;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -38,6 +38,10 @@ public class AddartController implements Initializable {
     private Button addIMAGES;
     @FXML
     private Label ImageEmty;
+
+    @FXML
+    private TextField TF_video;
+
     @FXML
     private Button Stat;
 
@@ -115,6 +119,7 @@ public class AddartController implements Initializable {
             float price = pricef.getText().isEmpty() ? 0.0f : Float.parseFloat(pricef.getText().trim());
             category SelectedCategory = typeCategry.getValue();    // getting all combo category values
             String path_art = pathArt.getText().trim();
+            String Video = TF_video.getText().trim();
             // Validate fields
             if (title.isEmpty()) {
                 titleempty.setVisible(true);
@@ -174,8 +179,10 @@ public class AddartController implements Initializable {
                     city,
                     description, price,
                     SelectedCategory.getId_category(),
-                    path_art));
-
+                    path_art,
+                    Video
+                    ));
+            sendSMS();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Art added successfully");
@@ -257,7 +264,7 @@ public class AddartController implements Initializable {
 
         if (selectedFile != null) {
             pathArt.setText(selectedFile.getPath());
-            String destinationFolder = "C:\\xamppp\\htdocs\\ImageArt"; // Change the destination folder path
+            String destinationFolder = "C:\\xampp\\htdocs\\ImageArt"; // Change the destination folder path
             File destinationFile = new File(destinationFolder, selectedFile.getName());
             Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             // Load the selected image
@@ -284,6 +291,26 @@ public class AddartController implements Initializable {
             System.out.println("error"+e.getMessage());
         }
     }
+    private void sendSMS() {
+        try {
+            String ACCOUNT_SID = "ACd798b277e43df20066cdae91b223ec94";
+            String AUTH_TOKEN = "9414dac42c61657cd92c898474e9ff54";
+            String TWILIO_PHONE_NUMBER = "+16504371703";
+            String recipientPhoneNumber = "+21656694187"; // Tunisian phone number format
 
+            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+            Message message = Message.creator(
+                    new PhoneNumber(recipientPhoneNumber),
+                    new PhoneNumber(TWILIO_PHONE_NUMBER),
+                    "You added new work in VINCI\n"
+            ).create();
+
+            System.out.println("SMS sent successfully!");
+
+        } catch (Exception e) {
+            System.err.println("Error sending SMS: " + e.getMessage());
+        }
+    }
 
 }

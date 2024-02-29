@@ -6,10 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -19,10 +17,7 @@ import services.ArtServices;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 public class FronClientController {
-    @FXML
-    private Button LoginArtist;
 
     @FXML
     private GridPane artGrid;

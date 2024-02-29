@@ -1,14 +1,19 @@
 package controllers;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import entities.art;
 import entities.category;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import com.itextpdf.text.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,32 +21,28 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import services.ArtServices;
-
-import javafx.scene.layout.AnchorPane;
-
-import javafx.scene.input.MouseEvent;
 import services.CategoryServices;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class DisplayArtController  {
+
+public class DisplayArtController {
     private final ArtServices ps = new ArtServices();
     private ObservableList<art> ol;
     private final CategoryServices categoryServices = new CategoryServices();
-
-
 
 
     int id = 0;
@@ -118,7 +119,6 @@ public class DisplayArtController  {
     private ImageView imageARTS;
 
 
-
     @FXML
     private Button deleteC;
 
@@ -151,7 +151,7 @@ public class DisplayArtController  {
                     alert.setContentText("Error fetching category name: " + e.getMessage());
                     alert.showAndWait();
                 }
-                   // Set the selected category in the combo box
+                // Set the selected category in the combo box
                 return new SimpleStringProperty(categoryName);
             });
             path.setCellValueFactory(new PropertyValueFactory<>("path_image"));
@@ -162,7 +162,7 @@ public class DisplayArtController  {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
-        List<category> allCategories = null ;
+        List<category> allCategories = null;
         try {
             allCategories = categoryServices.displayC();
         } catch (SQLException e) {
@@ -175,9 +175,8 @@ public class DisplayArtController  {
 
     @FXML
     void delete(ActionEvent event) {
-         art selectedart= ArtTableView.getSelectionModel().getSelectedItem();
-        if (selectedart != null)
-        {
+        art selectedart = ArtTableView.getSelectionModel().getSelectedItem();
+        if (selectedart != null) {
             try {
                 int id_art = selectedart.getId_art();
                 ps.delete(id_art);
@@ -200,13 +199,11 @@ public class DisplayArtController  {
 
     @FXML
     void rereturn(ActionEvent event) {
-        try
-        {
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("/addart.fxml"));
             titleu.getScene().setRoot(root);
-        }catch(IOException e)
-        {
-            System.out.println("error" +e.getMessage());
+        } catch (IOException e) {
+            System.out.println("error" + e.getMessage());
         }
 
     }
@@ -233,7 +230,7 @@ public class DisplayArtController  {
             //System.out.println("New Image Path: " + newImagePath);
             // Appeler la méthode de mise à jour dans votre service ou gestionnaire de données
             try {
-                ps.modify(art,id); // Assuming you have an update method in your service
+                ps.modify(art, id); // Assuming you have an update method in your service
                 // Rafraîchir la TableView après la modification
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
@@ -249,40 +246,40 @@ public class DisplayArtController  {
             resetFields();
             initialize();
             //btn_ajouter.setDisable(false);
-        }}
-        // Méthode pour rafraîchir la TableView après la modification
-        private void refreshTableView() {
-            try {
-                ObservableList<art> observableList = FXCollections.observableList(ps.display());
-                ArtTableView.setItems(observableList);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                // Gérer l'erreur selon vos besoins
-            }
         }
+    }
 
-        // Méthode pour réinitialiser les champs de texte
-        private void resetFields() {
-            titleu.clear();
-            matiralsu.clear();
-            heightu.clear();
-            widthu.clear();
-            typeu.clear();
-            cityu.clear();
-            descriptionu.clear();
-            prices.clear();
-            categoriChoix.getItems().clear();
-            paths.clear();
-            imageARTS.setImage(null);
-
-
-
-
+    // Méthode pour rafraîchir la TableView après la modification
+    private void refreshTableView() {
+        try {
+            ObservableList<art> observableList = FXCollections.observableList(ps.display());
+            ArtTableView.setItems(observableList);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            // Gérer l'erreur selon vos besoins
         }
+    }
+
+    // Méthode pour réinitialiser les champs de texte
+    private void resetFields() {
+        titleu.clear();
+        matiralsu.clear();
+        heightu.clear();
+        widthu.clear();
+        typeu.clear();
+        cityu.clear();
+        descriptionu.clear();
+        prices.clear();
+        categoriChoix.getItems().clear();
+        paths.clear();
+        imageARTS.setImage(null);
+
+
+    }
 
     @FXML
     void click(MouseEvent event) {
-            if (event.getButton()== MouseButton.PRIMARY) {
+        if (event.getButton() == MouseButton.PRIMARY) {
             // Récupérer l'objet Panier sélectionné dans le TableView
             art art = ArtTableView.getSelectionModel().getSelectedItem();
             // Vérifi  er si un élément a été effectivement sélectionné
@@ -311,7 +308,6 @@ public class DisplayArtController  {
                 paths.setText(art.getPath_image());
 
 
-
 // Load the image from the specified path
                 String imagePath = art.getPath_image();
                 File imageFile = new File(imagePath);
@@ -322,6 +318,7 @@ public class DisplayArtController  {
             }
         }
     }
+
     @FXML
     void go_cat(ActionEvent event) {
         try {
@@ -329,7 +326,7 @@ public class DisplayArtController  {
             cityu.getScene().setRoot(root);
 
         } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
+            System.out.println("error" + e.getMessage());
         }
     }
 
@@ -356,7 +353,7 @@ public class DisplayArtController  {
 
         if (selectedFile != null) {
             paths.setText(selectedFile.getPath());
-            String destinationFolder = "C:\\xamppp\\htdocs\\ImageArt"; // Change the destination folder path
+            String destinationFolder = "C:\\xampp\\htdocs\\ImageArt"; // Change the destination folder path
             File destinationFile = new File(destinationFolder, selectedFile.getName());
             Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             // Load the selected image
@@ -372,6 +369,7 @@ public class DisplayArtController  {
             alert.showAndWait();
         }
     }
+
     @FXML
     void Sort(ActionEvent event) {
         // Retrieve the items from the TableView
@@ -383,6 +381,105 @@ public class DisplayArtController  {
         // Update the TableView with the sorted items
         ArtTableView.setItems(items);
     }
+    @FXML
+    void Sortdecroissant(ActionEvent event) {
+        // Retrieve the items from the TableView
+        ObservableList<art> items = ArtTableView.getItems();
+
+        // Sort the items by price in descending order using Comparator
+        items.sort(Comparator.comparing(art::getPrice, Comparator.reverseOrder()));
+
+        // Update the TableView with the sorted items
+        ArtTableView.setItems(items);
+    }
+    @FXML
+    void PDF(ActionEvent event) throws SQLException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Enregistrer le fichier PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"));
+        File selectedFile = fileChooser.showSaveDialog(((Node) event.getSource()).getScene().getWindow());
+        if (selectedFile != null) {
+            List<art> artList = ps.getAllArts();
+
+            try {
+                // Créer le document PDF
+                Document document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream(selectedFile));
+                document.open();
+
+                Paragraph title = new Paragraph("List Of Your ART works", FontFactory.getFont(FontFactory.TIMES_BOLD, 20));
+                title.setAlignment(Element.ALIGN_CENTER);
+                title.setSpacingBefore(50); // Ajouter une marge avant le titre pour l'éloigner de l'image
+                title.setSpacingAfter(20);
+                document.add(title);
+                String imagePath = "C:\\xampp\\htdocs\\ImageArt\\logo.png"; // Update this with the path to your image
+                com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(imagePath);
+                // Positionner l'image en haut à gauche
+                image.setAbsolutePosition(10, document.getPageSize().getHeight() -80);
+// Set the scale of the image
+                image.scaleToFit(100, 100); // Set the dimensions as needed
+
+// Add the image to the document
+                document.add(image);
+                Paragraph companyInfo = new Paragraph();
+                companyInfo.add(new Chunk("Company Vinci\n", FontFactory.getFont(FontFactory.TIMES_BOLD, 16)));
+                companyInfo.add("Pole Technologie , Ghazela\n");
+                companyInfo.add("Ariana,Tunisie\n");
+                companyInfo.add("Tél : +70 800 000\n");
+                companyInfo.add("Email :vinci@gmail.con\n");
+                companyInfo.add("Date : " + LocalDate.now().toString() + "\n \n \n");
+                document.add(companyInfo);
+
+                // Créer la table des produits
+                PdfPTable table = new PdfPTable(9); // Adjusted to match the number of columns in the header
+                table.setWidthPercentage(100);
+                table.setWidths(new float[]{2, 4,2, 2, 2, 2, 2, 2, 2}); // Définir la largeur des colonnes
+                // En-têtes de colonnes
+                addTableHeader(table, "Title", "Materials", "Height", "Width", "type", "city", "Description","id_category","price");
+
+                // Ajouter les lignes de produits à la table
+                addRows(table, artList);
+
+                // Ajouter la table au document
+                document.add(table);
+
+                // Fermer le document
+                document.close();
+
+                System.out.println("Le fichier PDF de la facture a été généré avec succès.");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Méthode pour ajouter les lignes de produits à la table
+    private void addRows(PdfPTable table, List<art> artList) {
+        for (art art : artList) {
+            table.addCell(art.getTitle());
+            table.addCell(art.getMaterials());
+            table.addCell(String.valueOf(art.getHeight()));
+            table.addCell(String.valueOf(art.getWidth()));
+            table.addCell(art.getType());
+            table.addCell(art.getCity());
+            table.addCell(art.getDescription());
+            table.addCell(String.valueOf(art.getId_category()));
+            table.addCell(String.valueOf(art.getPrice()));
+
+        }
+    }
+
+    // Méthode pour ajouter les en-têtes de colonnes à la table
+    private void addTableHeader(PdfPTable table, String... headers) {
+        for (String header : headers) {
+            PdfPCell cell = new PdfPCell();
+            cell.setPadding(5);
+            cell.setPhrase(new Phrase(header));
+            table.addCell(cell);
+        }
+    }
+
 
 
 }

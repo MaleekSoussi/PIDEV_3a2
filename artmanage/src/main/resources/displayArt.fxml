@@ -183,10 +183,41 @@
          </children>
       </Pane>
       <TextField fx:id="paths" layoutX="11.0" layoutY="538.0" prefWidth="235.0" promptText="Path" styleClass="search-button" stylesheets="@css/styles.css" />
-      <Button fx:id="Sort" layoutX="683.0" layoutY="97.0" mnemonicParsing="false" onAction="#Sort" styleClass="add-btn" stylesheets="@css/styles.css" text="Sort">
+      <Button fx:id="Sort" layoutX="860.0" layoutY="98.0" maxHeight="50.0" maxWidth="50.0" minHeight="18.0" minWidth="35.0" mnemonicParsing="false" onAction="#Sort" prefHeight="18.0" prefWidth="50.0" styleClass="transparent" stylesheets="@css/styles.css">
          <font>
             <Font size="14.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="38.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/sortup.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="PDF" layoutX="809.0" layoutY="90.0" maxHeight="50.0" maxWidth="50.0" minHeight="-Infinity" minWidth="50.0" mnemonicParsing="false" onAction="#PDF" prefHeight="43.0" prefWidth="50.0" styleClass="transparent" stylesheets="@css/styles.css">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/pdf.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="Sortdecroissant" layoutX="860.0" layoutY="116.0" maxHeight="50.0" maxWidth="50.0" minHeight="18.0" minWidth="35.0" mnemonicParsing="false" onAction="#Sortdecroissant" prefHeight="18.0" prefWidth="50.0" styleClass="transparent" stylesheets="@css/styles.css">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="38.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/sortDown.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </AnchorPane>

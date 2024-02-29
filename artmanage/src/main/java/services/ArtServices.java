@@ -15,7 +15,7 @@ public class ArtServices implements IServices <art> {
     @Override
     public void add(art a) throws SQLException {
         // SQL query to insert art data into the database
-        String req = "INSERT INTO art ( title, materials, height, width, type, city, description,price,id_category,path_image) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? , ?, ?)";
+        String req = "INSERT INTO art ( title, materials, height, width, type, city, description,price,id_category,path_image,video) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? , ?, ?,?)";
         //analyse->comuling-->optimizing-->executing
         // Using try-with-resources to ensure proper resource management
         try (PreparedStatement pstmt = con.prepareStatement(req)) {
@@ -30,6 +30,7 @@ public class ArtServices implements IServices <art> {
             pstmt.setFloat(8, a.getPrice());
             pstmt.setInt(9, a.getId_category());
             pstmt.setString(10, a.getPath_image());
+            pstmt.setString(11, a.getVideo());
 
             // Executing the update operation
             pstmt.executeUpdate();
@@ -38,7 +39,7 @@ public class ArtServices implements IServices <art> {
 
     @Override
     public void modify(art newart, int id_art) throws SQLException {
-        String req = "UPDATE art SET title=?, materials=?, height=?, width=?, type=?, city=?, description=? ,price=? ,id_category=?,path_image=? WHERE id_art=?";
+        String req = "UPDATE art SET title=?, materials=?, height=?, width=?, type=?, city=?, description=? ,price=? ,id_category=?,path_image=?,video=? WHERE id_art=?";
         PreparedStatement pre = con.prepareStatement(req);
         pre.setString(1, newart.getTitle());
         pre.setString(2, newart.getMaterials());
@@ -50,7 +51,8 @@ public class ArtServices implements IServices <art> {
         pre.setFloat(8, newart.getPrice());
         pre.setInt(9, newart.getId_category());
         pre.setString(10, newart.getPath_image());
-        pre.setInt(11, id_art);
+        pre.setString(11, newart.getVideo());
+        pre.setInt(12, id_art);
 
         pre.executeUpdate();
     }
@@ -92,6 +94,7 @@ public class ArtServices implements IServices <art> {
             a.setPrice(res.getFloat(9));
             a.setId_category(res.getInt(10));
             a.setPath_image(res.getString(11));
+            a.setVideo(res.getString(13));
             arts.add(a);
         }
 
@@ -117,6 +120,7 @@ public class ArtServices implements IServices <art> {
             a.setPrice(res.getFloat(9));
             a.setId_category(res.getInt(10));
             a.setPath_image(res.getString(11));
+            a.setVideo(res.getString(12));
 
             getOneArt.add(a);
         }
@@ -144,6 +148,7 @@ public class ArtServices implements IServices <art> {
                 art.setPrice(resultSet.getFloat(9));
                 art.setId_category(resultSet.getInt(10));
                 art.setPath_image(resultSet.getString(11));
+                art.setVideo(resultSet.getString(12));
                 artList.add(art);
             }
             preparedStatement.close();
@@ -174,6 +179,7 @@ public class ArtServices implements IServices <art> {
                 art.setPrice(resultSet.getFloat(9));
                 art.setId_category(resultSet.getInt(10));
                 art.setPath_image(resultSet.getString(11));
+                art.setVideo(resultSet.getString(12));
             }
         }
         return art;
@@ -255,5 +261,55 @@ public class ArtServices implements IServices <art> {
 
         return ArtCounts;
     }
+    public art getOneart(int idart) throws SQLException {
+
+        String req = "SELECT * FROM commande where id_art= ?";
+        PreparedStatement ps = con.prepareStatement(req);
+        ps.setInt(1, idart);
+
+        ResultSet rs = ps.executeQuery();
+        art art = new art();
+
+        while (rs.next()) {
+            art.setTitle(rs.getString("title"));
+            art.setMaterials(rs.getString("materials"));
+            art.setHeight(rs.getDouble("height"));
+            art.setWidth(rs.getDouble("width"));
+            art.setType(rs.getString("type"));
+            art.setCity(rs.getString("city"));
+            art.setDescription(rs.getString("description"));
+            art.setPrice(rs.getInt("price"));
+            art.setId_category(rs.getInt("category"));
+
+
+        }
+        ps.close();
+        return art;
     }
+    public List<art> getAllArts() throws SQLException {
+        List<art> artList = new ArrayList<>();
+        String req = "SELECT * FROM art"; // Assuming your table name is 'art'
+        PreparedStatement ps = con.prepareStatement(req);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            art art = new art();
+            art.setTitle(rs.getString("title"));
+            art.setMaterials(rs.getString("materials"));
+            art.setHeight(rs.getDouble("height"));
+            art.setWidth(rs.getDouble("width"));
+            art.setType(rs.getString("type"));
+            art.setCity(rs.getString("city"));
+            art.setDescription(rs.getString("description"));
+            art.setPrice(rs.getInt("price"));
+            art.setPrice(rs.getInt("id_category"));
+            artList.add(art);
+        }
+
+        ps.close();
+        return artList;
+    }
+
+}
 
