@@ -1,12 +1,13 @@
 package services;
 
+import java.sql.SQLException;
 import models.Bid;
 import utils.MyDatabase;
 import models.Auction;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.google.gson.Gson;
 public class BidService implements IService<Bid> {
     private Connection connection;
 
@@ -16,6 +17,7 @@ public class BidService implements IService<Bid> {
     public BidService(int auctionId) {
         connection = MyDatabase.getInstance().getConnection();
         this.auctionId = auctionId;
+
     }
 
     public Auction getAuctionById(int auctionId) throws SQLException {
@@ -88,6 +90,7 @@ public class BidService implements IService<Bid> {
 
         statement.executeUpdate();
         statement.close();
+
     }
 
     @Override
@@ -107,6 +110,7 @@ public class BidService implements IService<Bid> {
         } else {
             System.err.println("Bid update failed");
         }
+
     }
 
     @Override
@@ -124,6 +128,7 @@ public class BidService implements IService<Bid> {
         } else {
             System.err.println("Bid deletion failed for ID: " + id);
         }
+
     }
 
     @Override
@@ -148,6 +153,10 @@ public class BidService implements IService<Bid> {
         statement.close();
         return bids;
     }
+
+
+
+
 
 
 }

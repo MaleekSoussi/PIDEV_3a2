@@ -1,5 +1,6 @@
 package controllers.Client;
 
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,14 +15,6 @@ public class AddBidUsers {
 
     private ViewBidUsers ViewBidUsers;
     private BidService bidService;
-
-    public AddBidUsers() {
-        // You can initialize default values or perform other setup here if needed
-    }
-
-    public AddBidUsers(BidService bidService) {
-        this.bidService = bidService;
-    }
 
     @FXML
     private StackPane alertPopup;
@@ -59,21 +52,32 @@ public class AddBidUsers {
         }
 
         try {
+            Bid newBid = new Bid(bidAmount);// Create a new Bid object
+
             // Use the injected bidService
-            bidService.create(new Bid(bidAmount));
+            bidService.create(newBid);
+
+            // Send this bid to the server via BidClient
+            if (ViewBidUsers.getBidClient() != null) {
+                ViewBidUsers.getBidClient().sendBid(new Gson().toJson(newBid));
+            }
+
+            // Update the TableView in ViewBidUsers for all sessions
+            ViewBidUsers.populateTableView(newBid);
 
             // Handle successful addition (e.g., clear fields, navigate)
             clearFields();
             showAlertPopup(); // Show success popup (avoid duplicate attempts)
 
-            // Refresh the table view after adding a bid
-            ViewBidUsers.populateTableView();
         } catch (SQLException e) {
             errorLabel.setText("Error adding bid: " + e.getMessage());
         } catch (IllegalArgumentException e) {
             errorLabel.setText(e.getMessage()); // Display message for prompting user to bid higher
+        } catch (Exception e) {
+            // Handle exceptions
         }
     }
+
 
     // Method to show the alert popup
     private void showAlertPopup() {
@@ -92,6 +96,4 @@ public class AddBidUsers {
         alertPopup.setVisible(false); // Hide the popup
         clearFields();
     }
-
-
 }

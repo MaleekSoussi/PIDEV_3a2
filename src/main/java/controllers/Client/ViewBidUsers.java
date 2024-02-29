@@ -1,6 +1,8 @@
 package controllers.Client;
 
+import com.google.gson.Gson;
 import controllers.ChatClient.ChatClientController;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,9 +20,13 @@ import models.Auction;
 import services.AuctionService;
 import services.BidService;
 import javafx.scene.image.ImageView;
+import test.BidClient;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Comparator;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ViewBidUsers implements Initializable {
@@ -45,16 +51,23 @@ public class ViewBidUsers implements Initializable {
 
     @FXML
     private TableColumn<Bid, Integer> UserColumn;
+    private BidService bidService = null;
 
-    private BidService bidService;
     private int auctionId;
+    private BidClient bidClient;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
         setupTableView();
 
+        // Initialize and connect the bid client
+        try {
+            bidClient = new BidClient("localhost", 8001, auctionId, this);
+            bidClient.connectBidClient(auctionId);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle connection error
+        }
     }
 
     private void setupTableView() {
@@ -63,20 +76,55 @@ public class ViewBidUsers implements Initializable {
         UserColumn.setCellValueFactory(new PropertyValueFactory<>("userid"));
     }
 
-    public void populateTableView() {
+    public void populateTableView(Bid newBid) {
         try {
             // Fetch the highest bid for the auction
             int highestBid = bidService.getHighestBidForAuction(auctionId);
 
             // Set the highest bid to the label
-            highestbid.setText("Highest $"+ highestBid);
+            highestbid.setText("Highest $" + highestBid);
 
-            // Populate the TableView with bid data
+            // Add the new bid to the TableView
             ObservableList<Bid> bidData = FXCollections.observableArrayList(bidService.read());
             bidTableView.setItems(bidData);
+
+            // Add the new bid to the TableView
+            bidTableView.getItems().add(newBid);
+            refreshHighestBid();
         } catch (SQLException e) {
             e.printStackTrace(); // Handle or log the exception appropriately
         }
+    }
+
+
+
+    public void updateTableView(Bid newBid) {
+        // Update the table on the JavaFX application thread
+        Platform.runLater(() -> {
+            bidTableView.getItems().add(newBid);
+            refreshHighestBid();
+        });
+    }
+
+    public void refreshHighestBid() {
+        if (bidTableView != null && bidTableView.getItems() != null) {
+            Bid highestBid = bidTableView.getItems()
+                    .stream()
+                    .filter(Objects::nonNull) // Filter out null values
+                    .max(Comparator.comparingInt(Bid::getBidAmount))
+                    .orElse(null);
+
+            if (highestBid != null) {
+                highestbid.setText("Highest $" + highestBid.getBidAmount());
+            } else {
+                highestbid.setText("No bids available");
+            }
+        }
+    }
+
+
+    public BidClient getBidClient() {
+        return bidClient;
     }
 
     @FXML
@@ -107,11 +155,11 @@ public class ViewBidUsers implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void setAuctionId(int auctionId) {
         this.auctionId = auctionId;
         // Initialize BidService here after auctionId is set
         bidService = new BidService(auctionId);
-        populateTableView();
 
         try {
             AuctionService auctionService = new AuctionService();
@@ -128,8 +176,18 @@ public class ViewBidUsers implements Initializable {
             e.printStackTrace();
             // Handle exception
         }
-    }
 
+        // Connect the bid client after setting the auctionId
+        try {
+            bidClient.connectBidClient(auctionId);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle connection error
+        }
+
+        // Populate the table view with existing bids
+        populateTableView(null);
+    }
 
     @FXML
     public void Userschat(ActionEvent actionEvent) {
