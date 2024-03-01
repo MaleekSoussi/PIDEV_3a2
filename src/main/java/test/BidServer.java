@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -29,16 +30,19 @@ public class BidServer {
     }
 
     private static class BidRoom {
-        private final Set<PrintWriter> clients = new CopyOnWriteArraySet<>();
+        private final Map<PrintWriter, UUID> clients = new ConcurrentHashMap<>();
 
-        synchronized void broadcastBid(String bidMessage) {
-            for (PrintWriter client : clients) {
-                client.println(bidMessage);
-            }
+        void broadcastBid(String bidMessage, UUID senderId) {
+            clients.entrySet().stream()
+                    .filter(entry -> !entry.getValue().equals(senderId))
+                    .forEach(entry -> {
+                        entry.getKey().println(bidMessage);
+                        System.out.println("Sent bid message to a client: " + bidMessage);
+                    });
         }
 
-        void addClient(PrintWriter client) {
-            clients.add(client);
+        void addClient(PrintWriter client, UUID clientId) {
+            clients.put(client, clientId);
         }
 
         void removeClient(PrintWriter client) {
@@ -52,7 +56,7 @@ public class BidServer {
         private BufferedReader in; // Add BufferedReader for reading from the client
         private BidRoom currentRoom;
         private int auctionId;
-
+        private UUID clientId;
         public ClientHandler(Socket socket) {
             this.socket = socket;
         }
@@ -101,27 +105,28 @@ public class BidServer {
                 }
             }
         }
-
         private void handleJoinMessage(String joinMessage) {
-            // Extract auctionId from join message
-            // Example: JOIN 123
+            // Extract auctionId and clientId from join message
+            // Example: JOIN 123 clientId
             String[] parts = joinMessage.split(" ");
-            if (parts.length == 2) {
+            if (parts.length == 3) {
                 try {
                     auctionId = Integer.parseInt(parts[1]);
+                    clientId = UUID.fromString(parts[2]);
                     currentRoom = bidRooms.computeIfAbsent(auctionId, k -> new BidRoom());
-                    currentRoom.addClient(out);
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid auction ID received: " + parts[1]);
+                    currentRoom.addClient(out, clientId);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid join message: " + joinMessage);
                 }
             } else {
-                System.out.println("Invalid join message: " + joinMessage);
+                System.out.println("Invalid join message format: " + joinMessage);
             }
         }
 
         private void handleBidMessage(String bidMessage) {
+            // When broadcasting, pass the clientId
             if (currentRoom != null) {
-                currentRoom.broadcastBid(bidMessage);
+                currentRoom.broadcastBid(bidMessage, this.clientId);
             } else {
                 System.out.println("No room found for auction ID: " + auctionId);
             }

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.UUID;
 
 public class BidClient {
     private String host;
@@ -19,12 +20,14 @@ public class BidClient {
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
+    private UUID clientId; // Unique identifier for this client
 
     public BidClient(String host, int port, int auctionId, ViewBidUsers viewBidUsers) {
         this.host = host;
         this.port = port;
         this.auctionId = auctionId;
         this.viewBidUsers = viewBidUsers;
+        this.clientId = UUID.randomUUID(); // Generate a unique identifier
     }
 
     public void connectBidClient(int auctionId) throws IOException {
@@ -33,20 +36,17 @@ public class BidClient {
         out = new PrintWriter(socket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-        // Send a join message or any initial handshake message if required
-        sendJoinMessage();
+        sendJoinMessage(); // Send a join message including the client ID
 
         // Start a new thread to listen for messages from the server
         new Thread(() -> {
             try {
                 String fromServer;
                 while ((fromServer = in.readLine()) != null) {
-                    // Log bid message received from server
                     System.out.println("Received bid message from server: " + fromServer);
-                    // Process the message received from the server
                     Bid bid = convertToBid(fromServer);
                     Platform.runLater(() -> {
-                        // Update UI based on the new bid information
+                        System.out.println("Processing bid message on JavaFX thread.");
                         viewBidUsers.updateTableView(bid);
                         viewBidUsers.refreshHighestBid();
                     });
@@ -54,27 +54,24 @@ public class BidClient {
             } catch (IOException e) {
                 // Handle exception
             } finally {
-                // Close connections
+                closeConnections();
             }
         }).start();
     }
 
-
-    public Bid convertToBid(String bidUpdate) {
-        Gson gson = new Gson();
-        // Assuming the format is "BID {json}", we need to extract the JSON part.
-        String jsonPart = bidUpdate.substring(bidUpdate.indexOf("{"));
-        return gson.fromJson(jsonPart, Bid.class);
-    }
-
-
     private void sendJoinMessage() {
-        // Example of sending a join message to the server
-        out.println("JOIN " + auctionId);
+        // Send a join message with the auction ID and the client's unique identifier
+        out.println("JOIN " + auctionId + " " + clientId);
     }
 
     public void sendBid(String bidMessage) {
         out.println("BID " + bidMessage);
+    }
+
+    private Bid convertToBid(String bidUpdate) {
+        Gson gson = new Gson();
+        String jsonPart = bidUpdate.substring(bidUpdate.indexOf("{"));
+        return gson.fromJson(jsonPart, Bid.class);
     }
 
     private void closeConnections() {

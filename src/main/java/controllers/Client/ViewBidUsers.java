@@ -89,7 +89,6 @@ public class ViewBidUsers implements Initializable {
             bidTableView.setItems(bidData);
 
             // Add the new bid to the TableView
-            bidTableView.getItems().add(newBid);
             refreshHighestBid();
         } catch (SQLException e) {
             e.printStackTrace(); // Handle or log the exception appropriately
@@ -99,12 +98,19 @@ public class ViewBidUsers implements Initializable {
 
 
     public void updateTableView(Bid newBid) {
-        // Update the table on the JavaFX application thread
         Platform.runLater(() -> {
-            bidTableView.getItems().add(newBid);
+            // Check if the bid is already in the TableView based on bid ID
+            for (Bid bid : bidTableView.getItems()) {
+                if (bid != null && bid.getIdbid() == newBid.getIdbid()) {
+                    return; // If the bid is found, exit the method to avoid adding it again
+                }
+            }
+            bidTableView.getItems().add(newBid); // Add the bid if it's not already in the list
             refreshHighestBid();
         });
     }
+
+
 
     public void refreshHighestBid() {
         if (bidTableView != null && bidTableView.getItems() != null) {
