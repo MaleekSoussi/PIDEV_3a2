@@ -136,7 +136,7 @@ public class ViewBidUsers implements Initializable {
 
             // Get the controller associated with the Add Bid view
             AddBidUsers addBidUsers = loader.getController();
-
+            addBidUsers.setAuctionId(this.auctionId);
             // Inject the BidService into the AddBidUsers
             addBidUsers.setBidService(bidService);
 

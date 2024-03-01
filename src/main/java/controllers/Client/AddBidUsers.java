@@ -24,6 +24,7 @@ public class AddBidUsers {
 
     @FXML
     private TextField amountField;
+    private int auctionId;
 
     // Setter method to inject ViewBidUsers
     public void setViewBidUsers(ViewBidUsers ViewBidUsers) {
@@ -34,49 +35,47 @@ public class AddBidUsers {
     public void setBidService(BidService bidService) {
         this.bidService = bidService;
     }
-
+    public void setAuctionId(int auctionId) {
+        this.auctionId = auctionId;
+    }
     @FXML
     void addBid(ActionEvent event) {
+        System.out.println("Add bid button clicked.");
         String amountStr = amountField.getText().trim();
-
-        // Clear error label for fresh feedback
         errorLabel.setText("");
 
-        // Validate input
-        int bidAmount;
         try {
-            bidAmount = Integer.parseInt(amountStr);
-        } catch (NumberFormatException e) {
-            errorLabel.setText("Invalid amount format. Please enter a number.");
-            return;
-        }
+            int bidAmount = Integer.parseInt(amountStr);
+            int userId = 1; // You will need to implement this method to get the user ID.
+            System.out.println("Creating new bid object...");
+            Bid newBid = new Bid(this.auctionId, userId, bidAmount);
+            newBid.setUserid(userId); // Assume you have a setter for the user ID in your Bid class.
+            System.out.println("New bid object created: " + newBid);
+            // Here, bidService.create should return the generated ID for the new bid.
+            System.out.println("Calling createBidAndReturnId...");
+            int bidId = bidService.createBidAndReturnId(newBid);
+            System.out.println("Bid ID received: " + bidId);
+            newBid.setIdbid(bidId);  // Set the generated ID to the newBid object.
 
-        try {
-            Bid newBid = new Bid(bidAmount);// Create a new Bid object
+            // Convert the fully populated Bid object to JSON.
+            String bidJson = new Gson().toJson(newBid);
 
-            // Use the injected bidService
-            bidService.create(newBid);
-
-            // Send this bid to the server via BidClient
             if (ViewBidUsers.getBidClient() != null) {
-                ViewBidUsers.getBidClient().sendBid(new Gson().toJson(newBid));
+                ViewBidUsers.getBidClient().sendBid(bidJson);
             }
 
-            // Update the TableView in ViewBidUsers for all sessions
             ViewBidUsers.populateTableView(newBid);
-
-            // Handle successful addition (e.g., clear fields, navigate)
             clearFields();
-            showAlertPopup(); // Show success popup (avoid duplicate attempts)
-
+            showAlertPopup();
+        } catch (NumberFormatException e) {
+            errorLabel.setText("Invalid amount format. Please enter a number.");
         } catch (SQLException e) {
             errorLabel.setText("Error adding bid: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            errorLabel.setText(e.getMessage()); // Display message for prompting user to bid higher
         } catch (Exception e) {
             // Handle exceptions
         }
     }
+
 
 
     // Method to show the alert popup

@@ -92,6 +92,46 @@ public class BidService implements IService<Bid> {
         statement.close();
 
     }
+    public int createBidAndReturnId(Bid bid) throws SQLException {
+        AuctionService auctionService = new AuctionService();
+        Auction auction = auctionService.getAuctionById(auctionId); // Assuming you have a method to get auction by ID
+
+        // Set the initial highest bid to be the price of the auction
+        int highestBid = auction.getPrice();
+
+        // Check if there are existing bids for the auction and update the highest bid if necessary
+        int currentHighestBid = getHighestBidForAuction(auctionId);
+        if (currentHighestBid > highestBid) {
+            highestBid = currentHighestBid;
+        }
+
+        // Validate the bid amount against the highest bid
+        if (bid.getBidAmount() <= highestBid) {
+            throw new IllegalArgumentException("Bid amount must be higher than the current highest bid.");
+        }
+
+        String sql = "INSERT INTO bid (bidamount, idAuction, Userid) VALUES (?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        statement.setInt(1, bid.getBidAmount());
+        statement.setInt(2, auctionId);
+        statement.setInt(3, 1); // Or whatever logic you have to get the user ID
+
+        int affectedRows = statement.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException("Creating bid failed, no rows affected.");
+        }
+
+        try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                return generatedKeys.getInt(1); // Return the generated bid ID
+            } else {
+                throw new SQLException("Creating bid failed, no ID obtained.");
+            }
+        } finally {
+            statement.close();
+        }
+    }
 
     @Override
     public void update(Bid bid) throws SQLException {
