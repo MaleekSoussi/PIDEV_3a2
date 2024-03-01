@@ -27,7 +27,7 @@
                                 <Insets bottom="10.0" top="50.0" />
                             </VBox.margin>
                         </ImageView>
-                        <Button fx:id="usersbutton" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="253.0" stylesheets="@../Auction/Stylesheet.css" text="Biders" textAlignment="CENTER">
+                        <Button fx:id="usersbutton" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="253.0" styleClass="buttonBID" stylesheets="@Stylesheet.css" text="Biders" textAlignment="CENTER" textFill="#030303">
                             <graphic>
                                 <ImageView fitHeight="36.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -42,7 +42,8 @@
                         <Font name="Calibri" size="23.0" />
                      </font>
                         </Button>
-                        <Button fx:id="chatbutton" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Userschat" prefHeight="91.0" prefWidth="253.0" stylesheets="@../Auction/Stylesheet.css" text="CHAT">
+                  <VBox prefHeight="32.0" prefWidth="253.0" />
+                        <Button fx:id="chatbutton" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Userschat" prefHeight="91.0" prefWidth="253.0" styleClass="buttonBID" stylesheets="@Stylesheet.css" text="CHAT">
                             <graphic>
                                 <ImageView fitHeight="38.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -57,7 +58,8 @@
                         <Font name="Calibri Bold Italic" size="23.0" />
                      </font>
                         </Button>
-                        <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="253.0" stylesheets="@../Auction/Stylesheet.css" text="Auctions" textAlignment="CENTER" textFill="#030303">
+                  <VBox prefHeight="33.0" prefWidth="253.0" />
+                        <Button fx:id="btnPackages" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="253.0" styleClass="buttonBID" stylesheets="@Stylesheet.css" text="Auctions" textAlignment="CENTER" textFill="#030303">
                             <graphic>
                                 <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -105,7 +107,7 @@
                                     <children>
                                         <VBox alignment="CENTER" prefHeight="143.0" prefWidth="305.0">
                                  <children>
-                                              <Button onAction="#AddBidUsers" prefHeight="127.0" prefWidth="218.0" textFill="#2d6cff">
+                                              <Button onAction="#AddBidUsers" prefHeight="127.0" prefWidth="218.0" styleClass="buttonBID" stylesheets="@Stylesheet.css" textFill="#2d6cff">
                                                   <font>
                                                       <Font name="Century Schoolbook Bold" size="22.0" />
                                                   </font>

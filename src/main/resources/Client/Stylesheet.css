@@ -75,7 +75,19 @@
 .table-view .column-header-background {
     -fx-background-color: #4a7c59; /* Background color of the column headers */
 }
+.table-view .table-cell {
+    -fx-text-fill: #333333; /* Text color */
+    -fx-font-size: 20px; /* Font size */
+    -fx-font-family: "Arial"; /* Font family */
+    -fx-font-weight: normal; /* Font weight */
+    -fx-alignment: center; /* Align text to the center */
+}
 
+/* For selected row text */
+.table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: white; /* Text color for selected rows */
+    -fx-font-weight: bold; /* Bold font weight for selected rows */
+}
 .table-view .column-header, .table-view .column-header .label {
     -fx-text-fill: white; /* Text color of the column headers */
     -fx-font-weight: bold; /* Font weight of the column headers */
@@ -177,6 +189,14 @@
     -fx-background-color: #4a90e2;
     -fx-background-radius: 5px;
     -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+}
+.buttonBID {
+    -fx-background-color: rgba(255, 255, 255, 0.97);
+    -fx-background-radius: 5px;
+    -fx-text-fill: #000000;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
     -fx-padding: 10px 20px;
