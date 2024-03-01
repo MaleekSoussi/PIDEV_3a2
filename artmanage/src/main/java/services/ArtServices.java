@@ -1,12 +1,11 @@
 package services;
+
 import entities.art;
+import entities.category;
 import utils.MyDB;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ArtServices implements IServices <art> {
     private Connection con;
@@ -310,6 +309,95 @@ public class ArtServices implements IServices <art> {
         ps.close();
         return artList;
     }
+
+    public List<art> searchArtByName(String name) throws SQLException {
+        String query = "SELECT * FROM art WHERE title LIKE ?";
+        List<art> matchingArtworks = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + name + "%"); // Set the search name
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                art artwork = new art();
+                // Populate artwork object from resultSet
+                artwork.setTitle(resultSet.getString("title"));
+                artwork.setMaterials(resultSet.getString("materials"));
+                artwork.setHeight(resultSet.getDouble("height"));
+                artwork.setWidth(resultSet.getDouble("width"));
+                artwork.setType(resultSet.getString("type"));
+                artwork.setCity(resultSet.getString("city"));
+                artwork.setDescription(resultSet.getString("description"));
+                artwork.setPrice(resultSet.getFloat("price"));
+                artwork.setId_category(resultSet.getInt("id_category"));
+
+                // Retrieve image path from the resultSet
+                String imagePath = resultSet.getString("path_image");
+                artwork.setPath_image(imagePath); // Set the image path in the artwork object
+
+                // Add artwork object to matchingArtworks list
+                matchingArtworks.add(artwork);
+            }
+        }
+        return matchingArtworks;
+    }
+
+    public List<art> getArtByCategory(int categoryId) throws SQLException {
+        String query = "SELECT * FROM art WHERE id_category = ?";
+        List<art> artworksInCategory = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, categoryId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                art artwork = mapResultSetToArt(resultSet);
+                artworksInCategory.add(artwork);
+            }
+        }
+        return artworksInCategory;
+    }
+
+    // Helper method to map ResultSet to art object
+    public art mapResultSetToArt(ResultSet resultSet) throws SQLException {
+        art artwork = new art();
+        artwork.setId_art(resultSet.getInt("id_art"));
+        artwork.setTitle(resultSet.getString("title"));
+        artwork.setMaterials(resultSet.getString("materials"));
+        artwork.setHeight(resultSet.getDouble("height"));
+        artwork.setWidth(resultSet.getDouble("width"));
+        artwork.setType(resultSet.getString("type"));
+        artwork.setCity(resultSet.getString("city"));
+        artwork.setDescription(resultSet.getString("description"));
+        artwork.setPrice(resultSet.getFloat("price"));
+        artwork.setId_category(resultSet.getInt("id_category"));
+        // Retrieve image path from the resultSet
+        String imagePath = resultSet.getString("path_image");
+        artwork.setPath_image(imagePath); // Set the image path in the artwork object
+        // Set any other properties as needed
+        return artwork;
+    }
+
+    public List<category> getAllCategories() throws SQLException {
+        List<category> categories = new ArrayList<>();
+        String query = "SELECT * FROM category"; // Adjust the query based on your database schema
+
+        try (PreparedStatement statement = con.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                category category = new category();
+                category.setId_category(resultSet.getInt("id_category"));
+                category.setName(resultSet.getString("name"));
+                // Set other attributes accordingly
+
+                categories.add(category);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle or log the exception as necessary
+        }
+
+        return categories;
+    }
+
+
 
 }
 

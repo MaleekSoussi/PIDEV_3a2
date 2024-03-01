@@ -3,16 +3,14 @@ package controllers;
 import entities.art;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import services.ArtServices;
-import services.CategoryServices;
 
 import java.io.IOException;
 import java.net.URL;
@@ -73,6 +71,17 @@ populatePieChart();
             pieChart.setData(pieChartData);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void goHome(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/addart.fxml"));
+            pieChart.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            System.out.println("error"+e.getMessage());
         }
     }
 

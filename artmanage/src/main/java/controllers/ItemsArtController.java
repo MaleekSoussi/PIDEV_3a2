@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import services.CategoryServices;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ public class ItemsArtController {
     private static int idA;
 
     private art art;
-
 
 
     @FXML
@@ -117,7 +117,6 @@ public class ItemsArtController {
                 alert.showAndWait();
             }
         }
-
 
 
     }

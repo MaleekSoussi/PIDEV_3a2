@@ -1,9 +1,6 @@
 package controllers;
 
 
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
 import entities.art;
 import entities.category;
 import javafx.collections.FXCollections;
@@ -182,7 +179,7 @@ public class AddartController implements Initializable {
                     path_art,
                     Video
                     ));
-            sendSMS();
+            //sendSMS();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Art added successfully");
@@ -291,10 +288,10 @@ public class AddartController implements Initializable {
             System.out.println("error"+e.getMessage());
         }
     }
-    private void sendSMS() {
+   /* private void sendSMS() {
         try {
             String ACCOUNT_SID = "ACd798b277e43df20066cdae91b223ec94";
-            String AUTH_TOKEN = "9414dac42c61657cd92c898474e9ff54";
+            String AUTH_TOKEN = "2825d0e9d9eada564ddda2509a6c9961";
             String TWILIO_PHONE_NUMBER = "+16504371703";
             String recipientPhoneNumber = "+21656694187"; // Tunisian phone number format
 
@@ -312,5 +309,27 @@ public class AddartController implements Initializable {
             System.err.println("Error sending SMS: " + e.getMessage());
         }
     }
+*/
+    @FXML
+    void uploadVideo(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.avi", "*.mkv")); // Corrected extensions
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
 
-}
+        if (selectedFile != null) {
+            TF_video.setText(selectedFile.getPath());
+            String destinationFolder = "C:\\xampp\\htdocs\\ImageArt"; // Set the correct path
+            File destinationFile = new File(destinationFolder, selectedFile.getName());
+            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } else {
+            // Handle the case where no file was selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("No video file selected");
+            alert.showAndWait();
+        }
+    }
+
+
+    }

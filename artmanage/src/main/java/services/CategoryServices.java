@@ -1,6 +1,5 @@
 package services;
 
-import entities.art;
 import entities.category;
 import utils.MyDB;
 
@@ -88,6 +87,6 @@ public class CategoryServices implements IservicesC <category> {
         }
         return categoryName;
     }
-    
+
 
 }

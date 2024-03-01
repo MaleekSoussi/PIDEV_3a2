@@ -103,10 +103,10 @@
             <Image url="@images/logo.png" />
          </image>
       </ImageView>
-      <ComboBox fx:id="typeCategry" layoutX="236.0" layoutY="520.0" prefHeight="35.0" prefWidth="278.0" promptText="Type Category" styleClass="search-button" stylesheets="@css/styles.css" />
+      <ComboBox fx:id="typeCategry" layoutX="70.0" layoutY="517.0" prefHeight="35.0" prefWidth="278.0" promptText="Type Category" styleClass="search-button" stylesheets="@css/styles.css" />
       <Label fx:id="titleempty" layoutX="144.0" layoutY="252.0" prefHeight="18.0" prefWidth="134.0" text="Title should not empty" textFill="RED" />
       <Label fx:id="materialsempty" layoutX="622.0" layoutY="252.0" prefHeight="18.0" prefWidth="150.0" text="Materials should not empty" textFill="RED" />
-      <Label fx:id="categoryempty" layoutX="305.0" layoutY="560.0" prefHeight="18.0" prefWidth="165.0" text="category should not empty" textFill="RED" />
+      <Label fx:id="categoryempty" layoutX="112.0" layoutY="560.0" prefHeight="18.0" prefWidth="165.0" text="category should not empty" textFill="RED" />
       <Label fx:id="priceempty" layoutX="635.0" layoutY="482.0" prefHeight="18.0" prefWidth="134.0" text="Price should not be 0" textFill="RED" />
       <Label fx:id="heightempty" layoutX="144.0" layoutY="329.0" prefHeight="18.0" prefWidth="134.0" text="Height should not be 0" textFill="RED" />
       <Label fx:id="rarityempty" layoutX="144.0" layoutY="406.0" prefHeight="18.0" prefWidth="134.0" text="Rarity should not empty" textFill="RED" />
@@ -129,11 +129,20 @@
       </Pane>
       <TextField fx:id="pathArt" layoutX="920.0" layoutY="482.0" prefWidth="238.0" styleClass="search-button" stylesheets="@css/styles.css" />
       <Label fx:id="ImageEmty" layoutX="959.0" layoutY="153.0" prefHeight="18.0" prefWidth="150.0" text="Image should not empty" textFill="RED" />
-      <Button fx:id="Stat" alignment="TOP_CENTER" layoutX="11.0" layoutY="566.0" mnemonicParsing="false" onAction="#seeStat" prefHeight="33.0" prefWidth="134.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="statistical">
+      <Button fx:id="Stat" alignment="TOP_CENTER" layoutX="278.0" layoutY="154.0" mnemonicParsing="false" onAction="#seeStat" prefHeight="33.0" prefWidth="134.0" styleClass="button_menu_bar" stylesheets="@css/style.css" text="statistical">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <TextField fx:id="TF_video" layoutX="550.0" layoutY="520.0" prefWidth="278.0" promptText="Video" styleClass="search-button" stylesheets="@css/styles.css" />
+      <TextField fx:id="TF_video" layoutX="671.0" layoutY="520.0" prefWidth="278.0" promptText="Video" styleClass="search-button" stylesheets="@css/styles.css" />
+      <Button layoutX="554.0" layoutY="518.0" maxWidth="13.0" mnemonicParsing="false" onAction="#uploadVideo" prefHeight="38.0" prefWidth="67.0" styleClass="search-button" stylesheets="@css/styles.css">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../xampp/htdocs/ImageArt/startV.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

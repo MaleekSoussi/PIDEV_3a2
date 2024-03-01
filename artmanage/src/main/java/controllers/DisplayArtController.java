@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -79,6 +80,11 @@ public class DisplayArtController {
     private TableColumn<art, String> path;
     @FXML
     private TextField paths;
+    @FXML
+    private TableColumn<?, ?> path1;
+
+    @FXML
+    private TextField pathVideo;
 
     @FXML
     private TableColumn<art, Float> priceT;
@@ -155,7 +161,7 @@ public class DisplayArtController {
                 return new SimpleStringProperty(categoryName);
             });
             path.setCellValueFactory(new PropertyValueFactory<>("path_image"));
-
+            path1.setCellValueFactory(new PropertyValueFactory<>("video"));
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -226,7 +232,7 @@ public class DisplayArtController {
             art.setId_category((categoriChoix.getValue()).getId_category());
             String newImagePath = paths.getText();
             art.setPath_image(newImagePath);
-
+            art.setVideo(pathVideo.getText());
             //System.out.println("New Image Path: " + newImagePath);
             // Appeler la méthode de mise à jour dans votre service ou gestionnaire de données
             try {
@@ -273,6 +279,7 @@ public class DisplayArtController {
         categoriChoix.getItems().clear();
         paths.clear();
         imageARTS.setImage(null);
+        pathVideo.clear();
 
 
     }
@@ -306,8 +313,6 @@ public class DisplayArtController {
                 // Set the selected category in the combo box
                 categoriChoix.setValue(selectedCategory);
                 paths.setText(art.getPath_image());
-
-
 // Load the image from the specified path
                 String imagePath = art.getPath_image();
                 File imageFile = new File(imagePath);
@@ -315,6 +320,7 @@ public class DisplayArtController {
 
 // Set the image to the ImageView
                 imageARTS.setImage(image);
+                pathVideo.setText(art.getVideo());
             }
         }
     }
@@ -480,6 +486,29 @@ public class DisplayArtController {
         }
     }
 
+    @FXML
+    void play_videos(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/uplaodvideoFront.fxml"));
+            Parent playVideoRoot = fxmlLoader.load();
+
+            UplaodvideoFrontController video = fxmlLoader.getController();
+            video.DisplayArtController(this);
+            video.togglePlaybacks(event);
+
+            Stage playVideoStage = new Stage();
+            playVideoStage.setScene(new Scene(playVideoRoot));
+            playVideoStage.setTitle("Video");
+            playVideoStage.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
+    public TextField getPathVideo()
+    {
+        return pathVideo;
+    }
 
 
 }

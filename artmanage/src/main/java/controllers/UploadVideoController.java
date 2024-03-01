@@ -8,7 +8,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.MediaView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -19,6 +18,8 @@ import java.io.File;
 public class UploadVideoController {
 
  private    ManageArtistController manageArtistController;
+
+
 
     public void setManageArtistController(ManageArtistController manageArtistController)
     {
@@ -47,6 +48,8 @@ public class UploadVideoController {
     @FXML
     void Lire_video(ActionEvent event) {
         String videoPath = manageArtistController.getPath_video().getText();
+
+
         if (videoPath != null && !videoPath.isEmpty()) {
             media = new Media(new File(videoPath).toURI().toString());
             mediaPlayer = new MediaPlayer(media);

@@ -3,8 +3,8 @@ package services;
 import entities.art;
 import entities.category;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +31,11 @@ public interface IServices <T>{
     public Map<Integer, Long> getArtCountByCategory() throws SQLException ;
     public art getOneart (int idart) throws SQLException ;
     public List<art> getAllArts() throws SQLException;
+    public List<art> searchArtByName(String name) throws SQLException ;
+
+    public List<art> getArtByCategory(int categoryId) throws SQLException ;
+    public art mapResultSetToArt(ResultSet resultSet) throws SQLException ;
+    public List<category> getAllCategories() throws SQLException ;
 
 
     }
