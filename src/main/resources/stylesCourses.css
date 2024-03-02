@@ -1,9 +1,7 @@
-.bg
-{
-    -fx-background-image: url(../../images/bg.png);
-    -fx-background-repeat: no-repeat;
+.form_container {
+    -fx-background-color: #ffffff;
+    color: #041e32;
 }
-
 
 .form_container .element1 {
     background-color: #041e32;
@@ -22,7 +20,7 @@
 }
 
 .form_container VBox {
-    -fx-border-color: #041e32; /* Use the same color as specified for the text in .form_container */
+    /*-fx-border-color: #041e32; Use the same color as specified for the text in .form_container */
     -fx-border-width: 0 0 0 1;
     -fx-padding: 10;
     -fx-spacing: 10;
@@ -60,6 +58,9 @@
 
 .search-button {
     -fx-background-color: #778da9; /* Use the specified color */
+    -fx-background-radius: 30;
+}
+.imageview-container {
     -fx-background-radius: 30;
 }
 
@@ -162,23 +163,45 @@
 .table-view .scroll-bar .thumb {
     -fx-background-color: #778da9;
 }
+/* stylesCourses.css */
 
-.comboBox
-{
-    .form_container TextField {
-        -fx-pref-height: 250;
-        -fx-pref-height: 35;
-        -fx-background-color: #ffffff;
-        -fx-font-size: 1.3em;
-        -fx-effect: dropshadow(three-pass-box, #aaaaaa, 3, 0, 0, 3);
-    }
+.pie-chart .slice0 {
+    -fx-pie-color: rgba(119, 141, 169, 1);
 }
 
-.pane {
--fx-background-color: #ffffff;
--fx-border-color: #FFFFFF;
--fx-background-radius: 50px;
--fx-border-radius: 50px;
--fx-effect: dropshadow(three-pass-box,#AAAAAA,2,0.5,0.5,2);
+.pie-chart .slice1 {
+    -fx-pie-color: rgba(65, 90, 119, 1);
 }
 
+.pie-chart .slice2 {
+    -fx-pie-color: rgba(170, 170, 170, 1);
+}
+
+.pie-chart .slice3 {
+    -fx-pie-color: rgba(201, 164, 61, 1);
+}
+
+.pie-chart .slice4 {
+    -fx-pie-color: rgba(4, 30, 50, 1);
+}
+.table-view-new {
+    -fx-font-size: 14px;
+    -fx-font-family: "Cambria";
+    -fx-base: #415a77;
+    -fx-control-inner-background: #f9f9f9;
+    -fx-background-color: #f2f2f2;
+    -fx-table-cell-border-color: #d0d0d0;
+    -fx-table-header-border-color: #d0d0d0;
+    -fx-base-radius: 30px; /* Adjust the radius for rounding */
+    -fx-padding: 10px;
+    -fx-selection-bar: #8492ab;
+    -fx-selection-bar-non-focused: #a4a7ab;
+}
+
+.table-view .header-cell {
+    -fx-base: #415a77;
+    -fx-background-color: #415a77;
+    -fx-border-radius: 10px; /* Adjust the radius as needed */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

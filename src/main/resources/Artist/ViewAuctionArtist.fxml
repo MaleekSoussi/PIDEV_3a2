@@ -126,6 +126,16 @@
                                                   <Font name="Century Schoolbook Bold" size="22.0" />
                                               </font>
                                           </Button>
+                              <Button onAction="#ShowAuctions" prefHeight="51.0" prefWidth="153.0" stylesheets="@Stylesheet.css" text="ViewAuctions" textFill="#2d6cff">
+                                 <font>
+                                    <Font name="Century Schoolbook Bold" size="22.0" />
+                                 </font>
+                              </Button>
+                              <Button onAction="#Homepage" prefHeight="51.0" prefWidth="153.0" stylesheets="@Stylesheet.css" text="Home" textFill="#2d6cff">
+                                 <font>
+                                    <Font name="Century Schoolbook Bold" size="22.0" />
+                                 </font>
+                              </Button>
                            </children>
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">

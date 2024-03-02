@@ -205,6 +205,11 @@
                               <Insets left="20.0" right="20.0" />
                            </VBox.margin>
                            <children>
+                              <Button mnemonicParsing="false" onAction="#ManageCourses" prefHeight="50.0" prefWidth="284.0" styleClass="shopping-online-card" text="ManageCourses" textFill="#444748">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
                               <Button mnemonicParsing="false" onAction="#ViewAuction" prefHeight="50.0" prefWidth="284.0" styleClass="shopping-online-card" text="ManageAuction" textFill="#444748">
                                  <font>
                                     <Font name="System Bold" size="18.0" />

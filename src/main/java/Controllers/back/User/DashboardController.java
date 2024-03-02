@@ -337,4 +337,14 @@ public class DashboardController {
         }
     }
 
+    public void ManageCourses(ActionEvent actionEvent) {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Courses/showCourses.fxml"));
+            lastname.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            System.out.println("error"+e.getMessage());
+        }
+    }
 }

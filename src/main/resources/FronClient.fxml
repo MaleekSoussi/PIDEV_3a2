@@ -13,11 +13,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="708.0" prefWidth="1388.0" stylesheets="@styles/css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FronClientController">
    <children>
-      <HBox layoutX="-10.0" layoutY="-12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="1408.0" styleClass="table-view" stylesheets="@styles/css/styles.css">
+      <HBox layoutX="-10.0" layoutY="-12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="1434.0" styleClass="table-view" stylesheets="@styles/css/styles.css">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -115,7 +116,7 @@
                   <Insets right="100.0" />
                </HBox.margin>
                <children>
-                  <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" onAction="#login" prefWidth="67.0" text="Login">
+                  <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" onAction="#login" prefHeight="45.0" prefWidth="51.0">
                      <styleClass>
                         <String fx:value="add-btn" />
                         <String fx:value="shadow" />
@@ -123,8 +124,15 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-login-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="Signupbutton" maxWidth="1.7976931348623157E308" onAction="#signup" prefHeight="25.0" prefWidth="75.0" stylesheets="@styles/css/styles.css" text="SignUp">
+                  <Button fx:id="Signupbutton" maxWidth="1.7976931348623157E308" onAction="#signup" prefHeight="22.0" prefWidth="54.0" stylesheets="@styles/css/styles.css">
                      <styleClass>
                         <String fx:value="add-btn" />
                         <String fx:value="shadow" />
@@ -132,25 +140,39 @@
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-sign-up-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="settingsbutton" maxWidth="1.7976931348623157E308" onAction="#settings" prefWidth="67.0" text="Settings">
+                  <VBox prefHeight="111.0" prefWidth="10.0" />
+                  <Button fx:id="settingsbutton" maxWidth="1.7976931348623157E308" onAction="#settings" prefHeight="50.0" prefWidth="55.0">
                      <styleClass>
                         <String fx:value="add-btn" />
                         <String fx:value="shadow" />
                      </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-setting-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </HBox>
          </children>
       </HBox>
-      <ScrollPane fx:id="artItems" layoutX="14.0" layoutY="150.0" prefHeight="526.0" prefWidth="1371.0" styleClass="transparent" stylesheets="@styles/css/styles.css">
+      <ScrollPane fx:id="artItems" layoutX="14.0" layoutY="150.0" prefHeight="526.0" prefWidth="1408.0" styleClass="transparent" stylesheets="@styles/css/styles.css">
          <content>
             <GridPane fx:id="artGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#effect" prefHeight="913.0" prefWidth="1270.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="550.0" minWidth="10.0" prefWidth="536.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="550.0" minWidth="10.0" prefWidth="536.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="550.0" minWidth="10.0" prefWidth="536.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="536.0" minWidth="10.0" prefWidth="536.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="550.0" minWidth="10.0" prefWidth="420.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="550.0" minWidth="10.0" prefWidth="420.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="550.0" minWidth="10.0" prefWidth="420.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="461.6000122070312" minHeight="10.0" prefHeight="367.1999877929687" vgrow="ALWAYS" />
@@ -163,6 +185,6 @@
             <Insets left="70.0" top="50.0" />
          </padding>
       </ScrollPane>
-      <ComboBox fx:id="Category" layoutX="1148.0" layoutY="107.0" onAction="#filterone" prefWidth="235.0" promptText="Category" styleClass="comboBox" stylesheets="@styles/css/styles.css" />
+      <ComboBox fx:id="Category" layoutX="1162.0" layoutY="115.0" onAction="#filterone" prefWidth="235.0" promptText="Category" styleClass="comboBox" stylesheets="@styles/css/styles.css" />
    </children>
 </AnchorPane>

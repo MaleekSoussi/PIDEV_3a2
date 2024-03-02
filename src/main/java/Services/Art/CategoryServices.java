@@ -1,6 +1,7 @@
 package Services.Art;
 
 import Models.category;
+import Services.User.UserService;
 import Utils.MyDatabase;
 
 import java.sql.*;
@@ -17,14 +18,14 @@ public class CategoryServices implements IservicesC <category> {
 
     @Override
     public void addC(category c) throws SQLException {
-        String req = "INSERT INTO category (name, date) VALUES (?, ?)";
+        String req = "INSERT INTO category (name, date,Userid) VALUES (?, ?, ? )";
 
         // Using try-with-resources to ensure proper resource management
         try (PreparedStatement pstmt = con.prepareStatement(req)) {
             // Setting the parameters for the prepared statement
             pstmt.setString(1, c.getName());
             pstmt.setString(2, c.getDate());
-
+            pstmt.setInt(3, UserService.currentlyLoggedInUser.getUserID());
             // Executing the update operation
             pstmt.executeUpdate();
 

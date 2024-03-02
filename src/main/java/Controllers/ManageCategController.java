@@ -1,5 +1,6 @@
 package Controllers;
 import Models.category;
+import Services.User.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -82,8 +83,9 @@ public class ManageCategController {
 
     @FXML
     void addC(ActionEvent event) {
+        int Userid= UserService.currentlyLoggedInUser.getUserID();
         try {
-            categoryServices.addC(new category(typeCat.getValue(),datet.getText()));
+            categoryServices.addC(new category(typeCat.getValue(),datet.getText(),Userid));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success !");
             alert.setContentText("added!!");

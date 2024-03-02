@@ -2,6 +2,7 @@ package Services.Art;
 
 import Models.art;
 import Models.category;
+import Services.User.UserService;
 import Utils.MyDatabase;
 
 import java.sql.*;
@@ -14,7 +15,7 @@ public class ArtServices implements IServices <art> {
     @Override
     public void add(art a) throws SQLException {
         // SQL query to insert art data into the database
-        String req = "INSERT INTO art ( title, materials, height, width, type, city, description,price,id_category,path_image,video) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? , ?, ?,?)";
+        String req = "INSERT INTO art ( title, materials, height, width, type, city, description,price, id_category, path_image, video, Userid) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?)";
         //analyse->comuling-->optimizing-->executing
         // Using try-with-resources to ensure proper resource management
         try (PreparedStatement pstmt = con.prepareStatement(req)) {
@@ -30,7 +31,7 @@ public class ArtServices implements IServices <art> {
             pstmt.setInt(9, a.getId_category());
             pstmt.setString(10, a.getPath_image());
             pstmt.setString(11, a.getVideo());
-
+            pstmt.setInt(12, UserService.currentlyLoggedInUser.getUserID());
             // Executing the update operation
             pstmt.executeUpdate();
 

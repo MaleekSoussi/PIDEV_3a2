@@ -2,6 +2,7 @@ package Controllers;
 
 import Models.art;
 import Models.category;
+import Services.User.UserService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -156,6 +157,7 @@ public class ManageArtistController implements Initializable {
 
     @FXML
     void addArt(ActionEvent event) {
+        int Userid= UserService.currentlyLoggedInUser.getUserID();
         try {
             category SelectedCategory = combo_category.getValue();
             if (idT.getText().isEmpty() || materialsA.getText().isEmpty() || heightA.getText().isEmpty() || widthA.getText().isEmpty() ||
@@ -166,7 +168,7 @@ public class ManageArtistController implements Initializable {
                 alert.setContentText("Please fill in all fields");
                 alert.showAndWait();
                 return;}
-            artps.add(new art(idT.getText(), materialsA.getText(), Double.parseDouble(heightA.getText()), Double.parseDouble(widthA.getText()), TypeA.getText(), cityA.getText(), descA.getText(),Float.parseFloat(priceV.getText()),SelectedCategory.getId_category(),pathI.getText(),path_video.getText()));
+            artps.add(new art(idT.getText(), materialsA.getText(), Double.parseDouble(heightA.getText()), Double.parseDouble(widthA.getText()), TypeA.getText(), cityA.getText(), descA.getText(),Float.parseFloat(priceV.getText()),SelectedCategory.getId_category(),pathI.getText(),path_video.getText(),Userid));
 
             //show(event);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -488,7 +490,7 @@ public class ManageArtistController implements Initializable {
 
         if (selectedFile != null) {
             path_video.setText(selectedFile.getPath());
-            String destinationFolder = "C:\\xampp\\htdocs\\ImageArt"; // Set the correct path
+            String destinationFolder = "C:\\xampp\\htdocs\\image"; // Set the correct path
             File destinationFile = new File(destinationFolder, selectedFile.getName());
             Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } else {

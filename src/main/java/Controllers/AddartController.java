@@ -119,6 +119,7 @@ public class AddartController implements Initializable {
             category SelectedCategory = typeCategry.getValue();    // getting all combo category values
             String path_art = pathArt.getText().trim();
             String Video = TF_video.getText().trim();
+            int Userid= UserService.currentlyLoggedInUser.getUserID();
             // Validate fields
             if (title.isEmpty()) {
                 titleempty.setVisible(true);
@@ -179,7 +180,8 @@ public class AddartController implements Initializable {
                     description, price,
                     SelectedCategory.getId_category(),
                     path_art,
-                    Video
+                    Video,
+                    Userid
                     ));
             //sendSMS();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -352,6 +354,12 @@ public class AddartController implements Initializable {
             us.switchView(MainFX.primaryStage, "/Artist/ViewAuctionArtist.fxml");}
         else
             us.switchView(MainFX.primaryStage, "/Client/ViewAuctionClient.fxml");
+    }
+    @FXML
+    void Coursesbutton(ActionEvent event) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Courses/showCoursesF.fxml");}
+
     }
 
 

@@ -59,7 +59,7 @@
 .table-view {
     -fx-font-size: 14px; /* Adjust font size */
     -fx-font-family: "Arial"; /* Font family */
-    -fx-base: #3b74c2; /* Base color for the table */
+    -fx-base: #6083a9; /* Base color for the table */
     -fx-control-inner-background: #f9f9f9; /* Background color of the table */
     -fx-background-color: #f2f2f2; /* Background color outside the table */
     -fx-table-cell-border-color: transparent; /* Border color of cells */

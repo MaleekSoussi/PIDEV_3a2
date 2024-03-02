@@ -56,7 +56,7 @@
                   <Font name="Cambria" size="13.0" />
                </font>
             </Button>
-            <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" styleClass="button_menu_bar" stylesheets="@styles/css/style.css" text="Courses">
+            <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#Coursesbutton" prefHeight="26.0" prefWidth="87.0" styleClass="button_menu_bar" stylesheets="@styles/css/style.css" text="Courses">
                <HBox.margin>
                   <Insets left="50.0" top="45.0" />
                </HBox.margin>

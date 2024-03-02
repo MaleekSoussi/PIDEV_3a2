@@ -4,9 +4,12 @@ import Controllers.Auction.UpdateAuctionController;
 import Controllers.Client.ViewBidUsers;
 import Models.Auction;
 import Services.ArtistService;
+import Services.User.UserService;
+import Test.MainFX;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -233,4 +236,12 @@ public class ViewAuctionArtist implements Initializable {
         viewBidsStage.show();
     }
 
+    public void ShowAuctions(ActionEvent actionEvent) {
+        UserService us = new UserService();
+        us.switchView(MainFX.primaryStage, "/Client/ViewAuctionClient.fxml");}
+
+
+    public void Homepage(ActionEvent actionEvent) {
+        UserService us = new UserService();
+        us.switchView(MainFX.primaryStage, "/FronClient.fxml");}
 }

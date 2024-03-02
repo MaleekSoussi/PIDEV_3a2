@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 
 public class art {
     public int id_art;
+
+
+    public int Userid;
     public double height;
     public double width;
     public String title;
@@ -22,7 +25,8 @@ public class art {
 
     public art(){}
 
-    public art(String title, String materials,double height, double width, String type, String city, String description,float price,int id_category,String path_image,String video) {
+    public art(String title, String materials,double height, double width, String type, String city, String description,float price,int id_category,String path_image,String video,int Userid) {
+       this.Userid=Userid;
         this.title = title;
         this.materials = materials;
         this.height = height;
@@ -150,6 +154,13 @@ public class art {
 
     public void setPath_image(String path_image) {
         this.path_image = path_image;
+    }
+    public int getUserid() {
+        return Userid;
+    }
+
+    public void setUserid(int userid) {
+        Userid = userid;
     }
 
     @Override

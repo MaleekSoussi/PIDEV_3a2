@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.category;
+import Services.User.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +28,7 @@ public class ArtistCategorieController {
     @FXML
     private TextField nom;
     @FXML
-    private TextField datee;
+    private DatePicker datee;
 
     @FXML
     private TableColumn<?, ?> namee;
@@ -70,7 +71,8 @@ public class ArtistCategorieController {
     @FXML
     void adding(ActionEvent event) {
         try {
-            categoryServices.addC(new category(categorynew.getText(),datee.getText()));
+            int Userid= UserService.currentlyLoggedInUser.getUserID();
+            categoryServices.addC(new category(categorynew.getText(),String.valueOf(datee.getValue()),Userid));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success !");
             alert.setContentText("added!!");
@@ -113,7 +115,7 @@ public class ArtistCategorieController {
         if (category != null) {
             // Mettre à jour les propriétés d'art avec les valeurs des champs de texte
             category.setName(categorynew.getText());
-            category.setDate(datee.getText());
+            category.setDate(String.valueOf(datee.getValue()));
 
 
             // Appeler la méthode de mise à jour dans votre service ou gestionnaire de données
@@ -168,7 +170,7 @@ public class ArtistCategorieController {
     // Méthode pour réinitialiser les champs de texte
     private void resetFields() {
         categorynew.clear();
-        datee.clear();
+        datee.getEditor().clear();
 
     }
     @FXML
@@ -181,7 +183,7 @@ public class ArtistCategorieController {
                 // Récupérer les données du Panier et les afficher dans les champs de texte appropriés
                 idC = category.getId_category();
                 categorynew.setText(category.getName());
-                datee.setText(category.getDate());
+
 
             }
         }

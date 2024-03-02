@@ -1,22 +1,24 @@
 package Models;
 
-import java.util.Date;
-
 public class category {
 
    public int id_category;
    public String name;
     public String date;
 
+
+
+    public int Userid;
     public category(){}
     public category(int id_category, String name, String date) {
         this.id_category = id_category;
         this.name = name;
         this.date = date;
     }
-    public category(String name, String date) {
+    public category(String name, String date,int Userid) {
         this.name = name;
         this.date = date;
+        this.Userid=Userid;
     }
     public int getId_category() {
         return id_category;
@@ -41,9 +43,16 @@ public class category {
     public void setDate(String date) {
         this.date = date;
     }
+    public int getUserid() {
+        return Userid;
+    }
 
+    public void setUserid(int userid) {
+        Userid = userid;
+    }
     @Override
     public String toString() {
         return name;
     }
+
 }

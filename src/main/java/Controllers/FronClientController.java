@@ -67,8 +67,11 @@ public class FronClientController {
 
     }
 
+
     @FXML
     void gotofOb(ActionEvent event) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Courses/showCoursesF.fxml");}
 
     }
 
@@ -154,7 +157,7 @@ public class FronClientController {
                 artGrid.add(artnode, columnCount, rowCount);
                 columnCount++;
 
-                if (columnCount == 4) {
+                if (columnCount == 3) {
                     columnCount = 0;
                     rowCount++;
                 }
@@ -193,7 +196,7 @@ public class FronClientController {
             }
             artGrid.add(artnode, colIndex, rowIndex);
             colIndex++;
-            if (colIndex == 4) {
+            if (colIndex == 3) {
                 colIndex = 0;
                 rowIndex++;
             }
