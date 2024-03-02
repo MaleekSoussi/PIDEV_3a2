@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Art;
 
 import Models.art;
 import Models.category;
@@ -282,7 +282,7 @@ public class ManageArtistController implements Initializable {
     @FXML
     void clear(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FronClient.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/FronClient.fxml"));
             materialsA.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -391,7 +391,7 @@ public class ManageArtistController implements Initializable {
     @FXML
     void go_cat(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/categorieM.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Categorie/categorieM.fxml"));
             materialsA.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -439,7 +439,7 @@ public class ManageArtistController implements Initializable {
     @FXML
     void go_statistique(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Statistique.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/Statistique.fxml"));
             materialsA.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -464,7 +464,7 @@ public class ManageArtistController implements Initializable {
     void play_video(ActionEvent event) {
         {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/uploadVideo.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Art/uploadVideo.fxml"));
                 Parent playVideoRoot = fxmlLoader.load();
 
                 UploadVideoController video = fxmlLoader.getController();

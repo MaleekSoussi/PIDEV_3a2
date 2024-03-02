@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="339.0" prefWidth="291.0" styleClass="search-button" stylesheets="@../stylesCourses.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Courses.courseItemController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="339.0" prefWidth="291.0" styleClass="search-button" stylesheets="@stylesCourses.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Courses.courseItemController">
    <children>
-      <AnchorPane fx:id="apid" prefHeight="330.0" prefWidth="246.0" styleClass="transparent" stylesheets="@../stylesCourses.css">
+      <AnchorPane fx:id="apid" prefHeight="330.0" prefWidth="246.0" styleClass="transparent" stylesheets="@stylesCourses.css">
          <children>
             <Label fx:id="nameCI" alignment="CENTER" layoutX="161.0" layoutY="81.0" prefHeight="18.0" prefWidth="128.0" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="161.0" AnchorPane.topAnchor="81.0">
                <font>
@@ -33,11 +33,11 @@
                   <Font name="Britannic Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="nbwCI" layoutX="243.0" layoutY="205.0" prefHeight="18.0" prefWidth="40.0" stylesheets="@../stylesCourses.css" textFill="WHITE" AnchorPane.leftAnchor="243.0" AnchorPane.topAnchor="205.0">
+            <Label fx:id="nbwCI" layoutX="243.0" layoutY="205.0" prefHeight="18.0" prefWidth="40.0" stylesheets="@stylesCourses.css" textFill="WHITE" AnchorPane.leftAnchor="243.0" AnchorPane.topAnchor="205.0">
                <font>
                   <Font name="Britannic Bold" size="18.0" />
                </font></Label>
-            <Button fx:id="showlistbutton" layoutX="147.0" layoutY="14.0" mnemonicParsing="false" styleClass="transparent" stylesheets="@../stylesCourses.css" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="14.0">
+            <Button fx:id="showlistbutton" layoutX="147.0" layoutY="14.0" mnemonicParsing="false" styleClass="transparent" stylesheets="@stylesCourses.css" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="14.0">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,7 +51,7 @@
                   <Font name="Berlin Sans FB Demi Bold" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="deletecoursebuttonF" layoutX="79.0" layoutY="296.0" mnemonicParsing="false" styleClass="transparent" stylesheets="@../stylesCourses.css" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="296.0">
+            <Button fx:id="deletecoursebuttonF" layoutX="79.0" layoutY="296.0" mnemonicParsing="false" styleClass="transparent" stylesheets="@stylesCourses.css" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="296.0">
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -60,7 +60,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="editcoursebuttonF" layoutX="14.0" layoutY="294.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" styleClass="transparent" stylesheets="@../stylesCourses.css" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="294.0">
+            <Button fx:id="editcoursebuttonF" layoutX="14.0" layoutY="294.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="28.0" styleClass="transparent" stylesheets="@stylesCourses.css" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="294.0">
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>

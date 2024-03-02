@@ -13,22 +13,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="575.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ShowMoreController">
+<AnchorPane prefHeight="575.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Art.ShowMoreController">
    <children>
       <HBox layoutY="73.0" prefHeight="400.0" prefWidth="681.0">
          <children>
-            <AnchorPane fx:id="apid" prefHeight="473.0" prefWidth="694.0" styleClass="search-button" stylesheets="@styles/css/styles.css">
+            <AnchorPane fx:id="apid" prefHeight="473.0" prefWidth="694.0" styleClass="search-button" stylesheets="@../styles/css/styles.css">
                <children>
                   <Text fx:id="titleText" fill="WHITE" layoutX="258.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="139.19998779296884">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Button layoutX="640.0" layoutY="354.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="transparent" stylesheets="@styles/css/styles.css">
+                  <Button layoutX="640.0" layoutY="354.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" styleClass="transparent" stylesheets="@../styles/css/styles.css">
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons8-plus-64.png" />
+                              <Image url="@../images/icons8-plus-64.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -81,11 +81,11 @@
                   <Label layoutX="180.0" layoutY="148.0" prefHeight="18.0" prefWidth="53.0" text="Width" />
                   <Label layoutX="154.0" layoutY="224.0" prefHeight="18.0" prefWidth="79.0" text="Description " />
                   <Label layoutX="172.0" layoutY="280.0" prefHeight="18.0" prefWidth="63.0" text="Price en Dt" />
-                  <Button layoutX="617.0" layoutY="14.0" mnemonicParsing="false" onAction="#goHomis" prefHeight="32.0" prefWidth="46.0" styleClass="transparent" stylesheets="@styles/css/styles.css">
+                  <Button layoutX="617.0" layoutY="14.0" mnemonicParsing="false" onAction="#goHomis" prefHeight="32.0" prefWidth="46.0" styleClass="transparent" stylesheets="@../styles/css/styles.css">
                      <graphic>
                         <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/backto.png" />
+                              <Image url="@../images/backto.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -107,14 +107,14 @@
                   <HBox alignment="CENTER" layoutX="358.0" layoutY="332.0" prefHeight="44.0" prefWidth="202.0" spacing="20.0">
                      <children>
                         <Label fx:id="lll" />
-                        <Button mnemonicParsing="false" onAction="#togglePlayback" prefHeight="50.0" prefWidth="50.0" styleClass="search-button" stylesheets="@styles/css/styles.css">
+                        <Button mnemonicParsing="false" onAction="#togglePlayback" prefHeight="50.0" prefWidth="50.0" styleClass="search-button" stylesheets="@../styles/css/styles.css">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <graphic>
                               <ImageView fx:id="icon_player" fitHeight="32.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/bouton-jouer.png" />
+                                    <Image url="@../images/bouton-jouer.png" />
                                  </image>
                               </ImageView>
                            </graphic>

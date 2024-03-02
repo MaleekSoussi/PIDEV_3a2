@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Art;
 
 import Models.art;
 import javafx.collections.FXCollections;
@@ -77,7 +77,7 @@ populatePieChart();
     @FXML
     void goHome(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/addart.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/addart.fxml"));
             pieChart.getScene().setRoot(root);
 
         } catch (IOException e) {

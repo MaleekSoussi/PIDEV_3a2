@@ -84,7 +84,7 @@ public class SettingsController{
                 if (UserService.currentlyLoggedInUser != null) {
                     us.delete(UserService.currentlyLoggedInUser.getUserID());
                     UserService.currentlyLoggedInUser=null;
-                        us.switchView(MainFX.primaryStage, "/FronClient.fxml");
+                        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
                 }
             } catch (SQLException e) {
                  us.showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while deleting the account: " + e.getMessage());
@@ -94,7 +94,7 @@ public class SettingsController{
 
     @FXML
     void goback(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/FronClient.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 
     @FXML

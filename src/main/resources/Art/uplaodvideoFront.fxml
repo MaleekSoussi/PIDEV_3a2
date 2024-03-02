@@ -12,7 +12,7 @@
 <?import javafx.scene.media.MediaView?>
 
 
-<AnchorPane prefHeight="523.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UplaodvideoFrontController">
+<AnchorPane prefHeight="523.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Art.UplaodvideoFrontController">
    <children>
       <MediaView fx:id="mv_video" fitHeight="420.0" fitWidth="820.0" layoutX="32.0" layoutY="14.0" />
       <HBox fx:id="sliderr" alignment="CENTER" layoutX="5.0" layoutY="426.0" prefHeight="30.0" prefWidth="836.0">
@@ -29,14 +29,14 @@
       <HBox alignment="CENTER" layoutX="5.0" layoutY="426.0" prefHeight="98.0" prefWidth="873.0" spacing="20.0">
          <children>
             <Label fx:id="lll" />
-            <Button mnemonicParsing="false" onAction="#togglePlaybacks" prefHeight="50.0" prefWidth="50.0" styleClass="search-button" stylesheets="@styles/css/styles.css">
+            <Button mnemonicParsing="false" onAction="#togglePlaybacks" prefHeight="50.0" prefWidth="50.0" styleClass="search-button" stylesheets="@../styles/css/styles.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
                   <ImageView fx:id="icon_player" fitHeight="32.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/bouton-jouer.png" />
+                        <Image url="@../images/bouton-jouer.png" />
                      </image>
                   </ImageView>
                </graphic>

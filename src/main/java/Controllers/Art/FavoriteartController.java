@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Art;
 
 import Models.art;
 import javafx.fxml.FXML;

@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Categorie;
 
 import Models.category;
 import Services.User.UserService;
@@ -195,7 +195,7 @@ public class ArtistCategorieController {
     @FXML
     void goback(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/ManageArtist.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/ManageArtist.fxml"));
             datee.getScene().setRoot(root);
 
         } catch (IOException e) {

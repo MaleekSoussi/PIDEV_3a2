@@ -68,14 +68,14 @@ public class FeedbackController{
 
     @FXML
     void goback(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/FronClient.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 
     @FXML
     void logout(ActionEvent event) {
         us.clearRememberedUser();
         UserService.currentlyLoggedInUser = null;
-        us.switchView(MainFX.primaryStage, "/FronClient.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 
     @FXML

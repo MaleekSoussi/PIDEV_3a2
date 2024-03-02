@@ -17,13 +17,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="mainStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" stylesheets="@../stylesCourses.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Workshops.ShowWorkshopController">
+<StackPane fx:id="mainStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" stylesheets="@../Courses/stylesCourses.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Workshops.ShowWorkshopController">
    <children>
       <AnchorPane layoutX="2.0" layoutY="-2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0">
          <children>
             <BorderPane layoutX="7.0" layoutY="6.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="6.0">
                <left>
-                  <VBox prefHeight="200.0" prefWidth="435.0" styleClass="shadow" stylesheets="@../stylesCourses.css" BorderPane.alignment="CENTER">
+                  <VBox prefHeight="200.0" prefWidth="435.0" styleClass="shadow" stylesheets="@../Courses/stylesCourses.css" BorderPane.alignment="CENTER">
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="453.0">
                            <children>
@@ -42,12 +42,12 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="338.0" stylesheets="@../stylesCourses.css" VBox.vgrow="NEVER">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="338.0" stylesheets="@../Courses/stylesCourses.css" VBox.vgrow="NEVER">
                            <VBox.margin>
                               <Insets left="30.0" right="30.0" />
                            </VBox.margin>
                            <children>
-                              <TextField fx:id="searchforname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#searchworkshopF" prefHeight="51.0" prefWidth="235.0" promptText="Type here to search" styleClass="transparent" stylesheets="@../stylesCourses.css">
+                              <TextField fx:id="searchforname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#searchworkshopF" prefHeight="51.0" prefWidth="235.0" promptText="Type here to search" styleClass="transparent" stylesheets="@../Courses/stylesCourses.css">
                                  <HBox.margin>
                                     <Insets left="20.0" />
                                  </HBox.margin>
@@ -55,7 +55,7 @@
                                     <Font name="Cambria" size="18.0" />
                                  </font>
                               </TextField>
-                              <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="48.0" styleClass="search-button" stylesheets="@../stylesCourses.css" textFill="WHITE">
+                              <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="48.0" styleClass="search-button" stylesheets="@../Courses/stylesCourses.css" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -70,7 +70,7 @@
                            </styleClass>
                         </HBox>
                         <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="69.0" prefWidth="435.0" VBox.vgrow="ALWAYS" />
-                        <VBox fx:id="chosenFruitCard" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="327.0" styleClass="free-delivery-card" stylesheets="@../stylesCourses.css">
+                        <VBox fx:id="chosenFruitCard" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="327.0" styleClass="free-delivery-card" stylesheets="@../Courses/stylesCourses.css">
                            <VBox.margin>
                               <Insets left="35.0" right="90.0" />
                            </VBox.margin>
@@ -91,7 +91,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                                  <children>
-                                    <TextField fx:id="namewu" alignment="CENTER" prefHeight="41.0" prefWidth="278.0" promptText="Type here the Name " styleClass="search-box" stylesheets="@../stylesCourses.css">
+                                    <TextField fx:id="namewu" alignment="CENTER" prefHeight="41.0" prefWidth="278.0" promptText="Type here the Name " styleClass="search-box" stylesheets="@../Courses/stylesCourses.css">
                                        <font>
                                           <Font name="Cambria" size="18.0" />
                                        </font>
@@ -106,7 +106,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                                  <children>
-                                    <TextField fx:id="ressourcesu" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="Type here the ressources" styleClass="search-box" stylesheets="@../stylesCourses.css">
+                                    <TextField fx:id="ressourcesu" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="Type here the ressources" styleClass="search-box" stylesheets="@../Courses/stylesCourses.css">
                                        <font>
                                           <Font name="Cambria" size="18.0" />
                                        </font>
@@ -115,7 +115,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                                  <children>
-                                    <TextField fx:id="descfwu" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="Type here the description" styleClass="search-box" stylesheets="@../stylesCourses.css">
+                                    <TextField fx:id="descfwu" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="Type here the description" styleClass="search-box" stylesheets="@../Courses/stylesCourses.css">
                                        <font>
                                           <Font name="Cambria" size="18.0" />
                                        </font>
@@ -127,7 +127,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                                  <children>
-                                    <TextField fx:id="durationu" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="Type here the duration" styleClass="search-box" stylesheets="@../stylesCourses.css">
+                                    <TextField fx:id="durationu" alignment="CENTER" prefHeight="40.0" prefWidth="278.0" promptText="Type here the duration" styleClass="search-box" stylesheets="@../Courses/stylesCourses.css">
                                        <font>
                                           <Font name="Cambria" size="18.0" />
                                        </font>
@@ -137,7 +137,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Button mnemonicParsing="false" onAction="#confirmw" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #ffffff;" styleClass="shopping-online-card" stylesheets="@../stylesCourses.css" text="UPDATE" textFill="#444748">
+                              <Button mnemonicParsing="false" onAction="#confirmw" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #ffffff;" styleClass="shopping-online-card" stylesheets="@../Courses/stylesCourses.css" text="UPDATE" textFill="#444748">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -208,7 +208,7 @@
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="778.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <TableView fx:id="workshoptable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#click" prefHeight="538.0" prefWidth="811.0" styleClass="table-view-new" stylesheets="@../stylesCourses.css">
+                              <TableView fx:id="workshoptable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#click" prefHeight="538.0" prefWidth="811.0" styleClass="table-view-new" stylesheets="@../Courses/stylesCourses.css">
                                  <columns>
                                     <TableColumn fx:id="namecolw" prefWidth="134.13337171077728" text="NAME" />
                                     <TableColumn fx:id="ressourcescol" prefWidth="213.8666229248047" text="RESSOURCES" />

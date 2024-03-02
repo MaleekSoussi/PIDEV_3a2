@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="487.0" prefWidth="600.0" styleClass="form_container" stylesheets="@../stylesCourses.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Courses.addCourseController">
+<AnchorPane prefHeight="487.0" prefWidth="600.0" styleClass="form_container" stylesheets="@stylesCourses.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Courses.addCourseController">
    <children>
-      <Button layoutX="-27.0" layoutY="30.0" mnemonicParsing="false" onAction="#returnac" styleClass="transparent" stylesheets="@../stylesCourses.css">
+      <Button layoutX="-27.0" layoutY="30.0" mnemonicParsing="false" onAction="#returnac" styleClass="transparent" stylesheets="@stylesCourses.css">
          <graphic>
             <ImageView fitHeight="80.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,14 +21,14 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <VBox fx:id="chosenFruitCard" alignment="CENTER" layoutX="117.0" layoutY="62.0" minHeight="-Infinity" prefHeight="418.0" prefWidth="366.0" styleClass="free-delivery-card" stylesheets="@../stylesCourses.css">
+      <VBox fx:id="chosenFruitCard" alignment="CENTER" layoutX="117.0" layoutY="62.0" minHeight="-Infinity" prefHeight="418.0" prefWidth="366.0" styleClass="free-delivery-card" stylesheets="@stylesCourses.css">
          <children>
             <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
                <children>
-                  <TextField fx:id="namef" prefHeight="34.0" prefWidth="281.0" promptText="Enter the name" styleClass="search-box" stylesheets="@../stylesCourses.css">
+                  <TextField fx:id="namef" prefHeight="34.0" prefWidth="281.0" promptText="Enter the name" styleClass="search-box" stylesheets="@stylesCourses.css">
                      <HBox.margin>
                         <Insets bottom="-10.0" top="10.0" />
                      </HBox.margin></TextField>
@@ -50,7 +50,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <children>
-                  <TextField fx:id="pricef" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="281.0" promptText="Enter the price" styleClass="search-box" stylesheets="@../stylesCourses.css">
+                  <TextField fx:id="pricef" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="281.0" promptText="Enter the price" styleClass="search-box" stylesheets="@stylesCourses.css">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
@@ -62,13 +62,13 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <children>
-                  <TextField fx:id="typef" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="281.0" promptText="Enter the type " styleClass="search-box" stylesheets="@../stylesCourses.css">
+                  <TextField fx:id="typef" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="281.0" promptText="Enter the type " styleClass="search-box" stylesheets="@stylesCourses.css">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin></TextField>
                </children>
             </HBox>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addCourse" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #ffffff;" styleClass="shopping-online-card" stylesheets="@../stylesCourses.css" text="ADD" textFill="#444748">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addCourse" prefHeight="50.0" prefWidth="270.0" style="-fx-background-color: #ffffff;" styleClass="shopping-online-card" stylesheets="@stylesCourses.css" text="ADD" textFill="#444748">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

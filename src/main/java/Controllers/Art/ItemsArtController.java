@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Art;
 
 import Models.art;
 import javafx.event.ActionEvent;
@@ -75,7 +75,7 @@ public class ItemsArtController {
     void showmore(ActionEvent event) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowMore.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Art/showMore.fxml"));
             Parent root = loader.load();
 
             // Get the controller

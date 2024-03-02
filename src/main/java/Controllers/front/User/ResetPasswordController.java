@@ -78,14 +78,14 @@ public class ResetPasswordController {
     }
     @FXML
     void goback(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/FronClient.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 
     @FXML
     void logout(ActionEvent event) {
         currentlyLoggedInUser = null;
         us.clearRememberedUser();
-        us.switchView(MainFX.primaryStage, "/FronClient.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 
     @FXML

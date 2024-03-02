@@ -243,5 +243,5 @@ public class ViewAuctionArtist implements Initializable {
 
     public void Homepage(ActionEvent actionEvent) {
         UserService us = new UserService();
-        us.switchView(MainFX.primaryStage, "/FronClient.fxml");}
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");}
 }

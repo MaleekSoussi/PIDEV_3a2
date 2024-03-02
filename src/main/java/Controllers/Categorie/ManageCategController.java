@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Categorie;
 import Models.category;
 import Services.User.UserService;
 import javafx.collections.FXCollections;
@@ -204,7 +204,7 @@ public class ManageCategController {
     @FXML
     void goArt(ActionEvent event) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/displayArt.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/displayArt.fxml"));
             datet.getScene().setRoot(root);
 
         } catch (IOException e) {

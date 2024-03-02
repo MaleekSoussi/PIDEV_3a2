@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Art;
 
 
 import Models.art;
@@ -199,7 +199,7 @@ public class AddartController implements Initializable {
     @FXML
     void display(ActionEvent event) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/displayArt.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/displayArt.fxml"));
             titlef.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -242,7 +242,7 @@ public class AddartController implements Initializable {
     @FXML
     void gotoHome(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FronClient.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/FronClient.fxml"));
             materialsf.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -285,7 +285,7 @@ public class AddartController implements Initializable {
     @FXML
     void seeStat(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Statistique.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/Statistique.fxml"));
             typef.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -346,7 +346,7 @@ public class AddartController implements Initializable {
     @FXML
     void Logout(ActionEvent event) {
         UserService.currentlyLoggedInUser=null;
-        us.switchView(MainFX.primaryStage, "/FronClient.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
     @FXML
     void auctionbutton(ActionEvent event) {

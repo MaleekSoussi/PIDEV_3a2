@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Art;
 
 import Models.art;
 import Models.category;
@@ -171,7 +171,7 @@ public class FronClientController {
 
         for (art art : artList) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ItemsArt.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Art/ItemsArt.fxml"));
                 Node artnode = loader.load();
                 ItemsArtController itemController = loader.getController();
                 itemController.setData(art); // Pass the art data to ItemsArtController
@@ -192,7 +192,7 @@ public class FronClientController {
     @FXML
     void GoFrontArtist(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/addart.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/addart.fxml"));
             artGrid.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -208,7 +208,7 @@ public class FronClientController {
         for (art art : artList) {
             Node artnode;
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ItemsArt.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Art/ItemsArt.fxml"));
                 artnode = loader.load();
                 ItemsArtController itemController = loader.getController();
                 itemController.setData(art);

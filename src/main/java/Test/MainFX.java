@@ -30,7 +30,7 @@ public class MainFX extends Application {
             primaryStage.setScene(new Scene(root));
         } else {
             // Show login or transition view
-            Parent root = FXMLLoader.load(getClass().getResource("/FronClient.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/FronClient.fxml"));
             primaryStage.setScene(new Scene(root));
         }
         primaryStage.setTitle("VinciApp");

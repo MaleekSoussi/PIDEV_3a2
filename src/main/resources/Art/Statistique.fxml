@@ -9,14 +9,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="554.0" prefWidth="634.0" stylesheets="@styles/css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StatistiqueController">
+<AnchorPane prefHeight="554.0" prefWidth="634.0" stylesheets="@../styles/css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Art.StatistiqueController">
    <children>
       <PieChart fx:id="pieChart" layoutX="18.0" layoutY="188.0" prefHeight="335.0" prefWidth="592.0" />
-      <Pane layoutX="33.0" layoutY="36.0" prefHeight="131.0" prefWidth="228.0" styleClass="pane" stylesheets="@styles/css/styles.css">
+      <Pane layoutX="33.0" layoutY="36.0" prefHeight="131.0" prefWidth="228.0" styleClass="pane" stylesheets="@../styles/css/styles.css">
          <children>
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/art.png" />
+                  <Image url="@../images/art.png" />
                </image>
             </ImageView>
             <Text fx:id="nbreart" layoutX="83.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="10">
@@ -31,7 +31,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="354.0" layoutY="45.0" prefHeight="116.0" prefWidth="242.0" styleClass="pane" stylesheets="@styles/css/styles.css">
+      <Pane layoutX="354.0" layoutY="45.0" prefHeight="116.0" prefWidth="242.0" styleClass="pane" stylesheets="@../styles/css/styles.css">
          <children>
             <Text layoutX="66.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="The last Art work added  is :" wrappingWidth="159.57342529296875">
                <font>
@@ -45,7 +45,7 @@
             </Text>
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="19.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/418604487_1339576123408028_7628740461872219465_n.png" />
+                  <Image url="@../images/418604487_1339576123408028_7628740461872219465_n.png" />
                </image>
             </ImageView>
          </children>
@@ -55,11 +55,11 @@
             <Font name="Cambria" size="24.0" />
          </font>
       </Text>
-      <Button layoutX="12.0" layoutY="4.0" mnemonicParsing="false" onAction="#goHome" prefHeight="34.0" prefWidth="26.0" styleClass="transparent" stylesheets="@styles/css/styles.css">
+      <Button layoutX="12.0" layoutY="4.0" mnemonicParsing="false" onAction="#goHome" prefHeight="34.0" prefWidth="26.0" styleClass="transparent" stylesheets="@../styles/css/styles.css">
          <graphic>
             <ImageView fitHeight="39.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/backto.png" />
+                  <Image url="@../images/backto.png" />
                </image>
             </ImageView>
          </graphic>

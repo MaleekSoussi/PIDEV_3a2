@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.Art;
 
 import Services.User.UserService;
 import Test.MainFX;
@@ -208,7 +208,7 @@ public class DisplayArtController {
     @FXML
     void rereturn(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/addart.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/addart.fxml"));
             titleu.getScene().setRoot(root);
         } catch (IOException e) {
             System.out.println("error" + e.getMessage());
@@ -330,7 +330,7 @@ public class DisplayArtController {
     @FXML
     void go_cat(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/categorieM.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Categorie/categorieM.fxml"));
             cityu.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -491,7 +491,7 @@ public class DisplayArtController {
     @FXML
     void play_videos(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/uplaodvideoFront.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Art/uplaodvideoFront.fxml"));
             Parent playVideoRoot = fxmlLoader.load();
 
             UplaodvideoFrontController video = fxmlLoader.getController();
@@ -521,12 +521,12 @@ public class DisplayArtController {
     @FXML
     void Logout(ActionEvent event) {
         UserService.currentlyLoggedInUser=null;
-        us.switchView(MainFX.primaryStage, "/FronClient.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 
     @FXML
     void gohome(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/FronClient.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 
 }

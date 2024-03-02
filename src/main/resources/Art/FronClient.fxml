@@ -16,13 +16,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="708.0" prefWidth="1388.0" stylesheets="@styles/css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FronClientController">
+<AnchorPane prefHeight="708.0" prefWidth="1388.0" stylesheets="@../styles/css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Art.FronClientController">
    <children>
-      <HBox layoutX="-10.0" layoutY="-12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="1434.0" styleClass="table-view" stylesheets="@styles/css/styles.css">
+      <HBox layoutX="-10.0" layoutY="-12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="1434.0" styleClass="table-view" stylesheets="@../styles/css/styles.css">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/logo.png" />
+                  <Image url="@../images/logo.png" />
                </image>
             </ImageView>
             <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="530.0">
@@ -94,7 +94,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons8-chercher-128.png" />
+                              <Image url="@../images/icons8-chercher-128.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -127,12 +127,12 @@
                      <graphic>
                         <ImageView fitHeight="27.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons8-login-64.png" />
+                              <Image url="@../images/icons8-login-64.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="Signupbutton" maxWidth="1.7976931348623157E308" onAction="#signup" prefHeight="22.0" prefWidth="54.0" stylesheets="@styles/css/styles.css">
+                  <Button fx:id="Signupbutton" maxWidth="1.7976931348623157E308" onAction="#signup" prefHeight="22.0" prefWidth="54.0" stylesheets="@../styles/css/styles.css">
                      <styleClass>
                         <String fx:value="add-btn" />
                         <String fx:value="shadow" />
@@ -143,7 +143,7 @@
                      <graphic>
                         <ImageView fitHeight="36.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons8-sign-up-64.png" />
+                              <Image url="@../images/icons8-sign-up-64.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -157,7 +157,7 @@
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons8-setting-50.png" />
+                              <Image url="@../images/icons8-setting-50.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -166,7 +166,7 @@
             </HBox>
          </children>
       </HBox>
-      <ScrollPane fx:id="artItems" layoutX="14.0" layoutY="150.0" prefHeight="526.0" prefWidth="1408.0" styleClass="transparent" stylesheets="@styles/css/styles.css">
+      <ScrollPane fx:id="artItems" layoutX="14.0" layoutY="150.0" prefHeight="526.0" prefWidth="1408.0" styleClass="transparent" stylesheets="@../styles/css/styles.css">
          <content>
             <GridPane fx:id="artGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#effect" prefHeight="913.0" prefWidth="1270.0">
                <columnConstraints>
@@ -185,6 +185,6 @@
             <Insets left="70.0" top="50.0" />
          </padding>
       </ScrollPane>
-      <ComboBox fx:id="Category" layoutX="1162.0" layoutY="115.0" onAction="#filterone" prefWidth="235.0" promptText="Category" styleClass="comboBox" stylesheets="@styles/css/styles.css" />
+      <ComboBox fx:id="Category" layoutX="1162.0" layoutY="115.0" onAction="#filterone" prefWidth="235.0" promptText="Category" styleClass="comboBox" stylesheets="@../styles/css/styles.css" />
    </children>
 </AnchorPane>

@@ -319,7 +319,7 @@ public class DashboardController {
     @FXML
     void ViewArt(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/ManageArtist.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/ManageArtist.fxml"));
             lastname.getScene().setRoot(root);
 
         } catch (IOException e) {

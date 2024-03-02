@@ -22,7 +22,7 @@
          <children>
             <BorderPane layoutX="-6.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0">
                <top>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="1318.0" styleClass="table-view" stylesheets="@../stylesCourses.css" BorderPane.alignment="CENTER">
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="1318.0" styleClass="table-view" stylesheets="@stylesCourses.css" BorderPane.alignment="CENTER">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -31,7 +31,7 @@
                         </ImageView>
                         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="530.0">
                            <children>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#homebutton" styleClass="transparent" stylesheets="@../stylesCourses.css" text="Home" textFill="#878787">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#homebutton" styleClass="transparent" stylesheets="@stylesCourses.css" text="Home" textFill="#878787">
                                  <font>
                                     <Font name="Cambria Bold" size="19.0" />
                                  </font>
@@ -39,7 +39,7 @@
                                     <Insets left="20.0" right="20.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#artworksbutton" styleClass="transparent" stylesheets="@../stylesCourses.css" text="Art Works" textFill="#878787">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#artworksbutton" styleClass="transparent" stylesheets="@stylesCourses.css" text="Art Works" textFill="#878787">
                                  <font>
                                     <Font name="Cambria Bold" size="19.0" />
                                  </font>
@@ -47,7 +47,7 @@
                                     <Insets right="20.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#gotofOb" styleClass="transparent" stylesheets="@../stylesCourses.css" text="Courses" textFill="#878787">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#gotofOb" styleClass="transparent" stylesheets="@stylesCourses.css" text="Courses" textFill="#878787">
                                  <font>
                                     <Font name="Cambria Bold" size="19.0" />
                                  </font>
@@ -55,7 +55,7 @@
                                     <Insets right="20.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#eventbutton" styleClass="transparent" stylesheets="@../stylesCourses.css" text="Event" textFill="#878787">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#eventbutton" styleClass="transparent" stylesheets="@stylesCourses.css" text="Event" textFill="#878787">
                                  <font>
                                     <Font name="Cambria Bold" size="19.0" />
                                  </font>
@@ -63,7 +63,7 @@
                                     <Insets right="20.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#auctionbutton" styleClass="transparent" stylesheets="@../stylesCourses.css" text="Auction" textFill="#878787">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#auctionbutton" styleClass="transparent" stylesheets="@stylesCourses.css" text="Auction" textFill="#878787">
                                  <font>
                                     <Font name="Cambria Bold" size="19.0" />
                                  </font>
@@ -71,7 +71,7 @@
                                     <Insets right="20.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aboutusbutton" styleClass="transparent" stylesheets="@../stylesCourses.css" text="About Us" textFill="#878787">
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aboutusbutton" styleClass="transparent" stylesheets="@stylesCourses.css" text="About Us" textFill="#878787">
                                  <font>
                                     <Font name="Cambria Bold" size="19.0" />
                                  </font>
@@ -84,9 +84,9 @@
                               <Insets top="40.0" />
                            </padding>
                         </HBox>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="338.0" stylesheets="@../stylesCourses.css">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="338.0" stylesheets="@stylesCourses.css">
                            <children>
-                              <TextField fx:id="searchf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#searchcoursesF" prefHeight="51.0" prefWidth="235.0" promptText="Type here to search" styleClass="transparent" stylesheets="@../stylesCourses.css">
+                              <TextField fx:id="searchf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#searchcoursesF" prefHeight="51.0" prefWidth="235.0" promptText="Type here to search" styleClass="transparent" stylesheets="@stylesCourses.css">
                                  <HBox.margin>
                                     <Insets left="20.0" />
                                  </HBox.margin>
@@ -94,7 +94,7 @@
                                     <Font name="Cambria" size="18.0" />
                                  </font>
                               </TextField>
-                              <Button mnemonicParsing="false" onAction="#searchbutton" prefHeight="43.0" prefWidth="48.0" styleClass="search-button" stylesheets="@../stylesCourses.css" textFill="WHITE">
+                              <Button mnemonicParsing="false" onAction="#searchbutton" prefHeight="43.0" prefWidth="48.0" styleClass="search-button" stylesheets="@stylesCourses.css" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -120,7 +120,7 @@
                               <Insets left="100.0" right="100.0" />
                            </HBox.margin>
                            <children>
-                              <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewcartbutton" prefHeight="25.0" prefWidth="29.0" styleClass="transparent" stylesheets="@../stylesCourses.css">
+                              <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewcartbutton" prefHeight="25.0" prefWidth="29.0" styleClass="transparent" stylesheets="@stylesCourses.css">
                                  <graphic>
                                     <ImageView fitHeight="49.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -141,7 +141,7 @@
                   </HBox>
                </top>
                <center>
-                  <ScrollPane fx:id="coursesItems" prefWidth="1130.0" styleClass="transparent" stylesheets="@../stylesCourses.css" BorderPane.alignment="CENTER">
+                  <ScrollPane fx:id="coursesItems" prefWidth="1130.0" styleClass="transparent" stylesheets="@stylesCourses.css" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets />
                      </BorderPane.margin>
@@ -166,7 +166,7 @@
                   </ScrollPane>
                </center>
                <bottom>
-                  <Button mnemonicParsing="false" onAction="#addcoursebuttonF" styleClass="transparent" stylesheets="@../stylesCourses.css" BorderPane.alignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#addcoursebuttonF" styleClass="transparent" stylesheets="@stylesCourses.css" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets bottom="10.0" />
                      </BorderPane.margin>

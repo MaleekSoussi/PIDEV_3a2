@@ -1,169 +1,50 @@
-package Controllers;
+package Controllers.Art;
 
-import Models.art;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
-import Services.Art.ArtServices;
-import Services.Art.CategoryServices;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
 
-
-public class ShowMoreController {
-    private static int idA;
-    private boolean isPlayed = false ;
-    @FXML
-    private Label lbl_duration;
-
+public class UplaodvideoFrontController {
     private Media media;
     private MediaPlayer mediaPlayer;
+    private boolean isPlayed = false ;
+
     @FXML
     private ImageView icon_player;
 
-    private ArtServices cs = new ArtServices();
+    @FXML
+    private Label lbl_duration;
 
     @FXML
-    private Text CatText;
+    private Label lll;
 
     @FXML
-    private Text CityText;
+    private MediaView mv_video;
 
     @FXML
     private Slider slider;
 
     @FXML
-    private Text MaterialsText;
+    private HBox sliderr;
 
-    @FXML
-    private Text descriptionText;
-
-    @FXML
-    private Text heightText;
-
-    @FXML
-    private Text prixText;
-
-    @FXML
-    private Text rarityText;
-
-    @FXML
-    private Text titleText;
-
-    @FXML
-    private Text widthText;
-    @FXML
-    private MediaView mv_video;
-
-
-    @FXML
-    private Label CATEGORYA;
-
-    @FXML
-    private Label CITYA;
-
-    @FXML
-    private Label DESCRIPTIONA;
-
-    @FXML
-    private Label HEIGHTA;
-
-    @FXML
-    private Label MATERIALSA;
-
-
-    @FXML
-    private Text pathvideo;
-
-    public Text getPathvideo() {
-        return pathvideo;
-    }
-
-    @FXML
-    private Label PRICEA;
-
-    @FXML
-    private Label TITLEA;
-
-    @FXML
-    private Label TYPEA;
-
-    @FXML
-    private Label WIDTHA;
-
-    @FXML
-    private AnchorPane apid;
-    private ShowMoreController showMoreController;
-    public void showMoreController(ShowMoreController showMoreController)
+    private DisplayArtController displayArtController;
+    public void DisplayArtController(DisplayArtController displayArtController)
     {
-        this.showMoreController  = showMoreController ;
+        this.displayArtController  = displayArtController ;
     }
 
-    public void setDataa(art art) {
-        CategoryServices categoryServices = new CategoryServices();
-        titleText.setText(art.getTitle());
-        MaterialsText.setText(art.getMaterials());
-        heightText.setText(String.valueOf(art.getHeight()));
-        widthText.setText(String.valueOf(art.getHeight())); // Assuming this is correct, it should be art.getWidth() normally
-        rarityText.setText(art.getType());
-        CityText.setText(art.getCity());
-        descriptionText.setText(art.getDescription());
-        prixText.setText(String.valueOf(art.getPrice()));
-        int categoryId = art.getId_category();
-        String categoryName = ""; // Default value
-        try {
-            categoryName = categoryServices.getCategoryName(categoryId);
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Error fetching category name: " + e.getMessage());
-            alert.showAndWait();
-        }
-        // Set the category name in the label
-        CatText.setText(categoryName);
-        pathvideo.setText(art.getVideo());
-    }
-
-    @FXML
-    void initialize() {
-        pathvideo.setVisible(false);
-
-    }
-
-    // Helper method to display an alert
-    private void showAlert(String title, String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-
-    @FXML
-    void goHomis(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/FronClient.fxml"));
-            titleText.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
-        }
-    }
 
     @FXML
     void sliderPressed(MouseEvent event) {
@@ -171,9 +52,9 @@ public class ShowMoreController {
     }
 
     @FXML
-    void togglePlayback(ActionEvent event) {
+    void togglePlaybacks(ActionEvent event) {
         // Retrieve the text from the TextField
-        String videoPath = pathvideo.getText();  // get the path of video setted in field
+        String videoPath = displayArtController.getPathVideo().getText();  // get the path of video setted in field
 
         if (videoPath != null && !videoPath.isEmpty()) {
             if (mediaPlayer == null || !isPlayed) {
@@ -232,7 +113,6 @@ public class ShowMoreController {
             alert.showAndWait();
         }
     }
-    }
 
 
-
+}
