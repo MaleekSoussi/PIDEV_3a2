@@ -17,8 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import Models.Auction;
 import Models.Bid;
-import Services.AuctionService;
-import Services.BidService;
+import Services.AuctionSystem.AuctionService;
+import Services.AuctionSystem.BidService;
 import Test.BidClient;
 
 import java.io.IOException;

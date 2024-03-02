@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import Models.Auction;
-import Services.AuctionService;
+import Services.AuctionSystem.AuctionService;
 
 import java.io.IOException;
 import java.net.URL;

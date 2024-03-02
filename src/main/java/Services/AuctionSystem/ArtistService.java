@@ -1,4 +1,4 @@
-package Services;
+package Services.AuctionSystem;
 
 import Models.Auction;
 import Services.User.UserService;

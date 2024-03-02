@@ -46,7 +46,7 @@ public class LoginController{
                 redirectPath = "/ManageArtist.fxml";
             }
             else if ("Artist".equals(role)) {
-                redirectPath = "/addart.fxml";
+                redirectPath = "/FronClient.fxml";
             }
             else if ("Amateur".equals(role)) {
                 redirectPath = "/addart.fxml";

@@ -3,7 +3,7 @@ package Controllers.Auction;
 import Controllers.Artist.ViewAuctionArtist;
 import Controllers.Bid.ViewBidsController;
 import Models.Auction;
-import Services.AuctionService;
+import Services.AuctionSystem.AuctionService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

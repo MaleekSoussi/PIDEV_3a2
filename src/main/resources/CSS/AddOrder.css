@@ -1,0 +1,60 @@
+/* General styles for all AnchorPane elements */
+.root {
+    -fx-background-color: #f8f4e1; /* Background color for the application */
+}
+AnchorPane {
+    -fx-background-color: #f8f4e1; /* Light background for better readability */
+}
+/* Style for TableView to give it a glow effect */
+TableView {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0.5, 0, 0); /* Subtle shadow for depth */
+}
+
+/* Style for TableColumn headers */
+.table-column {
+    -fx-background-color: #778DA9; /* Background color for table column headers */
+    -fx-text-fill: #FFFFFF; /* White text for headers */
+    -fx-font-size: 14px; /* Font size for text in headers */
+    -fx-border-color: #415A77; /* Border color for headers */
+    -fx-border-width: 1; /* Border width for headers */
+}
+
+/* Style for Button */
+.button {
+    -fx-background-color: transparent; /* Set the background to transparent */
+    -fx-background-insets: 0;
+    -fx-background-radius: 5; /* More rounded corners for a smaller button */
+    -fx-padding: 3 8 3 8; /* Further reduced padding for an even smaller button */
+    -fx-font-size: 12px; /* Even smaller font size for text in buttons */
+    -fx-border-width: 1; /* Maintain thin border */
+    -fx-border-radius: 5; /* Border border radius should match the background radius */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 1); /* More subtle shadow */
+    -fx-min-width: 40px; /* Further reduced minimum width for the button */
+    -fx-min-height: 15px; /* Further reduced minimum height for the button */
+    -fx-text-fill: black; /* Set the text color to black for contrast */
+}
+
+
+/* Style for Text element (e.g., Titles, Labels) */
+.text {
+    -fx-fill: #0f0a3d; /* Dark blue color for text */
+    -fx-font-family: "Verdana"; /* Updated font family */
+    -fx-font-size: 14px;
+}
+/* Style for ImageView (logo) */
+.image-view {
+    -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 2); /* Shadow effect for images */
+}
+
+/* Hover effect for Button */
+.button:hover {
+    -fx-background-color: rgba(19, 56, 111, 0.5); /* Hover effect with a semi-transparent dark blue color */
+    -fx-text-fill: #FFFFFF; /* Text color on hover */
+}
+
+/* Focused TextField styles */
+.text-field:focused {
+    -fx-border-color: #C9A43D; /* Highlight color when the field is focused */
+    -fx-border-width: 2; /* Border width when focused */
+}
+

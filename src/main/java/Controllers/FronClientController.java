@@ -38,9 +38,38 @@ public class FronClientController {
     private ArtServices cs = new ArtServices();
 
     @FXML
-    void aboutusbutton(ActionEvent event) {
+    private Button loginButton;
 
+    @FXML
+    private Button Signupbutton;
+
+    @FXML
+    private Button settingsbutton;
+
+    @FXML
+    void login(ActionEvent event) {
+        us.switchView(MainFX.primaryStage, "/front/Transition.fxml");
     }
+
+    @FXML
+    void signup(ActionEvent event) {
+        us.switchView(MainFX.primaryStage, "/front/Transition.fxml");
+    }
+
+    @FXML
+    void settings(ActionEvent event) {
+        us.switchView(MainFX.primaryStage, "/front/Settings.fxml");
+    }
+
+    public void CoursesBT(ActionEvent actionEvent) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Courses/showCoursesF.fxml");}
+    }
+
+    public void PaymentBT(ActionEvent actionEvent) {
+        us.switchView(MainFX.primaryStage, "/Baskets/Basket.fxml");
+    }
+
 
     @FXML
     void artworksbutton(ActionEvent event) {
@@ -70,8 +99,7 @@ public class FronClientController {
 
     @FXML
     void gotofOb(ActionEvent event) {
-        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
-            us.switchView(MainFX.primaryStage, "/Courses/showCoursesF.fxml");}
+
 
     }
 
@@ -100,14 +128,7 @@ public class FronClientController {
         rowConstraints.setMinHeight(10.0); // Set the desired height
         artGrid.getRowConstraints().add(rowConstraints);
         if (UserService.currentlyLoggedInUser != null) {
-            if(UserService.currentlyLoggedInUser.getRole().equals("Amateur"))
-            {
-                LoginArtist.setVisible(false);
-            }
-            else
-            {
-                LoginArtist.setVisible(true);
-            }
+
             loginButton.setVisible(false); // Hide login button
             Signupbutton.setVisible(false); // Hide login button
             settingsbutton.setVisible(true);
@@ -254,28 +275,6 @@ public class FronClientController {
 
     private UserService us = new UserService();
 
-    @FXML
-    private Button loginButton;
 
-    @FXML
-    private Button Signupbutton;
-
-    @FXML
-    private Button settingsbutton;
-
-    @FXML
-    void login(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/front/Transition.fxml");
-    }
-
-    @FXML
-    void signup(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/front/Transition.fxml");
-    }
-
-    @FXML
-    void settings(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/front/Settings.fxml");
-    }
 
 }

@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import Models.Auction;
-import Services.AuctionService;
+import Services.AuctionSystem.AuctionService;
 
 import java.io.File;
 import java.sql.SQLException;

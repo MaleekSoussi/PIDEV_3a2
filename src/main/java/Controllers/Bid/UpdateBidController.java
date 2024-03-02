@@ -1,7 +1,7 @@
 package Controllers.Bid;
 
 import Models.Bid;
-import Services.BidService;
+import Services.AuctionSystem.BidService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;

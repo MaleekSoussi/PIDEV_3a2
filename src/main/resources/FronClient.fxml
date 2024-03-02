@@ -43,7 +43,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#gotofOb" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Courses" textFill="#878787">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#CoursesBT" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Courses" textFill="#878787">
                      <font>
                         <Font name="Cambria Bold" size="19.0" />
                      </font>
@@ -67,7 +67,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aboutusbutton" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="About Us" textFill="#878787">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#PaymentBT" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Payment" textFill="#878787">
                      <font>
                         <Font name="Cambria Bold" size="19.0" />
                      </font>

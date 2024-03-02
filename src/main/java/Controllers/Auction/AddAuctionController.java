@@ -2,7 +2,7 @@ package Controllers.Auction;
 
 import Controllers.Artist.ViewAuctionArtist;
 import Models.Auction;
-import Services.AuctionService;
+import Services.AuctionSystem.AuctionService;
 import Services.User.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

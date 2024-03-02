@@ -1,7 +1,7 @@
 package Controllers.Bid;
 
 import Models.Bid;
-import Services.BidService;
+import Services.AuctionSystem.BidService;
 import Services.User.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

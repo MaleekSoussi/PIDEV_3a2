@@ -1,4 +1,4 @@
-package Services;
+package Services.AuctionSystem;
 
 import java.sql.SQLException;
 import java.util.List;

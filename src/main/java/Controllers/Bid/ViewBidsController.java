@@ -1,7 +1,7 @@
     package Controllers.Bid;
 
     import Models.Bid;
-    import Services.BidService;
+    import Services.AuctionSystem.BidService;
     import javafx.application.Platform;
     import javafx.collections.FXCollections;
     import javafx.collections.ObservableList;

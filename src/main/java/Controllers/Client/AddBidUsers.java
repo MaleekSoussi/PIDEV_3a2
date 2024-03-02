@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import Models.Bid;
-import Services.BidService;
+import Services.AuctionSystem.BidService;
 
 import java.sql.SQLException;
 
