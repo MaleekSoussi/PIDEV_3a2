@@ -67,7 +67,6 @@ public class UpdateOrderController {
             LocalDate date = dateCu.getValue();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Adjust as necessary
             String dateC = date.format(formatter);
-            String status = order.getStatus(); // Get the status from the existing order object
 
             // Update the order using the service
             Order updatedOrder = new Order(totalP, dateC, idB);

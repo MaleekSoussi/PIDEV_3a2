@@ -86,8 +86,13 @@ public class FronClientController {
 
     @FXML
     void artworksbutton(ActionEvent event) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Art/addart.fxml");}
+        else
+            us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
 
-    }
+
+}
 
     @FXML
     void auctionbutton(ActionEvent event) {
@@ -106,7 +111,7 @@ public class FronClientController {
 
     @FXML
     void eventbutton(ActionEvent event) {
-
+        us.switchView(MainFX.primaryStage, "/Events/FrontOrBack.fxml");
     }
 
 
@@ -128,8 +133,8 @@ public class FronClientController {
     @FXML
     void initialize() throws SQLException, IOException {
 
-        artGrid.setHgap(-20); // Horizontal gap between items
-        artGrid.setVgap(-20); // Vertical gap between items
+        artGrid.setHgap(30); // Horizontal gap between items
+        artGrid.setVgap(30); // Vertical gap between items
         artItems.setContent(artGrid);
         artItems.setFitToWidth(true);
         RowConstraints rowConstraints = new RowConstraints();

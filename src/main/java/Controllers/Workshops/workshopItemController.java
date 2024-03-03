@@ -36,13 +36,14 @@ public class workshopItemController
 
     @FXML
     private Label resourceswi;
-
+    @FXML
+    private Button qr;
     @FXML
     private Button deleteworkshopbuttonF;
 
     @FXML
     private Button editworkshopbuttonF;
-
+    public static Workshop o;
     public Workshop getSelectedWorkshop()
     {
         return workshop;
@@ -93,6 +94,21 @@ public class workshopItemController
             catch (IOException e)
             {
                 e.printStackTrace();  // Add this line to print the exception details
+            }
+        });
+        qr.setOnAction(event ->{
+            try
+            {
+                o=getSelectedWorkshop();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Workshops/detailworkshopitem.fxml"));
+                Parent root = loader.load();
+                DetailworkshopitemController detailworkshopitemController = loader.getController();
+                detailworkshopitemController.setCurrentWorkshop(workshop);
+                detailworkshopitemController.setInstancew(workshop);
+
+                namewI.getScene().setRoot(root);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         });
     }

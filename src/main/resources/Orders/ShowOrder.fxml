@@ -23,13 +23,20 @@
                   <TableColumn fx:id="idOcol" prefWidth="97.5999755859375" text="Order N°" />
                   <TableColumn fx:id="pricecol" prefWidth="124.80000305175781" text="Total Price" />
                   <TableColumn fx:id="datecol" prefWidth="156.79998779296875" text="Date" />
-                  <TableColumn fx:id="deleteCol" minWidth="80" prefWidth="152.800048828125" text="Delete" />
+                  <TableColumn fx:id="deleteCol" minWidth="80" prefWidth="152.800048828125">
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/delete_white.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
                </columns>
                <effect>
                   <Glow />
                </effect>
             </TableView>
-            <Text layoutX="93.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your orders" wrappingWidth="259.97064208984375">
+            <Text layoutX="93.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="259.97064208984375">
                <font>
                   <Font name="Garamond" size="32.0" />
                </font>
@@ -43,7 +50,7 @@
                <graphic>
                   <ImageView fitHeight="44.0" fitWidth="40.0">
                      <image>
-                        <Image url="@../../../../../Downloads/image/image/pdf.png" />
+                        <Image url="@../images/pdf.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -59,7 +66,7 @@
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0">
                      <image>
-                        <Image url="@../../../../../Downloads/image/image/stat.png" />
+                        <Image url="@../images/stat.png" />
                      </image>
                   </ImageView>
                </graphic></Button>

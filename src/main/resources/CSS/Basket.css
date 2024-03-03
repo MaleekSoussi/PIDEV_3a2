@@ -1,6 +1,6 @@
 /* General Styles */
 .root {
-  -fx-background-color: #f8f4e1; /* Background color for the application */
+  -fx-background-color: #ffffff; /* Background color for the application */
 }
 
 /* Apply a general style for all Text nodes */

@@ -8,6 +8,14 @@ public class Order {
     private String status;
     private int idB; // Add idB field
     private int Userid;
+
+    public Order(int idO, float totalP, String dateC, int idB) {
+        this.idO = idO;
+        this.totalP = totalP;
+        this.dateC = dateC;
+        this.idB = idB;
+    }
+
     public int getUserid() {
         return Userid;
     }

@@ -60,13 +60,12 @@ public class OrderService implements IService<Order> {
 
     @Override
     public void update(Order order, int idO) throws SQLException {
-        String sql = "UPDATE `order` SET totalP=?, dateC=?, status=?, idB=? WHERE idO=?";
+        String sql = "UPDATE `order` SET totalP=?, dateC=?, idB=? WHERE idO=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setFloat(1, order.getTotalP());
             ps.setString(2, order.getDateC());
-            ps.setString(3, order.getStatus());
-            ps.setInt(4, order.getIdB());
-            ps.setInt(5, idO);
+            ps.setInt(3, order.getIdB());
+            ps.setInt(4, idO);
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Updating order failed, no rows affected.");
@@ -100,11 +99,10 @@ public class OrderService implements IService<Order> {
                 int idO = rs.getInt("idO");
                 float totalP = rs.getFloat("totalP");
                 String dateC = rs.getString("dateC");
-                String status = rs.getString("status");
                 int idB = rs.getInt("idB");
 
 
-                Order order = new Order(totalP, dateC, idB);
+                Order order = new Order(idO,totalP, dateC, idB);
                 // Assuming you have a method to set basket details in Order class
                 orders.add(order);
             }
@@ -157,7 +155,19 @@ public class OrderService implements IService<Order> {
         } // try-with-resources will auto close ps and rs even if an exception is thrown
         return ordersList;
     }
+    public int getNumberOfOrdersByUser(int userId) {
+        String query = "SELECT COUNT(*) AS orderCount FROM `order` WHERE Userid = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("orderCount");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
 }
-
-

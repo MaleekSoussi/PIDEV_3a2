@@ -97,7 +97,7 @@ public class PaymentController {
             Platform.runLater(() -> {
                 try {
                     // Load the FXML for the home page
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("FronClient.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Art/FronClient.fxml"));
                     Parent root = loader.load();
 
                     // Get the stage from the event

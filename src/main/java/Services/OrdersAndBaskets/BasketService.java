@@ -1,3 +1,4 @@
+
 package Services.OrdersAndBaskets;
 
 import Models.Basket;
@@ -119,6 +120,47 @@ public class BasketService implements IService<Basket> {
         }
         return false;
     }
+    public void applyLoyaltyDiscount(int idB) {
+        try {
+            Basket basket = getBasketById(idB);
+            int userId = UserService.currentlyLoggedInUser.getUserID(); // Assuming you have access to the currently logged-in user
+            int numberOfOrders = new OrderService().getNumberOfOrdersByUser(userId);
+
+            float discountRate = 0.0f;
+            if (numberOfOrders >= 10) {
+                discountRate = 0.15f; // 15% discount
+            } else if (numberOfOrders >= 5) {
+                discountRate = 0.10f; // 10% discount
+            }
+
+            if (discountRate > 0) {
+                float newTotalPrice = basket.getTotalPrice() * (1 - discountRate);
+                basket.setTotalPrice(newTotalPrice);
+                update(basket, basket.getIdB()); // Assuming you have a method to update the basket
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public Basket getBasketByUserId(int userId) {
+        String query = "SELECT * FROM basket WHERE Userid = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int idB = rs.getInt("idB");
+                    int quantity = rs.getInt("quantity");
+                    float totalPrice = rs.getFloat("total_price");
+                    return new Basket(idB, quantity, totalPrice, userId);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 
 

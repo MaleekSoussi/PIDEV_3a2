@@ -137,6 +137,15 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Text>
+            <Button layoutX="505.0" layoutY="421.0" mnemonicParsing="false" onAction="#applyLoyaltyDiscount" prefHeight="42.0" prefWidth="52.0">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-fidelite.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
 
          </children>
       </AnchorPane>

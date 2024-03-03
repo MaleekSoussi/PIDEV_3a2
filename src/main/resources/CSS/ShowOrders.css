@@ -1,8 +1,8 @@
 /* Table styles for a professional and modern look */
 .root {
-    -fx-background-color: #f8f4e1; /* Your chosen background color */
+    -fx-background-color: #ffffff; /* Your chosen background color */
 }AnchorPane {
-     -fx-background-color: #f8f4e1; /* Light background for better readability */
+     -fx-background-color: #ffffff; /* Light background for better readability */
  }
 .image-view {
     -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 2); /* Shadow effect for images */
@@ -88,3 +88,72 @@
     -fx-font-family: "Verdana"; /* Updated font family */
     -fx-font-size: 14px;
 }
+.choice-box {
+    -fx-padding: 6px;
+    -fx-font-size: 14px;
+    -fx-border-color: #f8f4e1;
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px; /* Match the border radius for background */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5); /* Shadow effect for depth */
+}
+.choice-box {
+    -fx-padding: 3px; /* Reduced padding for a thinner look */
+    -fx-font-size: 14px;
+    -fx-border-color: #f8f4e1;
+    -fx-border-radius: 7px; /* Rounded corners */
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px; /* Match the border radius for background */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 10, 0, 0, 5); /* Subtle shadow effect for depth */
+}
+
+.choice-box .cell {
+    -fx-padding: 3px; /* Reduced padding for dropdown items */
+    -fx-font-size: 14px;
+}
+
+.choice-box:focused {
+    -fx-border-color: #C9A43D; /* Highlight color when the field is focused */
+}
+
+.choice-box .list-view {
+    -fx-background-color: #ffffff; /* Background color of the dropdown list */
+    -fx-background-insets: 0;
+    -fx-background-radius: 5px; /* Rounded corners for the dropdown list */
+}
+
+.choice-box .list-cell {
+    -fx-border-color: transparent; /* Hide border for list cells */
+    -fx-background-color: transparent; /* Transparent background for list cells */
+}
+
+.choice-box:hover {
+    -fx-border-color: #C9A43D; /* Slight highlight on hover */
+}
+
+.choice-box:showing {
+    -fx-background-color: #f1f8ff; /* Lighter color when list is showing */
+}
+
+.choice-box .arrow-button .arrow {
+    -fx-background-color: #C9A43D; /* Arrow color to match the theme */
+}.text-field {
+     -fx-padding: 5px;
+     -fx-font-size: 14px;
+     -fx-border-color: #f8f4e1;
+     -fx-border-radius: 10px; /* Make corners rounder */
+     -fx-background-color: #ffffff;
+     -fx-background-radius: 10px; /* Match the border radius */
+     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5); /* Shadow effect for depth */
+ }
+
+.text-field:focused {
+    -fx-border-color: #C9A43D; /* Highlight color when the field is focused */
+    -fx-background-color: #f1f8ff;
+    -fx-border-width: 2; /* Border width when focused */
+}
+.text {
+    -fx-fill: #0f0a3d;
+    -fx-font-size: 16px;
+}
+

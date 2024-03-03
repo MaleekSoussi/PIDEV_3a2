@@ -19,11 +19,9 @@ TableView {
 
 /* Style for Button */
 .button {
-    -fx-background-color: #778DA9; /* Background color */
-    -fx-text-fill: #FFFFFF; /* Text color */
+    -fx-background-color:transparent; /* Background color */
     -fx-font-family: "Verdana"; /* Font family */
     -fx-font-size: 16px; /* Adjust font size here */
-    -fx-border-color: #415A77; /* Border color */
     -fx-border-width: 1; /* Border width */
     -fx-background-radius: 5; /* Rounded corners for the button */
     -fx-border-radius: 5; /* Border radius should match the background radius */
@@ -45,11 +43,7 @@ TableView {
     -fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 2); /* Shadow effect for images */
 }
 
-/* Hover effect for Button */
-.button:hover {
-    -fx-background-color: rgba(19, 56, 111, 0.5); /* Hover effect with a semi-transparent dark blue color */
-    -fx-text-fill: #FFFFFF; /* Text color on hover */
-}
+
 
 /* Focused TextField styles */
 .text-field:focused {

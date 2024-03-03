@@ -91,7 +91,7 @@
                            <children>
                               <HBox prefHeight="141.0" prefWidth="840.0">
                                  <children>
-                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="142.0" prefWidth="846.0" stylesheets="@../Auction%20Clients/Stylesheet.css">
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="142.0" prefWidth="846.0" stylesheets="@../Auction Clients/Stylesheet.css">
                                        <children>
                                           <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="769.0">
                                              <children>

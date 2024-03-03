@@ -1,9 +1,15 @@
 package Controllers.Art;
-
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import Models.art;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -12,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -20,14 +27,17 @@ import javafx.util.Duration;
 import Services.Art.ArtServices;
 import Services.Art.CategoryServices;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
-
 public class ShowMoreController {
+
     private static int idA;
-    private boolean isPlayed = false ;
+    private art currentArt; // Assuming this is where you store the current art instance
+
+    private boolean isPlayed = false;
     @FXML
     private Label lbl_duration;
 
@@ -70,7 +80,8 @@ public class ShowMoreController {
     @FXML
     private MediaView mv_video;
 
-
+    @FXML
+    private HBox qrCodeImgModel;
     @FXML
     private Label CATEGORYA;
 
@@ -82,6 +93,8 @@ public class ShowMoreController {
 
     @FXML
     private Label HEIGHTA;
+    @FXML
+    private ImageView qrCodeImg;
 
     @FXML
     private Label MATERIALSA;
@@ -109,9 +122,9 @@ public class ShowMoreController {
     @FXML
     private AnchorPane apid;
     private ShowMoreController showMoreController;
-    public void showMoreController(ShowMoreController showMoreController)
-    {
-        this.showMoreController  = showMoreController ;
+
+    public void showMoreController(ShowMoreController showMoreController) {
+        this.showMoreController = showMoreController;
     }
 
     public void setDataa(art art) {
@@ -137,6 +150,8 @@ public class ShowMoreController {
         // Set the category name in the label
         CatText.setText(categoryName);
         pathvideo.setText(art.getVideo());
+        setCurrentArt(art);
+
     }
 
     @FXML
@@ -161,7 +176,7 @@ public class ShowMoreController {
             titleText.getScene().setRoot(root);
 
         } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
+            System.out.println("error" + e.getMessage());
         }
     }
 
@@ -188,7 +203,7 @@ public class ShowMoreController {
                 mediaPlayer.currentTimeProperty().addListener((((observable, oldValue, newValue) -> {
                     slider.setValue(newValue.toSeconds());
                 })));
-                mediaPlayer.setOnReady(() ->{
+                mediaPlayer.setOnReady(() -> {
                     Duration totalDuration = media.getDuration();
                     slider.setValue(totalDuration.toSeconds());
                 });
@@ -203,7 +218,7 @@ public class ShowMoreController {
                         lbl_duration.setText("Duration : " + slider.getValue() + " / " + media.getDuration().toString());
                     })));
 
-                    mediaPlayer.setOnReady(() ->{
+                    mediaPlayer.setOnReady(() -> {
                         Duration totalDuration = media.getDuration();
                         slider.setValue(totalDuration.toSeconds());
                         lbl_duration.setText("Duration : 00 / " + totalDuration);
@@ -218,7 +233,7 @@ public class ShowMoreController {
                         lbl_duration.setText("Duration : " + slider.getValue() + " / " + media.getDuration().toString());
                     })));
 
-                    mediaPlayer.setOnReady(() ->{
+                    mediaPlayer.setOnReady(() -> {
                         Duration totalDuration = media.getDuration();
                         slider.setValue(totalDuration.toSeconds());
                         lbl_duration.setText("Duration : " + slider.getValue() + " / " + media.getDuration().toString());
@@ -232,7 +247,39 @@ public class ShowMoreController {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    void CodeQr(MouseEvent event) {
+        if (currentArt != null) {
+            System.out.println("ID art : " + currentArt.getId_art());
+            String phoneNumber = "50797955"; // The phone number to call
+            String phoneNumberUri = "tel:" + phoneNumber;
+
+            String text = phoneNumberUri; // Just the phone number URI
+
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BitMatrix bitMatrix;
+            try {
+                bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 200, 200);
+                BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
+                ImageView qrCodeImg = (ImageView) ((Node) event.getSource()).getScene().lookup("#qrCodeImg");
+                qrCodeImg.setImage(SwingFXUtils.toFXImage(bufferedImage, null));
+                HBox qrCodeImgModel = (HBox) ((Node) event.getSource()).getScene().lookup("#qrCodeImgModel");
+                qrCodeImgModel.setVisible(true);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No art selected."); // or handle this case appropriately
+        }
     }
+
+    public void setCurrentArt(art currentArt) {
+        this.currentArt = currentArt;
+    }
+
+
+}
 
 
 

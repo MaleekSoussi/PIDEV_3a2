@@ -4,7 +4,6 @@ import Models.Basket;
 import Services.OrdersAndBaskets.BasketService;
 import Services.OrdersAndBaskets.OrderService;
 import Services.User.UserService;
-import Test.MainFX;
 import Utils.EmailSend;
 import jakarta.mail.MessagingException;
 import javafx.event.ActionEvent;
@@ -14,9 +13,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AddQuantityBasketController {
     private OrderService OrderService = new OrderService();
@@ -152,33 +152,31 @@ public class AddQuantityBasketController {
     }
 
     private String generateEmailContent(int quantity, float totalPrice) {
-        // Host your icon on a web server and use the public URL here
+        try (InputStream inputStream = this.getClass().getResourceAsStream("/CSS/emailStyle.html")) {
+            if (inputStream == null) {
+                throw new IOException("Email template file not found.");
+            }
 
+            String htmlContent = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                    .lines().collect(Collectors.joining("\n"));
 
-        StringBuilder htmlContent = new StringBuilder();
-        htmlContent.append("<!DOCTYPE html>");
-        htmlContent.append("<html>");
-        htmlContent.append("<head>");
-        htmlContent.append("<title>Shared Basket</title>");
-        htmlContent.append("</head>");
-        htmlContent.append("<body style=\"font-family: 'Arial', sans-serif; color: #333; background-color: #f4f4f4; padding: 20px; margin: 0; box-sizing: border-box;\">");
+            // Define the table with dynamic content
+            String dynamicTable = "<table style=\"width: 100%; border-collapse: collapse; margin-top: 20px;\">" +
+                    "<tr><th>Quantity</th><th>Total Price</th></tr>" +
+                    "<tr><td>" + quantity + "</td><td>" + String.format("%.2f", totalPrice) + "</td></tr>" +
+                    "</table>";
 
-        // Inline the styles for the h2 element
-        htmlContent.append("<h2 style=\"color: #173e80; text-align: center; padding: 20px; margin-bottom: 20px;\">");
-        htmlContent.append("<img src=\"").append("\" alt=\"Basket\" style=\"vertical-align: middle; width: 24px; height: 24px; margin-right: 10px;\">"); // Icon next to the text
-        htmlContent.append("Your basket</h2>");
+            // Find the closing tag of the last <span> that is within the <h1>
+            htmlContent = htmlContent.replaceFirst("(?i)(<h1 class=\"v-text-align\"[^>]*>(?:<span[^>]*>)*.*?</span></span></span></span></span></span></span></h1>)", "$1" + dynamicTable);
 
-        // Inline the styles for the table and its children
-        htmlContent.append("<table style=\"width: 80%; margin: 0 auto; border-collapse: collapse;\">");
-        htmlContent.append("<tr><th style=\"background-color: #173e80; color: #fff; padding: 15px; text-align: left; border-radius: 10px 10px 0 0;\">Quantity</th><th style=\"background-color: #173e80; color: #fff; padding: 15px; text-align: left; border-radius: 10px 10px 0 0;\">Total Price</th></tr>");
-        htmlContent.append("<tr><td style=\"padding: 15px; border: 1px solid #ccc;\">").append(quantity).append("</td><td style=\"padding: 15px; border: 1px solid #ccc;\">").append(totalPrice).append("</td></tr>");
-        htmlContent.append("</table>");
-
-        htmlContent.append("</body>");
-        htmlContent.append("</html>");
-
-        return htmlContent.toString();
+            return htmlContent;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to generate email content.";
+        }
     }
+
+
 
 
 
@@ -207,36 +205,40 @@ public class AddQuantityBasketController {
             return defaultValue; // Return default value if parsing fails
         }
     }
+    @FXML
+    void applyLoyaltyDiscount(ActionEvent event) {
+        try {
+            // Retrieve the currently logged-in user ID
+            int userId = UserService.currentlyLoggedInUser.getUserID();
+
+            // Check the number of orders to determine if a discount should be applied
+            int numberOfOrders = OrderService.getNumberOfOrdersByUser(userId);
+            if (numberOfOrders >= 5) {
+                // Retrieve the latest basket ID for the user
+                Basket basket = basketService.getBasketByUserId(userId);
+                int idB = basket.getIdB();
+                // Apply the loyalty discount to the basket
+                basketService.applyLoyaltyDiscount(idB);
+
+                // Retrieve the updated basket from the database
+                Basket updatedBasket = basketService.getBasketById(idB);
+
+                // Update the UI with the new total price after discount
+                totalPriceS.setText(String.format("%.2f", updatedBasket.getTotalPrice()));
+
+                // Display success message
+                showInfoAlert("Loyalty discount applied successfully.");
+            } else {
+                // Inform the user that they do not have enough orders to qualify for a discount
+                showErrorAlert("You need to have at least 5 orders to qualify for a loyalty discount.");
+            }
+        } catch (Exception e) {
+            // Display error message if something goes wrong
+            showErrorAlert("Failed to apply loyalty discount: " + e.getMessage());
+        }
+    }
+
 
     public void homebutton(ActionEvent actionEvent) {
-      UserService us = new UserService();
-        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
-    /*public void applyLoyaltyDiscount(int userId, int basketId) {
-        Basket basket = basketService.findById(basketId); // Supposons que cette méthode récupère le panier par son ID
-        float discountRate = calculateDiscountRate(userId);
-
-        float newTotalPrice = basket.getTotalPrice() * (1 - discountRate);
-        basket.setTotalPrice(newTotalPrice);
-        basketService.update(basket); // Supposons que cette méthode met à jour le panier avec le nouveau prix total
-
-        System.out.println("Une réduction de " + (discountRate * 100) + "% a été appliquée. Nouveau total: " + newTotalPrice);
-    }
-
-    /**
-     * Calcule le taux de réduction basé sur l'historique des commandes de l'utilisateur.
-     * @param userId Identifiant de l'utilisateur
-     * @return Taux de réduction
-
-
-    private float calculateDiscountRate(int userId) {
-        int numberOfOrders = OrderService.getNumberOfOrdersByUser(userId); // Implémentez cette méthode dans OrderService
-        if (numberOfOrders >= 10) {
-            return 0.15f; // 15% de réduction après 10 commandes
-        } else if (numberOfOrders >= 5) {
-            return 0.10f; // 10% de réduction après 5 commandes
-        }
-        return 0.0f; // Pas de réduction pour moins de 5 commandes
-    }*/
 }
-

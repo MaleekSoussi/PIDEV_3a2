@@ -4,6 +4,7 @@ import Models.Order;
 import Services.OrdersAndBaskets.BasketService;
 import Services.OrdersAndBaskets.OrderService;
 import Services.User.UserService;
+import Utils.EmailSend;
 import jakarta.mail.MessagingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,13 +13,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import Utils.EmailSend;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 
 public class AddOrderController {
@@ -59,7 +60,7 @@ public class AddOrderController {
 
     @FXML
     void addButton(ActionEvent event) {
-      int  Userid= UserService.currentlyLoggedInUser.getUserID();
+        int  Userid= UserService.currentlyLoggedInUser.getUserID();
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate date = dateCA.getValue(); // Get the LocalDate directly from DatePicker
@@ -90,14 +91,20 @@ public class AddOrderController {
 
 
             // Assuming you have a method to add the order in OrderService
-             orderService.create(newOrder);
+            orderService.create(newOrder);
             System.out.println("Debug: idB in Order object = " + newOrder.getIdB());
 
             // Send email notification
             String toEmail = "nourzghal5@gmail.com"; // Replace with actual recipient email
             String subject = "Order Confirmation";
-            String content = "Your order has been successfully placed. Thank you for your purchase!";
-            EmailSend.MailSender(toEmail, subject, content); // Call MailSender to send the email
+            String TP = "Your order has been successfully placed. Thank you for your purchase!";
+
+
+            String htmlContents = getHtmlContent(TP); // Generate HTML content with dynamic part
+
+// Now call MailSender with the generated HTML content
+            EmailSend.MailSender(toEmail, subject, htmlContents); // Call MailSender to send the email with HTML content
+
 
             showInfoAlert("Order added successfully");
 
@@ -111,7 +118,27 @@ public class AddOrderController {
             showErrorAlert("Failed to send confirmation email.");
         } // No need for an else after catch blocks
     }
+    public static String getHtmlContent(String TP) {
+        try {
+            // Adjust the path according to where your template is located in your project
+            InputStream inputStream = EmailSend.class.getResourceAsStream("/CSS/EmailconfirmOrder.html");
+            if (inputStream == null) {
+                throw new IOException("Failed to load email template. File not found.");
+            }
 
+            String htmlContents;
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                htmlContents = reader.lines().collect(Collectors.joining("\n"));
+            }
+
+            // Replace the placeholder {TP} with the actual content
+            htmlContents = htmlContents.replace("{TP}", TP);
+            return htmlContents;
+        } catch (IOException e) {
+            // Log the error or display a message to the user
+            throw new RuntimeException("Failed to load email template: " + e.getMessage(), e);
+        }
+    }
 
     @FXML
     void returnA(ActionEvent event) {
@@ -206,4 +233,4 @@ public class AddOrderController {
         alert.showAndWait();
     }
 
-        }
+}

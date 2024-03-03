@@ -7,33 +7,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="353.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Art.ItemsArtController">
+<AnchorPane prefHeight="353.0" prefWidth="405.0" stylesheets="@STYLESITEMS.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Art.ItemsArtController">
    <children>
-      <AnchorPane fx:id="apid" layoutX="2.0" layoutY="11.0" prefHeight="342.0" prefWidth="425.0" styleClass="search-button" stylesheets="@../styles/css/styles.css">
+      <AnchorPane fx:id="apid" layoutX="2.0" layoutY="11.0" prefHeight="342.0" prefWidth="425.0">
          <children>
-            <Label fx:id="TITLE" alignment="CENTER" layoutX="282.0" layoutY="76.0" prefHeight="42.0" prefWidth="142.0" stylesheets="@../styles/css/styles.css" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="282.0" AnchorPane.topAnchor="76.0">
+            <Label fx:id="TITLE" alignment="CENTER" layoutX="274.0" layoutY="78.0" prefHeight="42.0" prefWidth="152.0" textAlignment="CENTER" AnchorPane.leftAnchor="273.0" AnchorPane.topAnchor="77.0">
                <font>
                   <Font name="Britannic Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="PRICE" layoutX="277.0" layoutY="169.0" prefHeight="42.0" prefWidth="152.0" stylesheets="@../styles/css/styles.css" textFill="WHITE">
+            <Label fx:id="PRICE" layoutX="271.0" layoutY="157.0" prefHeight="42.0" prefWidth="152.0" textFill="WHITE">
                <font>
                   <Font name="Britannic Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="361.0" layoutY="180.0" text="DT" textFill="WHITE">
+            <Label layoutX="380.0" layoutY="158.0" prefHeight="40.0" prefWidth="43.0" text="DT" textFill="WHITE">
                <font>
-                  <Font name="Cambria" size="16.0" />
+                  <Font name="Cambria" size="11.0" />
                </font>
             </Label>
-            <Label fx:id="CATEGORY" layoutX="261.0" layoutY="241.0" prefHeight="42.0" prefWidth="162.0" stylesheets="@../styles/css/styles.css" textFill="WHITE">
+            <Label fx:id="CATEGORY" layoutX="271.0" layoutY="241.0" prefHeight="42.0" prefWidth="152.0" textFill="WHITE">
                <font>
                   <Font name="Britannic Bold" size="18.0" />
                </font>
             </Label>
             <Button fx:id="showmore" layoutX="79.0" layoutY="283.0" mnemonicParsing="false" onAction="#showmore" prefHeight="59.0" prefWidth="67.0" styleClass="transparent" stylesheets="@../styles/css/styles.css">
                <graphic>
-                  <ImageView fx:id="moreshow" fitHeight="42.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" styleClass="transparent">
+                  <ImageView fx:id="moreshow" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons8-plus-64.png" />
                      </image>

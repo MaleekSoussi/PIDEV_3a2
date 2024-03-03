@@ -235,5 +235,14 @@
          </graphic>
       </Button>
       <TextField fx:id="pathVideo" layoutX="13.0" layoutY="542.0" prefWidth="235.0" promptText="Path Video" styleClass="search-button" stylesheets="@../styles/css/styles.css" />
+      <Button layoutX="764.0" layoutY="92.0" mnemonicParsing="false" onAction="#excel">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/etiquette-de-prix.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

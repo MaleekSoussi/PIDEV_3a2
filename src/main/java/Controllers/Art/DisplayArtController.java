@@ -1,20 +1,22 @@
 package Controllers.Art;
 
+import Models.art;
+import Models.category;
+import Services.Art.ArtServices;
+import Services.Art.CategoryServices;
 import Services.User.UserService;
 import Test.MainFX;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import Models.art;
-import Models.category;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.itextpdf.text.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,8 +30,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import Services.Art.ArtServices;
-import Services.Art.CategoryServices;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -506,6 +508,31 @@ public class DisplayArtController {
             System.out.println(e.getMessage());
 
         }
+    }
+    @FXML
+    void excel(ActionEvent event) throws IOException {
+
+        ExcelHandler handler = new ExcelHandler();
+        String filePath = "art.xlsx";
+        handler.writeExcelFile(filePath);
+        try {
+            handler.readExcelFile(filePath);
+            Image originalImage = new Image(String.valueOf(getClass().getResource("/images/success.png")));
+            double targetWidth = 50; // Set the desired width
+            double targetHeight = 50; // Set the desired height
+            Image resizedImage = new Image(originalImage.getUrl(), targetWidth, targetHeight, true, true);
+            Notifications notification = Notifications.create();
+            notification.graphic(new ImageView(resizedImage));
+            notification.text("Fichier Excel est enregistré");
+            notification.title("Succés");
+            notification.hideAfter(Duration.seconds(4));
+            notification.position(Pos.BOTTOM_RIGHT);
+            notification.darkStyle();
+            notification.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
     public TextField getPathVideo()
     {

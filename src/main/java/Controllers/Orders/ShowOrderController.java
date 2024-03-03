@@ -222,7 +222,8 @@ public class ShowOrderController {
                 title.setSpacingBefore(50); // Ajouter une marge avant le titre pour l'éloigner de l'image
                 title.setSpacingAfter(20);
                 document.add(title);
-                String imagePath = "C://Users//zghal//IdeaProjects//Basket FONCTIONNELLE - Copie//src//main//resources//CSS//logo.png"; // Update this with the path to your image
+                //Reminder to change this in every pc this is wrong !!!!
+                String imagePath = "C:\\xampp\\htdocs\\image\\logo.png"; // Update this with the path to your image
                 Image image = Image.getInstance(imagePath);
                 // Positionner l'image en haut à gauche
                 image.setAbsolutePosition(10, document.getPageSize().getHeight() -80);

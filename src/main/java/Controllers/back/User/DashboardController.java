@@ -251,7 +251,7 @@ public class DashboardController {
                 addTableHeader(table, "ID", "First Name", "Last Name", "Email", "Role", "Status");
                 addTableContent(table, new UserService().read());
                 document.add(table);
-
+                //Remminder to change this to C:\xampp\htdocs\image\xyellow.png
                 // Add logo at the bottom center of the page
                 String imagePath = "D:\\downloaaaad\\PIDEV_3a2-User_management\\PIDEV_3a2-User_management\\src\\main\\resources\\styles\\xyellow.png";
                 Image image = Image.getInstance(imagePath);
