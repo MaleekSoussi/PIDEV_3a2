@@ -9,10 +9,10 @@ import entities.category;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.itextpdf.text.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,6 +26,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import services.ArtServices;
 import services.CategoryServices;
 
@@ -508,6 +510,33 @@ public class DisplayArtController {
     public TextField getPathVideo()
     {
         return pathVideo;
+    }
+
+
+    @FXML
+    void excel(ActionEvent event) throws IOException {
+
+        ExcelHandler handler = new ExcelHandler();
+        String filePath = "art.xlsx";
+        handler.writeExcelFile(filePath);
+        try {
+            handler.readExcelFile(filePath);
+            Image originalImage = new Image(String.valueOf(getClass().getResource("/images/success.png")));
+            double targetWidth = 50; // Set the desired width
+            double targetHeight = 50; // Set the desired height
+            Image resizedImage = new Image(originalImage.getUrl(), targetWidth, targetHeight, true, true);
+            Notifications notification = Notifications.create();
+            notification.graphic(new ImageView(resizedImage));
+            notification.text("Fichier Excel est enregistré");
+            notification.title("Succés");
+            notification.hideAfter(Duration.seconds(4));
+            notification.position(Pos.BOTTOM_RIGHT);
+            notification.darkStyle();
+            notification.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 
