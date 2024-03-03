@@ -17,7 +17,7 @@
    <children>
       <HBox layoutY="73.0" prefHeight="400.0" prefWidth="681.0">
          <children>
-            <AnchorPane fx:id="apid" prefHeight="473.0" prefWidth="694.0" styleClass="search-button" stylesheets="@css/styles.css">
+            <AnchorPane fx:id="apid" minHeight="500.0" prefHeight="553.0" prefWidth="717.0" styleClass="search-button" stylesheets="@css/styles.css">
                <children>
                   <Text fx:id="titleText" fill="WHITE" layoutX="258.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="139.19998779296884">
                      <font>
@@ -123,6 +123,14 @@
                      </children>
                   </HBox>
                   <Slider fx:id="slider" layoutX="235.0" layoutY="316.0" onMousePressed="#sliderPressed" prefHeight="14.0" prefWidth="481.0" />
+                  <HBox fx:id="qrCodeImgModel" layoutX="24.0" layoutY="332.0" prefHeight="126.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="qrCodeImg" fitHeight="139.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <Button layoutX="274.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#CodeQr" styleClass="add-btn" stylesheets="@css/styles.css" text="QRCode" />
+                  <Label layoutX="24.0" layoutY="477.0" prefHeight="18.0" prefWidth="250.0" text=" get your QRCode to call for more details" />
+
                </children>
             </AnchorPane>
          </children>
