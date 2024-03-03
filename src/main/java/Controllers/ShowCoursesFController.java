@@ -119,7 +119,6 @@ public class ShowCoursesFController
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/courseItem.fxml"));
                 coursenode = loader.load();
                 courseItemController itemController = loader.getController();
-
                 itemController.setData(courses);
             }
             catch (IOException e)

@@ -43,15 +43,22 @@ public class workshopItemController
     @FXML
     private Button editworkshopbuttonF;
 
+
+    @FXML
+    private Button qr;
+    public static Workshop o;
+
     public Workshop getSelectedWorkshop()
     {
         return workshop;
     }
+    public DetailworkshopitemController detailworkshopitemController;
 
     public void setParent(ShowWorkshopsFController showWorkshopsFController)
     {
         this.showWorkshopsFController=showWorkshopsFController;
     }
+
 
 
     public void setDataw(Workshop workshop,ShowWorkshopsFController showWorkshopsFController)
@@ -95,5 +102,21 @@ public class workshopItemController
                 e.printStackTrace();  // Add this line to print the exception details
             }
         });
+        qr.setOnAction(event ->{
+            try
+            {
+                o=getSelectedWorkshop();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailworkshopitem.fxml"));
+                Parent root = loader.load();
+                DetailworkshopitemController detailworkshopitemController = loader.getController();
+                detailworkshopitemController.setCurrentWorkshop(workshop);
+                detailworkshopitemController.setInstancew(workshop);
+
+                namewI.getScene().setRoot(root);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
     }
 }

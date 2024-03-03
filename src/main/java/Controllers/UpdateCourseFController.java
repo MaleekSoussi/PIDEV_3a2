@@ -98,9 +98,10 @@ public class UpdateCourseFController {
                 selectedCourse.setType(typecFU.getText());
                 selectedCourse.setPriceC(Float.parseFloat(pricecFU.getText()));
                 selectedCourse.setDescriptionC(descriptioncFU.getText());
-                selectedCourse.setImage_path(imageid.getText());
+                String newPath = imageid.getText();
+                selectedCourse.setImage_path(newPath);
+                courseItemController.updateImageFromUpdateCourse(new Image(newPath));
                 cs.update(selectedCourse);
-
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setContentText("Course updated successfully ");
@@ -116,7 +117,7 @@ public class UpdateCourseFController {
         }
     }
 
-    public void setInstance(Courses selectedCourseID)
+    public void setInstance(Courses selectedCourseID,courseItemController courseItemController)
     {
         this.selectedCourse = selectedCourseID;
         namecFU.setText(selectedCourseID.getNameC());
@@ -124,10 +125,8 @@ public class UpdateCourseFController {
         typecFU.setText(selectedCourseID.getType());
         pricecFU.setText(String.valueOf(selectedCourseID.getPriceC()));
         imageid.setText(selectedCourseID.getImage_path());
-    }
-
-    public Image getUploadedImage() {
-        return uploadedImage;
+        this.courseItemController =courseItemController;
+        courseItemController.setUpdateCourseFController(this);
     }
 
     private void setSelectedCourse(Courses selectedCourse)

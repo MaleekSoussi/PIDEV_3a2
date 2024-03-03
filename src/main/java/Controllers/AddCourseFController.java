@@ -25,6 +25,8 @@ import javafx.stage.FileChooser;
 
 import javafx.scene.image.ImageView;
 import javafx.embed.swing.SwingFXUtils;
+import nl.captcha.Captcha;
+
 
 public class AddCourseFController
 {
@@ -81,6 +83,8 @@ public class AddCourseFController
 
     private Image uploadedImage;
 
+    private Captcha captcha;
+
     public Image getUploadedImage() {
         return uploadedImage;
     }
@@ -90,7 +94,7 @@ public class AddCourseFController
     {
         setvisibility();
         uploadButton.setOnAction(event -> handleUploadButton());
-        generateCaptcha();
+        captcha = setCaptcha();
     }
     public void setvisibility()
     {
@@ -101,6 +105,21 @@ public class AddCourseFController
         priceempty.setVisible(false);
         imageId.setVisible(false);
         imageView.setVisible(false);
+    }
+
+    public Captcha setCaptcha()
+    {
+        Captcha captchaV = new Captcha.Builder(250, 150)
+                .addText()
+                .addBackground()
+                .addNoise()
+                .addBorder()
+                .build();
+
+        System.out.println(captchaV.getImage());
+        Image image = SwingFXUtils.toFXImage(captchaV.getImage(), null);
+        captchaImageView.setImage(image);
+        return captchaV;
     }
 
     private void handleUploadButton() {
@@ -133,6 +152,8 @@ public class AddCourseFController
             float price = pricecF.getText().isEmpty() ? 0.0f : Float.parseFloat(pricecF.getText().trim());
             String type = typecF.getText().trim();
             String pathimage = imageId.getText().trim();
+            String captchaImagView = captchaInputField.getText().trim();
+
             imageView.setVisible(true);
             if (name.isEmpty())
             {
@@ -163,9 +184,10 @@ public class AddCourseFController
             {
                 return;
             }
-            if (!captchaInputField.getText().equalsIgnoreCase(captchaText))
+            if (!captcha.isCorrect(captchaInputField.getText()))
             {
-                generateCaptcha();
+                captcha = setCaptcha();
+                captchaInputField.setText("");
                 namecF.setText("");
                 descriptioncF.setText("");
                 pricecF.setText("");
@@ -202,8 +224,6 @@ public class AddCourseFController
             System.out.println("error" +e.getMessage());
         }
     }
-
-
     @FXML
     void returncF(ActionEvent event)
     {
@@ -216,123 +236,6 @@ public class AddCourseFController
             System.out.println("error" +e.getMessage());
         }
     }
-
-
-    private void generateCaptcha()
-    {
-        captchaText = generateRandomText(6);
-        Image captchaImage = createCaptchaImage(captchaText);
-        captchaImageView.setImage(captchaImage);
-    }
-
-    private String generateRandomText(int length)
-    {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < length; i++)
-        {
-            sb.append(chars.charAt(random.nextInt(chars.length())));
-        }
-        return sb.toString();
-    }
-
-
-    private Image createCaptchaImage(String text)
-    {
-        int width = 200;
-        int height = 70;
-        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = bufferedImage.createGraphics();
-
-        // Set rendering hints for quality
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-
-        // Custom background
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, width, height);
-
-        // Add complex background noise and shapes
-        drawComplexBackground(g2d, width, height);
-
-        // Randomize the font and color for each character
-        Random random = new Random();
-        Font[] fonts = {new Font("Serif", Font.BOLD, 28), new Font("SansSerif", Font.BOLD, 28),
-                new Font("Monospaced", Font.BOLD, 28), new Font("Dialog", Font.BOLD, 28)};
-
-        // Starting x and y coordinates
-        int x = 10;
-        int y = (height / 2) + 10;
-
-        // Draw each character with different fonts and colors
-        for (char c : text.toCharArray()) {
-            g2d.setColor(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
-            g2d.setFont(fonts[random.nextInt(fonts.length)]);
-
-            // Apply transformations for rotation and translation
-            AffineTransform affineTransform = new AffineTransform();
-            affineTransform.rotate(Math.toRadians(random.nextInt(25) - 12), 0, 0); // Rotate around the origin
-            affineTransform.translate(x, y); // Translate to position the character
-            g2d.setTransform(affineTransform);
-
-            g2d.drawString(String.valueOf(c), 0, 0); // Draw character at the origin
-            x += 30 + random.nextInt(5); // Increment x for the next character
-        }
-
-        // Overlay the text with more noise
-        drawForegroundNoise(g2d, width, height);
-
-        g2d.dispose();
-
-        // Convert the BufferedImage to a JavaFX Image
-        return SwingFXUtils.toFXImage(bufferedImage, null);
-    }
-
-    private void drawComplexBackground(Graphics2D g2d, int width, int height) {
-        Random random = new Random();
-        // Draw random lines
-        for (int i = 0; i < 5; i++) {
-            int x1 = random.nextInt(width);
-            int x2 = random.nextInt(width);
-            int y1 = random.nextInt(height);
-            int y2 = random.nextInt(height);
-            g2d.setColor(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
-            g2d.drawLine(x1, y1, x2, y2);
-        }
-        // Draw random circles
-        for (int i = 0; i < 5; i++) {
-            int x = random.nextInt(width);
-            int y = random.nextInt(height);
-            int radius = random.nextInt(height / 4);
-            g2d.setColor(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256), 50)); // Semi-transparent
-            g2d.fillOval(x, y, radius, radius);
-        }
-        // Draw random bezier curves
-        for (int i = 0; i < 3; i++)
-        {
-            int x1 = random.nextInt(width), y1 = random.nextInt(height);
-            int x2 = random.nextInt(width), y2 = random.nextInt(height);
-            int ctrlX1 = random.nextInt(width), ctrlY1 = random.nextInt(height);
-            int ctrlX2 = random.nextInt(width), ctrlY2 = random.nextInt(height);
-            g2d.setColor(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
-            g2d.setStroke(new BasicStroke(1.5f + random.nextFloat())); // Variable stroke width
-            g2d.draw(new CubicCurve2D.Float(x1, y1, ctrlX1, ctrlY1, ctrlX2, ctrlY2, x2, y2));
-        }
-    }
-
-    private void drawForegroundNoise(Graphics2D g2d, int width, int height) {
-        Random random = new Random();
-        // Draw foreground noise, such as random lines or squiggles over the text
-        g2d.setStroke(new BasicStroke(1));
-        for (int i = 0; i < 2; i++) {
-            int xs = random.nextInt(width), ys = random.nextInt(height);
-            int xe = xs + random.nextInt(width / 4), ye = ys + random.nextInt(height / 4);
-            g2d.setColor(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256), 100)); // Semi-transparent
-            g2d.drawLine(xs, ys, xe, ye);
-        }
-    }
-
 
     @FXML
     void aboutusbutton(ActionEvent event) {

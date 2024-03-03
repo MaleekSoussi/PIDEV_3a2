@@ -75,8 +75,6 @@ public class AddworkshopFController
         durationempty.setVisible(false);
         resourcesempty.setVisible(false);
         captchaincorrect.setVisible(false);
-        //imageId.setVisible(false);
-        //imageView.setVisible(false);
     }
 
     public Captcha setCaptcha()

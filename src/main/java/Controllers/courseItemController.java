@@ -25,7 +25,7 @@ public class courseItemController
     private Courses course;
     public Courses selectedcourse;
     public static int i;
-    UpdateCourseFController controller = new UpdateCourseFController();
+    private UpdateCourseFController updateCourseFController;
     private String imagePath;
     private ShowCoursesFController showCoursesFController;
     public void updateImage(Image image) {
@@ -76,7 +76,13 @@ public class courseItemController
     {
         this.showCoursesFController=showCoursesFController;
     }
+    public void setUpdateCourseFController(UpdateCourseFController updateCourseFController) {
+        this.updateCourseFController = updateCourseFController;
+    }
 
+    public void updateImageFromUpdateCourse(Image image) {
+        imageC.setImage(image);
+    }
 
     public void get_idc(Courses course)
     {
@@ -85,7 +91,6 @@ public class courseItemController
 
     public void setData(Courses course)
     {
-        //this.showWorkshopsFController=showWorkshopsFController;
         nameCI.setText(course.getNameC());
         descCI.setText(course.getDescriptionC());
         priceCI.setText(String.valueOf(course.getPriceC()));
@@ -93,15 +98,13 @@ public class courseItemController
         nbwCI.setText(String.valueOf(course.getNumberW()));
         Image image = new Image(course.getImage_path());
         imageC.setImage(image);
-        double size = 330; // Adjust the size according to your needs
-        double cornerRadius = 30; // Adjust the corner radius for squircle shape
+        double size = 330;
+        double cornerRadius = 30;
 
         Rectangle clip = new Rectangle(size, size);
         clip.setArcWidth(cornerRadius * 2);
         clip.setArcHeight(cornerRadius * 2);
-
         imageC.setClip(clip);
-
         showlistbutton.setOnAction(event -> {
             try
             {
@@ -140,13 +143,8 @@ public class courseItemController
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateCourseF.fxml"));
                 Parent root = loader.load();
                 UpdateCourseFController updateCourseFController = loader.getController();
-                updateCourseFController.setInstance(course);
-
-                // Get the updated image from UpdateCourseFController
-                Image updatedImage = updateCourseFController.getUploadedImage();
-                // Update the image in courseItemController
-                updateImage(updatedImage);
-
+                updateCourseFController.setInstance(course,this);
+                setUpdateCourseFController(updateCourseFController);
                 descCI.getScene().setRoot(root);
             }
             catch (IOException e)
