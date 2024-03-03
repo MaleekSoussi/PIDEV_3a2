@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="287.0" prefWidth="743.0" stylesheets="@../Auction/Stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Client.AddBidUsers">
+<AnchorPane prefHeight="287.0" prefWidth="743.0" stylesheets="@../Auction Admin/Stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Client.AddBidUsers">
     <children>
         <Button layoutX="342.0" layoutY="228.0" mnemonicParsing="false" onAction="#addBid" text="Add Bid" />
         <Label fx:id="errorLabel" layoutX="198.0" layoutY="172.0" prefHeight="40.0" prefWidth="347.0" textFill="blue" />
@@ -22,14 +22,14 @@
                </font></Label>
             </children>
         </StackPane>
-      <HBox alignment="CENTER" layoutX="82.0" layoutY="76.0" prefHeight="65.0" prefWidth="580.0" stylesheets="@../Auction/Stylesheet.css">
+      <HBox alignment="CENTER" layoutX="82.0" layoutY="76.0" prefHeight="65.0" prefWidth="580.0" stylesheets="@../Auction Admin/Stylesheet.css">
          <children>
             <Label prefHeight="25.0" prefWidth="80.0" text="Price:">
                <font>
                   <Font name="Blacksword" size="27.0" />
                </font>
             </Label>
-            <TextField fx:id="amountField" prefHeight="40.0" prefWidth="235.0" promptText="Type here  Price" styleClass="transparent" stylesheets="@../Auction/Stylesheet.css">
+            <TextField fx:id="amountField" prefHeight="40.0" prefWidth="235.0" promptText="Type here  Price" styleClass="transparent" stylesheets="@../Auction Admin/Stylesheet.css">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>

@@ -4,9 +4,12 @@ import Controllers.Artist.ViewAuctionArtist;
 import Controllers.Bid.ViewBidsController;
 import Models.Auction;
 import Services.AuctionSystem.AuctionService;
+import Services.User.UserService;
+import Test.MainFX;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +27,7 @@ import java.util.ResourceBundle;
 
 public class ViewAuctionController implements Initializable {
 
+    public String Logout;
     @FXML
     private TableView<Auction> auctionTableView;
     @FXML
@@ -175,7 +179,7 @@ public class ViewAuctionController implements Initializable {
     private void handleUpdateButton(Auction auction) {
         Auction selectedAuction = auctionTableView.getSelectionModel().getSelectedItem();
         if (selectedAuction != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction/UpdateAuction.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction Admin/UpdateAuction.fxml"));
             Parent updateAuctionParent;
             try {
                 updateAuctionParent = loader.load();
@@ -208,7 +212,7 @@ public class ViewAuctionController implements Initializable {
     @FXML
     private void AddAuctionController() {
         // Load the Add Auction view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction/AddAuction.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction Admin/AddAuction.fxml"));
         Parent addAuctionParent;
         try {
             addAuctionParent = loader.load();
@@ -260,4 +264,12 @@ public class ViewAuctionController implements Initializable {
         viewBidsStage.show();
     }
 
+
+    @FXML
+    void logout(ActionEvent event) {
+        UserService us=new UserService();
+        us.clearRememberedUser();
+        UserService.currentlyLoggedInUser=null;
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
+    }
 }

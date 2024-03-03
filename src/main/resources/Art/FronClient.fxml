@@ -35,7 +35,7 @@
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#artworksbutton" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Art Works" textFill="#878787">
+                  <Button fx:id="Artworksid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#artworksbutton" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Art Works" textFill="#878787">
                      <font>
                         <Font name="Cambria Bold" size="19.0" />
                      </font>
@@ -43,7 +43,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#CoursesBT" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Courses" textFill="#878787">
+                  <Button fx:id="Coursesid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#CoursesBT" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Courses" textFill="#878787">
                      <font>
                         <Font name="Cambria Bold" size="19.0" />
                      </font>
@@ -51,7 +51,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#eventbutton" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Event" textFill="#878787">
+                  <Button fx:id="Eventid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#eventbutton" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Event" textFill="#878787">
                      <font>
                         <Font name="Cambria Bold" size="19.0" />
                      </font>
@@ -59,7 +59,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#auctionbutton" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Auction" textFill="#878787">
+                  <Button fx:id="Auctionid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#auctionbutton" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Auction" textFill="#878787">
                      <font>
                         <Font name="Cambria Bold" size="19.0" />
                      </font>
@@ -67,13 +67,20 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#PaymentBT" styleClass="transparent" stylesheets="@/styles/css/styles.css" text="Payment" textFill="#878787">
+                  <Button fx:id="Paymentid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#PaymentBT" styleClass="transparent" stylesheets="@/styles/css/styles.css" textFill="#878787">
                      <font>
                         <Font name="Cambria Bold" size="19.0" />
                      </font>
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/cart.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
                <padding>

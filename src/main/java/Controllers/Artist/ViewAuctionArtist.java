@@ -4,6 +4,7 @@ import Controllers.Auction.UpdateAuctionController;
 import Controllers.Client.ViewBidUsers;
 import Models.Auction;
 import Services.AuctionSystem.ArtistService;
+import Services.AuctionSystem.AuctionService;
 import Services.User.UserService;
 import Test.MainFX;
 import javafx.application.Platform;
@@ -22,9 +23,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ViewAuctionArtist implements Initializable {
+
+    @FXML
+    private TextField donations;
 
     @FXML
     private TableView<Auction> auctionTableView;
@@ -149,6 +154,7 @@ public class ViewAuctionArtist implements Initializable {
         try {
             ObservableList<Auction> auctionData = FXCollections.observableArrayList(ArtistService.read());
             auctionTableView.setItems(auctionData);
+            calculateAndDisplayTotalDonations();
         } catch (SQLException e) {
             e.printStackTrace(); // Handle or log the exception appropriately
         }
@@ -158,7 +164,7 @@ public class ViewAuctionArtist implements Initializable {
     private void handleUpdateButton(Auction auction) {
         Auction selectedAuction = auctionTableView.getSelectionModel().getSelectedItem();
         if (selectedAuction != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction/UpdateAuction.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction Admin/UpdateAuction.fxml"));
             Parent updateAuctionParent;
             try {
                 updateAuctionParent = loader.load();
@@ -193,7 +199,7 @@ public class ViewAuctionArtist implements Initializable {
     public void addAuction() {
         try {
             // Correct the path to your AddAuctionArtist.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction/AddAuction.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction Admin/AddAuction.fxml"));
             Parent addAuctionParent = loader.load();
 
             Stage addAuctionStage = new Stage();
@@ -215,7 +221,7 @@ public class ViewAuctionArtist implements Initializable {
 
     // Method to handle view bids button click
     private void handleViewBidsButton(int auctionId) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/ViewBidClients.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction Clients/ViewBidClients.fxml"));
         Parent viewBidsParent;
         try {
             viewBidsParent = loader.load();
@@ -235,13 +241,41 @@ public class ViewAuctionArtist implements Initializable {
         viewBidsStage.setTitle("View Bids");
         viewBidsStage.show();
     }
+    private final AuctionService auctionService = new AuctionService();
+    private void calculateAndDisplayTotalDonations() throws SQLException {
+        List<Integer> lastBidPrices = auctionService.getLastBidPrices();
+        double totalDonations = 0;
+        for (Integer bidPrice : lastBidPrices) {
+            totalDonations += bidPrice * 0.05; // 5% of each last bid price
+        }
+        donations.setText(String.format("%.2f", totalDonations));
+    }
+    private UserService us = new UserService();
+    public void PaymentBT(ActionEvent actionEvent) {
+        us.switchView(MainFX.primaryStage, "/Baskets/Basket.fxml");
+    }
 
-    public void ShowAuctions(ActionEvent actionEvent) {
-        UserService us = new UserService();
-        us.switchView(MainFX.primaryStage, "/Client/ViewAuctionClient.fxml");}
+    public void auctionbutton(ActionEvent actionEvent) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Artist /ViewAuctionArtist.fxml");}
+        else
+            us.switchView(MainFX.primaryStage, "/Auction Clients/ViewAuctionClient.fxml");
+    }
 
+    public void eventbutton(ActionEvent actionEvent) {
+    }
 
-    public void Homepage(ActionEvent actionEvent) {
-        UserService us = new UserService();
-        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");}
+    public void CoursesBT(ActionEvent actionEvent) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Courses/showCoursesF.fxml");}
+    }
+
+    public void artworksbutton(ActionEvent actionEvent) {
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
+
+    }
+
+    public void homebutton(ActionEvent actionEvent) {
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
+    }
 }

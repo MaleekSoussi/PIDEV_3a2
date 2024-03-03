@@ -353,7 +353,7 @@ public class AddartController implements Initializable {
         if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
             us.switchView(MainFX.primaryStage, "/Artist/ViewAuctionArtist.fxml");}
         else
-            us.switchView(MainFX.primaryStage, "/Client/ViewAuctionClient.fxml");
+            us.switchView(MainFX.primaryStage, "/Auction Clients/ViewAuctionClient.fxml");
     }
     @FXML
     void Coursesbutton(ActionEvent event) {

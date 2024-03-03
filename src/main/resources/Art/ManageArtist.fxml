@@ -356,7 +356,7 @@
                                             </HBox.margin>
                                  <stylesheets>
                                     <URL value="@../styles/css/styles.css" />
-                                    <URL value="@../Client/Stylesheet.css" />
+                                    <URL value="@../Auction Clients/Stylesheet.css" />
 
                                  </stylesheets>
                                  <columnResizePolicy>

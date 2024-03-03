@@ -43,7 +43,7 @@
             <String fx:value="shadow" />
          </styleClass>
          <stylesheets>
-            <URL value="@../Auction/Stylesheet.css" />
+            <URL value="@../Auction Admin/Stylesheet.css" />
          </stylesheets>
       </AnchorPane>
    </children>

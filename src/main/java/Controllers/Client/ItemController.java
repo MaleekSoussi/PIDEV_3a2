@@ -42,7 +42,7 @@ public class ItemController {
 
     public void Participate(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/ViewBidClients.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction Clients/ViewBidClients.fxml"));
             Parent bidViewParent = loader.load();
 
             // Get the controller associated with the bid view

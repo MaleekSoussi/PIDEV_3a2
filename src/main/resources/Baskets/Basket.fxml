@@ -34,7 +34,7 @@
                <font>
                   <Font name="Bell MT" size="18.0" />
                </font></Text>
-            <Button layoutY="8.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="77.0">
+            <Button fx:id="Home" layoutY="8.0" mnemonicParsing="false" onAction="#homebutton" prefHeight="48.0" prefWidth="77.0">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="29.0">
                      <image>

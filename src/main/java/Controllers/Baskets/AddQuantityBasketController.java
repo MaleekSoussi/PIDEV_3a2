@@ -4,6 +4,7 @@ import Models.Basket;
 import Services.OrdersAndBaskets.BasketService;
 import Services.OrdersAndBaskets.OrderService;
 import Services.User.UserService;
+import Test.MainFX;
 import Utils.EmailSend;
 import jakarta.mail.MessagingException;
 import javafx.event.ActionEvent;
@@ -205,6 +206,11 @@ public class AddQuantityBasketController {
         } catch (NumberFormatException e) {
             return defaultValue; // Return default value if parsing fails
         }
+    }
+
+    public void homebutton(ActionEvent actionEvent) {
+      UserService us = new UserService();
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
     /*public void applyLoyaltyDiscount(int userId, int basketId) {
         Basket basket = basketService.findById(basketId); // Supposons que cette méthode récupère le panier par son ID

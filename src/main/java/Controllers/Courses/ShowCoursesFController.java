@@ -218,7 +218,7 @@ public class ShowCoursesFController
     {
         try
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/Courses/frontOrBack.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/FronClient.fxml"));
             coursesItems.getScene().setRoot(root);
         }
         catch (IOException e)

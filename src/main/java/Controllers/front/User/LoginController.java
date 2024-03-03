@@ -49,7 +49,12 @@ public class LoginController{
                 redirectPath = "/Art/FronClient.fxml";
             }
             else if ("Amateur".equals(role)) {
-                redirectPath = "/Art/addart.fxml";
+                redirectPath = "/Art/FronClient.fxml";
+
+            }
+            else if ("AuctionAdmin".equals(role)) {
+                redirectPath = "/Auction Admin/ViewAuction.fxml";
+
             }
 
             try {

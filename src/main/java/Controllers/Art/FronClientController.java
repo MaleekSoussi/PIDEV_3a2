@@ -25,6 +25,19 @@ import java.util.List;
 
 public class FronClientController {
     @FXML
+    private Button Coursesid;
+
+    @FXML
+    private Button Eventid;
+    @FXML
+    private Button Auctionid;
+    @FXML
+    private Button Paymentid;
+    @FXML
+    private Button Artworksid;
+    @FXML
+    private Button homy;
+    @FXML
     private ComboBox<category> Category;
 
     @FXML
@@ -81,7 +94,7 @@ public class FronClientController {
          if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
             us.switchView(MainFX.primaryStage, "/Artist/ViewAuctionArtist.fxml");}
          else
-             us.switchView(MainFX.primaryStage, "/Client/ViewAuctionClient.fxml");
+             us.switchView(MainFX.primaryStage, "/Auction Clients/ViewAuctionClient.fxml");
         }
 
 
@@ -97,11 +110,6 @@ public class FronClientController {
     }
 
 
-    @FXML
-    void gotofOb(ActionEvent event) {
-
-
-    }
 
     @FXML
     void homebutton(ActionEvent event) {
@@ -115,7 +123,7 @@ public class FronClientController {
 
     @FXML
     private Button LoginArtist;
-
+    private UserService us = new UserService();
 
     @FXML
     void initialize() throws SQLException, IOException {
@@ -132,11 +140,23 @@ public class FronClientController {
             loginButton.setVisible(false); // Hide login button
             Signupbutton.setVisible(false); // Hide login button
             settingsbutton.setVisible(true);
+            Coursesid.setDisable(false);
+            Eventid.setDisable(false);
+            Auctionid.setDisable(false);
+            Paymentid.setDisable(false);
+            Artworksid.setDisable(false);
+            homy.setDisable(false);
+
         } else {
             loginButton.setVisible(true); // Show login button
             Signupbutton.setVisible(true); // Hide login button
             settingsbutton.setVisible(false);
-
+            Coursesid.setDisable(true);
+            Eventid.setDisable(true);
+            Auctionid.setDisable(true);
+            Paymentid.setDisable(true);
+            Artworksid.setDisable(true);
+            homy.setDisable(true);
         }
         try {
             // Retrieve all categories
@@ -273,7 +293,7 @@ public class FronClientController {
         }
     }
 
-    private UserService us = new UserService();
+
 
 
 

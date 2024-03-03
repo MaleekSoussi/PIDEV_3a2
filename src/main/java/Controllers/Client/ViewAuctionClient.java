@@ -1,5 +1,8 @@
 package Controllers.Client;
 
+import Services.User.UserService;
+import Test.MainFX;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -48,7 +51,7 @@ public class ViewAuctionClient implements Initializable {
             int columnIndex = 0;
             int rowIndex = 0;
             for (Auction auction : auctions) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/Items.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction Clients/Items.fxml"));
                 VBox item = loader.load();
                 GridPane.setColumnIndex(item, columnIndex);
                 GridPane.setRowIndex(item, rowIndex);
@@ -73,5 +76,33 @@ public class ViewAuctionClient implements Initializable {
             totalDonations += bidPrice * 0.05; // 5% of each last bid price
         }
         donations.setText(String.format("%.2f", totalDonations));
+    }
+    private UserService us = new UserService();
+    public void PaymentBT(ActionEvent actionEvent) {
+        us.switchView(MainFX.primaryStage, "/Baskets/Basket.fxml");
+    }
+
+    public void auctionbutton(ActionEvent actionEvent) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Artist /ViewAuctionArtist.fxml");}
+        else
+            us.switchView(MainFX.primaryStage, "/Auction Clients/ViewAuctionClient.fxml");
+    }
+
+    public void eventbutton(ActionEvent actionEvent) {
+    }
+
+    public void CoursesBT(ActionEvent actionEvent) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Courses/showCoursesF.fxml");}
+    }
+
+    public void artworksbutton(ActionEvent actionEvent) {
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
+
+    }
+
+    public void homebutton(ActionEvent actionEvent) {
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 }

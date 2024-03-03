@@ -20,7 +20,7 @@
 }
 
 .right-bar{
-    -fx-background-color: #33425b;
+    -fx-background-color: #253146;
 }
 
 .shadow{
@@ -59,7 +59,7 @@
 .table-view {
     -fx-font-size: 14px; /* Adjust font size */
     -fx-font-family: "Arial"; /* Font family */
-    -fx-base: #3b74c2; /* Base color for the table */
+    -fx-base: #4f6986; /* Base color for the table */
     -fx-control-inner-background: #f9f9f9; /* Background color of the table */
     -fx-background-color: #f2f2f2; /* Background color outside the table */
     -fx-table-cell-border-color: transparent; /* Border color of cells */
@@ -96,7 +96,7 @@
 
 /* Styles for TableView */
 .table-view .row-cell {
-    -fx-background-color: #2773d3;
+    -fx-background-color: #465d7e;
     -fx-text-fill: #c9a43d;
     -fx-padding: 5 10;
 }
@@ -174,7 +174,7 @@
 
 /* Styles for the Participate button */
 .button {
-    -fx-background-color: #4a90e2;
+    -fx-background-color: #4f667e;
     -fx-background-radius: 5px;
     -fx-text-fill: white;
     -fx-font-weight: bold;

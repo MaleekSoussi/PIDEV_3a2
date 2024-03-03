@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
@@ -211,7 +210,7 @@ public class DashboardController {
     void logout(ActionEvent event) {
         us.clearRememberedUser();
         UserService.currentlyLoggedInUser=null;
-        us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 
     @FXML
@@ -316,35 +315,4 @@ public class DashboardController {
     }
 
 
-    @FXML
-    void ViewArt(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Art/ManageArtist.fxml"));
-            lastname.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
-        }
-    }
-
-    public void ViewAuction(ActionEvent actionEvent) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Auction/ViewAuction.fxml"));
-            lastname.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
-        }
-    }
-
-    public void ManageCourses(ActionEvent actionEvent) {
-
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Courses/showCourses.fxml"));
-            lastname.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            System.out.println("error"+e.getMessage());
-        }
-    }
 }

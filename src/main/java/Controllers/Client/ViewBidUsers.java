@@ -136,7 +136,7 @@ public class ViewBidUsers implements Initializable {
     private void AddBidUsers() {
         try {
             // Load the Add Bid view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/AddBidClients.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction Clients/AddBidClients.fxml"));
             Parent addBidParent = loader.load();
 
             // Get the controller associated with the Add Bid view
@@ -197,7 +197,7 @@ public class ViewBidUsers implements Initializable {
     @FXML
     public void Userschat(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/Userschat.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Auction Clients/Userschat.fxml"));
             Parent chatWindow = loader.load();
 
             ChatClientController chatController = loader.getController();
