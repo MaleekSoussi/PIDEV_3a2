@@ -19,7 +19,7 @@ public class FrontOrBackController {
     {
         try
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/Events/ShowEvents.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Events/ShowEventsAdmin.fxml"));
             lab.getScene().setRoot(root);
         }
         catch(IOException e)

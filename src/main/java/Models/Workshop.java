@@ -52,14 +52,14 @@ public class Workshop
         this.id_C = id_C;
     }
 
-/*
+
     public int getUserid() {
         return Userid;
     }
 
     public void setUserid(int Userid) {
         this.Userid = Userid;
-    }*/
+    }
 
     public int getId_W() {
         return id_W;

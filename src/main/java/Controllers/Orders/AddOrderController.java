@@ -19,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 
@@ -55,7 +56,9 @@ public class AddOrderController {
         int latestBasketId = bs.getLatestBasketId(); // Assuming getLatestBasketId() throws SQLException
         idBa.setText(Integer.toString(latestBasketId));
         System.out.println(latestBasketId);
+
     }
+
 
 
     @FXML
@@ -231,6 +234,15 @@ public class AddOrderController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+
+
+    // Existing code...
+
+    // Method to set the total price in the TextField
+    public void setTotalPrice(float totalPrice) {
+        totalPA.setText(String.format(Locale.US, "%.2f", totalPrice));
     }
 
 }

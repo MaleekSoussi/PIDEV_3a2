@@ -1,5 +1,6 @@
 package Controllers.Art;
 
+import Controllers.Baskets.AddQuantityBasketController;
 import Models.art;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class ItemsArtController {
     private List<art> favoriteList = new ArrayList<>();
-
+    private AddQuantityBasketController addQuantityBasketController;
     private FronClientController fronClientController;
     private static int idA;
 
@@ -33,7 +34,7 @@ public class ItemsArtController {
     private ImageView image;
     @FXML
     private Label CATEGORY;
-
+    public static art selectedart  ;
 
     @FXML
     private Button showmore;
@@ -42,7 +43,7 @@ public class ItemsArtController {
 
     @FXML
     private Label TITLE;
-
+    private art currentArt;
     private ShowMoreController showMoreController;
 
     public void setData(art art) {
@@ -99,27 +100,46 @@ public class ItemsArtController {
 
     @FXML
     void favoriteadd(ActionEvent event) {
-            if (art != null) {
-                // Add the art object to the favorite list
-                favoriteList.add(art);
+        if (art != null) {
+            // Add the art object to the favorite list
+            favoriteList.add(art);
 
-                // Show a notification that the product has been added to favorites
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText(null);
-                alert.setContentText("Product added to favorites!");
-                alert.showAndWait();
-            } else {
-                // Handle case when no art object is selected
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setContentText("No art object selected to add to favorites!");
-                alert.showAndWait();
-            }
+            // Show a notification that the product has been added to favorites
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Product added to favorites!");
+            alert.showAndWait();
+        } else {
+            // Handle case when no art object is selected
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("No art object selected to add to favorites!");
+            alert.showAndWait();
         }
-
-
     }
+    @FXML
+    void additem(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Baskets/Basket.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller
+            AddQuantityBasketController addQuantityBasketController1 = loader.getController();
+
+            // Pass the art data to the controller
+            addQuantityBasketController1.setnewdata(art);
+
+            // Set the scene
+            CATEGORY.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println("error" + e.getMessage());
+        }
+    }
+
+
+}
+
 
 
 

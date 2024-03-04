@@ -123,7 +123,7 @@ public class AddAuctionController {
             showAlertPopup(); // Show success popup (avoid duplicate attempts)
 
             // Refresh the table view after adding an auction
-            viewAuctionController.refreshTableView();
+
         } catch (SQLException e) {
             errorLabel.setText("Error adding auction: " + e.getMessage());
         }

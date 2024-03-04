@@ -30,6 +30,9 @@ public class FeedbackItemController {
     @FXML
     private Button updatebutton;
 
+    @FXML
+    private Label satisfaction;
+
 
     private Feedback feedback; // The User object for this item
     private FeedbackService fs = new FeedbackService();
@@ -39,17 +42,16 @@ public class FeedbackItemController {
         this.feedback = feedback;
         this.dashboardFeedbackController = dashboardFeedbackController;
 
-        // Set the question and type labels
+        // Set the question, type, and satisfaction labels
         Question.setText(feedback.getQuestion());
         Type.setText(feedback.getType());
         status.setText(feedback.getStatus());
+        satisfaction.setText(feedback.getUserSatisfaction()); // Add this line to display user satisfaction
 
         if (feedback.getAnswer() != null && !feedback.getAnswer().isEmpty()) {
-
             Answer.setText(feedback.getAnswer());
             updatebutton.setVisible(false);
         } else {
-
             Answer.setText("No answer yet.");
             updatebutton.setVisible(true);
         }

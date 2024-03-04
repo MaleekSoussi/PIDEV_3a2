@@ -115,7 +115,7 @@ public class CoursesService implements IServiceC<Courses> {
             c.setType(rs.getString("type"));
             c.setNumberW(rs.getInt("numberW"));
             c.setImage_path(rs.getString("image_path"));
-            //c.setUserid(rs.getInt("userid"));
+            c.setUserid(rs.getInt("userid"));
             coursesList.add(c);
         }
         return coursesList;

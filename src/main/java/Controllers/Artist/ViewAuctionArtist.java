@@ -256,13 +256,14 @@ public class ViewAuctionArtist implements Initializable {
     }
 
     public void auctionbutton(ActionEvent actionEvent) {
-        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
-            us.switchView(MainFX.primaryStage, "/Artist /ViewAuctionArtist.fxml");}
-        else
             us.switchView(MainFX.primaryStage, "/Auction Clients/ViewAuctionClient.fxml");
     }
 
     public void eventbutton(ActionEvent actionEvent) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Events/ShowEventsF.fxml");}
+        else
+            us.switchView(MainFX.primaryStage, "/Events/ShowEventsAF.fxml");
     }
 
     public void CoursesBT(ActionEvent actionEvent) {

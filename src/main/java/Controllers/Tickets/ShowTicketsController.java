@@ -181,7 +181,7 @@ public class ShowTicketsController
     {
         try
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/Events/ShowEvents.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Events/ShowEventsAdmin.fxml"));
             eventname.getScene().setRoot(root);
         } catch (IOException e)
         {

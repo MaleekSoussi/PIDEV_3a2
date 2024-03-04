@@ -2,6 +2,7 @@ package Controllers.Event;
 
 import Models.Event;
 import Services.Event.EventService;
+import Services.User.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +45,7 @@ public class AddEventController {
     {
         try
         {
-            es.createE(new Event(eventNameTF.getText(), LocalDate.parse(eventDateTF.getText()),Integer.parseInt(eventDurationTF.getText()),eventTypeTF.getText(), Double.parseDouble(eventEntryFeeTF.getText()), Integer.parseInt(eventCapacityTF.getText())));
+            es.createE(new Event(eventNameTF.getText(), LocalDate.parse(eventDateTF.getText()),Integer.parseInt(eventDurationTF.getText()),eventTypeTF.getText(), Double.parseDouble(eventEntryFeeTF.getText()), Integer.parseInt(eventCapacityTF.getText()), UserService.currentlyLoggedInUser.getUserID()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Event added successfully ");
@@ -65,7 +66,7 @@ public class AddEventController {
         }
         try
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/Events/ShowEvents.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Events/ShowEventsAdmin.fxml"));
             eventNameTF.getScene().setRoot(root);
         }
         catch(IOException e)
@@ -79,7 +80,7 @@ public class AddEventController {
     {
         try
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/Events/ShowEvents.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Events/ShowEventsAdmin.fxml"));
             eventNameTF.getScene().setRoot(root);
         }catch(IOException e)
         {

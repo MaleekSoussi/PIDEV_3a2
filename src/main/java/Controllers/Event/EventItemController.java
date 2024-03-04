@@ -3,6 +3,7 @@ package Controllers.Event;
 import Controllers.Tickets.ShowTicketsFController;
 import Models.Event;
 import Services.Event.EventService;
+import Services.User.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,7 +68,7 @@ public class EventItemController {
 
 
     public void setData(Event event)
-    {
+    {  int loggedInUserId= UserService.currentlyLoggedInUser.getUserID();
         this.showTicketsFController=showTicketsFController;
         nameEI.setText(event.getNameE());
         dateEI.setText(String.valueOf(event.getDateE()));
@@ -120,6 +121,15 @@ public class EventItemController {
             }
         });
 
+        if (event.getUserid() == loggedInUserId) {
+            // User is the creator, show update and delete buttons
+            deleteeventbuttonF.setVisible(true);
+            editeventbuttonF.setVisible(true);
+        } else {
+            // User is not the creator, hide update and delete buttons
+            deleteeventbuttonF.setVisible(false);
+            editeventbuttonF.setVisible(false);
+        }
     }
 
     public void setShowEventsFController(ShowEventsFController controller) {

@@ -101,7 +101,7 @@ public class SettingsController{
     void logout(ActionEvent event) {
         UserService.currentlyLoggedInUser = null;
         us.clearRememberedUser();
-        us.switchView(MainFX.primaryStage, "/FronClient");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient");
     }
 
 

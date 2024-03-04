@@ -50,7 +50,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="12.0" layoutY="283.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="15.0" styleClass="transparent" stylesheets="@../styles/css/styles.css">
+            <Button layoutX="12.0" layoutY="283.0" mnemonicParsing="false" onAction="#additem" prefHeight="26.0" prefWidth="15.0" styleClass="transparent" stylesheets="@../styles/css/styles.css">
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>

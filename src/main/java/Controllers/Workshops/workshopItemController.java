@@ -2,6 +2,7 @@ package Controllers.Workshops;
 
 import Models.Workshop;
 import Services.CoursesandWorkshops.WorkshopService;
+import Services.User.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -56,12 +57,21 @@ public class workshopItemController
 
 
     public void setDataw(Workshop workshop,ShowWorkshopsFController showWorkshopsFController)
-    {
+    {   int loggedInUserId= UserService.currentlyLoggedInUser.getUserID();
         namewI.setText(workshop.getNameW());
         descwi.setText(workshop.getDescription());
         durationwI.setText(String.valueOf(workshop.getDuration()));
         resourceswi.setText(workshop.getResources());
 
+        if (workshop.getUserid() == loggedInUserId) {
+            // User is the creator, show update and delete buttons
+            deleteworkshopbuttonF.setVisible(true);
+            editworkshopbuttonF.setVisible(true);
+        } else {
+            // User is not the creator, hide update and delete buttons
+            deleteworkshopbuttonF.setVisible(false);
+            editworkshopbuttonF.setVisible(false);
+        }
         deleteworkshopbuttonF.setOnAction(event->{
             try
             {

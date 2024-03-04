@@ -18,12 +18,13 @@ public class BasketService implements IService<Basket> {
 
     public int create(Basket basket) {
         int generatedId = 0;
-        String sql = "INSERT INTO basket (quantity, total_price,Userid) VALUES (?, ? , ?)";
+        String sql = "INSERT INTO basket (quantity, total_price,Userid,id_art) VALUES (?, ? , ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setInt(1, basket.getQuantity());
             pstmt.setFloat(2, basket.getTotalPrice());
             pstmt.setInt(3, UserService.currentlyLoggedInUser.getUserID());
+            pstmt.setFloat(4, basket.getId_art());
             int affectedRows = pstmt.executeUpdate();
 
             if (affectedRows > 0) {

@@ -59,7 +59,7 @@
       <TextField fx:id="heightu" layoutX="13.0" layoutY="213.0" prefWidth="235.0" promptText="height" styleClass="search-button" stylesheets="@../styles/css/styles.css" />
       <TextField fx:id="typeu" layoutX="13.0" layoutY="296.0" prefWidth="235.0" promptText="Rarity" styleClass="search-button" stylesheets="@../styles/css/styles.css" />
       <TextField fx:id="cityu" layoutX="12.0" layoutY="338.0" prefWidth="235.0" promptText="city" styleClass="search-button" stylesheets="@../styles/css/styles.css" />
-      <Button fx:id="returnc" layoutX="14.0" layoutY="84.0" mnemonicParsing="false" onAction="#rereturn" prefHeight="26.0" prefWidth="117.0" styleClass="add-btn" stylesheets="@../styles/css/styles.css" text="Return">
+      <Button fx:id="returnc" layoutX="31.0" layoutY="94.0" mnemonicParsing="false" onAction="#rereturn" prefHeight="26.0" prefWidth="117.0" styleClass="add-btn" stylesheets="@../styles/css/styles.css" text="Return">
          <font>
             <Font size="14.0" />
          </font></Button>

@@ -2,6 +2,7 @@ package Controllers.Event;
 
 import Models.Event;
 import Services.Event.EventService;
+import Services.User.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,10 +42,10 @@ public class AddEventFController {
 
     @FXML
     void addEventF(ActionEvent event)
-    {
+    {int loggedInUserId= UserService.currentlyLoggedInUser.getUserID();
         try
         {
-            es.createE(new Event(eventNameTFF.getText(), LocalDate.parse(eventDateTFF.getText()),Integer.parseInt(eventDurationTFF.getText()),eventTypeTFF.getText(), Double.parseDouble(eventEntryFeeTFF.getText()), Integer.parseInt(eventCapacityTFF.getText())));
+            es.createE(new Event(eventNameTFF.getText(), LocalDate.parse(eventDateTFF.getText()),Integer.parseInt(eventDurationTFF.getText()),eventTypeTFF.getText(), Double.parseDouble(eventEntryFeeTFF.getText()), Integer.parseInt(eventCapacityTFF.getText()),loggedInUserId));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Event added successfully ");

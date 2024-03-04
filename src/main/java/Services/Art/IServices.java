@@ -15,6 +15,8 @@ public interface IServices <T>{
     public  void delete(int id_art )throws SQLException;
     public List<T> display() throws SQLException;
 
+    List<art> displayArtist() throws SQLException;
+
     public List<art> getOneArt() throws SQLException;
 
     public List<art> searchArt(String search);

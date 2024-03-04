@@ -3,6 +3,7 @@ package Controllers.Event;
 import Models.Event;
 import Services.Event.EventService;
 import Services.Event.TicketService;
+import Services.User.UserService;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -175,6 +176,10 @@ public class ShowEventsController {
     public int getcapacityE(Event e) {
         capacityE = e.getCapacityE();
         return capacityE;
+    }
+    public int Userid(Event e) {
+        int Userid = UserService.currentlyLoggedInUser.getUserID();
+        return Userid;
     }
 
     @FXML

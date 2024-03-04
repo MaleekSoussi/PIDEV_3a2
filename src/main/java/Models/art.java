@@ -26,7 +26,7 @@ public class art {
     public art(){}
 
     public art(String title, String materials,double height, double width, String type, String city, String description,float price,int id_category,String path_image,String video,int Userid) {
-       this.Userid=Userid;
+        this.Userid=Userid;
         this.title = title;
         this.materials = materials;
         this.height = height;

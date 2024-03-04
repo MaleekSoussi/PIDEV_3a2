@@ -11,6 +11,8 @@ public class Event {
     private String typeE;
     private double entryFeeE;
     private int capacityE;
+    private int Userid;
+
 
 
     // Default constructor
@@ -30,7 +32,8 @@ public class Event {
     }
 
     //Constructor without IdE parameter
-    public Event(String nameE, LocalDate dateE, int durationE, String typeE, double entryFeeE, int capacityE) {
+    public Event(String nameE, LocalDate dateE, int durationE, String typeE, double entryFeeE, int capacityE,int Userid) {
+        this.Userid=Userid;
         this.nameE = nameE;
         this.dateE = dateE;
         this.durationE = durationE;
@@ -39,6 +42,9 @@ public class Event {
         this.capacityE = capacityE;
     }
 
+
+
+
     public int getIdE() {
         return idE;
     }
@@ -46,7 +52,13 @@ public class Event {
     public void setIdE(int idE) {
         this.idE = idE;
     }
+    public  int getUserid() {
+        return Userid;
+    }
 
+    public void setUserid(int userid) {
+        Userid = userid;
+    }
     public String getNameE() {
         return nameE;
     }

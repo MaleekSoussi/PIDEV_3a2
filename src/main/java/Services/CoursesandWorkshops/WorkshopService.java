@@ -90,16 +90,14 @@ public class WorkshopService implements IServiceW<Workshop>
     }
 
     @Override
-    public List<Workshop> readw() throws SQLException
-    {
+    public List<Workshop> readw() throws SQLException {
         String sql = "SELECT workshops.id_W, workshops.nameW, workshops.resources, " +
-                "workshops.description, workshops.duration, workshops.id_C " +
+                "workshops.description, workshops.duration, workshops.id_C, workshops.Userid " +
                 "FROM workshops JOIN courses ON workshops.id_C = courses.id_C";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
         List<Workshop> workshopList = new ArrayList<>();
-        while (rs.next())
-        {
+        while (rs.next()) {
             Workshop w = new Workshop();
             w.setId_W(rs.getInt("id_W"));
             w.setNameW(rs.getString("nameW"));
@@ -107,7 +105,7 @@ public class WorkshopService implements IServiceW<Workshop>
             w.setDescription(rs.getString("description"));
             w.setDuration(rs.getFloat("duration"));
             w.setId_C(rs.getInt("id_C"));
-            //w.setUserid((rs.getInt("userid")));
+            w.setUserid(rs.getInt("Userid"));
             workshopList.add(w);
         }
         return workshopList;

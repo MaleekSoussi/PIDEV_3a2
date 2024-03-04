@@ -3,8 +3,11 @@ package Controllers.Orders;
 
 import Models.Order;
 import Services.OrdersAndBaskets.OrderService;
+import Services.User.UserService;
+import Test.MainFX;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 
@@ -40,5 +43,15 @@ public class StatisticsController {
 
         ordersOverFiftyPieChart.setData(pieChartData);
         ordersOverFiftyPieChart.setTitle("Orders Statistics");
+    }
+    @FXML
+    void gohome(ActionEvent event) {
+         UserService us = new UserService();
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
+    }
+
+    public void homebutton(ActionEvent actionEvent) {
+        UserService us = new UserService();
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 }

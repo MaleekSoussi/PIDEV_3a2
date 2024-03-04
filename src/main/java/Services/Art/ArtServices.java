@@ -100,6 +100,33 @@ public class ArtServices implements IServices <art> {
 
         return arts;
     }
+    @Override
+    public List<art> displayArtist() throws SQLException {
+        List<art> arts = new ArrayList<>();
+
+        Statement stmt = con.createStatement();
+        int currentid = UserService.currentlyLoggedInUser.getUserID();
+        ResultSet res = stmt.executeQuery("SELECT * FROM art where Userid ="+currentid);
+
+        while (res.next()){
+            art a = new art();
+            a.setId_art(res.getInt(1));
+            a.setTitle(res.getString(2));
+            a.setMaterials(res.getString(3));
+            a.setHeight(res.getDouble(4));
+            a.setWidth(res.getDouble(5));
+            a.setType(res.getString(6));
+            a.setCity(res.getString(7));
+            a.setDescription(res.getString(8));
+            a.setPrice(res.getFloat(9));
+            a.setId_category(res.getInt(10));
+            a.setPath_image(res.getString(11));
+            a.setVideo(res.getString(13));
+            arts.add(a);
+        }
+
+        return arts;
+    }
 
     @Override
     public List<art> getOneArt() throws SQLException {

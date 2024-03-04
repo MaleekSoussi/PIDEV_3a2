@@ -75,8 +75,8 @@ public class FronClientController {
     }
 
     public void CoursesBT(ActionEvent actionEvent) {
-        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
-            us.switchView(MainFX.primaryStage, "/Courses/showCoursesF.fxml");}
+
+            us.switchView(MainFX.primaryStage, "/Courses/showCoursesF.fxml");
     }
 
     public void PaymentBT(ActionEvent actionEvent) {
@@ -111,7 +111,10 @@ public class FronClientController {
 
     @FXML
     void eventbutton(ActionEvent event) {
-        us.switchView(MainFX.primaryStage, "/Events/FrontOrBack.fxml");
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Events/ShowEventsF.fxml");}
+        else
+            us.switchView(MainFX.primaryStage, "/Events/ShowEventsAF.fxml");
     }
 
 

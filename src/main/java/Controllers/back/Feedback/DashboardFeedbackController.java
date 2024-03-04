@@ -94,7 +94,7 @@ public class DashboardFeedbackController {
     void logout(ActionEvent event) {
         us.clearRememberedUser();
         UserService.currentlyLoggedInUser=null;
-        us.switchView(MainFX.primaryStage, "/front/MainWindow.fxml");
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 
     @FXML

@@ -2,6 +2,8 @@ package Controllers.Event;
 
 import Models.Event;
 import Services.Event.EventService;
+import Services.User.UserService;
+import Test.MainFX;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -194,39 +196,48 @@ public class ShowEventsFController
     }
 
 
-
+    private UserService us = new UserService();
     @FXML
     void aboutUsButton(ActionEvent event) {
 
     }
-
     @FXML
     void artworksButton(ActionEvent event) {
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Art/addart.fxml");}
+        else
+            us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
+
 
     }
 
     @FXML
     void auctionButton(ActionEvent event) {
-
+        if (UserService.currentlyLoggedInUser.getRole().equals("Artist")){
+            us.switchView(MainFX.primaryStage, "/Artist/ViewAuctionArtist.fxml");}
+        else
+            us.switchView(MainFX.primaryStage, "/Auction Clients/ViewAuctionClient.fxml");
     }
+
 
     @FXML
     void effect(MouseEvent event)
     {
 
     }
-
     @FXML
-    void courseButton(ActionEvent event) {
+    public void courseButton(ActionEvent actionEvent) {
 
+        us.switchView(MainFX.primaryStage, "/Courses/showCoursesF.fxml");
     }
+
 
     @FXML
     void homeButton(ActionEvent event)
     {
         try
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/Events/FrontOrBack.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Art/FronClient.fxml"));
             eventsItems.getScene().setRoot(root);
         }
         catch (IOException e)

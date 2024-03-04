@@ -5,6 +5,7 @@ public class Basket {
     private int quantity;
     private float totalPrice;
     private int Userid;
+    private int id_art;
 
     public int getUserid() {
         return Userid;
@@ -28,6 +29,21 @@ public class Basket {
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.Userid = userId;
+    }
+    public Basket(int idB, int quantity, float totalPrice, int userId,int id_art) {
+        this.idB = idB;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.Userid = userId;
+        this.id_art = id_art;
+    }
+
+    public int getId_art() {
+        return id_art;
+    }
+
+    public void setId_art(int id_art) {
+        this.id_art = id_art;
     }
 
     // Default constructor

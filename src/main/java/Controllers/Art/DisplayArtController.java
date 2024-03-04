@@ -139,7 +139,7 @@ public class DisplayArtController {
     @FXML
     void initialize() {
         try {
-            List<art> artList = ps.display();
+            List<art> artList = ps.displayArtist();
             ol = FXCollections.observableList(artList);
             ArtTableView.setItems(ol);
             titlec.setCellValueFactory(new PropertyValueFactory<>("title"));

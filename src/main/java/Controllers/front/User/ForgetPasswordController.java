@@ -4,17 +4,19 @@ import Models.Users;
 import Services.User.PasswordHasher;
 import Services.User.UserService;
 import Test.MainFX;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
-import jakarta.mail.*;
-import jakarta.mail.internet.InternetAddress;
+import com.vonage.client.VonageClient;
+import com.vonage.client.sms.MessageStatus;
+import com.vonage.client.sms.SmsSubmissionResponse;
+import com.vonage.client.sms.messages.TextMessage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
@@ -25,13 +27,6 @@ import java.util.stream.Collectors;
 
 public class ForgetPasswordController {
 
-    private static final String ACCOUNT_SID = "AC5399d4bf35ce3020db83efbe5929634d";
-    private static final String AUTH_TOKEN = "5b4809581d465a137f925e571dfc2e0d";
-    private static final String TWILIO_NUMBER = "+17163201382";
-
-    static {
-        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-    }
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
     private static final String FROM_EMAIL = "nxtpixel01@gmail.com";
@@ -92,22 +87,25 @@ public class ForgetPasswordController {
         return String.valueOf(TP);
     }
 
-    private void sendOTPtoUser(String toEmail, String TP) throws MessagingException, UnsupportedEncodingException {
-        String subject = "Your Temporary Password ";
-        sendEmail(toEmail, subject);
-        sendSMSToUser("recipient_phone_number", TP);
-    }
-
+    private VonageClient client = VonageClient.builder()
+            .apiKey("a2bedbc3") // Replace with your actual API key
+            .apiSecret("qRRZ4Y4uKIts790o") // Replace with your actual API secret
+            .build();
     private void sendSMSToUser(String recipientPhoneNumber, String TP) {
-        Message message = Message.creator(
-                        new PhoneNumber(recipientPhoneNumber), // To number
-                        new PhoneNumber(TWILIO_NUMBER), // From number (Your Twilio number)
-                        "Your temporary password is: " + TP)
-                .create();
+        TextMessage message = new TextMessage(
+                "Vonage APIs", // This should be your Vonage virtual number
+                recipientPhoneNumber,
+                "Your temporary password is: " + TP
+        );
 
-        System.out.println("Sent message ID: " + message.getSid());
+        SmsSubmissionResponse response = client.getSmsClient().submitMessage(message);
+
+        if (response.getMessages().get(0).getStatus() == MessageStatus.OK) {
+            System.out.println("Message sent successfully.");
+        } else {
+            System.out.println("Message failed with error: " + response.getMessages().get(0).getErrorText());
+        }
     }
-
     private void sendEmail(String toEmail, String subject) throws MessagingException, UnsupportedEncodingException {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -123,9 +121,12 @@ public class ForgetPasswordController {
         };
         Session session = Session.getInstance(props, auth);
 
-        jakarta.mail.internet.MimeMessage message = new jakarta.mail.internet.MimeMessage(session);
+        // Correct the MimeMessage import if necessary
+        MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(FROM_EMAIL, "Mail"));
-        message.addRecipient(jakarta.mail.Message.RecipientType.TO, new InternetAddress(toEmail));
+
+        // Specify the correct Message class for RecipientType
+        message.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(toEmail));
         message.setSubject(subject);
 
         // Set content to HTML
@@ -133,6 +134,7 @@ public class ForgetPasswordController {
 
         Transport.send(message);
     }
+
 
     private String getHtmlContent(String TP) {
         try {

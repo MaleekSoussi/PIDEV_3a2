@@ -3,6 +3,7 @@ package Controllers.Courses;
 import Controllers.Workshops.ShowWorkshopsFController;
 import Models.Courses;
 import Services.CoursesandWorkshops.CoursesService;
+import Services.User.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,6 +87,9 @@ public class courseItemController
 
     public void setData(Courses course)
     {
+        int loggedInUserId= UserService.currentlyLoggedInUser.getUserID();
+        System.out.println("Logged in User ID: " + loggedInUserId);
+        System.out.println("Course User ID: " + course.getUserid());
         //this.showWorkshopsFController=showWorkshopsFController;
         nameCI.setText(course.getNameC());
         descCI.setText(course.getDescriptionC());
@@ -116,6 +120,7 @@ public class courseItemController
                 System.out.println("Error loading FXML: " + e.getMessage());
             }
         });
+
         deletecoursebuttonF.setOnAction(event->{
             try
             {
@@ -155,7 +160,15 @@ public class courseItemController
                 e.printStackTrace();
             }
         });
-
+        if (course.getUserid() == loggedInUserId) {
+            // User is the creator, show update and delete buttons
+            deletecoursebuttonF.setVisible(true);
+            editcoursebuttonF.setVisible(true);
+        } else {
+            // User is not the creator, hide update and delete buttons
+            deletecoursebuttonF.setVisible(false);
+            editcoursebuttonF.setVisible(false);
+        }
     }
 
 

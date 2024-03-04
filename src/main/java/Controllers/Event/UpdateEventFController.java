@@ -95,15 +95,28 @@ public class UpdateEventFController {
         }
     }
 
+
     public static void setInstance(UpdateEventFController instance, Event selectedEvent)
     {
         UpdateEventFController.instance = instance;
         instance.setSelectedEvent(selectedEvent);
-    }
 
-    private void setSelectedEvent(Event selectedEvent)
-    {
+    }
+    private void initializeFieldsWithSelectedEventData() {
+        if (selectedEventsID != null) {
+            nameEFU.setText(selectedEventsID.getNameE());
+            dateEFU.setText(String.valueOf(selectedEventsID.getDateE()));
+            durationEFU.setText(String.valueOf(selectedEventsID.getDurationE()));
+            typeEFU.setText(selectedEventsID.getTypeE());
+            entryFeeEFU.setText(String.valueOf(selectedEventsID.getEntryFeeE()));
+            capacityEFU.setText(String.valueOf(selectedEventsID.getCapacityE()));
+        } else {
+            System.out.println("No event selected.");
+        }
+    }
+    private void setSelectedEvent(Event selectedEvent) {
         this.selectedEventsID = selectedEvent;
+        initializeFieldsWithSelectedEventData(); // Call this method to initialize fields
     }
 
     @FXML

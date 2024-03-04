@@ -1,20 +1,29 @@
 package Controllers.Baskets;
 
+import Controllers.Art.ItemsArtController;
+import Controllers.Orders.AddOrderController;
 import Models.Basket;
+import Models.art;
 import Services.OrdersAndBaskets.BasketService;
 import Services.OrdersAndBaskets.OrderService;
 import Services.User.UserService;
+import Test.MainFX;
 import Utils.EmailSend;
 import jakarta.mail.MessagingException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -22,25 +31,104 @@ public class AddQuantityBasketController {
     private OrderService OrderService = new OrderService();
     private BasketService basketService = new BasketService();
     public static int id;
+
+
+    private art art;
+    private ItemsArtController itemsArtController;
+    @FXML
+    private Button continueButton;
+    @FXML
+    private Button Home;
+    @FXML
+    private TableView<art> itemstab;
+    @FXML
+    private Button addBasketbutton;
+
     @FXML
     private Button addquantity3;
 
     @FXML
-    private Button continueButton;
+    private TableColumn<Basket, String> citya;
+
 
     @FXML
     private Button deletequantity2;
 
     @FXML
+    private TableColumn<Basket, String> desca;
+
+    @FXML
+    private Button discount;
+
+    @FXML
+    private TableColumn<art, String> heighta;
+
+    @FXML
+    private TableColumn<art, String> materialsa;
+
+    @FXML
+    private TableColumn<art, String> pricea;
+
+    @FXML
     private Label quantityLabel;
 
     @FXML
+    private TableColumn<Basket, String> raritya;
+
+    @FXML
+    private Button shareButton;
+
+    @FXML
+    private TableColumn<art, String> titlea;
+
+    @FXML
     private TextField totalPriceS;
+    private ObservableList<art> artData = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<String, Basket> widtha;
+    public static float totalPriceToPass;
+
+    public void setCurrentArt(art currentArt) {
+        this.art = currentArt;
+    }
+
+
+    public void setnewdata(art art) {
+        // Assuming 'art' is the item you want to add to the TableView
+        this.art = art; // You might still want to keep this, depending on other needs
+
+        // Now, instead of just setting the private field, add 'art' to the 'artData' list
+        artData.add(art); // This adds the new art to the observable list
+
+        // Configure the TableView columns if not already done
+        // It's okay to set these multiple times, but you could check if they've been set previously if performance is a concern
+        titlea.setCellValueFactory(new PropertyValueFactory<>("title"));
+        materialsa.setCellValueFactory(new PropertyValueFactory<>("materials"));
+        heighta.setCellValueFactory(new PropertyValueFactory<>("height"));
+        widtha.setCellValueFactory(new PropertyValueFactory<>("width")); // Make sure 'widtha' is correctly defined if you're using it for 'art'
+        raritya.setCellValueFactory(new PropertyValueFactory<>("type")); // Assuming 'rarity' is a property of 'art'
+        citya.setCellValueFactory(new PropertyValueFactory<>("city"));
+        desca.setCellValueFactory(new PropertyValueFactory<>("description")); // Ensure this matches the property name in 'art'
+        pricea.setCellValueFactory(new PropertyValueFactory<>("price"));
+        updateTotalPrice();
+        // Set the ObservableList to the TableView
+        itemstab.setItems(artData);
+    }
+
+    private void updateTotalPrice() {
+        float totalPrice = 0f;
+        for (art item : artData) {
+            totalPrice += item.getPrice(); // Make sure getPrice() returns a float
+        }
+        // Use Locale.US to ensure the period is used as the decimal separator.
+        totalPriceS.setText(String.format(Locale.US, "%.2f", totalPrice));
+    }
+
 
     @FXML
     void addQuantity(ActionEvent event) {
         // Increment the quantity directly without using the basket ID
-        int quantity = safeParseInt(quantityLabel.getText(), 0);
+        int quantity = safeParseInt(quantityLabel.getText(), 1);
         quantity++;
         quantityLabel.setText(String.valueOf(quantity));
     }
@@ -63,59 +151,86 @@ public class AddQuantityBasketController {
 
     @FXML
     public void addBasket(ActionEvent actionEvent) {
-        int  Userid= UserService.currentlyLoggedInUser.getUserID();
-        int quantity = safeParseInt(quantityLabel.getText(), 0);
+        int userId = UserService.currentlyLoggedInUser.getUserID();
+
+        // Use NumberFormat with a US locale to ensure period is used as the decimal separator
+        NumberFormat format = NumberFormat.getInstance(Locale.US);
         float totalPrice;
         try {
-            totalPrice = Float.parseFloat(totalPriceS.getText().trim());
-        } catch (NumberFormatException e) {
-            showErrorAlert("Invalid total price format.");
-            return;
+            // Parse the totalPriceS text as a Number, then get its float value
+            totalPrice = format.parse(totalPriceS.getText().trim()).floatValue();
+        } catch (ParseException e) {
+            showErrorAlert("Invalid total price format. Please ensure all items are priced correctly using a period (.) as the decimal separator.");
+            return; // Exit the method early if there's an error
         }
-
+        int Id_art = 17;
         Basket newBasket = new Basket();
-        newBasket.setQuantity(quantity);
+        newBasket.setQuantity(1);
+        newBasket.setUserid(userId);
         newBasket.setTotalPrice(totalPrice);
-        newBasket.setUserid(Userid);
+        newBasket.setId_art(Id_art);
 
         int basketId = basketService.create(newBasket);
         if (basketId > 0) {
-            showInfoAlert("Basket added successfully with ID: " + basketId);
+            showInfoAlert("Basket added successfully with ID: " + basketId + " and total price: " + format.format(totalPrice));
         } else {
             showErrorAlert("Error adding basket to the database.");
         }
-        id=newBasket.getIdB();
     }
+
+
     public void applyDiscount(float discountPercentage) {
+        NumberFormat format = NumberFormat.getInstance(Locale.US);
         float totalPrice;
         try {
-            totalPrice = Float.parseFloat(totalPriceS.getText().trim());
-        } catch (NumberFormatException e) {
+            totalPrice = format.parse(totalPriceS.getText().trim()).floatValue();
+        } catch (ParseException e) {
             showErrorAlert("Invalid total price format.");
             return;
         }
 
-        // Calcul de la réduction
         float discountAmount = totalPrice * (discountPercentage / 100);
         float finalPrice = totalPrice - discountAmount;
 
-        // Mise à jour du prix total après réduction
-        totalPriceS.setText(String.format("%.2f", finalPrice));
+        // Update the totalPriceS TextField with formatted final price
+        totalPriceS.setText(format.format(finalPrice));
 
-        showInfoAlert("A discount of " + discountPercentage + "% has been applied. New total price: " + finalPrice);
+        showInfoAlert("A discount of " + discountPercentage + "% has been applied. New total price: " + format.format(finalPrice));
     }
+
 
     @FXML
     void onApplyDiscountClicked(ActionEvent event) {
         // Appliquer une réduction de 20%
         applyDiscount(20.0f);
     }
+
     @FXML
-    void navigateC(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Orders/AddOrder.fxml"));
-        Scene scene = continueButton.getScene();
-        scene.setRoot(root);
+    void navigateC(ActionEvent event) {
+        try {
+            // Parse and set the total price before navigating
+            NumberFormat format = NumberFormat.getInstance(Locale.US);
+            float totalPrice = format.parse(totalPriceS.getText().trim()).floatValue();
+            totalPriceToPass = totalPrice; // Static variable to pass the total price
+
+            // Load the AddOrder.fxml and set the controller
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Orders/AddOrder.fxml"));
+            Parent root = loader.load();
+
+            // Assuming AddOrderController has a method called 'setTotalPrice'
+            AddOrderController orderController = loader.getController();
+            orderController.setTotalPrice(totalPriceToPass);
+
+            // Set the scene
+            Home.getScene().setRoot(root);
+        } catch (IOException e) {
+            showErrorAlert("Error navigating to order: " + e.getMessage());
+        } catch (ParseException e) {
+            showErrorAlert("Error parsing total price: " + e.getMessage());
+        }
     }
+
+
 
     @FXML
     void ShareBasket(ActionEvent event) {
@@ -177,10 +292,6 @@ public class AddQuantityBasketController {
     }
 
 
-
-
-
-
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -205,6 +316,7 @@ public class AddQuantityBasketController {
             return defaultValue; // Return default value if parsing fails
         }
     }
+
     @FXML
     void applyLoyaltyDiscount(ActionEvent event) {
         try {
@@ -240,5 +352,7 @@ public class AddQuantityBasketController {
 
 
     public void homebutton(ActionEvent actionEvent) {
+        UserService us = new UserService();
+        us.switchView(MainFX.primaryStage, "/Art/FronClient.fxml");
     }
 }

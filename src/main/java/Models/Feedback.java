@@ -1,5 +1,9 @@
 package Models;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Feedback {
     private int feedbackId;
     private String status;
@@ -8,6 +12,39 @@ public class Feedback {
     private String answer;
     private String userSatisfaction;
     private int userId;  // id_U
+
+    private static final Set<String> POSITIVE_WORDS = new HashSet<>(
+            Arrays.asList("happy", "satisfied", "amazing", "good", "great", "positive", "thankful", "enjoyed"));
+    private static final Set<String> NEGATIVE_WORDS = new HashSet<>(
+            Arrays.asList("unhappy", "bad", "disappointed", "poor", "negative", "terrible", "horrible", "hate"));
+
+    public String analyzeSentiment() {
+        String lowerCaseAnswer = this.answer.toLowerCase();
+        int positiveScore = 0;
+        int negativeScore = 0;
+
+        // Tokenize the answer into words
+        String[] words = lowerCaseAnswer.split("\\s+");
+
+        // Count positive and negative words
+        for (String word : words) {
+            if (POSITIVE_WORDS.contains(word)) {
+                positiveScore++;
+            } else if (NEGATIVE_WORDS.contains(word)) {
+                negativeScore++;
+            }
+        }
+
+        // Determine sentiment
+        if (positiveScore > negativeScore) {
+            return "Positive";
+        } else if (positiveScore < negativeScore) {
+            return "Negative";
+        } else {
+            return "Neutral";
+        }
+    }
+
 
     // Constructor
     public Feedback(int feedbackId, String status, String type, String question, String answer, String userSatisfaction, int userId) {

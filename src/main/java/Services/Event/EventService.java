@@ -1,6 +1,7 @@
 package Services.Event;
 
 import Models.Event;
+import Services.User.UserService;
 import Utils.MyDatabase;
 
 import java.sql.*;
@@ -18,7 +19,7 @@ public class EventService implements IServiceE<Event> {
 
     @Override
     public void createE(Event event) throws SQLException {
-        String sql = "INSERT INTO event (nameE, dateE, durationE, typeE, entryFeeE, capacityE) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO event (nameE, dateE, durationE, typeE, entryFeeE, capacityE, Userid) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, event.getNameE());
@@ -27,6 +28,7 @@ public class EventService implements IServiceE<Event> {
             statement.setString(4, event.getTypeE());
             statement.setDouble(5, event.getEntryFeeE());
             statement.setInt(6, event.getCapacityE());
+            statement.setInt(7, UserService.currentlyLoggedInUser.getUserID());
 
             statement.executeUpdate();
         }
@@ -84,10 +86,31 @@ public class EventService implements IServiceE<Event> {
             e.setTypeE(rs.getString("typeE"));
             e.setEntryFeeE(rs.getDouble("entryFeeE"));
             e.setCapacityE(rs.getInt("capacityE"));
+            e.setUserid(rs.getInt("Userid"));;
             eventList.add(e);
         }
         return eventList;
     }
+    @Override
+    public List<Event> readEU() throws SQLException {
+        String sql = "SELECT * FROM event ";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        List<Event> eventList = new ArrayList<>();
+        while (rs.next()){
+            Event e = new Event();
+            e.setIdE(rs.getInt("idE"));
+            e.setNameE(rs.getString("nameE"));
+            e.setDateE(rs.getDate("dateE").toLocalDate());
+            e.setDurationE(rs.getInt("durationE"));
+            e.setTypeE(rs.getString("typeE"));
+            e.setEntryFeeE(rs.getDouble("entryFeeE"));
+            e.setUserid(rs.getInt("Userid"));;
+            eventList.add(e);
+        }
+        return eventList;
+    }
+
 
     // Method to get an event by its ID
     public Event getEventById(int eventId) throws SQLException {

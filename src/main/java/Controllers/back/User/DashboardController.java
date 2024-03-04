@@ -253,7 +253,7 @@ public class DashboardController {
                 document.add(table);
                 //Remminder to change this to C:\xampp\htdocs\image\xyellow.png
                 // Add logo at the bottom center of the page
-                String imagePath = "D:\\downloaaaad\\PIDEV_3a2-User_management\\PIDEV_3a2-User_management\\src\\main\\resources\\styles\\xyellow.png";
+                String imagePath = "C:\\xampp\\htdocs\\image\\xyellow.png";
                 Image image = Image.getInstance(imagePath);
                 image.scaleToFit(100, 50); // Adjust scale as needed
                 image.setAbsolutePosition((PageSize.A4.getWidth() - image.getScaledWidth()) / 2, document.bottomMargin());
